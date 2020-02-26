@@ -3,7 +3,7 @@ entries:
   grafana:
   - apiVersion: v1
     appVersion: 6.5.2
-    created: "2020-02-26T13:20:13.501069964Z"
+    created: "2020-02-26T13:22:37.830721247Z"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 1ffc3215d7e0b0760d61639ab919650dbc07b89a5c79f4a3937b059cbb6d8f9c
     home: https://grafana.net
@@ -20,6 +20,6 @@ entries:
     sources:
     - https://github.com/grafana/grafana
     urls:
-    - https://github.com/accelleran/helm-charts.git/grafana-4.4.0.tgz
+    - https://accelleran.github.io/helm-charts/grafana-4.4.0.tgz
     version: 4.4.0
-generated: "2020-02-26T13:20:13.496127691Z"
+generated: "2020-02-26T13:22:37.824913003Z"
