@@ -1,0 +1,9 @@
+{{- if .Values.ingressController.enabled -}}
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: strip-path
+route:
+  strip_path: {{ .Values.ingressController.strip_path }}
+  preserve_host: {{ .Values.ingressController.preserve_host }}
+{{- end }} 

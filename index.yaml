@@ -1,9 +1,37 @@
 apiVersion: v1
 entries:
+  acc-sys-dashboard:
+  - apiVersion: v1
+    appVersion: 1.1.0
+    created: "2020-02-26T13:27:51.926965767Z"
+    description: Accelleran's System Overview Dashboard
+    digest: 5d0ad730b0c041eb72f11936aa78a1ff49f0d419cd1ea6360d2e1c8b499d744b
+    name: acc-sys-dashboard
+    urls:
+    - https://accelleran.github.io/helm-charts/acc-sys-dashboard-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v1
+    appVersion: 1.1.0
+    created: "2020-02-26T13:27:51.904917154Z"
+    description: Accelleran's System Overview Dashboard
+    digest: 9385d961bf6d25123744c382a17bd561274a6df2ba125457c75c42f5274b7501
+    name: acc-sys-dashboard
+    urls:
+    - https://accelleran.github.io/helm-charts/acc-sys-dashboard-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2020-02-26T13:27:51.882175838Z"
+    description: Accelleran's System Overview Dashboard
+    digest: 62ad0c320868cd3195c0ca76e6664b04dea1f22b1602175dfbc2beb38d7e1ec0
+    name: acc-sys-dashboard
+    urls:
+    - https://accelleran.github.io/helm-charts/acc-sys-dashboard-1.0.0.tgz
+    version: 1.0.0
   grafana:
   - apiVersion: v1
     appVersion: 6.5.2
-    created: "2020-02-26T13:22:37.830721247Z"
+    created: "2020-02-26T13:27:51.929606534Z"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 1ffc3215d7e0b0760d61639ab919650dbc07b89a5c79f4a3937b059cbb6d8f9c
     home: https://grafana.net
@@ -22,4 +50,80 @@ entries:
     urls:
     - https://accelleran.github.io/helm-charts/grafana-4.4.0.tgz
     version: 4.4.0
-generated: "2020-02-26T13:22:37.824913003Z"
+  kong:
+  - apiVersion: v1
+    appVersion: "1.4"
+    created: "2020-02-26T13:27:51.945764486Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: ~8.1.0
+    description: The Cloud-Native Ingress and API-management
+    digest: be62c2c5670ad9719a5cabbde7bfc1713c20999215954798119f0f5ae99b60b9
+    home: https://konghq.com/
+    icon: https://s3.amazonaws.com/downloads.kong/universe/assets/icon-kong-inc-large.png
+    maintainers:
+    - email: shashi@konghq.com
+      name: shashiranjan84
+    - email: harry@konghq.com
+      name: hbagdi
+    name: kong
+    urls:
+    - https://accelleran.github.io/helm-charts/kong-1.2.0.tgz
+    version: 1.2.0
+  kube-eagle:
+  - apiVersion: v1
+    appVersion: 1.1.0
+    created: "2020-02-26T13:27:51.946581899Z"
+    description: Prometheus exporter for Kubernetes pod & node resource requests,
+      limits and usage.
+    digest: 60b6dbb2dac3654e1bc17bdc8e431f14692e974f747c58894d0acde35fb2de86
+    name: kube-eagle
+    urls:
+    - https://accelleran.github.io/helm-charts/kube-eagle-1.1.5.tgz
+    version: 1.1.5
+  metrics-server:
+  - apiVersion: v1
+    appVersion: 0.3.6
+    created: "2020-02-26T13:27:51.947544177Z"
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+    digest: 80474e3ff5cbb689cd30dca25b0220c8ed659779e18f6a019da78db66055d5ec
+    home: https://github.com/kubernetes-incubator/metrics-server
+    keywords:
+    - metrics-server
+    maintainers:
+    - email: o.with@sportradar.com
+      name: olemarkus
+    - email: k.aasan@sportradar.com
+      name: kennethaasan
+    name: metrics-server
+    sources:
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - https://accelleran.github.io/helm-charts/metrics-server-2.9.0.tgz
+    version: 2.9.0
+  prometheus:
+  - apiVersion: v1
+    appVersion: 2.15.2
+    created: "2020-02-26T13:27:51.952427173Z"
+    description: Prometheus is a monitoring system and time series database.
+    digest: 09aa61653bb916baeade9058b97667e4a8df2ab94d7c8c69a8760e22b38a9824
+    home: https://prometheus.io/
+    icon: https://raw.githubusercontent.com/prometheus/prometheus.github.io/master/assets/prometheus_logo-cb55bb5c346.png
+    maintainers:
+    - email: gianrubio@gmail.com
+      name: gianrubio
+    - email: zanhsieh@gmail.com
+      name: zanhsieh
+    name: prometheus
+    sources:
+    - https://github.com/prometheus/alertmanager
+    - https://github.com/prometheus/prometheus
+    - https://github.com/prometheus/pushgateway
+    - https://github.com/prometheus/node_exporter
+    - https://github.com/kubernetes/kube-state-metrics
+    urls:
+    - https://accelleran.github.io/helm-charts/prometheus-10.3.1.tgz
+    version: 10.3.1
+generated: "2020-02-26T13:27:51.862187241Z"
