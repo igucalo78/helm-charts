@@ -77,9 +77,11 @@ grafana.ini:
     # Role for unauthenticated users, other valid values are `Editor` and `Admin`
     org_role: Viewer
 image:
-  pullPolicy: IfNotPresent
-  repository: grafana/grafana
-  tag: 6.5.2
+  pullPolicy: Always
+  repository: accelleran/dash-grafana
+  tag: 0.1.0-s3
+  pullSecrets: 
+  - accelleran-secret
 ingress:
   annotations: {}
   enabled: false
@@ -140,7 +142,7 @@ securityContext:
 service:
   annotations: {}
   labels: {}
-  nodePort: 30300
+  nodePort: 32032
   port: 80
   portName: service
   targetPort: 3000

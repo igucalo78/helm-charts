@@ -1,0 +1,5707 @@
+NAME: dash-grafana
+LAST DEPLOYED: Wed Feb 26 16:38:53 2020
+NAMESPACE: test
+STATUS: pending-install
+REVISION: 1
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+admin:
+  existingSecret: ""
+  passwordKey: admin-password
+  userKey: admin-user
+adminPassword: password
+adminUser: admin
+affinity: {}
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - disableDeletion: false
+      editable: true
+      folder: ""
+      name: default
+      options:
+        path: /var/lib/grafana/dashboards/default
+      orgId: 1
+      type: file
+dashboards:
+  default:
+    custom-dashboard:
+      file: dashboards/custom-dashboard.json
+    monitor-dashboard:
+      file: dashboards/monitor-dashboard.json
+dashboardsConfigMaps: {}
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - access: proxy
+      isDefault: true
+      name: Prometheus
+      type: prometheus
+      url: http://acc-sys-prometheus-server.default.svc.cluster.local:80
+    - access: proxy
+      isDefault: false
+      name: Druid
+      type: paypal-druid-datasource
+      url: http://druid-router:8888
+deploymentStrategy:
+  type: RollingUpdate
+downloadDashboards:
+  env: {}
+downloadDashboardsImage:
+  pullPolicy: IfNotPresent
+  repository: appropriate/curl
+  tag: latest
+env: {}
+envFromSecret: ""
+envRenderSecret: {}
+envValueFrom: {}
+extraConfigmapMounts: []
+extraContainers: ""
+extraEmptyDirMounts: []
+extraInitContainers: []
+extraSecretMounts: []
+extraVolumeMounts: []
+grafana.ini:
+  analytics:
+    check_for_updates: true
+  auth.anonymous:
+    enabled: true
+    org_name: Main Org.
+    org_role: Viewer
+  grafana_net:
+    url: https://grafana.net
+  log:
+    mode: console
+  paths:
+    data: /var/lib/grafana/data
+    logs: /var/log/grafana
+    plugins: /var/lib/grafana/plugins
+    provisioning: /etc/grafana/provisioning
+  security:
+    allow_embedding: true
+image:
+  pullPolicy: Always
+  pullSecrets:
+  - accelleran-secret
+  repository: accelleran/dash-grafana
+  tag: 0.1.0-s3
+ingress:
+  annotations: {}
+  enabled: false
+  extraPaths: []
+  hosts:
+  - grafana.local
+  labels: {}
+  path: /
+  tls: []
+initChownData:
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: busybox
+    tag: "1.30"
+  resources: {}
+ldap:
+  config: ""
+  enabled: false
+  existingSecret: ""
+livenessProbe:
+  failureThreshold: 10
+  httpGet:
+    path: /api/health
+    port: 3000
+  initialDelaySeconds: 60
+  timeoutSeconds: 30
+namespaceOverride: ""
+nodeSelector: {}
+notifiers: {}
+persistence:
+  accessModes:
+  - ReadWriteMany
+  enabled: true
+  hostPath: /opt/pods/
+  size: 10Gi
+  storageClassName: grafana
+  type: pvc
+plugins: []
+podDisruptionBudget: {}
+podPortName: grafana
+rbac:
+  create: true
+  extraClusterRoleRules: []
+  extraRoleRules: []
+  namespaced: false
+  pspEnabled: true
+  pspUseAppArmor: true
+readinessProbe:
+  httpGet:
+    path: /api/health
+    port: 3000
+replicas: 1
+resources: {}
+securityContext:
+  fsGroup: 472
+  runAsUser: 472
+service:
+  annotations: {}
+  labels: {}
+  nodePort: 32032
+  port: 80
+  portName: service
+  targetPort: 3000
+  type: NodePort
+serviceAccount:
+  create: true
+  name: null
+  nameTest: null
+sidecar:
+  dashboards:
+    SCProvider: true
+    defaultFolderName: null
+    enabled: false
+    folder: /tmp/dashboards
+    label: grafana_dashboard
+    provider:
+      allowUiUpdates: false
+      disableDelete: false
+      folder: ""
+      name: sidecarProvider
+      orgid: 1
+      type: file
+    searchNamespace: null
+  datasources:
+    enabled: false
+    label: grafana_datasource
+    searchNamespace: null
+  image: kiwigrid/k8s-sidecar:0.1.20
+  imagePullPolicy: IfNotPresent
+  resources: {}
+smtp:
+  existingSecret: ""
+  passwordKey: password
+  userKey: user
+testFramework:
+  enabled: true
+  image: dduportal/bats
+  securityContext: {}
+  tag: 0.4.0
+tolerations: []
+
+HOOKS:
+---
+# Source: grafana/templates/tests/test.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dash-grafana-test
+  labels:
+    app: dash-grafana
+    chart: "grafana-4.4.0"
+    heritage: "Helm"
+    release: "dash-grafana"
+  annotations:
+    "helm.sh/hook": test-success
+  namespace: test
+spec:
+  serviceAccountName: dash-grafana-test
+  initContainers:
+    - name: test-framework
+      image: "dduportal/bats:0.4.0"
+      command:
+      - "bash"
+      - "-c"
+      - |
+        set -ex
+        # copy bats to tools dir
+        cp -R /usr/local/libexec/ /tools/bats/
+      volumeMounts:
+      - mountPath: /tools
+        name: tools
+  imagePullSecrets:
+    - name: accelleran-secret
+  containers:
+    - name: dash-grafana-test
+      image: "dduportal/bats:0.4.0"
+      command: ["/tools/bats/bats", "-t", "/tests/run.sh"]
+      volumeMounts:
+        - mountPath: /tests
+          name: tests
+          readOnly: true
+        - mountPath: /tools
+          name: tools
+  volumes:
+  - name: tests
+    configMap:
+      name: dash-grafana-test
+  - name: tools
+    emptyDir: {}
+  restartPolicy: Never
+MANIFEST:
+---
+# Source: grafana/templates/podsecuritypolicy.yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'docker/default'
+    apparmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
+    apparmor.security.beta.kubernetes.io/defaultProfileName:  'runtime/default'
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    # Default set from Docker, without DAC_OVERRIDE or CHOWN
+    - FOWNER
+    - FSETID
+    - KILL
+    - SETGID
+    - SETUID
+    - SETPCAP
+    - NET_BIND_SERVICE
+    - NET_RAW
+    - SYS_CHROOT
+    - MKNOD
+    - AUDIT_WRITE
+    - SETFCAP
+  volumes:
+    - 'configMap'
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
+    - 'persistentVolumeClaim'
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'RunAsAny'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+  readOnlyRootFilesystem: false
+---
+# Source: grafana/templates/tests/test-podsecuritypolicy.yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: dash-grafana-test
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+spec:
+  allowPrivilegeEscalation: true
+  privileged: false
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  fsGroup:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  volumes:
+  - configMap
+  - downwardAPI
+  - emptyDir
+  - projected
+  - secret
+---
+# Source: grafana/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+type: Opaque
+data:
+  admin-user: "YWRtaW4="
+  admin-password: "cGFzc3dvcmQ="
+  ldap-toml: ""
+---
+# Source: grafana/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+data:
+  grafana.ini: |
+    [analytics]
+    check_for_updates = true
+    [auth.anonymous]
+    enabled = true
+    org_name = Main Org.
+    org_role = Viewer
+    [grafana_net]
+    url = https://grafana.net
+    [log]
+    mode = console
+    [paths]
+    data = /var/lib/grafana/data
+    logs = /var/log/grafana
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+    [security]
+    allow_embedding = true
+
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+    - access: proxy
+      isDefault: true
+      name: Prometheus
+      type: prometheus
+      url: http://acc-sys-prometheus-server.default.svc.cluster.local:80
+    - access: proxy
+      isDefault: false
+      name: Druid
+      type: paypal-druid-datasource
+      url: http://druid-router:8888
+  dashboardproviders.yaml: |
+    apiVersion: 1
+    providers:
+    - disableDeletion: false
+      editable: true
+      folder: ""
+      name: default
+      options:
+        path: /var/lib/grafana/dashboards/default
+      orgId: 1
+      type: file
+  download_dashboards.sh: |
+    #!/usr/bin/env sh
+    set -euf
+    mkdir -p /var/lib/grafana/dashboards/default
+---
+# Source: grafana/templates/dashboards-json-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dash-grafana-dashboards-default
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+    dashboard-provider: default
+data:
+  custom-dashboard.json:
+    |
+      {
+        "annotations": {
+          "list": [
+            {
+              "builtIn": 1,
+              "datasource": "-- Grafana --",
+              "enable": true,
+              "hide": true,
+              "iconColor": "rgba(0, 211, 255, 1)",
+              "name": "Annotations & Alerts",
+              "type": "dashboard"
+            }
+          ]
+        },
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "id": 1,
+        "iteration": 1581091172577,
+        "links": [],
+        "panels": [
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 0
+            },
+            "id": 65,
+            "panels": [],
+            "title": "Cluster Information",
+            "type": "row"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "#299c46",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Prometheus",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 0,
+              "y": 1
+            },
+            "id": 19,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "count(kube_node_labels)",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Nodes",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#73BF69",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": null,
+            "format": "decbytes",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 3,
+              "y": 1
+            },
+            "id": 28,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "eagle_node_resource_allocatable_memory_bytes",
+                "legendFormat": "",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Allocatable RAM",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#73BF69",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": null,
+            "format": "short",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 6,
+              "y": 1
+            },
+            "id": 29,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "eagle_node_resource_allocatable_cpu_cores",
+                "legendFormat": "",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Allocatable CPU Cores",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "#299c46",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Prometheus",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 9,
+              "y": 1
+            },
+            "id": 32,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "count(count(kube_pod_labels) by (pod))",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Running Pods",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorPostfix": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#299c46",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Prometheus",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 12,
+              "y": 1
+            },
+            "id": 33,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "sum(kube_pod_container_status_running)",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Running Container",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "#299c46",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Prometheus",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 3,
+              "x": 15,
+              "y": 1
+            },
+            "id": 34,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "sum(kube_pod_container_status_terminated)",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Terminated Containers",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorValue": false,
+            "colors": [
+              "#37872D",
+              "#C4162A",
+              "#C4162A"
+            ],
+            "datasource": "Prometheus",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 6,
+              "x": 18,
+              "y": 1
+            },
+            "id": 35,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "#C0D8FF",
+              "full": false,
+              "lineColor": "#1F60C4",
+              "show": true,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "expr": "sum(kube_pod_container_status_waiting)",
+                "refId": "A"
+              }
+            ],
+            "thresholds": "1",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Waiting Containers",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 5
+            },
+            "id": 63,
+            "panels": [],
+            "title": "RAM Information",
+            "type": "row"
+          },
+          {
+            "datasource": null,
+            "gridPos": {
+              "h": 7,
+              "w": 9,
+              "x": 0,
+              "y": 6
+            },
+            "id": 40,
+            "interval": "",
+            "options": {
+              "fieldOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "defaults": {
+                  "decimals": 1,
+                  "mappings": [],
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ],
+                  "unit": "percentunit"
+                },
+                "override": {},
+                "values": false
+              },
+              "orientation": "auto",
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "6.5.2",
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_usage_memory_bytes)/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+                "instant": false,
+                "legendFormat": "Total RAM Usage",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+                "instant": false,
+                "legendFormat": "Node RAM Usage",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+                "instant": false,
+                "legendFormat": "Pod RAM Usage",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+                "instant": false,
+                "legendFormat": "Container RAM Usage",
+                "refId": "D"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "RAM Usage",
+            "type": "gauge"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 7,
+              "x": 9,
+              "y": 6
+            },
+            "hiddenSeries": false,
+            "id": 39,
+            "interval": "",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pluginVersion": "6.5.2",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+                "legendFormat": "Allocatable RAM",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_node_resource_usage_memory_bytes{node=~\"$Node\"})",
+                "legendFormat": "Total RAM Usage",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})",
+                "legendFormat": "Node RAM Usage",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})",
+                "legendFormat": "Pod RAM Usage",
+                "refId": "D"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})",
+                "legendFormat": "Container RAM Usage",
+                "refId": "E"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "RAM Usage History",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 8,
+              "x": 16,
+              "y": 6
+            },
+            "id": 49,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 7,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Limit RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Allocatable RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "RAM Reserved",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #D",
+                "thresholds": [
+                  "0.6",
+                  "0.8"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "RAM Burstable",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #E",
+                "thresholds": [
+                  "1.5",
+                  "3"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "RAM Usage",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #F",
+                "thresholds": [
+                  "0.4",
+                  "0.6"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_requests_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_node_resource_limits_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_node_resource_requests_memory_bytes{node=~\"$Node\"} / eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "D"
+              },
+              {
+                "expr": "sum(eagle_node_resource_limits_memory_bytes{node=~\"$Node\"} / eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "E"
+              },
+              {
+                "expr": "sum(eagle_node_resource_usage_memory_bytes{node=~\"$Node\"} / eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "F"
+              }
+            ],
+            "title": "Node RAM Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 11,
+              "x": 0,
+              "y": 13
+            },
+            "id": 56,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 6,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Container",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "container",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Pod",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "pod",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Limit RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Used RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Namespace",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "namespace",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "Usage RAM",
+                "colorMode": "cell",
+                "colors": [
+                  "#37872D",
+                  "#FA6400",
+                  "#C4162A"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #D",
+                "thresholds": [
+                  "0.7",
+                  "0.9"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum (eagle_pod_container_resource_requests_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"}) by (pod, node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_limits_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"}) by (pod, node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "B"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"}) by (pod, node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "C"
+              }
+            ],
+            "title": "Pod RAM Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 13,
+              "x": 11,
+              "y": 13
+            },
+            "id": 44,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 6,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Container",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "container",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Pod",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "pod",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Limit RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Usage RAM",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Namespace",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "namespace",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum (eagle_pod_container_resource_requests_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_limits_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "B"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "C"
+              }
+            ],
+            "title": "Container RAM Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 20
+            },
+            "id": 31,
+            "panels": [],
+            "title": "CPU Information",
+            "type": "row"
+          },
+          {
+            "datasource": null,
+            "gridPos": {
+              "h": 7,
+              "w": 9,
+              "x": 0,
+              "y": 21
+            },
+            "id": 41,
+            "options": {
+              "fieldOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "defaults": {
+                  "decimals": 1,
+                  "mappings": [],
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ],
+                  "unit": "percentunit"
+                },
+                "override": {},
+                "values": false
+              },
+              "orientation": "auto",
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "6.5.2",
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_usage_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Total CPU Usage",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Node CPU Usage",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Pod CPU Usage",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Container CPU Usage",
+                "refId": "D"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage",
+            "type": "gauge"
+          },
+          {
+            "aliasColors": {
+              "Busy": "#EAB839",
+              "Busy Iowait": "#890F02",
+              "Busy other": "#1F78C1",
+              "Idle": "#052B51",
+              "Idle - Waiting for something to happen": "#052B51",
+              "guest": "#9AC48A",
+              "idle": "#052B51",
+              "iowait": "#EAB839",
+              "irq": "#BF1B00",
+              "nice": "#C15C17",
+              "softirq": "#E24D42",
+              "steal": "#FCE2DE",
+              "system": "#508642",
+              "user": "#5195CE"
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Prometheus",
+            "decimals": 2,
+            "description": "Basic CPU info",
+            "fill": 4,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 7,
+              "x": 9,
+              "y": 21
+            },
+            "hiddenSeries": false,
+            "id": 47,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": false,
+              "show": true,
+              "sideWidth": 250,
+              "sort": null,
+              "sortDesc": null,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "maxPerRow": 6,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": true,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "Allocatable CPU",
+                "color": "#890F02"
+              },
+              {
+                "alias": "Allocatable CPU",
+                "color": "#7EB26D"
+              },
+              {
+                "alias": "Total CPU Usage",
+                "color": "#EAB839"
+              },
+              {
+                "alias": "Busy User",
+                "color": "#0A437C"
+              },
+              {
+                "alias": "Busy Other",
+                "color": "#6D1F62"
+              }
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Allocatable CPU",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_node_resource_usage_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Total CPU Usage",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Node CPU Usage",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Pod CPU Usage",
+                "refId": "D"
+              },
+              {
+                "expr": "sum(eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
+                "legendFormat": "Container CPU Usage",
+                "refId": "E"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "CPU Usage History",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "decimals": null,
+                "format": "percentunit",
+                "label": "",
+                "logBase": 1,
+                "max": "1.1",
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": false
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 8,
+              "x": 16,
+              "y": 21
+            },
+            "id": 42,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 7,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Limit Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Allocatable Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "CPU Reserved",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #D",
+                "thresholds": [
+                  "0.6",
+                  "0.8"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "CPU Burstable",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #E",
+                "thresholds": [
+                  "1.5",
+                  "3"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "CPU Usage",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(50, 172, 45, 0.97)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(245, 54, 54, 0.9)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #F",
+                "thresholds": [
+                  "0.4",
+                  "0.6"
+                ],
+                "type": "number",
+                "unit": "percentunit"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum(eagle_node_resource_requests_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(eagle_node_resource_limits_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(eagle_node_resource_requests_cpu_cores{node=~\"$Node\"} / eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "D"
+              },
+              {
+                "expr": "sum(eagle_node_resource_limits_cpu_cores{node=~\"$Node\"} / eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "E"
+              },
+              {
+                "expr": "sum(eagle_node_resource_usage_cpu_cores{node=~\"$Node\"} / eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"}) by (node)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "F"
+              }
+            ],
+            "title": "Node CPU Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 11,
+              "x": 0,
+              "y": 28
+            },
+            "id": 45,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 6,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Container",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "container",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Pod",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "pod",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Limit Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Usage Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Namespace",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "namespace",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum (eagle_pod_container_resource_requests_cpu_cores{node=~\"$Node\", pod=~\"$Pod\"}) by (node, pod)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_limits_cpu_cores{node=~\"$Node\", pod=~\"$Pod\"}) by (node, pod)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "B"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\"}) by (node, pod)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "C"
+              }
+            ],
+            "title": "Pod CPU Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "columns": [],
+            "datasource": null,
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 13,
+              "x": 11,
+              "y": 28
+            },
+            "id": 57,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "scroll": true,
+            "showHeader": true,
+            "sort": {
+              "col": 6,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Container",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "container",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Pod",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "pod",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Requested Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Limit Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Usage Cores",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Namespace",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "namespace",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "node",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum (eagle_pod_container_resource_requests_cpu_cores{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "legendFormat": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_limits_cpu_cores{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "B"
+              },
+              {
+                "expr": "sum (eagle_pod_container_resource_usage_cpu_cores{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"}) by (node, pod, container)",
+                "format": "table",
+                "instant": true,
+                "intervalFactor": 1,
+                "refId": "C"
+              }
+            ],
+            "title": "Container CPU Information",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 35
+            },
+            "id": 15,
+            "panels": [],
+            "title": "Network Information",
+            "type": "row"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 36
+            },
+            "hiddenSeries": false,
+            "id": 59,
+            "interval": "",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(container_network_transmit_bytes_total[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Total TX Traffic",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(rate(container_network_transmit_bytes_total{kubernetes_io_hostname=~\"$Node\"}[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Node TX Traffic",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(rate(container_network_transmit_bytes_total{kubernetes_io_hostname=~\"$Node\", pod=~\"$Pod\"}[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Pod TX Traffic",
+                "refId": "B"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "TX Traffic",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 36
+            },
+            "hiddenSeries": false,
+            "id": 60,
+            "interval": "",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "sum(rate(container_network_receive_bytes_total[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Total RX Traffic",
+                "refId": "C"
+              },
+              {
+                "expr": "sum(rate(container_network_receive_bytes_total{kubernetes_io_hostname=~\"$Node\"}[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Node RX Traffic",
+                "refId": "A"
+              },
+              {
+                "expr": "sum(rate(container_network_receive_bytes_total{kubernetes_io_hostname=~\"$Node\", pod=~\"$Pod\"}[5m]))",
+                "format": "time_series",
+                "hide": false,
+                "instant": false,
+                "legendFormat": "Pod RX Traffic",
+                "refId": "B"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "RX Traffic",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "collapsed": false,
+            "datasource": null,
+            "gridPos": {
+              "h": 1,
+              "w": 24,
+              "x": 0,
+              "y": 44
+            },
+            "id": 7,
+            "panels": [],
+            "title": "Disk Space Information",
+            "type": "row"
+          },
+          {
+            "cacheTimeout": null,
+            "datasource": "Prometheus",
+            "gridPos": {
+              "h": 7,
+              "w": 4,
+              "x": 0,
+              "y": 45
+            },
+            "id": 48,
+            "links": [],
+            "options": {
+              "fieldOptions": {
+                "calcs": [
+                  "mean"
+                ],
+                "defaults": {
+                  "mappings": [],
+                  "max": 1,
+                  "min": 0,
+                  "thresholds": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    }
+                  ],
+                  "unit": "percentunit"
+                },
+                "override": {},
+                "values": false
+              },
+              "orientation": "auto",
+              "showThresholdLabels": false,
+              "showThresholdMarkers": true
+            },
+            "pluginVersion": "6.5.2",
+            "targets": [
+              {
+                "expr": "sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"}) /sum (container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Disk Usage",
+            "type": "gauge"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Prometheus",
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 7,
+              "w": 8,
+              "x": 4,
+              "y": 45
+            },
+            "hiddenSeries": false,
+            "id": 54,
+            "interval": "",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pluginVersion": "6.5.2",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "expr": "(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\",kubernetes_io_hostname=~\"$Node\"})",
+                "legendFormat": "Total Disk Usage",
+                "refId": "A"
+              },
+              {
+                "expr": "sum by (kubernetes_io_hostname)(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
+                "legendFormat": "Node {{kubernetes_io_hostname}}",
+                "refId": "B"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Disk Usage History",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "cacheTimeout": null,
+            "columns": [],
+            "datasource": "Prometheus",
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 45
+            },
+            "id": 55,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "pluginVersion": "6.5.2",
+            "showHeader": true,
+            "sort": {
+              "col": 0,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "kubernetes_io_hostname",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "Used Disk Space",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Total Disk Space",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Free Disk Space",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum by (kubernetes_io_hostname)(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "legendFormat": "Node {{kubernetes_io_hostname}}",
+                "refId": "B"
+              },
+              {
+                "expr": "sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})-sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\",kubernetes_io_hostname=~\"$Node\"})",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "refId": "C"
+              },
+              {
+                "expr": "sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})",
+                "format": "table",
+                "hide": false,
+                "instant": true,
+                "refId": "A"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Disk Usage per Node",
+            "transform": "table",
+            "type": "table"
+          },
+          {
+            "cacheTimeout": null,
+            "columns": [],
+            "datasource": "Prometheus",
+            "fontSize": "100%",
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 52
+            },
+            "id": 53,
+            "links": [],
+            "options": {},
+            "pageSize": null,
+            "pluginVersion": "6.5.2",
+            "showHeader": true,
+            "sort": {
+              "col": 0,
+              "desc": true
+            },
+            "styles": [
+              {
+                "alias": "Time",
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "pattern": "Time",
+                "type": "hidden"
+              },
+              {
+                "alias": "Disk Space",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #A",
+                "thresholds": [],
+                "type": "number",
+                "unit": "decbytes"
+              },
+              {
+                "alias": "Volume Name",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "persistentvolumeclaim",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "Bound",
+                "colorMode": "cell",
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "#37872D",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #C",
+                "thresholds": [
+                  "1"
+                ],
+                "type": "string",
+                "unit": "short",
+                "valueMaps": [
+                  {
+                    "text": "Yes",
+                    "value": "1"
+                  },
+                  {
+                    "text": "No",
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "alias": "Node",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "kubernetes_node",
+                "thresholds": [],
+                "type": "string",
+                "unit": "short"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "decimals": 2,
+                "mappingType": 1,
+                "pattern": "Value #B",
+                "thresholds": [],
+                "type": "hidden",
+                "unit": "short"
+              },
+              {
+                "alias": "",
+                "colorMode": null,
+                "colors": [
+                  "rgba(245, 54, 54, 0.9)",
+                  "rgba(237, 129, 40, 0.89)",
+                  "rgba(50, 172, 45, 0.97)"
+                ],
+                "decimals": 2,
+                "pattern": "/.*/",
+                "thresholds": [],
+                "type": "number",
+                "unit": "short"
+              }
+            ],
+            "targets": [
+              {
+                "expr": "sum by (kubernetes_node, persistentvolumeclaim) (kube_persistentvolumeclaim_info{kubernetes_node=~\"$Node\"})",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "refId": "B"
+              },
+              {
+                "expr": "sum by (persistentvolumeclaim)(kube_persistentvolumeclaim_resource_requests_storage_bytes{kubernetes_node=~\"$Node\"})",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "refId": "A"
+              },
+              {
+                "expr": "sum by (persistentvolumeclaim) (kube_persistentvolumeclaim_status_phase{phase=\"Bound\",kubernetes_node=~\"$Node\"})",
+                "format": "table",
+                "instant": true,
+                "interval": "",
+                "refId": "C"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Persistant Volumes",
+            "transform": "table",
+            "type": "table"
+          }
+        ],
+        "refresh": "",
+        "schemaVersion": 21,
+        "style": "dark",
+        "tags": [],
+        "templating": {
+          "list": [
+            {
+              "allValue": ".*",
+              "current": {
+                "selected": false,
+                "tags": [],
+                "text": "All",
+                "value": [
+                  "$__all"
+                ]
+              },
+              "datasource": "Prometheus",
+              "definition": "label_values(kubernetes_io_hostname)",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": true,
+              "name": "Node",
+              "options": [
+                {
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
+                },
+                {
+                  "selected": false,
+                  "text": "drax03",
+                  "value": "drax03"
+                }
+              ],
+              "query": "label_values(kubernetes_io_hostname)",
+              "refresh": 0,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            },
+            {
+              "allValue": ".*",
+              "current": {
+                "selected": false,
+                "tags": [],
+                "text": "All",
+                "value": [
+                  "$__all"
+                ]
+              },
+              "datasource": "Prometheus",
+              "definition": "label_values(kube_pod_info{node=~\"^$Node$\"}, pod)",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": true,
+              "name": "Pod",
+              "options": [
+                {
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
+                },
+                {
+                  "selected": false,
+                  "text": "dashboard",
+                  "value": "dashboard"
+                },
+                {
+                  "selected": false,
+                  "text": "grafana",
+                  "value": "grafana"
+                },
+                {
+                  "selected": false,
+                  "text": "influxdb",
+                  "value": "influxdb"
+                },
+                {
+                  "selected": false,
+                  "text": "l3-antwerp42",
+                  "value": "l3-antwerp42"
+                },
+                {
+                  "selected": false,
+                  "text": "nats",
+                  "value": "nats"
+                },
+                {
+                  "selected": false,
+                  "text": "neo4j",
+                  "value": "neo4j"
+                },
+                {
+                  "selected": false,
+                  "text": "nfs-server-pod",
+                  "value": "nfs-server-pod"
+                },
+                {
+                  "selected": false,
+                  "text": "oran-clustercontrol",
+                  "value": "oran-clustercontrol"
+                },
+                {
+                  "selected": false,
+                  "text": "redis",
+                  "value": "redis"
+                },
+                {
+                  "selected": false,
+                  "text": "simple-api",
+                  "value": "simple-api"
+                },
+                {
+                  "selected": false,
+                  "text": "etcd-drax03",
+                  "value": "etcd-drax03"
+                },
+                {
+                  "selected": false,
+                  "text": "kube-apiserver-drax03",
+                  "value": "kube-apiserver-drax03"
+                },
+                {
+                  "selected": false,
+                  "text": "kube-controller-manager-drax03",
+                  "value": "kube-controller-manager-drax03"
+                },
+                {
+                  "selected": false,
+                  "text": "kube-scheduler-drax03",
+                  "value": "kube-scheduler-drax03"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-prometheus-node-exporter-m2qws",
+                  "value": "acc-sys-prometheus-node-exporter-m2qws"
+                },
+                {
+                  "selected": false,
+                  "text": "kube-flannel-ds-amd64-9x75l",
+                  "value": "kube-flannel-ds-amd64-9x75l"
+                },
+                {
+                  "selected": false,
+                  "text": "kube-proxy-fclc2",
+                  "value": "kube-proxy-fclc2"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-grafana-58b9b4bf57-zxlgw",
+                  "value": "acc-sys-grafana-58b9b4bf57-zxlgw"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-kube-eagle-6889f9d495-p6rhm",
+                  "value": "acc-sys-kube-eagle-6889f9d495-p6rhm"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-metrics-server-67fccbcd4d-8snvv",
+                  "value": "acc-sys-metrics-server-67fccbcd4d-8snvv"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-prometheus-alertmanager-c9d479f67-jsvbk",
+                  "value": "acc-sys-prometheus-alertmanager-c9d479f67-jsvbk"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-prometheus-kube-state-metrics-9449698b-5qjkh",
+                  "value": "acc-sys-prometheus-kube-state-metrics-9449698b-5qjkh"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-prometheus-pushgateway-799d9d69f8-m6bpk",
+                  "value": "acc-sys-prometheus-pushgateway-799d9d69f8-m6bpk"
+                },
+                {
+                  "selected": false,
+                  "text": "acc-sys-prometheus-server-6569594d4d-zpm9k",
+                  "value": "acc-sys-prometheus-server-6569594d4d-zpm9k"
+                },
+                {
+                  "selected": false,
+                  "text": "coredns-5644d7b6d9-vz9r4",
+                  "value": "coredns-5644d7b6d9-vz9r4"
+                },
+                {
+                  "selected": false,
+                  "text": "coredns-5644d7b6d9-wkctd",
+                  "value": "coredns-5644d7b6d9-wkctd"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-broker-867c5d8c46-fhpkt",
+                  "value": "druid-broker-867c5d8c46-fhpkt"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-coordinator-548995745c-skq6t",
+                  "value": "druid-coordinator-548995745c-skq6t"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-mysql-784ffcf4f7-gnd6z",
+                  "value": "druid-mysql-784ffcf4f7-gnd6z"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-overlord-847bd47847-f6lkc",
+                  "value": "druid-overlord-847bd47847-f6lkc"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-router-bb9dc57cf-978t9",
+                  "value": "druid-router-bb9dc57cf-978t9"
+                },
+                {
+                  "selected": false,
+                  "text": "web-deployment-fb4c9d56c-2lqlm",
+                  "value": "web-deployment-fb4c9d56c-2lqlm"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-historical-0",
+                  "value": "druid-historical-0"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-middle-manager-0",
+                  "value": "druid-middle-manager-0"
+                },
+                {
+                  "selected": false,
+                  "text": "druid-zookeeper-0",
+                  "value": "druid-zookeeper-0"
+                }
+              ],
+              "query": "label_values(kube_pod_info{node=~\"^$Node$\"}, pod)",
+              "refresh": 0,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            },
+            {
+              "allValue": ".*",
+              "current": {
+                "text": "All",
+                "value": [
+                  "$__all"
+                ]
+              },
+              "datasource": "Prometheus",
+              "definition": "label_values(kube_pod_info{pod=\"$Pod\", node=\"$Node\"}, pod_ip)",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": true,
+              "name": "Pod_ip",
+              "options": [
+                {
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
+                }
+              ],
+              "query": "label_values(kube_pod_info{pod=\"$Pod\", node=\"$Node\"}, pod_ip)",
+              "refresh": 0,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            },
+            {
+              "allValue": ".*",
+              "current": {
+                "text": "All",
+                "value": [
+                  "$__all"
+                ]
+              },
+              "datasource": "Prometheus",
+              "definition": "label_values(kube_pod_container_info{pod=\"$Pod\"}, container)",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": true,
+              "name": "Container",
+              "options": [
+                {
+                  "selected": true,
+                  "text": "All",
+                  "value": "$__all"
+                }
+              ],
+              "query": "label_values(kube_pod_container_info{pod=\"$Pod\"}, container)",
+              "refresh": 0,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            }
+          ]
+        },
+        "time": {
+          "from": "now-5m",
+          "to": "now"
+        },
+        "timepicker": {
+          "refresh_intervals": [
+            "1s",
+            "5s",
+            "10s",
+            "30s",
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+          ]
+        },
+        "timezone": "",
+        "title": "Accelleran dRAX System Dashboard",
+        "uid": "yV0DdhyZz",
+        "version": 1
+      }
+  monitor-dashboard.json:
+    |
+      {
+        "annotations": {
+          "list": [
+            {
+              "builtIn": 1,
+              "datasource": "-- Grafana --",
+              "enable": true,
+              "hide": true,
+              "iconColor": "rgba(0, 211, 255, 1)",
+              "name": "Annotations & Alerts",
+              "type": "dashboard"
+            }
+          ]
+        },
+        "description": "Monitors the basic KPIs reported by RIC",
+        "editable": true,
+        "gnetId": null,
+        "graphTooltip": 0,
+        "id": 2,
+        "iteration": 1581599420728,
+        "links": [],
+        "panels": [
+          {
+            "aliasColors": {
+              "\"8eb8a807-39c7-4ea0-9af4-5b6027dac1e9\"": "blue"
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Druid",
+            "fill": 1,
+            "fillGradient": 2,
+            "gridPos": {
+              "h": 16,
+              "w": 12,
+              "x": 0,
+              "y": 0
+            },
+            "hiddenSeries": false,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "throughputReport.dlThroughput",
+                    "hidden": true,
+                    "name": "dlThroughputS",
+                    "type": "doubleSum"
+                  },
+                  {
+                    "hidden": true,
+                    "name": "dlThroughputC",
+                    "type": "count"
+                  }
+                ],
+                "alias": "$tag_ueRicId",
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "customGranularity": "Invalid granularity."
+                },
+                "filters": [
+                  {
+                    "dimension": "throughputReport.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  },
+                  {
+                    "dimension": "throughputReport.cellId",
+                    "pattern": "$cell",
+                    "type": "regex",
+                    "value": "$cell"
+                  }
+                ],
+                "limit": 5,
+                "measurement": "throughput",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "postAggregators": [
+                  {
+                    "fields": [
+                      {
+                        "fieldName": "dlThroughputS",
+                        "type": "fieldAccess"
+                      },
+                      {
+                        "fieldName": "dlThroughputC",
+                        "type": "fieldAccess"
+                      }
+                    ],
+                    "fn": "/",
+                    "name": "dlThroughput",
+                    "type": "arithmetic"
+                  }
+                ],
+                "queryType": "timeseries",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "dlthroughput"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": [
+                  {
+                    "key": "ueRicId",
+                    "operator": "=~",
+                    "value": "/^$ue$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Throughput",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "decimals": 0,
+                "format": "Kbits",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "#299c46",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Druid",
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 6,
+              "x": 12,
+              "y": 0
+            },
+            "id": 10,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "pluginVersion": "6.4.3",
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "ueMeasurement.ueCellId",
+                    "name": "cellId",
+                    "type": "stringLast"
+                  }
+                ],
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "aggregators": "You must supply at least one aggregator"
+                },
+                "filters": [
+                  {
+                    "dimension": "ueMeasurement.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  }
+                ],
+                "limit": 5,
+                "queryType": "timeseries",
+                "refId": "A",
+                "shouldOverrideGranularity": true
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Serving Cell",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "100%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorPrefix": false,
+            "colorValue": true,
+            "colors": [
+              "#E0B400",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Druid",
+            "decimals": 0,
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 3,
+              "x": 18,
+              "y": 0
+            },
+            "id": 8,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "ueMeasurement.cellId",
+                    "fieldNames": "ueMeasurement.cellId",
+                    "hidden": false,
+                    "name": "number",
+                    "type": "cardinality"
+                  }
+                ],
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {},
+                "filters": [
+                  {
+                    "dimension": "ueMeasurement.cellId",
+                    "negate": true,
+                    "type": "selector",
+                    "value": ""
+                  }
+                ],
+                "groupBy": [],
+                "limit": 5,
+                "measurement": "existence",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT COUNT(DISTINCT(\"cellId\") ) FROM (SELECT \"cellId\",allOnAir FROM \"cell_info\" WHERE time > now() - 5s) where allOnAir = 1",
+                "queryType": "timeseries",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "table",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "ue"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "distinct"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": []
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Cells",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorPostfix": false,
+            "colorValue": true,
+            "colors": [
+              "#E0B400",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Druid",
+            "decimals": 0,
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 3,
+              "x": 21,
+              "y": 0
+            },
+            "id": 7,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "options": {},
+            "pluginVersion": "6.5.3",
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldNames": "ueMeasurement.ueRicId",
+                    "name": "number",
+                    "type": "cardinality"
+                  }
+                ],
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {},
+                "filters": [
+                  {
+                    "dimension": "ueMeasurement.ueRicId",
+                    "negate": true,
+                    "type": "selector",
+                    "value": ""
+                  }
+                ],
+                "limit": 5,
+                "queryType": "timeseries",
+                "refId": "A",
+                "shouldOverrideGranularity": true
+              }
+            ],
+            "thresholds": "",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of UEs",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "aliasColors": {
+              "RSRP \"Antwerp\"": "orange"
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Druid",
+            "fill": 1,
+            "fillGradient": 2,
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 6
+            },
+            "hiddenSeries": false,
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "ueMeasurement.rsrp",
+                    "hidden": true,
+                    "name": "_rsrp",
+                    "type": "longSum"
+                  },
+                  {
+                    "hidden": true,
+                    "name": "count",
+                    "type": "count"
+                  }
+                ],
+                "alias": "RSRP $tag_cellId",
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "customGranularity": "Invalid granularity."
+                },
+                "filters": [
+                  {
+                    "dimension": "ueMeasurement.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  },
+                  {
+                    "dimension": "ueMeasurement.attached",
+                    "type": "selector",
+                    "value": "1"
+                  },
+                  {
+                    "dimension": "ueMeasurement.cellId",
+                    "pattern": "$cell",
+                    "type": "regex"
+                  }
+                ],
+                "limit": 5,
+                "measurement": "measurement",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "postAggregators": [
+                  {
+                    "fields": [
+                      {
+                        "fieldName": "_rsrp",
+                        "type": "fieldAccess"
+                      },
+                      {
+                        "fieldName": "count",
+                        "type": "fieldAccess"
+                      }
+                    ],
+                    "fn": "/",
+                    "name": "rsrp",
+                    "type": "arithmetic"
+                  }
+                ],
+                "query": "SELECT \"rsrp\" FROM \"measurement\" WHERE (\"ueRicId\" =~ /^$ue$/) AND $timeFilter GROUP BY \"cellId\", \"ueRicId\"",
+                "queryType": "timeseries",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "rsrp"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": [
+                  {
+                    "key": "ueRicId",
+                    "operator": "=~",
+                    "value": "/^$ue$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "RSRP",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "decimals": 0,
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Druid",
+            "fill": 1,
+            "fillGradient": 2,
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 12,
+              "y": 15
+            },
+            "hiddenSeries": false,
+            "id": 3,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "ueMeasurement.rsrq",
+                    "hidden": true,
+                    "name": "_rsrq",
+                    "type": "longSum"
+                  },
+                  {
+                    "hidden": true,
+                    "name": "_count",
+                    "type": "count"
+                  }
+                ],
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "customGranularity": "Invalid granularity."
+                },
+                "filters": [
+                  {
+                    "dimension": "ueMeasurement.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  },
+                  {
+                    "dimension": "ueMeasurement.attached",
+                    "type": "selector",
+                    "value": "1"
+                  },
+                  {
+                    "dimension": "ueMeasurement.cellId",
+                    "pattern": "$cell",
+                    "type": "regex"
+                  }
+                ],
+                "limit": 5,
+                "measurement": "measurement",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "postAggregators": [
+                  {
+                    "fields": [
+                      {
+                        "fieldName": "_rsrq",
+                        "type": "fieldAccess"
+                      },
+                      {
+                        "fieldName": "_count",
+                        "type": "fieldAccess"
+                      }
+                    ],
+                    "fn": "/",
+                    "name": "rsrq",
+                    "type": "arithmetic"
+                  }
+                ],
+                "queryType": "timeseries",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "rsrq"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": [
+                  {
+                    "key": "ueRicId",
+                    "operator": "=~",
+                    "value": "/^$ue$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "RSRQ",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "decimals": 0,
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Druid",
+            "fill": 1,
+            "fillGradient": 2,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 0,
+              "y": 16
+            },
+            "hiddenSeries": false,
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "cqiReport.widebandCqi",
+                    "hidden": true,
+                    "name": "cqiS",
+                    "type": "longSum"
+                  },
+                  {
+                    "hidden": true,
+                    "name": "cqiC",
+                    "type": "count"
+                  }
+                ],
+                "alias": "Channel $tag_channel",
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "fn": "+",
+                  "type": "arithmetic"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "customGranularity": "Invalid granularity."
+                },
+                "filters": [
+                  {
+                    "dimension": "cqiReport.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  },
+                  {
+                    "dimension": "cqiReport.cellId",
+                    "pattern": "$cell",
+                    "type": "regex"
+                  }
+                ],
+                "limit": 5,
+                "measurement": "cqi",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "postAggregators": [
+                  {
+                    "fields": [
+                      {
+                        "fieldName": "cqiS",
+                        "type": "fieldAccess"
+                      },
+                      {
+                        "fieldName": "cqiC",
+                        "type": "fieldAccess"
+                      }
+                    ],
+                    "fn": "/",
+                    "name": "cqi",
+                    "type": "arithmetic"
+                  }
+                ],
+                "queryType": "timeseries",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "cqi"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": [
+                  {
+                    "key": "ueRicId",
+                    "operator": "=~",
+                    "value": "/^$ue$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Wideband CQI",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": "15",
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "datasource": "Druid",
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "fill": 1,
+            "fillGradient": 1,
+            "gridPos": {
+              "h": 8,
+              "w": 12,
+              "x": 12,
+              "y": 24
+            },
+            "hiddenSeries": false,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "options": {
+              "dataLinks": []
+            },
+            "percentage": false,
+            "pluginVersion": "6.5.2",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "aggregators": [
+                  {
+                    "fieldName": "cqiReport.cqiList.0",
+                    "hidden": true,
+                    "name": "cqiS0",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.1",
+                    "hidden": true,
+                    "name": "cqiS1",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.2",
+                    "hidden": true,
+                    "name": "cqiS2",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.3",
+                    "hidden": true,
+                    "name": "cqiS3",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.4",
+                    "hidden": true,
+                    "name": "cqiS4",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.5",
+                    "hidden": true,
+                    "name": "cqiS5",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.6",
+                    "hidden": true,
+                    "name": "cqiS6",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.7",
+                    "hidden": true,
+                    "name": "cqiS7",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.8",
+                    "hidden": true,
+                    "name": "cqiS8",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.9",
+                    "hidden": true,
+                    "name": "cqiS9",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.10",
+                    "hidden": true,
+                    "name": "cqiS10",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.11",
+                    "hidden": true,
+                    "name": "cqiS11",
+                    "type": "longSum"
+                  },
+                  {
+                    "fieldName": "cqiReport.cqiList.12",
+                    "hidden": true,
+                    "name": "cqiS12",
+                    "type": "longSum"
+                  },
+                  {
+                    "type": "count",
+                    "name": "cqiC",
+                    "hidden": true
+                  }
+                ],
+                "alias": "Channel $tag_channel",
+                "currentAggregator": {
+                  "type": "count"
+                },
+                "currentFilter": {
+                  "type": "selector"
+                },
+                "currentPostAggregator": {
+                  "type": "arithmetic",
+                  "fn": "+"
+                },
+                "currentSelect": {
+                  "dimension": "",
+                  "metric": ""
+                },
+                "customGranularity": "$granularity",
+                "druidDS": "test2",
+                "errors": {
+                  "customGranularity": "Invalid granularity."
+                },
+                "filters": [
+                  {
+                    "dimension": "cqiReport.ueRicId",
+                    "pattern": "$ue",
+                    "type": "regex",
+                    "value": "$ue"
+                  },
+                  {
+                    "dimension": "cqiReport.cellId",
+                    "pattern": "$cell",
+                    "type": "regex"
+                  }
+                ],
+                "limit": 5,
+                "measurement": "cqi",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "postAggregators": [
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS0"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi0"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS1"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi1"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS2"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi2"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS3"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi3"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS4"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi4"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS5"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi5"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS6"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi6"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS7"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi7"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS8"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi8"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS9"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi9"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS10"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi10"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS11"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi11"
+                  },
+                  {
+                    "fn": "/",
+                    "type": "arithmetic",
+                    "fields": [
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiS12"
+                      },
+                      {
+                        "type": "fieldAccess",
+                        "fieldName": "cqiC"
+                      }
+                    ],
+                    "name": "cqi12"
+                  }
+                ],
+                "queryType": "timeseries",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "cqi"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "shouldOverrideGranularity": true,
+                "tags": [
+                  {
+                    "key": "ueRicId",
+                    "operator": "=~",
+                    "value": "/^$ue$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "CQI",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "transparent": true,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": "15",
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "refresh": "10s",
+        "schemaVersion": 21,
+        "style": "dark",
+        "tags": [],
+        "templating": {
+          "list": [
+            {
+              "allValue": ".*",
+              "current": {
+                "selected": false,
+                "text": "All",
+                "value": "$__all"
+              },
+              "datasource": "Druid",
+              "definition": "UE",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": false,
+              "name": "ue",
+              "options": [],
+              "query": "SELECT DISTINCT(\"ueMeasurement.ueRicId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+              "refresh": 2,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            },
+            {
+              "current": {
+                "selected": false,
+                "text": "PT5S",
+                "value": "PT5S"
+              },
+              "hide": 0,
+              "label": null,
+              "name": "granularity",
+              "options": [
+                {
+                  "selected": false,
+                  "text": "PT5S",
+                  "value": "PT5S"
+                }
+              ],
+              "query": "PT5S",
+              "skipUrlSync": false,
+              "type": "textbox"
+            },
+            {
+              "allValue": ".*",
+              "current": {
+                "text": "Brussels",
+                "value": "Brussels"
+              },
+              "datasource": "Druid",
+              "definition": "SELECT DISTINCT(\"ueMeasurement.cellId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+              "hide": 0,
+              "includeAll": true,
+              "label": null,
+              "multi": false,
+              "name": "cell",
+              "options": [],
+              "query": "SELECT DISTINCT(\"ueMeasurement.cellId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+              "refresh": 2,
+              "regex": "",
+              "skipUrlSync": false,
+              "sort": 0,
+              "tagValuesQuery": "",
+              "tags": [],
+              "tagsQuery": "",
+              "type": "query",
+              "useTags": false
+            }
+          ]
+        },
+        "time": {
+          "from": "now-15m",
+          "to": "now"
+        },
+        "timepicker": {
+          "refresh_intervals": [
+            "1s",
+            "2s",
+            "5s",
+            "10s",
+            "30s",
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "2h",
+            "1d"
+          ]
+        },
+        "timezone": "",
+        "title": "Cell Monitoring",
+        "uid": "lCbesm1Zk",
+        "version": 16
+      }
+---
+# Source: grafana/templates/tests/test-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dash-grafana-test
+  namespace: test
+  labels:
+    app: dash-grafana
+    chart: "grafana-4.4.0"
+    heritage: "Helm"
+    release: "dash-grafana"
+data:
+  run.sh: |-
+    @test "Test Health" {
+      url="http://dash-grafana/api/health"
+
+      code=$(curl -s -o /dev/null -I -w "%{http_code}" $url)
+      [ "$code" == "200" ]
+    }
+---
+# Source: grafana/templates/pv.yaml
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: dash-grafana
+  labels:
+    type: local
+spec:
+  storageClassName: grafana
+  capacity:
+    storage: "10Gi"
+  accessModes:
+    - "ReadWriteMany"
+  hostPath:
+     path: "/opt/pods//dash-grafana"
+---
+# Source: grafana/templates/pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+spec:
+  accessModes:
+    - "ReadWriteMany"
+  resources:
+    requests:
+      storage: "10Gi"
+  storageClassName: grafana
+---
+# Source: grafana/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+  name: dash-grafana
+  namespace: test
+---
+# Source: grafana/templates/tests/test-serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+  name: dash-grafana-test
+  namespace: test
+---
+# Source: grafana/templates/clusterrole.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+  name: dash-grafana-clusterrole
+rules: []
+---
+# Source: grafana/templates/clusterrolebinding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dash-grafana-clusterrolebinding
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+subjects:
+  - kind: ServiceAccount
+    name: dash-grafana
+    namespace: test
+roleRef:
+  kind: ClusterRole
+  name: dash-grafana-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: grafana/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+rules:
+- apiGroups:      ['extensions']
+  resources:      ['podsecuritypolicies']
+  verbs:          ['use']
+  resourceNames:  [dash-grafana]
+---
+# Source: grafana/templates/tests/test-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: dash-grafana-test
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+rules:
+- apiGroups:      ['policy']
+  resources:      ['podsecuritypolicies']
+  verbs:          ['use']
+  resourceNames:  [dash-grafana-test]
+---
+# Source: grafana/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: dash-grafana
+subjects:
+- kind: ServiceAccount
+  name: dash-grafana
+  namespace: test
+---
+# Source: grafana/templates/tests/test-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dash-grafana-test
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    heritage: Helm
+    release: dash-grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: dash-grafana-test
+subjects:
+- kind: ServiceAccount
+  name: dash-grafana-test
+  namespace: test
+---
+# Source: grafana/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+spec:
+  type: NodePort
+  ports:
+    - name: service
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+
+      nodePort: 32032
+
+  selector:
+    app: grafana
+    release: dash-grafana
+---
+# Source: grafana/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dash-grafana
+  namespace: test
+  labels:
+    app: grafana
+    chart: grafana-4.4.0
+    release: dash-grafana
+    heritage: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+      release: dash-grafana
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: grafana
+        release: dash-grafana
+      annotations:
+        checksum/config: 2680c6cea0383b0bb153e62bbc6a666401ff987fc92190ab231ca3292e350c01
+        checksum/dashboards-json-config: 566f7403c1c71afa72d3577de657e14e98f25a80f4c1dbab6f38de4f3ca40707
+        checksum/sc-dashboard-provider-config: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+        checksum/secret: 2fb6ed38aeaa091f1afcf1005fd3181b3dbeeb6d348ed5b2ecf2651729753d42
+    spec:
+      
+      serviceAccountName: dash-grafana
+      securityContext:
+        fsGroup: 472
+        runAsUser: 472
+      initContainers:
+        - name: init-chown-data
+          image: "busybox:1.30"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+          command: ["chown", "-R", "472:472", "/var/lib/grafana"]
+          resources:
+            {}
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/grafana"
+        - name: download-dashboards
+          image: "appropriate/curl:latest"
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh"]
+          args: [ "-c", "mkdir -p /var/lib/grafana/dashboards/default && /bin/sh /etc/grafana/download_dashboards.sh" ]
+          env:
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/grafana/download_dashboards.sh"
+              subPath: download_dashboards.sh
+            - name: storage
+              mountPath: "/var/lib/grafana"
+      imagePullSecrets:
+        - name: accelleran-secret
+      containers:
+        - name: grafana
+          image: "accelleran/dash-grafana:0.1.0-s3"
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/grafana/grafana.ini"
+              subPath: grafana.ini
+            - name: storage
+              mountPath: "/var/lib/grafana"
+            - name: dashboards-default
+              mountPath: "/var/lib/grafana/dashboards/default/custom-dashboard.json"
+              subPath: "custom-dashboard.json"
+            - name: dashboards-default
+              mountPath: "/var/lib/grafana/dashboards/default/monitor-dashboard.json"
+              subPath: "monitor-dashboard.json"
+            - name: config
+              mountPath: "/etc/grafana/provisioning/datasources/datasources.yaml"
+              subPath: datasources.yaml
+            - name: config
+              mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
+              subPath: dashboardproviders.yaml
+          ports:
+            - name: service
+              containerPort: 80
+              protocol: TCP
+            - name: grafana
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dash-grafana
+                  key: admin-user
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dash-grafana
+                  key: admin-password
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 60
+            timeoutSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+          resources:
+            {}
+      volumes:
+        - name: config
+          configMap:
+            name: dash-grafana
+        - name: dashboards-default
+          configMap:
+            name: dash-grafana-dashboards-default
+        - name: storage
+          persistentVolumeClaim:
+            claimName: dash-grafana
+
+NOTES:
+1. Get your 'admin' user password by running:
+
+   kubectl get secret --namespace test dash-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+2. The Grafana server can be accessed via port 80 on the following DNS name from within your cluster:
+
+   dash-grafana.test.svc.cluster.local
+
+   Get the Grafana URL to visit by running these commands in the same shell:
+export NODE_PORT=$(kubectl get --namespace test -o jsonpath="{.spec.ports[0].nodePort}" services dash-grafana)
+     export NODE_IP=$(kubectl get nodes --namespace test -o jsonpath="{.items[0].status.addresses[0].address}")
+     echo http://$NODE_IP:$NODE_PORT
+
+
+3. Login with the password from step 1 and the username: admin
+
+"/opt/pods//dash-grafana"

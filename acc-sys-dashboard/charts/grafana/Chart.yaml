@@ -12,6 +12,6 @@ maintainers:
 - email: maor.friedman@redhat.com
   name: maorfr
 name: grafana
-sources:
-- https://github.com/grafana/grafana
+#sources:
+#- https://github.com/grafana/grafana
 version: 4.4.0
