@@ -1,6 +1,6 @@
 apiVersion: v2
-name: dash-front-back-end
-description: Frontend and backend of the Accelleran Dashboard
+name: provisioner
+description: The Accelleran provisioner for bootstrap files 
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -18,4 +18,4 @@ version: latest
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: latest
+appVersion: latest 

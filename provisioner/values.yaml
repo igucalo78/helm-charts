@@ -1,4 +1,4 @@
-# Default values for dash-front-back-end.
+# Default values for provisioner.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,10 +7,10 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/dash-front-back-end
+  repository: accelleran/provisioner
   pullPolicy: Always
 
-imagePullSecrets: 
+imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
@@ -25,7 +25,7 @@ serviceAccount:
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: 
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -36,10 +36,10 @@ securityContext:
 service:
   enabled: true
   type: NodePort
-  port: 5000
-  targetPort: 5000
-  nodePort: 31315
-  portname: http
+  port: 16002
+  targetPort: 16002
+  nodePort: 31602
+  portname: provisioner
   protocol: TCP
 
 ingress:

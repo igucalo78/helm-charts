@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dash-front-back-end.fullname" . }}
+  name: {{ include "provisioner.fullname" . }}
   labels:
-    {{- include "dash-front-back-end.labels" . | nindent 4 }}
+    {{- include "provisioner.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "dash-front-back-end.selectorLabels" . | nindent 6 }}
+      {{- include "provisioner.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "dash-front-back-end.selectorLabels" . | nindent 8 }}
+        {{- include "provisioner.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "dash-front-back-end.serviceAccountName" . }}
+      serviceAccountName: {{ include "provisioner.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
