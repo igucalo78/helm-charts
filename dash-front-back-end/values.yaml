@@ -4,7 +4,8 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
+# version: "{{ .Chart.AppVersion }}"
+version: latest
 
 image:
   repository: accelleran/dash-front-back-end
