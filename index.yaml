@@ -3,7 +3,7 @@ entries:
   acc-sys-dashboard:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:07:10.009322321Z"
+    created: "2020-03-10T10:18:12.425332718Z"
     description: Accelleran's System Overview Dashboard
     digest: 5d0ad730b0c041eb72f11936aa78a1ff49f0d419cd1ea6360d2e1c8b499d744b
     name: acc-sys-dashboard
@@ -12,7 +12,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:07:09.985209663Z"
+    created: "2020-03-10T10:18:12.405608658Z"
     description: Accelleran's System Overview Dashboard
     digest: 9385d961bf6d25123744c382a17bd561274a6df2ba125457c75c42f5274b7501
     name: acc-sys-dashboard
@@ -21,7 +21,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-10T10:07:09.963443739Z"
+    created: "2020-03-10T10:18:12.384061182Z"
     description: Accelleran's System Overview Dashboard
     digest: 62ad0c320868cd3195c0ca76e6664b04dea1f22b1602175dfbc2beb38d7e1ec0
     name: acc-sys-dashboard
@@ -31,7 +31,17 @@ entries:
   dash-front-back-end:
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-03-10T10:07:10.009982926Z"
+    created: "2020-03-10T10:18:12.428177079Z"
+    description: Frontend and backend of the Accelleran Dashboard
+    digest: e44f122efceb2a1a237800222a62dc9fb27ef9c9340bdb061899abb5d344cfce
+    name: dash-front-back-end
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: 0.3.0
+    created: "2020-03-10T10:18:12.426381908Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 12fa2313cf3a68c152bb32930fee9145ef7b597ea08e681781349a8b9aa0c38e
     name: dash-front-back-end
@@ -41,7 +51,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: latest
-    created: "2020-03-10T10:07:10.010627163Z"
+    created: "2020-03-10T10:18:12.429572431Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 784afd0b680af4f6445a222ff9cfe45f53524e2ffb06ecfb81872bf704532536
     name: dash-front-back-end
@@ -52,7 +62,7 @@ entries:
   grafana:
   - apiVersion: v1
     appVersion: 6.5.2
-    created: "2020-03-10T10:07:10.014802312Z"
+    created: "2020-03-10T10:18:12.435601785Z"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 1ffc3215d7e0b0760d61639ab919650dbc07b89a5c79f4a3937b059cbb6d8f9c
     home: https://grafana.net
@@ -74,7 +84,7 @@ entries:
   kong:
   - apiVersion: v1
     appVersion: "1.4"
-    created: "2020-03-10T10:07:10.024973294Z"
+    created: "2020-03-10T10:18:12.444110775Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -96,7 +106,7 @@ entries:
   kube-eagle:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:07:10.025934821Z"
+    created: "2020-03-10T10:18:12.444903608Z"
     description: Prometheus exporter for Kubernetes pod & node resource requests,
       limits and usage.
     digest: 60b6dbb2dac3654e1bc17bdc8e431f14692e974f747c58894d0acde35fb2de86
@@ -107,7 +117,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-03-10T10:07:10.027189594Z"
+    created: "2020-03-10T10:18:12.445865035Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 80474e3ff5cbb689cd30dca25b0220c8ed659779e18f6a019da78db66055d5ec
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -127,7 +137,7 @@ entries:
   prometheus:
   - apiVersion: v1
     appVersion: 2.15.2
-    created: "2020-03-10T10:07:10.032882542Z"
+    created: "2020-03-10T10:18:12.456798259Z"
     description: Prometheus is a monitoring system and time series database.
     digest: 09aa61653bb916baeade9058b97667e4a8df2ab94d7c8c69a8760e22b38a9824
     home: https://prometheus.io/
@@ -147,4 +157,4 @@ entries:
     urls:
     - https://accelleran.github.io/helm-charts/prometheus-10.3.1.tgz
     version: 10.3.1
-generated: "2020-03-10T10:07:09.940479069Z"
+generated: "2020-03-10T10:18:12.364436044Z"
