@@ -3,7 +3,7 @@ entries:
   acc-sys-dashboard:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:18:12.425332718Z"
+    created: "2020-03-10T10:46:45.916721983Z"
     description: Accelleran's System Overview Dashboard
     digest: 5d0ad730b0c041eb72f11936aa78a1ff49f0d419cd1ea6360d2e1c8b499d744b
     name: acc-sys-dashboard
@@ -12,7 +12,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:18:12.405608658Z"
+    created: "2020-03-10T10:46:45.893807613Z"
     description: Accelleran's System Overview Dashboard
     digest: 9385d961bf6d25123744c382a17bd561274a6df2ba125457c75c42f5274b7501
     name: acc-sys-dashboard
@@ -21,7 +21,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-10T10:18:12.384061182Z"
+    created: "2020-03-10T10:46:45.875980711Z"
     description: Accelleran's System Overview Dashboard
     digest: 62ad0c320868cd3195c0ca76e6664b04dea1f22b1602175dfbc2beb38d7e1ec0
     name: acc-sys-dashboard
@@ -30,10 +30,28 @@ entries:
     version: 1.0.0
   dash-front-back-end:
   - apiVersion: v2
-    appVersion: 0.3.0
-    created: "2020-03-10T10:18:12.428177079Z"
+    appVersion: latest
+    created: "2020-03-10T10:46:45.922253876Z"
     description: Frontend and backend of the Accelleran Dashboard
-    digest: e44f122efceb2a1a237800222a62dc9fb27ef9c9340bdb061899abb5d344cfce
+    digest: f262d9e4a3588e3af0831664ee424d45916e2fe29a63470b03b3194695addea2
+    name: dash-front-back-end
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v2
+    created: "2020-03-10T10:46:45.920829708Z"
+    description: Frontend and backend of the Accelleran Dashboard
+    digest: 2e873a8f3826f312dbd2c1b1cc7b3b63cb211930a606eb29a03869efc931aecd
+    name: dash-front-back-end
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.2.tgz
+    version: 0.3.2
+  - apiVersion: v2
+    created: "2020-03-10T10:46:45.919465801Z"
+    description: Frontend and backend of the Accelleran Dashboard
+    digest: ab5dcdd2eb33b352f45b87d6ed6184719457ab720028d3c85c6d2e9b2d3e946f
     name: dash-front-back-end
     type: application
     urls:
@@ -41,7 +59,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-03-10T10:18:12.426381908Z"
+    created: "2020-03-10T10:46:45.918108581Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 12fa2313cf3a68c152bb32930fee9145ef7b597ea08e681781349a8b9aa0c38e
     name: dash-front-back-end
@@ -51,7 +69,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: latest
-    created: "2020-03-10T10:18:12.429572431Z"
+    created: "2020-03-10T10:46:45.923520883Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 784afd0b680af4f6445a222ff9cfe45f53524e2ffb06ecfb81872bf704532536
     name: dash-front-back-end
@@ -62,7 +80,7 @@ entries:
   grafana:
   - apiVersion: v1
     appVersion: 6.5.2
-    created: "2020-03-10T10:18:12.435601785Z"
+    created: "2020-03-10T10:46:45.928103172Z"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 1ffc3215d7e0b0760d61639ab919650dbc07b89a5c79f4a3937b059cbb6d8f9c
     home: https://grafana.net
@@ -84,7 +102,7 @@ entries:
   kong:
   - apiVersion: v1
     appVersion: "1.4"
-    created: "2020-03-10T10:18:12.444110775Z"
+    created: "2020-03-10T10:46:45.934598234Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -106,7 +124,7 @@ entries:
   kube-eagle:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:18:12.444903608Z"
+    created: "2020-03-10T10:46:45.935420416Z"
     description: Prometheus exporter for Kubernetes pod & node resource requests,
       limits and usage.
     digest: 60b6dbb2dac3654e1bc17bdc8e431f14692e974f747c58894d0acde35fb2de86
@@ -117,7 +135,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-03-10T10:18:12.445865035Z"
+    created: "2020-03-10T10:46:45.93640374Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 80474e3ff5cbb689cd30dca25b0220c8ed659779e18f6a019da78db66055d5ec
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -137,7 +155,7 @@ entries:
   prometheus:
   - apiVersion: v1
     appVersion: 2.15.2
-    created: "2020-03-10T10:18:12.456798259Z"
+    created: "2020-03-10T10:46:45.949031092Z"
     description: Prometheus is a monitoring system and time series database.
     digest: 09aa61653bb916baeade9058b97667e4a8df2ab94d7c8c69a8760e22b38a9824
     home: https://prometheus.io/
@@ -157,4 +175,4 @@ entries:
     urls:
     - https://accelleran.github.io/helm-charts/prometheus-10.3.1.tgz
     version: 10.3.1
-generated: "2020-03-10T10:18:12.364436044Z"
+generated: "2020-03-10T10:46:45.852856043Z"
