@@ -1,18 +1,28 @@
 apiVersion: v1
 entries:
+  acc-dashboard:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2020-03-10T11:06:35.097978754Z"
+    description: Accelleran's Dashboard
+    digest: cf00950011d1df09cc7690ed01d483b9d85c807f83197f603b78aa9052af3b49
+    name: acc-dashboard
+    urls:
+    - https://accelleran.github.io/helm-charts/acc-dashboard-1.2.0.tgz
+    version: 1.2.0
   acc-sys-dashboard:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:46:45.916721983Z"
+    created: "2020-03-10T11:06:35.158021986Z"
     description: Accelleran's System Overview Dashboard
-    digest: 5d0ad730b0c041eb72f11936aa78a1ff49f0d419cd1ea6360d2e1c8b499d744b
+    digest: b33ace06edf238a9dafa6957c966cb951fd58b7850bc86af36d57d3686f22f08
     name: acc-sys-dashboard
     urls:
     - https://accelleran.github.io/helm-charts/acc-sys-dashboard-1.1.1.tgz
     version: 1.1.1
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:46:45.893807613Z"
+    created: "2020-03-10T11:06:35.13841215Z"
     description: Accelleran's System Overview Dashboard
     digest: 9385d961bf6d25123744c382a17bd561274a6df2ba125457c75c42f5274b7501
     name: acc-sys-dashboard
@@ -21,7 +31,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-03-10T10:46:45.875980711Z"
+    created: "2020-03-10T11:06:35.116617531Z"
     description: Accelleran's System Overview Dashboard
     digest: 62ad0c320868cd3195c0ca76e6664b04dea1f22b1602175dfbc2beb38d7e1ec0
     name: acc-sys-dashboard
@@ -31,7 +41,17 @@ entries:
   dash-front-back-end:
   - apiVersion: v2
     appVersion: latest
-    created: "2020-03-10T10:46:45.922253876Z"
+    created: "2020-03-10T11:06:35.166359584Z"
+    description: Frontend and backend of the Accelleran Dashboard
+    digest: 4e651d757aed08e6608b97f35d9b2023baacdec5108f7a1e696fd064220b52cc
+    name: dash-front-back-end
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.4.tgz
+    version: 0.3.4
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-03-10T11:06:35.16528282Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: f262d9e4a3588e3af0831664ee424d45916e2fe29a63470b03b3194695addea2
     name: dash-front-back-end
@@ -40,7 +60,7 @@ entries:
     - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.3.tgz
     version: 0.3.3
   - apiVersion: v2
-    created: "2020-03-10T10:46:45.920829708Z"
+    created: "2020-03-10T11:06:35.163715989Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 2e873a8f3826f312dbd2c1b1cc7b3b63cb211930a606eb29a03869efc931aecd
     name: dash-front-back-end
@@ -49,7 +69,7 @@ entries:
     - https://accelleran.github.io/helm-charts/dash-front-back-end-0.3.2.tgz
     version: 0.3.2
   - apiVersion: v2
-    created: "2020-03-10T10:46:45.919465801Z"
+    created: "2020-03-10T11:06:35.161991891Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: ab5dcdd2eb33b352f45b87d6ed6184719457ab720028d3c85c6d2e9b2d3e946f
     name: dash-front-back-end
@@ -59,7 +79,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-03-10T10:46:45.918108581Z"
+    created: "2020-03-10T11:06:35.160000512Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 12fa2313cf3a68c152bb32930fee9145ef7b597ea08e681781349a8b9aa0c38e
     name: dash-front-back-end
@@ -69,7 +89,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: latest
-    created: "2020-03-10T10:46:45.923520883Z"
+    created: "2020-03-10T11:06:35.166996225Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 784afd0b680af4f6445a222ff9cfe45f53524e2ffb06ecfb81872bf704532536
     name: dash-front-back-end
@@ -80,7 +100,7 @@ entries:
   grafana:
   - apiVersion: v1
     appVersion: 6.5.2
-    created: "2020-03-10T10:46:45.928103172Z"
+    created: "2020-03-10T11:06:35.169586413Z"
     description: The leading tool for querying and visualizing time series and metrics.
     digest: 1ffc3215d7e0b0760d61639ab919650dbc07b89a5c79f4a3937b059cbb6d8f9c
     home: https://grafana.net
@@ -102,7 +122,7 @@ entries:
   kong:
   - apiVersion: v1
     appVersion: "1.4"
-    created: "2020-03-10T10:46:45.934598234Z"
+    created: "2020-03-10T11:06:35.179636227Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -124,7 +144,7 @@ entries:
   kube-eagle:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-03-10T10:46:45.935420416Z"
+    created: "2020-03-10T11:06:35.182362787Z"
     description: Prometheus exporter for Kubernetes pod & node resource requests,
       limits and usage.
     digest: 60b6dbb2dac3654e1bc17bdc8e431f14692e974f747c58894d0acde35fb2de86
@@ -135,7 +155,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-03-10T10:46:45.93640374Z"
+    created: "2020-03-10T11:06:35.18458054Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 80474e3ff5cbb689cd30dca25b0220c8ed659779e18f6a019da78db66055d5ec
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -155,7 +175,7 @@ entries:
   prometheus:
   - apiVersion: v1
     appVersion: 2.15.2
-    created: "2020-03-10T10:46:45.949031092Z"
+    created: "2020-03-10T11:06:35.192709781Z"
     description: Prometheus is a monitoring system and time series database.
     digest: 09aa61653bb916baeade9058b97667e4a8df2ab94d7c8c69a8760e22b38a9824
     home: https://prometheus.io/
@@ -175,4 +195,15 @@ entries:
     urls:
     - https://accelleran.github.io/helm-charts/prometheus-10.3.1.tgz
     version: 10.3.1
-generated: "2020-03-10T10:46:45.852856043Z"
+  provisioner:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2020-03-10T11:06:35.193341494Z"
+    description: The Accelleran provisioner for bootstrap files
+    digest: 0e398a1bbf78ada05cc143d9ae3e0fd5fe9135d4e909a67d606890a72ea33f28
+    name: provisioner
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/provisioner-latest.tgz
+    version: latest
+generated: "2020-03-10T11:06:35.075404676Z"
