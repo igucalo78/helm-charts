@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.version }}"
+version: "{{ .Chart.Version }}"
 #version: latest
 
 image:
