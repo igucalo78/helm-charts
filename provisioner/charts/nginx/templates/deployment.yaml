@@ -28,9 +28,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: provisioner-conf
+            - name: prov-nginx-conf
               mountPath: /etc/nginx/conf.d/
-              subPath: nginx-conf/
+              subPath: ""
             - mountPath: /etc/nginx/certs/
               name: provisioner-conf
               subPath: nginx-s-certs/
@@ -68,4 +68,7 @@ spec:
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "nginx.fullname" . }}{{- end }}
-          {{- end -}}
+          {{- end }}
+        - name: prov-nginx-conf
+          configMap: 
+            name: prov-nginx-conf
