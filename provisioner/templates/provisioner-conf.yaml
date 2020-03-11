@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "provisioner.fullname" . }}-provisioner-conf
+  labels:
+    {{- include "provisioner.labels" . | nindent 4 }}
+data:
+  provision.conf: "server {\n\tlisten 16010 ssl;\n\tssl_session_cache  builtin:1000
+    \ shared:SSL:10m;\n\tssl_protocols  TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;\n\tssl_ciphers
+    HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4;\n\tssl_prefer_server_ciphers
+    on;\n\tserver_name localhost;\n\tssl_certificate /etc/nginx/certs/server.crt;\n\tssl_certificate_key
+    /etc/nginx/certs/server.key;\n\tssl_client_certificate /etc/nginx/client-certs/client.crt;\n\tssl_verify_client
+    optional;\n\tproxy_set_header SSL_CLIENT_CERT $ssl_client_cert;\n\taccess_log
+    /var/log/nginx/provision;\n\n\tlocation /get/ {\n\t\tproxy_set_header        Host
+    $host;\n\t\tproxy_set_header        X-Real-IP $remote_addr;\n\t\tproxy_set_header
+    \       X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_set_header        X-Forwarded-Proto
+    $scheme;\n\n\t\tproxy_pass          http://provisioner:16002;\n\t\tproxy_read_timeout
+    \ 90;\n\t\tproxy_redirect http://provisioner:16002 http://provisioner;\n\t}\n\n\tlocation
+    /delete/ {\n\t\tif ($ssl_client_verify != SUCCESS) {\n\t\t\treturn 403;\n\t\t}\n\t\tproxy_set_header
+    \       Host $host;\n\t\tproxy_set_header        X-Real-IP $remote_addr;\n\t\tproxy_set_header
+    \       X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_set_header        X-Forwarded-Proto
+    $scheme;\n\n\t\tproxy_pass          http://provisioner:16002;\n\t\tproxy_read_timeout
+    \ 90;\n\t\tproxy_redirect http://provisioner:16002 http://provisioner;\n\t}\n\n\tlocation
+    /set/ {\n\t\tif ($ssl_client_verify != SUCCESS) {\n\t\t\treturn 403;\n\t\t}\n\t\tproxy_set_header
+    \       Host $host;\n\t\tproxy_set_header        X-Real-IP $remote_addr;\n\t\tproxy_set_header
+    \       X-Forwarded-For $proxy_add_x_forwarded_for;\n\t\tproxy_set_header        X-Forwarded-Proto
+    $scheme;\n\n\t\tproxy_pass          http://provisioner:16002;\n\t\tproxy_read_timeout
+    \ 90;\n\t\tproxy_redirect http://provisioner:16002 http://provisioner;\n\t}\n}\n"

@@ -19,3 +19,13 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:80
 {{- end }}
+
+The provisioner can be reached!
+
+If this is the first time you are installing the provisioner, please add the certificates in the correct folder:
+1. client.crt goes to -> /opt/pods/provisioner/...
+2. server.key and server.crt goes to -> /opt/pod/provisioner/...
+
+The POD should automatically restart after some time, and the certificates should take effect. If you want the change to be immediate, just recreate this package:
+1. helm delete {name of deployment}
+2. helm install {name of deployment} acc-helm/provisioner
