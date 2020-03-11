@@ -1,17 +1,16 @@
-# Default values for provisioner.
+# Default values for nkafka-helm.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 version: "{{ .Chart.Version }}"
-# version: v0.2.3
 
 image:
-  repository: accelleran/provisioner
+  repository: accelleran/dash-nkafka
   pullPolicy: Always
 
-imagePullSecrets:
+imagePullSecrets: 
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
@@ -26,7 +25,7 @@ serviceAccount:
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: 
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
@@ -35,11 +34,11 @@ securityContext:
   runAsUser: 0
 
 service:
-  enabled: true
-  type: ClusterIP
-  port: 16002
-  name: provisioner
-  protocol: TCP
+  enabled: false
+  type: NodePort
+  port: 80
+  nodePort: 30309
+  name: nkafka
 
 ingress:
   enabled: false
@@ -53,15 +52,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-persistence:
-  accessModes:
-    - ReadWriteMany
-  enabled: true
-  size: 1Gi
-  storageClassName: acc-provisioner
-  type: pvc
-  hostPath: /opt/pods/
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
