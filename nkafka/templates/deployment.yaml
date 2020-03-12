@@ -4,6 +4,8 @@ metadata:
   name: {{ include "nkafka-helm.fullname" . }}
   labels:
     {{- include "nkafka-helm.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "post-install" 
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
