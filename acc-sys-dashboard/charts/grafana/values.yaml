@@ -32,12 +32,12 @@ datasources:
       isDefault: true
       name: Prometheus
       type: prometheus
-      url: http://acc-sys-prometheus-server.default.svc.cluster.local:80
+      url: http://acc-dash-prometheus-server.default.svc.cluster.local:80
     - access: proxy
       isDefault: false
       name: Druid
       type: paypal-druid-datasource
-      url: http://druid-router:8888
+      url: http://acc-dash-druid:8888
 deploymentStrategy:
   type: RollingUpdate
 downloadDashboards:
