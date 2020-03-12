@@ -78,8 +78,8 @@ grafana.ini:
     org_role: Viewer
 image:
   pullPolicy: IfNotPresent
-  repository: grafana
-  tag: 6.5.2
+  repository: grafana/grafana
+  tag: 6.6.2
   #pullSecrets: 
   # - accelleran-secret
 ingress:
