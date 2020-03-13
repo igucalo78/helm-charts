@@ -1,0 +1,80 @@
+apiVersion: v1
+entries:
+  acc-sys-dashboard:
+  - apiVersion: v1
+    appVersion: 1.2.2
+    created: "2020-03-13T14:14:40.489224101Z"
+    description: Accelleran's System Overview Dashboard
+    digest: 17fae9dd077abe4d571eec5eb3ca377326b69904f541a210c7fc451e34736d11
+    name: acc-sys-dashboard
+    urls:
+    - https://accelleran.github.io/helm-charts/charts/acc-sys-dashboard-1.2.2.tgz
+    version: 1.2.2
+  dash-front-back-end:
+  - apiVersion: v2
+    appVersion: 0.4.0
+    created: "2020-03-13T14:14:40.49090172Z"
+    description: Frontend and backend of the Accelleran Dashboard
+    digest: 1ca2816616cef88d4567bf296fb2ad8099a0824eecd2e809c90c0f06c5d7a0fb
+    name: dash-front-back-end
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/charts/dash-front-back-end-0.4.0.tgz
+    version: 0.4.0
+  druid:
+  - apiVersion: v1
+    appVersion: 0.2.2
+    created: "2020-03-13T14:14:40.491919917Z"
+    description: Druid chart
+    digest: fc949f5b6cb131be6cb5f0fd17c3e6e3c3182304a4709947475cdb3b293d5873
+    name: druid
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/charts/druid-0.2.2.tgz
+    version: 0.2.2
+  kafka:
+  - apiVersion: v1
+    appVersion: 5.0.1
+    created: "2020-03-13T14:14:40.49968443Z"
+    dependencies:
+    - condition: kafka.zookeeper.enabled,zookeeper.enabled
+      name: zookeeper
+      repository: https://kubernetes-charts-incubator.storage.googleapis.com/
+      version: 2.1.0
+    description: Apache Kafka is publish-subscribe messaging rethought as a distributed
+      commit log.
+    digest: deaedcbf6850d15e8bbeff05afe661fcc55c8e68fc53c0e9aae237ecf924b349
+    home: https://kafka.apache.org/
+    icon: https://kafka.apache.org/images/logo.png
+    keywords:
+    - kafka
+    - zookeeper
+    - kafka statefulset
+    maintainers:
+    - email: faraaz@rationalizeit.us
+      name: faraazkhan
+    - email: marc.villacorta@gmail.com
+      name: h0tbird
+    - email: ben@spothero.com
+      name: benjigoldberg
+    name: kafka
+    sources:
+    - https://github.com/kubernetes/charts/tree/master/incubator/zookeeper
+    - https://github.com/Yolean/kubernetes-kafka
+    - https://github.com/confluentinc/cp-docker-images
+    - https://github.com/apache/kafka
+    urls:
+    - https://accelleran.github.io/helm-charts/charts/kafka-0.20.8.tgz
+    version: 0.20.8
+  nkafka-helm:
+  - apiVersion: v2
+    appVersion: 0.1.5
+    created: "2020-03-13T14:14:40.500599171Z"
+    description: A Helm chart for Kubernetes
+    digest: 4dc54123c5b1ab2092072656a18ee1caaa9d3353ae30646fd97c3e617f8e2269
+    name: nkafka-helm
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/charts/nkafka-helm-0.1.3.tgz
+    version: 0.1.3
+generated: "2020-03-13T14:14:40.462546842Z"
