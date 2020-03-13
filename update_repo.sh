@@ -31,7 +31,7 @@ echo "Pushing everything excpet acc-dashboard"
 git push
 
 echo "Sleeping for 5 seconds..."
-sleep 5
+sleep 20
 
 echo "Updating helm chart repo"
 helm repo update
