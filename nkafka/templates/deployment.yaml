@@ -34,7 +34,7 @@ spec:
               value: info
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/nkafka"]
-          args: ["producer", "--kafka", "{{ .Values.kafkaUrl }}", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "{{ .Values.natsUrl }}","--invert", "--replicate", "--threads", "1"]
+          args: ["producer", "--kafka", "{{ tpl .Values.kafkaUrl . }}", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "{{ .Values.natsUrl }}","--invert", "--replicate", "--threads", "1"]
 #          ports:
 #            - name: http
 #              containerPort: 80

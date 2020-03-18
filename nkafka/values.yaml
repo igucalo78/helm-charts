@@ -15,7 +15,7 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
-kafkaUrl: "acc-dash-kafka:9092"
+kafkaUrl: "{{ .Release.Name }}-kafka:9092"
 natsUrl: "nats://nats-service:4222"
 # args: ["producer", "--kafka", "acc-dash-kafka:9092", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "nats://nats-service:4222", "--invert", "--replicate", "--threads", "1"]
 
