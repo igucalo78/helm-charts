@@ -1,8 +1,10 @@
 #druid:
 #  service:
 #    nodePort: 30301
-#nkafka-helm:
-#  version: latest
+nkafka-helm:
+  version: latest
+  kafkaUrl: "{{ .Release.Name }}-kafka:9092"
+  natsUrl: "nats://nats-service:4222"
 #acc-sys-dashboard:
 #  metrics-server:
 #    rbac:
