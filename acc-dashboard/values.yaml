@@ -1,3 +1,9 @@
-druid:
-  service:
-    nodePort: 30301
+#druid:
+#  service:
+#    nodePort: 30301
+#nkafka-helm:
+#  version: latest
+#acc-sys-dashboard:
+#  metrics-server:
+#    rbac:
+#      create: false
