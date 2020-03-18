@@ -4,9 +4,9 @@ metadata:
   name: {{ include "nkafka-helm.fullname" . }}
   labels:
     {{- include "nkafka-helm.labels" . | nindent 4 }}
-  annotations:
-    "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "1"
+  #annotations:
+  #  "helm.sh/hook": post-install
+  #  "helm.sh/hook-weight": "1"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -33,6 +33,8 @@ spec:
             - name: RUST_LOG
               value: info
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/nkafka"]
+          args: ["producer", "--kafka", "{{ .Values.kafkaUrl }}", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "{{ .Values.natsUrl }}","--invert", "--replicate", "--threads", "1"]
 #          ports:
 #            - name: http
 #              containerPort: 80
