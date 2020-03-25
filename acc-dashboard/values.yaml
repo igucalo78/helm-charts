@@ -1,6 +1,5 @@
-# druid:
-#   service:
-#     nodePort: 30301
+druid:
+  kafkaUrl: "{{ .Release.Name }}-kafka:9092"
 nkafka-helm:
   # version: latest
   kafkaUrl: "{{ .Release.Name }}-kafka:9092"
