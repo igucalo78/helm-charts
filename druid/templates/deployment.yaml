@@ -55,7 +55,7 @@ spec:
             - name: acc-druid-sv
               mountPath: /opt/druid/supervisor.json
               subPath: "supervisor.json"
-            - name: acc-druid-sv
+            - name: acc-druid-ssv
               mountPath: /opt/druid/state-supervisor.json
               subPath: "state-supervisor.json"
           ports:
@@ -98,3 +98,6 @@ spec:
         - name: acc-druid-sv
           configMap:
             name: acc-druid-sv
+        - name: acc-druid-ssv
+          configMap:
+            name: acc-druid-ssv
