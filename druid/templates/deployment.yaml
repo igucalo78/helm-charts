@@ -25,7 +25,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}"
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           #command: ["/bin/bash","-c"]
           #args: ['ls && "/opt/druid/bin/start-micro-quickstart &" && until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done && until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done && /opt/druid/bin/start-micro-quickstart']
