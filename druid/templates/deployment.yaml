@@ -40,9 +40,7 @@ spec:
               # Normal script content possible here
               #echo "Hello world"
               #ls -l
-              (./bin/start-micro-quickstart) && (until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done &) && (until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done &) 
-              kill %1 
-              ./bin/start-micro-quickstart
+              ((until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done) &) && ((until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done) &) && (./bin/start-micro-quickstart)
 
               EOF
           volumeMounts:

@@ -4,9 +4,11 @@
 
 replicaCount: 1
 
+version: "{{ .Chart.Version }}"
+
 image:
-  repository: beta-druid
-  pullPolicy: IfNotPresent
+  repository: accelleran/dash-druid
+  pullPolicy: Always
 
 imagePullSecrets:
   - name: accelleran-secret
