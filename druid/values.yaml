@@ -36,7 +36,7 @@ securityContext:
 service:
   type: NodePort
   port: 8888
-  nodePort: 31301
+  nodePort: 30301
   name: druid
 
 ingress:

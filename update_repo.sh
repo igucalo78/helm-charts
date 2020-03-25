@@ -8,7 +8,7 @@
 
 # helm package verything except acc-dashboard
 echo "Packaging everything except acc-dashboard"
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.sh*" \! -name "" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.sh*" \! -name "" \! -name "beta" \) -exec sh -c '
  for i do
    helm package "$i"
  done' sh {} +
@@ -30,8 +30,8 @@ git commit -m "$1" --author="$2"
 echo "Pushing everything excpet acc-dashboard"
 git push
 
-echo "Sleeping for 5 seconds..."
-sleep 20
+echo "Sleeping for 30 seconds..."
+sleep 30
 
 echo "Updating helm chart repo"
 helm repo update
