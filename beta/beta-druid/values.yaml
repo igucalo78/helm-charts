@@ -13,7 +13,8 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
-kafkaUrl: "http://{{ .Release.Name }}-kafka:9092"
+#kafkaUrl: "http://{{ .Release.Name }}-kafka:9092"
+kafkaUrl: "http://acc-dash-kafka:9092"
 
 serviceAccount:
   # Specifies whether a service account should be created
