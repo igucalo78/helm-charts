@@ -73,6 +73,19 @@ spec:
             httpGet:
               path: /
               port: 8081
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - "-c"
+                  - |
+                    /bin/bash <<'EOF'
+
+                    until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+                    until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+
+                    EOF
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
