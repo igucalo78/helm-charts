@@ -77,7 +77,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "echo Hello!"]
+                command: ["/bin/sh", "-c", "echo Hello from the postStart handler > ./message.txt"]
 #                  - sh
 #                  - "-c"
 #                  - |
