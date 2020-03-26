@@ -77,18 +77,18 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command:
-                  - sh
-                  - "-c"
-                  - |
-                    /bin/bash <<'EOF'
-
-                    until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done
-                    until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done                    
-                    until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
-                    until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
-
-                    EOF
+                command: ["/bin/sh", "-c", "echo Hello!"]
+#                  - sh
+#                  - "-c"
+#                  - |
+#                    /bin/bash <<'EOF'
+#                    echo "Starting postStart scripts"
+#                    #until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done
+#                    #until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done                    
+#                    #until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+#                    #until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+#                    #echo "Finished postStart script"
+#                    EOF
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
