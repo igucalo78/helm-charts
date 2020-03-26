@@ -77,18 +77,18 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "echo Hello from the postStart handler > ./message.txt"]
-#                  - sh
-#                  - "-c"
-#                  - |
-#                    /bin/bash <<'EOF'
-#                    echo "Starting postStart scripts"
-#                    #until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done
-#                    #until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done                    
-#                    #until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
-#                    #until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
-#                    #echo "Finished postStart script"
-#                    EOF
+                command: 
+                  - sh
+                  - "-c"
+                  - |
+                    /bin/bash <<'EOF'
+                    echo "NEW Starting postStart scripts" > ./message.txt
+                    (until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done) > ./super_start.txt
+                    (until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json http://localhost:8081/druid/indexer/v1/supervisor; do sleep 6; done) > ./state_start.txt                    
+                    (until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done) > ./reset_state.txt
+                    (until curl -f -XPOST http://localhost:8081/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done) > ./reset_test2.txt
+                    echo "Finished postStart script" > ./finished.txt
+                    EOF
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
