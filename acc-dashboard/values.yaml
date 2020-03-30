@@ -4,7 +4,7 @@ nkafka-helm:
   # version: latest
   kafkaUrl: "{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
   # natsUrl: "nats://nats-service:4222"
-  druidOverlordUrl: "{{ .Release.Name }}overlord.{{ .Release.Namespace }}:8081"  
+  druidOverlordUrl: "{{ .Release.Name }}-druid-overlord.{{ .Release.Namespace }}:8081"  
 # acc-sys-dashboard:
 #   metrics-server:
 #     rbac:
