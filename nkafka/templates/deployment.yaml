@@ -51,8 +51,9 @@ spec:
 
                     apk update && apk add curl
 
+                    EOF
 #                    read response <<< $(curl -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor)
-
+#
 #                    if echo "$response" | grep "test2" ; then
 #                      echo "test2 OK" >> status.log
 #                      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
@@ -61,7 +62,7 @@ spec:
 #                      until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
 #                      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
 #                    fi
-
+#
 #                    if echo "$response" | grep "state" ; then
 #                      echo "state OK" >> status.log
 #                      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
@@ -70,10 +71,10 @@ spec:
 #                      until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
 #                      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
 #                    fi
-
-                    echo "-- Script finished!" >> status.log
-
-                    EOF
+#
+#                    echo "-- Script finished!" >> status.log
+#
+#                    EOF
 #          ports:
 #            - name: http
 #              containerPort: 80
