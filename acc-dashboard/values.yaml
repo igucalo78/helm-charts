@@ -1,9 +1,10 @@
 druid:
-  kafkaUrl: "http://{{ .Release.Name }}-kafka:9092"
+  kafkaUrl: "http://{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
 nkafka-helm:
   # version: latest
-  kafkaUrl: "{{ .Release.Name }}-kafka:9092"
+  kafkaUrl: "{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
   # natsUrl: "nats://nats-service:4222"
+  druidOverlordUrl: "{{ .Release.Name }}overlord.{{ .Release.Namespace }}:8081"  
 # acc-sys-dashboard:
 #   metrics-server:
 #     rbac:
