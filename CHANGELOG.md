@@ -12,3 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated acc-dasboard to 0.7.0
 - - Update due to dash-front-back-end
 - Updated dash-front-back-end to 0.9.0
+- Updated update\_repo.sh to accomodate the CHANGELOG.md file
+
+### Added
+- Added CHANGELOG.md
