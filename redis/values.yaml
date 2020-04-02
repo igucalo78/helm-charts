@@ -63,9 +63,9 @@ persistence:
   storageClassName: acc-redis
   type: pvc
   ### TESTING
-  hostPath: /opt/pods/acc-redis
+  #hostPath: /opt/pods/acc-redis
   ### Production
-  # hostPath: /opt/pods/redis-storage
+  hostPath: /opt/pods/redis-storage
 
 livenessProbe:
   enabled: true

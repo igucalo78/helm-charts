@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 31.03.2020
+## 02.04.2020.
+
+### Changed
+
+- Updated nkafka postInstall script, added -f silent fail option to the until curl command
+- Updated redis values.yaml to replect production storage location
+
+### Added
+
+- Added redis to main helm repo from beta
+
+## 31.03.2020.
 
 ### Changed
 
