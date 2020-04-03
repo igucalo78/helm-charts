@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "redis20190206"
+version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/mwc
@@ -14,6 +14,9 @@ imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
+
+natsIp: "10.20.20.20"
+natsPort: "31000"
 
 serviceAccount:
   # Specifies whether a service account should be created

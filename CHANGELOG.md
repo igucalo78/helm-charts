@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 03.04.2020.
+
+### Changed
+
+- Updated Redis Helm Chart to 0.2.0
+- Updated Redis App version to redis20190206
+- Updated Redis deployment.yaml to use natsIP:natsPort from values.yaml
+- Updated Redis values.yaml to use AppVersion from Charts.yaml as version for dcoker image
+
+### Added
+
+- Added natsIp and natsPort to Redis values.yaml
+
 ## 02.04.2020.
 
 ### Changed
