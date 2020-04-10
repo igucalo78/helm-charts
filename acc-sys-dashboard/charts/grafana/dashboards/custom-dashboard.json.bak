@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586519703830,
+  "id": 1,
+  "iteration": 1581091172577,
   "links": [],
   "panels": [
     {
@@ -181,7 +182,6 @@
       "targets": [
         {
           "expr": "eagle_node_resource_allocatable_memory_bytes",
-          "instant": true,
           "legendFormat": "",
           "refId": "A"
         }
@@ -267,7 +267,6 @@
       "targets": [
         {
           "expr": "eagle_node_resource_allocatable_cpu_cores",
-          "instant": true,
           "legendFormat": "",
           "refId": "A"
         }
@@ -651,40 +650,34 @@
             "mean"
           ],
           "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
             "decimals": 1,
             "mappings": [],
             "max": 1,
             "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0.7
-                },
-                {
-                  "color": "red",
-                  "value": 0.9
-                }
-              ]
-            },
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ],
             "unit": "percentunit"
           },
-          "overrides": [],
+          "override": {},
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.6.2",
+      "pluginVersion": "6.5.2",
       "targets": [
         {
           "expr": "sum(eagle_node_resource_usage_memory_bytes)/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
@@ -848,14 +841,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -872,7 +863,6 @@
         },
         {
           "alias": "Requested RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -889,7 +879,6 @@
         },
         {
           "alias": "Limit RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -906,7 +895,6 @@
         },
         {
           "alias": "Allocatable RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -923,7 +911,6 @@
         },
         {
           "alias": "RAM Reserved",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -943,7 +930,6 @@
         },
         {
           "alias": "RAM Burstable",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -963,7 +949,6 @@
         },
         {
           "alias": "RAM Usage",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -983,7 +968,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1066,20 +1050,18 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 5,
+        "col": 6,
         "desc": true
       },
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Container",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1096,7 +1078,6 @@
         },
         {
           "alias": "Pod",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1113,7 +1094,6 @@
         },
         {
           "alias": "Requested RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1130,7 +1110,6 @@
         },
         {
           "alias": "Limit RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1147,7 +1126,6 @@
         },
         {
           "alias": "Used RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1164,7 +1142,6 @@
         },
         {
           "alias": "Namespace",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1181,7 +1158,6 @@
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1198,7 +1174,6 @@
         },
         {
           "alias": "Usage RAM",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "#37872D",
@@ -1218,7 +1193,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1283,14 +1257,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Container",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1307,7 +1279,6 @@
         },
         {
           "alias": "Pod",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1324,7 +1295,6 @@
         },
         {
           "alias": "Requested RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1341,7 +1311,6 @@
         },
         {
           "alias": "Limit RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1358,7 +1327,6 @@
         },
         {
           "alias": "Usage RAM",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1375,7 +1343,6 @@
         },
         {
           "alias": "Namespace",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1392,7 +1359,6 @@
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1409,7 +1375,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1480,40 +1445,34 @@
             "mean"
           ],
           "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
             "decimals": 1,
             "mappings": [],
             "max": 1,
             "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0.7
-                },
-                {
-                  "color": "red",
-                  "value": 0.9
-                }
-              ]
-            },
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ],
             "unit": "percentunit"
           },
-          "overrides": [],
+          "override": {},
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.6.2",
+      "pluginVersion": "6.5.2",
       "targets": [
         {
           "expr": "sum(eagle_node_resource_usage_cpu_cores{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_cpu_cores{node=~\"$Node\"})",
@@ -1717,14 +1676,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1741,7 +1698,6 @@
         },
         {
           "alias": "Requested Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1758,7 +1714,6 @@
         },
         {
           "alias": "Limit Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1775,7 +1730,6 @@
         },
         {
           "alias": "Allocatable Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1792,7 +1746,6 @@
         },
         {
           "alias": "CPU Reserved",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -1812,7 +1765,6 @@
         },
         {
           "alias": "CPU Burstable",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -1832,7 +1784,6 @@
         },
         {
           "alias": "CPU Usage",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -1852,7 +1803,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1941,14 +1891,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Container",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1965,7 +1913,6 @@
         },
         {
           "alias": "Pod",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1982,7 +1929,6 @@
         },
         {
           "alias": "Requested Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -1999,7 +1945,6 @@
         },
         {
           "alias": "Limit Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2016,7 +1961,6 @@
         },
         {
           "alias": "Usage Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2033,7 +1977,6 @@
         },
         {
           "alias": "Namespace",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2050,7 +1993,6 @@
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2067,7 +2009,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2132,14 +2073,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Container",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2156,7 +2095,6 @@
         },
         {
           "alias": "Pod",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2173,7 +2111,6 @@
         },
         {
           "alias": "Requested Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2190,7 +2127,6 @@
         },
         {
           "alias": "Limit Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2207,7 +2143,6 @@
         },
         {
           "alias": "Usage Cores",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2224,7 +2159,6 @@
         },
         {
           "alias": "Namespace",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2241,7 +2175,6 @@
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2258,7 +2191,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2559,39 +2491,33 @@
             "mean"
           ],
           "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
             "mappings": [],
             "max": 1,
             "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "yellow",
-                  "value": 0.7
-                },
-                {
-                  "color": "red",
-                  "value": 0.9
-                }
-              ]
-            },
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ],
             "unit": "percentunit"
           },
-          "overrides": [],
+          "override": {},
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.6.2",
+      "pluginVersion": "6.5.2",
       "targets": [
         {
           "expr": "sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"}) /sum (container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
@@ -2723,14 +2649,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2747,7 +2671,6 @@
         },
         {
           "alias": "Used Disk Space",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2764,7 +2687,6 @@
         },
         {
           "alias": "Total Disk Space",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2781,7 +2703,6 @@
         },
         {
           "alias": "Free Disk Space",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2798,7 +2719,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2866,14 +2786,12 @@
       "styles": [
         {
           "alias": "Time",
-          "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "Time",
           "type": "hidden"
         },
         {
           "alias": "Disk Space",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2890,7 +2808,6 @@
         },
         {
           "alias": "Volume Name",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2907,7 +2824,6 @@
         },
         {
           "alias": "Bound",
-          "align": "auto",
           "colorMode": "cell",
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2936,7 +2852,6 @@
         },
         {
           "alias": "Node",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2953,7 +2868,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -2970,7 +2884,6 @@
         },
         {
           "alias": "",
-          "align": "auto",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -3014,8 +2927,8 @@
       "type": "table"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 22,
+  "refresh": "",
+  "schemaVersion": 21,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -3023,6 +2936,8 @@
       {
         "allValue": ".*",
         "current": {
+          "selected": false,
+          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -3035,9 +2950,20 @@
         "label": null,
         "multi": true,
         "name": "Node",
-        "options": [],
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "drax03",
+            "value": "drax03"
+          }
+        ],
         "query": "label_values(kubernetes_io_hostname)",
-        "refresh": 1,
+        "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -3050,6 +2976,8 @@
       {
         "allValue": ".*",
         "current": {
+          "selected": false,
+          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -3062,9 +2990,190 @@
         "label": null,
         "multi": true,
         "name": "Pod",
-        "options": [],
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "dashboard",
+            "value": "dashboard"
+          },
+          {
+            "selected": false,
+            "text": "grafana",
+            "value": "grafana"
+          },
+          {
+            "selected": false,
+            "text": "influxdb",
+            "value": "influxdb"
+          },
+          {
+            "selected": false,
+            "text": "l3-antwerp42",
+            "value": "l3-antwerp42"
+          },
+          {
+            "selected": false,
+            "text": "nats",
+            "value": "nats"
+          },
+          {
+            "selected": false,
+            "text": "neo4j",
+            "value": "neo4j"
+          },
+          {
+            "selected": false,
+            "text": "nfs-server-pod",
+            "value": "nfs-server-pod"
+          },
+          {
+            "selected": false,
+            "text": "oran-clustercontrol",
+            "value": "oran-clustercontrol"
+          },
+          {
+            "selected": false,
+            "text": "redis",
+            "value": "redis"
+          },
+          {
+            "selected": false,
+            "text": "simple-api",
+            "value": "simple-api"
+          },
+          {
+            "selected": false,
+            "text": "etcd-drax03",
+            "value": "etcd-drax03"
+          },
+          {
+            "selected": false,
+            "text": "kube-apiserver-drax03",
+            "value": "kube-apiserver-drax03"
+          },
+          {
+            "selected": false,
+            "text": "kube-controller-manager-drax03",
+            "value": "kube-controller-manager-drax03"
+          },
+          {
+            "selected": false,
+            "text": "kube-scheduler-drax03",
+            "value": "kube-scheduler-drax03"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-prometheus-node-exporter-m2qws",
+            "value": "acc-sys-prometheus-node-exporter-m2qws"
+          },
+          {
+            "selected": false,
+            "text": "kube-flannel-ds-amd64-9x75l",
+            "value": "kube-flannel-ds-amd64-9x75l"
+          },
+          {
+            "selected": false,
+            "text": "kube-proxy-fclc2",
+            "value": "kube-proxy-fclc2"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-grafana-58b9b4bf57-zxlgw",
+            "value": "acc-sys-grafana-58b9b4bf57-zxlgw"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-kube-eagle-6889f9d495-p6rhm",
+            "value": "acc-sys-kube-eagle-6889f9d495-p6rhm"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-metrics-server-67fccbcd4d-8snvv",
+            "value": "acc-sys-metrics-server-67fccbcd4d-8snvv"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-prometheus-alertmanager-c9d479f67-jsvbk",
+            "value": "acc-sys-prometheus-alertmanager-c9d479f67-jsvbk"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-prometheus-kube-state-metrics-9449698b-5qjkh",
+            "value": "acc-sys-prometheus-kube-state-metrics-9449698b-5qjkh"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-prometheus-pushgateway-799d9d69f8-m6bpk",
+            "value": "acc-sys-prometheus-pushgateway-799d9d69f8-m6bpk"
+          },
+          {
+            "selected": false,
+            "text": "acc-sys-prometheus-server-6569594d4d-zpm9k",
+            "value": "acc-sys-prometheus-server-6569594d4d-zpm9k"
+          },
+          {
+            "selected": false,
+            "text": "coredns-5644d7b6d9-vz9r4",
+            "value": "coredns-5644d7b6d9-vz9r4"
+          },
+          {
+            "selected": false,
+            "text": "coredns-5644d7b6d9-wkctd",
+            "value": "coredns-5644d7b6d9-wkctd"
+          },
+          {
+            "selected": false,
+            "text": "druid-broker-867c5d8c46-fhpkt",
+            "value": "druid-broker-867c5d8c46-fhpkt"
+          },
+          {
+            "selected": false,
+            "text": "druid-coordinator-548995745c-skq6t",
+            "value": "druid-coordinator-548995745c-skq6t"
+          },
+          {
+            "selected": false,
+            "text": "druid-mysql-784ffcf4f7-gnd6z",
+            "value": "druid-mysql-784ffcf4f7-gnd6z"
+          },
+          {
+            "selected": false,
+            "text": "druid-overlord-847bd47847-f6lkc",
+            "value": "druid-overlord-847bd47847-f6lkc"
+          },
+          {
+            "selected": false,
+            "text": "druid-router-bb9dc57cf-978t9",
+            "value": "druid-router-bb9dc57cf-978t9"
+          },
+          {
+            "selected": false,
+            "text": "web-deployment-fb4c9d56c-2lqlm",
+            "value": "web-deployment-fb4c9d56c-2lqlm"
+          },
+          {
+            "selected": false,
+            "text": "druid-historical-0",
+            "value": "druid-historical-0"
+          },
+          {
+            "selected": false,
+            "text": "druid-middle-manager-0",
+            "value": "druid-middle-manager-0"
+          },
+          {
+            "selected": false,
+            "text": "druid-zookeeper-0",
+            "value": "druid-zookeeper-0"
+          }
+        ],
         "query": "label_values(kube_pod_info{node=~\"^$Node$\"}, pod)",
-        "refresh": 1,
+        "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -3089,9 +3198,15 @@
         "label": null,
         "multi": true,
         "name": "Pod_ip",
-        "options": [],
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
         "query": "label_values(kube_pod_info{pod=\"$Pod\", node=\"$Node\"}, pod_ip)",
-        "refresh": 1,
+        "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -3116,9 +3231,15 @@
         "label": null,
         "multi": true,
         "name": "Container",
-        "options": [],
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
         "query": "label_values(kube_pod_container_info{pod=\"$Pod\"}, container)",
-        "refresh": 1,
+        "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,

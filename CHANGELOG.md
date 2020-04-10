@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 10.04.2020.
+
+### Changed
+
+- Updated the json definition of the custom-dashboard for grafan in acc-sys-dashboard
+- - It now has auto 10s refresh periods
+- - The variables of the dashboard should autorefresh on dashboard load
+- - Fixed the RAM and CPU panels, to instant value to avoid error
+
 ## 03.04.2020.
 
 ### Changed
