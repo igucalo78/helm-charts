@@ -8,7 +8,7 @@
 
 # helm package verything except acc-dashboard
 echo "Packaging everything except acc-dashboard"
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \) -exec sh -c '
  for i do
    helm package "$i"
  done' sh {} +
@@ -19,7 +19,7 @@ helm repo index . --url  https://accelleran.github.io/helm-charts/
 
 echo "Adding  everything excpet acc-dashboard"
 #git add all except acc-dashboard
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard*" \! -name ".git" \! -name "*.sh*" \! -name "" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard*" \! -name ".git" \! -name "" \) -exec sh -c '
   for i do
     git add "$i"
   done' sh {} +
