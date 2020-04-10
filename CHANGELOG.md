@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - The variables of the dashboard should autorefresh on dashboard load
 - - Fixed the RAM and CPU panels, to instant value to avoid error
 
+### Added
+
+- Added grafana testing charts in beta
+- Added Loki for logs in beta
+
 ## 03.04.2020.
 
 ### Changed
