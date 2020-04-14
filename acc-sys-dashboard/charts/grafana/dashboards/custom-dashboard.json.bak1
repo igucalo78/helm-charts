@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1586860430223,
+  "iteration": 1586519703830,
   "links": [],
   "panels": [
     {
@@ -53,7 +52,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
+        "w": 3,
         "x": 0,
         "y": 1
       },
@@ -137,8 +136,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 2,
+        "w": 3,
+        "x": 3,
         "y": 1
       },
       "id": 28,
@@ -223,8 +222,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 4,
+        "w": 3,
+        "x": 6,
         "y": 1
       },
       "id": 29,
@@ -308,8 +307,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 6,
+        "w": 3,
+        "x": 9,
         "y": 1
       },
       "id": 32,
@@ -359,7 +358,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Running Pods",
+      "title": "Number of Running Pods",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -373,14 +372,14 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
+      "colorBackground": false,
       "colorPostfix": false,
       "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
-        "#FF9830",
-        "#FF9830"
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
       ],
       "datasource": "Prometheus",
       "format": "none",
@@ -393,8 +392,91 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 8,
+        "w": 3,
+        "x": 12,
+        "y": 1
+      },
+      "id": 33,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(kube_pod_container_status_running)",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of Running Container",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "Prometheus",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
         "y": 1
       },
       "id": 34,
@@ -437,15 +519,14 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1",
-          "instant": false,
+          "expr": "sum(kube_pod_container_status_terminated)",
           "refId": "A"
         }
       ],
-      "thresholds": "1",
+      "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Pending Containers",
+      "title": "Number of Terminated Containers",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -462,7 +543,7 @@
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#299c46",
+        "#37872D",
         "#C4162A",
         "#C4162A"
       ],
@@ -477,11 +558,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 2,
-        "x": 10,
+        "w": 6,
+        "x": 18,
         "y": 1
       },
-      "id": 66,
+      "id": 35,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -522,14 +603,13 @@
       "targets": [
         {
           "expr": "sum(kube_pod_container_status_waiting)",
-          "instant": false,
           "refId": "A"
         }
       ],
       "thresholds": "1",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Crashed Containers",
+      "title": "Number of Waiting Containers",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -542,1316 +622,13 @@
       "valueName": "current"
     },
     {
-      "cacheTimeout": null,
-      "columns": [],
-      "datasource": "Prometheus",
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 35,
-      "links": [],
-      "options": {},
-      "pageSize": null,
-      "pluginVersion": "6.6.2",
-      "showHeader": true,
-      "sort": {
-        "col": 13,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "",
-          "align": "right",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "pod",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Time",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "__name__",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "app",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "chart",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "component",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "heritage",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "instance",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "job",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Package",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "release",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "Pod",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "pod",
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Status",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "phase",
-          "thresholds": [
-            ""
-          ],
-          "type": "string",
-          "unit": "short",
-          "valueMaps": [
-            {
-              "text": "Crash",
-              "value": "null"
-            },
-            {
-              "text": "Crash",
-              "value": "Null"
-            },
-            {
-              "text": "Crash",
-              "value": "None"
-            }
-          ]
-        },
-        {
-          "alias": "Namespace",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "namespace",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "kubernetes_namespace",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "Node",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "kubernetes_node",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "kubernetes_name",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #A",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #B",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1",
-          "format": "table",
-          "instant": true,
-          "refId": "A"
-        },
-        {
-          "expr": "kube_pod_container_status_waiting == 1",
-          "format": "table",
-          "instant": true,
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Pending or Crashed Pods and Containers",
-      "transform": "table",
-      "type": "table"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 0,
-        "y": 5
-      },
-      "id": 67,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "ON",
-                "type": 1,
-                "value": "1"
-              },
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\".*redis.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "Provisioner",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Redis",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 2,
-        "y": 5
-      },
-      "id": 68,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "ON",
-                "type": 1,
-                "value": "1"
-              },
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\".*nats.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Nats",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 4,
-        "y": 5
-      },
-      "id": 69,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "ON",
-                "type": 1,
-                "value": "1"
-              },
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\".*oran.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Oran",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 6,
-        "y": 5
-      },
-      "id": 71,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "ON",
-                "type": 1,
-                "value": "2"
-              },
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "1"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 2
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\"provisioner.*\"})",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Provisioner",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 8,
-        "y": 5
-      },
-      "id": 70,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "id": 0,
-                "op": "=",
-                "text": "ON",
-                "type": 1,
-                "value": "1"
-              },
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-dash-front-back-end.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Frontend",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 10,
-        "y": 5
-      },
-      "id": 72,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "1"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-druid.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Druid",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 0,
-        "y": 9
-      },
-      "id": 74,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "0",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "1",
-                "type": 2,
-                "value": "0"
-              },
-              {
-                "from": "2",
-                "id": 4,
-                "operator": "",
-                "text": "ON",
-                "to": "200",
-                "type": 2,
-                "value": ""
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 2
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-kafka.*\",pod!=\"acc-dash-kafka-config.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-zookeeper.*\"})",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Kafka",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 2,
-        "y": 9
-      },
-      "id": 75,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "1"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-nkafka.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "NKafka",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 4,
-        "y": 9
-      },
-      "id": 76,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "0",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "6",
-                "type": 2,
-                "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "7"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 7
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-prometheus.*\"})",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Prometheus",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 6,
-        "y": 9
-      },
-      "id": 77,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "0",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "1",
-                "type": 2,
-                "value": ""
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "2"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 2
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-kube-eagle.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-metrics-server.*\"})",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Metrics",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 8,
-        "y": 9
-      },
-      "id": 78,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "0",
-                "id": 3,
-                "operator": "",
-                "text": "OFF",
-                "to": "1",
-                "type": 2,
-                "value": ""
-              },
-              {
-                "from": "2",
-                "id": 4,
-                "operator": "",
-                "text": "ON",
-                "to": "100",
-                "type": 2,
-                "value": ""
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 2
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\"loki.*\"})",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Loki",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 10,
-        "y": 9
-      },
-      "id": 73,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "fieldOptions": {
-          "calcs": [
-            "first"
-          ],
-          "defaults": {
-            "mappings": [
-              {
-                "from": "",
-                "id": 1,
-                "operator": "",
-                "text": "OFF",
-                "to": "",
-                "type": 1,
-                "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "1"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "red",
-                  "value": null
-                },
-                {
-                  "color": "green",
-                  "value": 1
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal"
-      },
-      "pluginVersion": "6.6.2",
-      "targets": [
-        {
-          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-grafana.*\"}",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "B"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Grafana",
-      "type": "stat"
-    },
-    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 5
       },
       "id": 63,
       "panels": [],
@@ -1864,7 +641,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 14
+        "y": 6
       },
       "id": 40,
       "interval": "",
@@ -1951,7 +728,7 @@
         "h": 7,
         "w": 7,
         "x": 9,
-        "y": 14
+        "y": 6
       },
       "hiddenSeries": false,
       "id": 39,
@@ -2056,7 +833,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 14
+        "y": 6
       },
       "id": 49,
       "links": [],
@@ -2280,7 +1057,7 @@
         "h": 7,
         "w": 11,
         "x": 0,
-        "y": 21
+        "y": 13
       },
       "id": 56,
       "links": [],
@@ -2491,7 +1268,7 @@
         "h": 7,
         "w": 13,
         "x": 11,
-        "y": 21
+        "y": 13
       },
       "id": 44,
       "links": [],
@@ -2681,7 +1458,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 20
       },
       "id": 31,
       "panels": [],
@@ -2694,7 +1471,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 29
+        "y": 21
       },
       "id": 41,
       "options": {
@@ -2793,7 +1570,7 @@
         "h": 7,
         "w": 7,
         "x": 9,
-        "y": 29
+        "y": 21
       },
       "hiddenSeries": false,
       "id": 47,
@@ -2925,7 +1702,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 29
+        "y": 21
       },
       "id": 42,
       "links": [],
@@ -3149,7 +1926,7 @@
         "h": 7,
         "w": 11,
         "x": 0,
-        "y": 36
+        "y": 28
       },
       "id": 45,
       "links": [],
@@ -3340,7 +2117,7 @@
         "h": 7,
         "w": 13,
         "x": 11,
-        "y": 36
+        "y": 28
       },
       "id": 57,
       "links": [],
@@ -3530,7 +2307,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 35
       },
       "id": 15,
       "panels": [],
@@ -3549,7 +2326,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 59,
@@ -3656,7 +2433,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 60,
@@ -3758,7 +2535,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 44
       },
       "id": 7,
       "panels": [],
@@ -3772,7 +2549,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 53
+        "y": 45
       },
       "id": 48,
       "links": [],
@@ -3839,7 +2616,7 @@
         "h": 7,
         "w": 8,
         "x": 4,
-        "y": 53
+        "y": 45
       },
       "hiddenSeries": false,
       "id": 54,
@@ -3931,7 +2708,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 53
+        "y": 45
       },
       "id": 55,
       "links": [],
@@ -4074,7 +2851,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 52
       },
       "id": 53,
       "links": [],
@@ -4237,7 +3014,7 @@
       "type": "table"
     }
   ],
-  "refresh": "30s",
+  "refresh": "10s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -4375,5 +3152,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 13
+  "version": 1
 }
