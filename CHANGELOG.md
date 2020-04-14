@@ -10,6 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated custom-dashboard.json to include the dRAX Health status
+- Updated acc-dashboard to include loki-stack
+- Updated acc-dashboard to have dynamic lokiUrl
+- Updated grafana datasources to be dynamic
+- Updated loki-stak fluent-bit to have dynamic lokiUrl
+
+### Added
+
+- Added loki-stack to helm repo
+- Added loki-log.dashboard.json for grafan
 
 ## 10.04.2020.
 

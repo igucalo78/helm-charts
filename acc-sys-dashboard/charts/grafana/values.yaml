@@ -23,21 +23,13 @@ dashboards:
       file: dashboards/custom-dashboard.json
     monitor-dashboard:
       file: dashboards/monitor-dashboard.json
+    loki-log-dashboard:
+      file: dashboards/loki-log-dashboard.json
 dashboardsConfigMaps: {}
 datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-    - access: proxy
-      isDefault: true
-      name: Prometheus
-      type: prometheus
-      url: http://acc-dash-prometheus-server.default.svc.cluster.local:80
-    - access: proxy
-      isDefault: false
-      name: Druid
-      type: paypal-druid-datasource
-      url: http://acc-dash-druid:8888
+  prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
+  druidUrl: http://{{ .Release.Name }}-druid.{{ .Release.Namespace }}:8888
+  lokiUrl: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}:3100
 deploymentStrategy:
   type: RollingUpdate
 downloadDashboards:
