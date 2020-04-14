@@ -4,13 +4,14 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.7.0    |0.7.0           |The All-In-One Accelleran Dashboard   |
-|acc-helm/acc-sys-dashboard    |1.2.2    |1.2.2           |Accelleran's System Overview Dashboard   |
+|acc-helm/acc-dashboard        |0.11.1   |0.11.1          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-sys-dashboard    |1.5.1    |1.5.1           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.9.0    |0.9.0           |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
 |acc-helm/kube-eagle           |1.1.5    |1.1.0           |Prometheus exporter for Kubernetes pod & node r...   |
+|acc-helm/loki-stack         	 |0.35.0   |v1.4.1       	  |Loki: like Prometheus, but for logs.
 |acc-helm/metrics-server       |2.9.0    |0.3.6           |Metrics Server is a cluster-wide aggregator of ...   |
 |acc-helm/nkafka-helm          |0.2.2    |0.2.2           |A Helm chart for Kubernetes   |
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
