@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1586895415090,
+  "iteration": 1586873317030,
   "links": [],
   "panels": [
     {
@@ -438,7 +437,7 @@
       "targets": [
         {
           "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1",
-          "instant": true,
+          "instant": false,
           "refId": "A"
         }
       ],
@@ -522,7 +521,7 @@
       "targets": [
         {
           "expr": "sum(kube_pod_container_status_waiting)",
-          "instant": true,
+          "instant": false,
           "refId": "A"
         }
       ],
@@ -4237,7 +4236,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -4246,9 +4245,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "node1",
+          "text": "All",
           "value": [
-            "node1"
+            "$__all"
           ]
         },
         "datasource": "Prometheus",
@@ -4375,5 +4374,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 4
+  "version": 2
 }
