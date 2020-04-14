@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586873317030,
+  "id": 5,
+  "iteration": 1586860430223,
   "links": [],
   "panels": [
     {
@@ -1710,7 +1711,7 @@
             "mappings": [
               {
                 "from": "0",
-                "id": 5,
+                "id": 3,
                 "operator": "",
                 "text": "OFF",
                 "to": "1",
@@ -1719,7 +1720,7 @@
               },
               {
                 "from": "2",
-                "id": 6,
+                "id": 4,
                 "operator": "",
                 "text": "ON",
                 "to": "100",
@@ -1753,7 +1754,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_status_running{pod=~\".*loki.*\"})",
+          "expr": "sum(kube_pod_container_status_running{pod=~\"loki.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -4374,5 +4375,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 2
+  "version": 13
 }

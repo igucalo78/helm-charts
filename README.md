@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated acc-dashboard to have dynamic lokiUrl
 - Updated grafana datasources to be dynamic
 - Updated loki-stak fluent-bit to have dynamic lokiUrl
+- Updated loki panel in Accelleran dashboard for dynamic naming
 
 ### Added
 
