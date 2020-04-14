@@ -70,10 +70,10 @@ grafana.ini:
     org_role: Viewer
 image:
   pullPolicy: IfNotPresent
-  repository: grafana/grafana
-  tag: 6.6.2
-  #pullSecrets: 
-  # - accelleran-secret
+  repository: accelleran/dash-grafana
+  tag: 0.3.0
+  pullSecrets: 
+  - accelleran-secret
 ingress:
   annotations: {}
   enabled: false

@@ -15,11 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated grafana datasources to be dynamic
 - Updated loki-stak fluent-bit to have dynamic lokiUrl
 - Updated loki panel in Accelleran dashboard for dynamic naming
+- Updated grafana to use accelleran/dash-grafana:0.3.0
+- Updated grafana helm chart to import plugins folder, including druidplugin, from inside the Docker image
 
 ### Added
 
 - Added loki-stack to helm repo
-- Added loki-log.dashboard.json for grafan
+- Added loki-log.dashboard.json for grafana
 
 ## 10.04.2020.
 

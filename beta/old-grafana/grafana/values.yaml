@@ -78,8 +78,8 @@ grafana.ini:
     org_role: Viewer
 image:
   pullPolicy: IfNotPresent
-  repository: accelleran/dash-grafana 
-  tag: 0.1.0-s3
+  repository: beta-grafana 
+  tag: latest
   pullSecrets: 
    - accelleran-secret
 ingress:
@@ -142,7 +142,7 @@ securityContext:
 service:
   annotations: {}
   labels: {}
-  nodePort: 30300
+  nodePort: 31300
   port: 80
   portName: service
   targetPort: 3000
