@@ -4,8 +4,8 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.11.1   |0.11.1          |The All-In-One Accelleran Dashboard   |
-|acc-helm/acc-sys-dashboard    |1.5.1    |1.5.1           |Accelleran's System Overview Dashboard   |
+|acc-helm/acc-dashboard        |0.11.2   |0.11.2          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-sys-dashboard    |1.5.2    |1.5.2           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.9.0    |0.9.0           |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
@@ -28,20 +28,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 14.04.2020.
+## 15.04.2020.
 
 ### Changed
 
-- Updated custom-dashboard.json to include the dRAX Health status
-- Updated acc-dashboard to include loki-stack
-- Updated acc-dashboard to have dynamic lokiUrl
-- Updated grafana datasources to be dynamic
-- Updated loki-stak fluent-bit to have dynamic lokiUrl
-- Updated loki panel in Accelleran dashboard for dynamic naming
-- Updated grafana to use accelleran/dash-grafana:0.3.0
-- Updated grafana helm chart to import plugins folder, including druidplugin, from inside the Docker image
-
-### Added
-
-- Added loki-stack to helm repo
-- Added loki-log.dashboard.json for grafana
+- Updated custom-dashboard.json with some bug fixes

@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586956207925,
+  "id": 4,
+  "iteration": 1586895415090,
   "links": [],
   "panels": [
     {
@@ -97,7 +98,6 @@
       "targets": [
         {
           "expr": "count(kube_node_labels)",
-          "instant": true,
           "refId": "A"
         }
       ],
@@ -353,7 +353,6 @@
       "targets": [
         {
           "expr": "count(count(kube_pod_labels) by (pod))",
-          "instant": true,
           "refId": "A"
         }
       ],
@@ -438,7 +437,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1)",
+          "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1",
           "instant": true,
           "refId": "A"
         }
@@ -942,6 +941,13 @@
           "defaults": {
             "mappings": [
               {
+                "id": 0,
+                "op": "=",
+                "text": "ON",
+                "type": 1,
+                "value": "1"
+              },
+              {
                 "from": "",
                 "id": 1,
                 "operator": "",
@@ -949,15 +955,6 @@
                 "to": "",
                 "type": 1,
                 "value": "0"
-              },
-              {
-                "from": "",
-                "id": 2,
-                "operator": "",
-                "text": "ON",
-                "to": "",
-                "type": 1,
-                "value": "1"
               }
             ],
             "nullValueMode": "connected",
@@ -986,11 +983,11 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*redis.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\".*redis.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
-          "legendFormat": "0",
+          "legendFormat": "Provisioner",
           "refId": "B"
         }
       ],
@@ -1061,7 +1058,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*nats.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\".*nats.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1136,7 +1133,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*oran.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\".*oran.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1220,7 +1217,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_status_running{pod=~\"provisioner.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "sum(kube_pod_container_status_running{pod=~\"provisioner.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1295,7 +1292,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-dash-front-back-end.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-dash-front-back-end.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1305,7 +1302,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Web GUI",
+      "title": "Frontend",
       "type": "stat"
     },
     {
@@ -1372,7 +1369,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-druid.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-druid.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1449,7 +1446,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "((sum(kube_pod_container_status_running{pod=~\"acc-dash-kafka.*\",pod!=\"acc-dash-kafka-config.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-zookeeper.*\"}))or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-kafka.*\",pod!=\"acc-dash-kafka-config.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-zookeeper.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1526,7 +1523,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-nkafka.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-nkafka.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1603,7 +1600,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_status_running{pod=~\"acc-dash-prometheus.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-prometheus.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1680,7 +1677,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "((sum(kube_pod_container_status_running{pod=~\"acc-dash-kube-eagle.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-metrics-server.*\"})) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "sum(kube_pod_container_status_running{pod=~\"acc-dash-kube-eagle.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-metrics-server.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1757,7 +1754,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_status_running{pod=~\".*loki.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*loki.*\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1834,7 +1831,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-grafana.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "kube_pod_container_status_running{pod=~\"acc-dash-grafana.*\"}",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -4249,9 +4246,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "All",
+          "text": "node1",
           "value": [
-            "$__all"
+            "node1"
           ]
         },
         "datasource": "Prometheus",
@@ -4378,5 +4375,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 1
+  "version": 4
 }
