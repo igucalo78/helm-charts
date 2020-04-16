@@ -8,7 +8,7 @@ version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/provisioner-dhcp
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
