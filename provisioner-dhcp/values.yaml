@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.Version }}"
+version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/provisioner-dhcp
@@ -58,11 +58,21 @@ ingress:
 persistence:
   accessModes: 
     - ReadwriteMany
-  enabled: true
+  enabled: false
   size: 1Gi
   storageClassName: acc-prov-dhcp
   type: pvc
   hostPath: /opt/pods/
+
+configuration:
+  interface: eno1
+  provisionerIp: 10.20.20.20
+  provisionerPort: 31610
+  # If you enable staticRoute, then provide the network and gateway values
+  staticRoute: false
+  staticRouteNetwork: 10.20.20.0/24
+  staticRouteGateway: 10.22.10.52
+    
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

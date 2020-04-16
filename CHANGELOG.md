@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 16.04.2020.
+
+### Changed
+
+- Updated the provisioner-dhcp helm chart
+- Updated udhcpd.conf as a configurable configMap for the provisioner-dhcp
+
 ## 15.04.2020.
 
 ### Changed

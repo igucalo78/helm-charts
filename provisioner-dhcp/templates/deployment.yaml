@@ -30,7 +30,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: prov-dhcp-conf
-              mountPath: /conf/
+              mountPath: /conf/udhcpd.conf
+              subPath: "udhcpd.conf"
           #ports:
           #  - name: http
           #    containerPort: 80

@@ -5,8 +5,17 @@ metadata:
  labels:
    {{- include "provisioner-dhcp.labels" . | nindent 4 }}
 data:
-  {{- $files := .Files }}
-  {{- range tuple "udhcpd.conf" }}
-  {{ . }}:
-    {{ $files.Get . | quote }}
-  {{- end }}
+  udhcpd.conf: |
+    start        10.0.0.20
+    end          10.255.255.254
+    interface    {{ .Values.configuration.interface }}
+    opt     dns     10.0.0.1 10.0.0.2
+    option  subnet  255.0.0.0
+    opt     router  10.0.0.1
+    opt     wins    10.0.0.2
+    option  domain  local
+    option  lease   86400
+    option  provision  https://{{ .Values.configuration.provisionerIp }}:{{ .Values.configuration.provisionerPort }}
+    {{- if .Values.configuration.staticRoute }} 
+    option staticroutes {{ .Values.configuration.staticRouteNetwork }} {{ .Values.configuration.staticRouteGateway }}
+    {{- end }}

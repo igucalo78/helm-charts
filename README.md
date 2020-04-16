@@ -16,7 +16,7 @@
 |acc-helm/nkafka-helm          |0.2.2    |0.2.2           |A Helm chart for Kubernetes   |
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.4.1    |0.4.1           |The Accelleran provisioner for bootstrap files   |
-|acc-helm/provisioner-dhcp     |0.1.4    |0.1.4           |A DHCP service for Provisioner discovery   |
+|acc-helm/provisioner-dhcp     |0.1.0    |0.1.4           |A DHCP service for Provisioner discovery   |
 |acc-helm/redis                |0.2.0    |redis20190206   |Accelleran dRAX Redis   |
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
@@ -28,8 +28,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 15.04.2020.
+## 16.04.2020.
 
 ### Changed
 
-- Updated custom-dashboard.json with some bug fixes
+- Updated the provisioner-dhcp helm chart
+- Updated udhcpd.conf as a configurable configMap for the provisioner-dhcp
+
