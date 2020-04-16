@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated the provisioner-dhcp helm chart
 - Updated udhcpd.conf as a configurable configMap for the provisioner-dhcp
+- Updated provisioner helm chart to use pre-defined configMaps for keys and crts making it a single command install 
+
+### Added
+
+- Added drax to beta charts
+- Added NATS to main repo
 
 ## 15.04.2020.
 

@@ -53,6 +53,11 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+config:
+  serverKeyName: prov-server-key
+  serverCrtName: prov-server-crt
+  clientCrtName: prov-client-crt
+
 persistence:
   accessModes:
     - ReadWriteMany

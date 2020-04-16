@@ -1,6 +1,6 @@
 apiVersion: v2
-name: provisioner
-description: The Accelleran provisioner for bootstrap files 
+name: drax
+description: All in one Accelleran dRAX
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -14,8 +14,28 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 0.5.0
+version: 0.1.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 0.4.1
+appVersion: 0.1.0
+
+# Dependencies
+dependencies:
+  - name: nats
+    condition: nats.enabled
+    version: 0.1.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: redis
+    condition: redis.enabled
+    version: 0.2.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: provisioner-dhcp
+    condition: provisioner-dhcp.enabled
+    version: 0.1.1
+    repository: https://accelleran.github.io/helm-charts/
+  - name: provisioner
+    condition: provisioner.enabled
+    version: 0.4.1
+    repository: https://accelleran.github.io/helm-charts/
+

@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.Version }}"
+version: "{{ .Chart.AppVersion }}"
 # version: v0.2.3
 
 image:
@@ -80,3 +80,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+nginx:
+  config:
+    serverKeyName: prov-server-key
+    serverCrtName: prov-server-crt
+    clientCrtName: prov-client-crt
+  service:
+    nodePort: 31610
