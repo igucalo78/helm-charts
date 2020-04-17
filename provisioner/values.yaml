@@ -88,3 +88,5 @@ nginx:
     clientCrtName: prov-client-crt
   service:
     nodePort: 31610
+  provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
+  provisionerPort: 16002

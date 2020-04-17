@@ -58,6 +58,9 @@ config:
   serverCrtName: prov-server-crt
   clientCrtName: prov-client-crt
 
+provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
+provisionerPort: 16002
+
 persistence:
   accessModes:
     - ReadWriteMany
