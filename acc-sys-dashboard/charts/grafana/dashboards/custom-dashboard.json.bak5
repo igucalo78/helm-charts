@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1587125994199,
+  "iteration": 1586956207925,
   "links": [],
   "panels": [
     {
@@ -1169,22 +1169,29 @@
           "defaults": {
             "mappings": [
               {
-                "from": "0",
+                "id": 0,
+                "op": "=",
+                "text": "ON",
+                "type": 1,
+                "value": "2"
+              },
+              {
+                "from": "",
                 "id": 1,
                 "operator": "",
                 "text": "OFF",
-                "to": "2",
-                "type": 2,
-                "value": ""
+                "to": "",
+                "type": 1,
+                "value": "0"
               },
               {
                 "from": "",
                 "id": 2,
                 "operator": "",
-                "text": "ON",
+                "text": "OFF",
                 "to": "",
                 "type": 1,
-                "value": "3"
+                "value": "1"
               }
             ],
             "nullValueMode": "connected",
@@ -1213,7 +1220,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "((sum(kube_pod_container_status_running{pod=~\".*provisioner.*\"}) + sum(kube_pod_container_status_running{pod=~\".*nginx.*\"})) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(sum(kube_pod_container_status_running{pod=~\"provisioner.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -4371,5 +4378,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 3
+  "version": 1
 }

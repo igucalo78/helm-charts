@@ -48,6 +48,10 @@ provisioner:
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
 
+  # The service port used by the privisioner
+  service:
+    port: 16002
+
   # The nginx configuration
   nginx:
     # Names of the pre-made configMaps for the keys and crts
@@ -59,4 +63,8 @@ provisioner:
     # Exposed external port of the provisioner
     service:
       nodePort: 31610
-  
+
+    # Where the privisoner is isntalled
+    # The Port should be the same as the one in provisioner.service.port, deafult is 16002
+    provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
+    provisionerPort: 16002  
