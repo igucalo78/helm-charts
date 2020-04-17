@@ -19,6 +19,7 @@ data:
             ssl_verify_client optional;
             proxy_set_header SSL_CLIENT_CERT $ssl_client_cert;
             access_log /var/log/nginx/provision;
+            error_log /var/log/error.log info;
   
             location /get/ {
                     proxy_set_header        Host $host;

@@ -4,8 +4,8 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.11.2   |0.11.2          |The All-In-One Accelleran Dashboard   |
-|acc-helm/acc-sys-dashboard    |1.5.2    |1.5.2           |Accelleran's System Overview Dashboard   |
+|acc-helm/acc-dashboard        |0.11.3   |0.11.3          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-sys-dashboard    |1.5.3    |1.5.3           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.9.0    |0.9.0           |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
@@ -13,9 +13,10 @@
 |acc-helm/kube-eagle           |1.1.5    |1.1.0           |Prometheus exporter for Kubernetes pod & node r...   |
 |acc-helm/loki-stack         	 |0.35.0   |v1.4.1       	  |Loki: like Prometheus, but for logs.
 |acc-helm/metrics-server       |2.9.0    |0.3.6           |Metrics Server is a cluster-wide aggregator of ...   |
+|acc-helm/nats                 |0.1.0    |0.1.0        	  |Accelleran NATS   |
 |acc-helm/nkafka-helm          |0.2.2    |0.2.2           |A Helm chart for Kubernetes   |
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
-|acc-helm/provisioner          |0.4.1    |0.4.1           |The Accelleran provisioner for bootstrap files   |
+|acc-helm/provisioner          |0.7.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
 |acc-helm/provisioner-dhcp     |0.1.0    |0.1.4           |A DHCP service for Provisioner discovery   |
 |acc-helm/redis                |0.2.0    |redis20190206   |Accelleran dRAX Redis   |
 
@@ -28,16 +29,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 16.04.2020.
+## 17.04.2020.
 
 ### Changed
 
-- Updated the provisioner-dhcp helm chart
-- Updated udhcpd.conf as a configurable configMap for the provisioner-dhcp
-- Updated provisioner helm chart to use pre-defined configMaps for keys and crts making it a single command install
-
-### Added
-
-- Added drax to beta charts
-- Added NATS to main repo
+- Updated provisioner to use latest dockerimage verison 0.6.0
+- Updated provisoner values.yaml to have loglevel as well
+- Updated provisioner nginx provision.conf to have error logs enabled
+- Updated beta/drax to use latest version of provisioner
+- Updated provisioner to have provision.conf in a configMap fully configurable
+- Updated custom-dashboard.json with minor fixed for provisioner status panel
 

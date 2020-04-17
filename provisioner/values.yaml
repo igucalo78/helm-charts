@@ -34,6 +34,8 @@ securityContext:
   # runAsNonRoot: true
   runAsUser: 0
 
+logLevel: "debug"
+
 service:
   enabled: true
   type: ClusterIP

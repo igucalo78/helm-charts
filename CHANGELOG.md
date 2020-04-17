@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 17.04.2020.
+
+### Changed
+
+- Updated provisioner to use latest dockerimage verison 0.6.0
+- Updated provisoner values.yaml to have loglevel as well
+- Updated provisioner nginx provision.conf to have error logs enabled
+- Updated beta/drax to use latest version of provisioner
+- Updated provisioner to have provision.conf in a configMap fully configurable
+- Updated custom-dashboard.json with minor fixed for provisioner status panel
+
 ## 16.04.2020.
 
 ### Changed

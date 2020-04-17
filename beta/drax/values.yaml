@@ -52,6 +52,9 @@ provisioner:
   service:
     port: 16002
 
+  # Log level of the provisioner
+  logLevel: "debug"
+
   # The nginx configuration
   nginx:
     # Names of the pre-made configMaps for the keys and crts
