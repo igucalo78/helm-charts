@@ -14,4 +14,17 @@ acc-sys-dashboard:
 loki-stack:
   fluent-bit:
     loki:
-      serviceName: "{{ .Release.Name }}-loki.{{ .Release.Namespace }}"  # Defaults to "${RELEASE}-loki" if not set 
+      serviceName: "{{ .Release.Name }}-loki.{{ .Release.Namespace }}"  # Defaults to "${RELEASE}-loki" if not set
+dash-front-back-end:
+  service:
+    port: 5000
+    nodePort: 31315
+
+  config:
+    config_id: "production"
+    defaultServiceNamespace: "accelleran"
+    grafanaURL: "{{ .Release.Name }}-grafana.{{ .Release.Namespace }}"
+    grafanaPort: "80"
+    druidURL: "{{ .Release.Name }}-druid.{{ .Release.Namespace }}"
+    druidPort: "8888"
+    nodeApiURL: "10.20.20.20" 
