@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.Version }}"
+version: "{{ .Chart.AppVersion }}"
 #version: latest
 
 image:
@@ -42,6 +42,15 @@ service:
   nodePort: 31315
   portname: http
   protocol: TCP
+
+config:
+  config_id: "production"
+  defaultServiceNamespace: "accelleran"
+  grafanaURL: "10.20.20.20"
+  grafanaPort: "30300"
+  druidURL: "10.20.20.20"
+  druidPort: "30301"
+  nodeApiURL: "10.20.20.20"
 
 ingress:
   enabled: false

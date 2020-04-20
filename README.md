@@ -36,7 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated redis chart to 0.3.0 version
 - - Turned off the health check of redis because it causes errors afterwads during saving of db
 - Updated redis version in drax chart dependency
+- Updated dash-front-back-end to 0.10.0
+- - Using new version on DockerHub with bug fixes
+- - Using configMaps for config.json
 
 ### Added
 
 - Added oran-clustercontroller serviceAccount, ClusterRole, ClusterRoleBinging yamls
+- Added configMaps for config.json in dashboard-front-back-end helm chart
+

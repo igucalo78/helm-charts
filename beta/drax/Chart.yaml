@@ -32,7 +32,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: provisioner-dhcp
     condition: provisioner-dhcp.enabled
-    version: 0.1.1
+    version: 0.1.2
     repository: https://accelleran.github.io/helm-charts/
   - name: provisioner
     condition: provisioner.enabled

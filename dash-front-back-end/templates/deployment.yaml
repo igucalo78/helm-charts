@@ -27,6 +27,13 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: coreui-config
+              mountPath: /usr/src/dashboard/core-ui/src/config.json
+              subPath: "config.json"
+            - name: server-config
+              mountPath: /usr/src/dashboard/server/config.json
+              subPath: "config.json"
           ports:
             - name: {{ .Values.service.portname}}
               containerPort: {{ .Values.service.port }}
@@ -53,3 +60,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: coreui-config
+          configMap: 
+            name: coreui-config
+        - name: server-config
+          configMap:
+            name: server-config
