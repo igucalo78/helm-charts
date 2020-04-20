@@ -60,7 +60,7 @@ ingress:
 
 persistence:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   enabled: true
   size: 10Gi
   storageClassName: acc-redis

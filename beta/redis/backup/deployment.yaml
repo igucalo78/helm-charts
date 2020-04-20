@@ -30,10 +30,8 @@ spec:
           volumeMounts:
             - name: acc-redis
               mountPath: /data
-            {{- if .Values.health.enabled }}
             - name: health
               mountPath: /health
-            {{- end }}
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
@@ -88,9 +86,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "redis.fullname" . }}{{- end }}
           {{- end }}
-        {{- if .Values.health.enabled }}
         - name: health
           configMap:
             name: {{ include "redis.fullname" . }}-health
             defaultMode: 0755
-        {{- end }}

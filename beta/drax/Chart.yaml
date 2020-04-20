@@ -28,7 +28,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: redis
     condition: redis.enabled
-    version: 0.2.0
+    version: 0.3.0
     repository: https://accelleran.github.io/helm-charts/
   - name: provisioner-dhcp
     condition: provisioner-dhcp.enabled

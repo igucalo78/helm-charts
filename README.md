@@ -18,7 +18,7 @@
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.7.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
 |acc-helm/provisioner-dhcp     |0.1.0    |0.1.4           |A DHCP service for Provisioner discovery   |
-|acc-helm/redis                |0.2.0    |redis20190206   |Accelleran dRAX Redis   |
+|acc-helm/redis                |0.3.0    |redis20190206   |Accelleran dRAX Redis   |
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
 
@@ -29,14 +29,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 17.04.2020.
+## 20.04.2020.
 
 ### Changed
 
-- Updated provisioner to use latest dockerimage verison 0.6.0
-- Updated provisoner values.yaml to have loglevel as well
-- Updated provisioner nginx provision.conf to have error logs enabled
-- Updated beta/drax to use latest version of provisioner
-- Updated provisioner to have provision.conf in a configMap fully configurable
-- Updated custom-dashboard.json with minor fixed for provisioner status panel
+- Updated redis chart to 0.3.0 version
+- - Turned off the health check of redis because it causes errors afterwads during saving of db
+- Updated redis version in drax chart dependency
 
+### Added
+
+- Added oran-clustercontroller serviceAccount, ClusterRole, ClusterRoleBinging yamls
