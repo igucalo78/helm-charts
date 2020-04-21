@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
-- Updated acc-dashboard to 0.13.0
-- - Using new dash-fbe verison 0.11.0
-- Update dash-fbe to 0.11.0
+- Updated acc-dashboard to 0.13.1
+- - Using new dash-fbe verison 0.11.1
+- - Using external IP and PORT as configs
+- Update dash-fbe to 0.11.1
 - - Using proper config.js in build for coreui
 
 ## 20.04.2020.
