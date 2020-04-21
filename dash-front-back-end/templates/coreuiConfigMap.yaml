@@ -5,17 +5,6 @@ metadata:
   labels:
     {{- include "dash-front-back-end.labels" . | nindent 4 }}
 data:
-  config.json: |
-    {
-      "production": {
-        "config_id": "{{ .Values.config.config_id }}",
-        "defaultServiceNamespace": "{{ tpl .Values.config.defaultServiceNamespace . }}",
-        "node_port": {{ .Values.service.port }},
-        "grafanaURL": "{{ tpl .Values.config.grafanaURL . }}",
-        "grafanaPort": "{{ .Values.config.grafanaPort }}",
-        "druidURL": "{{ tpl .Values.config.druidURL . }}",
-        "druidPort": "{{ .Values.config.druidPort }}",
-        "nodeApiURL": "{{ tpl .Values.config.nodeApiURL . }}",
-        "nodeApiPort": "{{ .Values.service.nodePort }}"
-      }
-    }
+  config.js: |
+    window.GRAFANA_URL = "{{ .Values.config.grafanaURL }}";
+    window.GRAFANA_PORT = "{{ .Values.config.grafanaPort }}";

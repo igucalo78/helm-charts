@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 21.04.2020.
+
+### Updated
+
+- Updated acc-dashboard to 0.13.0
+- - Using new dash-fbe verison 0.11.0
+- Update dash-fbe to 0.11.0
+- - Using proper config.js in build for coreui
+
 ## 20.04.2020.
 
 ### Changed
