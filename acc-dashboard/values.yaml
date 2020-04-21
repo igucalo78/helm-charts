@@ -23,8 +23,8 @@ dash-front-back-end:
   config:
     config_id: "production"
     defaultServiceNamespace: "accelleran"
-    grafanaURL: "{{ .Release.Name }}-grafana.{{ .Release.Namespace }}"
-    grafanaPort: "80"
-    druidURL: "{{ .Release.Name }}-druid.{{ .Release.Namespace }}"
-    druidPort: "8888"
+    grafanaURL: "10.20.20.20"
+    grafanaPort: "30300"
+    druidURL: "10.20.20.20"
+    druidPort: "30301"
     nodeApiURL: "10.20.20.20" 
