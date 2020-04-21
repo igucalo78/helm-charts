@@ -7,9 +7,9 @@ dependencies:
   version: 0.3.0
 - name: provisioner-dhcp
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.1.1
+  version: 0.1.2
 - name: provisioner
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.7.0
-digest: sha256:ce3dc9399e6443534926f6a6156c799972ef7c7e227d7d354ce2fbe082c4789c
-generated: "2020-04-20T13:47:29.642074563Z"
+  version: 0.4.1
+digest: sha256:ca8f8c557f27dcfbdee24a61f7e1f87843cd8d0e520b0876d2b2a9de4e804c51
+generated: "2020-04-21T20:18:28.714047416Z"
