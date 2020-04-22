@@ -6,6 +6,8 @@ metadata:
     {{- include "provisioner.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: {{ .Values.strategyType }}
   selector:
     matchLabels:
       {{- include "provisioner.selectorLabels" . | nindent 6 }}

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 22.04.2020.
+
+### Updated
+
+- Updated provisioner to 0.8.0
+- - It is using the Recreate strategy now to avoid DB lock
+- Updated drax to 0.5.0
+- - Using provisioner 0.8.0
+- Updated git push script to include drax helm chart 
+
 ## 21.04.2020.
 
 ### Updated
