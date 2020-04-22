@@ -48,6 +48,8 @@ provisioner:
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
 
+  strategyType: Recreate
+  
   # The service port used by the privisioner
   service:
     port: 16002

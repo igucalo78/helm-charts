@@ -10,6 +10,6 @@ dependencies:
   version: 0.1.2
 - name: provisioner
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.7.0
-digest: sha256:ff1e9b3cd10ce2df871e19b460a3e8a89220cacf8974cd97ced581384cb0e039
-generated: "2020-04-21T20:33:48.205258288Z"
+  version: 0.8.0
+digest: sha256:aba53159a7f61e89830014337e176eeec6baced9da9475c73e4ab4edd31b1d8e
+generated: "2020-04-22T19:12:17.990313177Z"
