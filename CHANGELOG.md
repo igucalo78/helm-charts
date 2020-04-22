@@ -11,8 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated provisioner to 0.8.0
 - - It is using the Recreate strategy now to avoid DB lock
-- Updated drax to 0.5.0
+- Updated drax to 0.2.0
 - - Using provisioner 0.8.0
+- - Have option of strategy in values.yaml for provisioner
 - Updated git push script to include drax helm chart 
 
 ## 21.04.2020.

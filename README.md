@@ -7,7 +7,7 @@
 |acc-helm/acc-dashboard        |0.13.1   |0.13.1          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.3    |1.5.3           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.11.1   |0.11.1          |Frontend and backend of the Accelleran Dashboard   |
-|acc-helm/drax                 |0.5.0    |0.5.0           |All in one Accelleran dRAX   |
+|acc-helm/drax                 |0.2.0    |0.2.0           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
@@ -36,7 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated provisioner to 0.8.0
 - - It is using the Recreate strategy now to avoid DB lock
-- Updated drax to 0.5.0
+- Updated drax to 0.2.0
 - - Using provisioner 0.8.0
+- - Have option of strategy in values.yaml for provisioner
 - Updated git push script to include drax helm chart
 
