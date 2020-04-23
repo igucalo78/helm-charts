@@ -18,7 +18,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      {{- if .Values.config.https }}
       serviceAccountName: {{ include "oran-clustercontrol.serviceAccountName" . }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -29,16 +31,28 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: SERVED_NAMESPACE
-              value: {{ .Release.Namespace | quote }}
+              value: "{{ tpl .Values.config.l3Namespace . }}"
           command: ["sudo"]
-          args: [ "-E", "/data/oran/ocstart" ]
+          args: ["/data/oran/ocstart"]
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           volumeMounts:
-            - name: acc-oran
-              mountPath: /data
+#            - name: acc-oran
+#              mountPath: /data
+            - name: bootstrap-config
+              mountPath: /data/oran/oc.bootstrap
+              subPath: "oc.bootstrap"
+            - name: empty-db-config
+              mountPath: /data/oran/emptydb.db
+              subPath: "emptydb.db"
+            - name: l3-fdd-start-config
+              mountPath: /data/l3-fdd/l3start
+              subPath: "l3start" 
+            - name: l3-tdd-start-config
+              mountPath: /data/l3-tdd/l3start
+              subPath: "l3start"
           #livenessProbe:
           #  httpGet:
           #    path: /
@@ -62,8 +76,20 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: acc-oran
-          {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "oran-clustercontrol.fullname" . }}{{- end }}
-          {{- end }}
+#        - name: acc-oran
+#          {{- if .Values.persistence.enabled }}
+#          persistentVolumeClaim:
+#            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "oran-clustercontrol.fullname" . }}{{- end }}
+#          {{- end }}
+        - name: bootstrap-config
+          configMap:
+            name: bootstrap-config
+        - name: empty-db-config
+          configMap:
+            name: empty-db-config
+        - name: l3-tdd-start-config
+          configMap:
+            name: l3-tdd-start-config
+        - name: l3-fdd-start-config
+          configMap:
+            name: l3-fdd-start-config  

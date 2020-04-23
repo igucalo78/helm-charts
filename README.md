@@ -30,14 +30,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 22.04.2020.
+## 24.04.2020.
 
-### Updated
+### Added 
 
-- Updated provisioner to 0.8.0
-- - It is using the Recreate strategy now to avoid DB lock
-- Updated drax to 0.2.0
-- - Using provisioner 0.8.0
-- - Have option of strategy in values.yaml for provisioner
-- Updated git push script to include drax helm chart
+- drax beta 0.3.0 chart
+- - includes the oran-clstercontroller 0.1.0
+- oran-clustercontroler 0.1.0
+- - Now uses proper DockerHub image
+- - Includes all the files required
+- - Configured the redis hostname and port
 

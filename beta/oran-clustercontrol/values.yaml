@@ -4,10 +4,10 @@
 
 replicaCount: 1
 
-version: "podimage"
+version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/mwc
+  repository: accelleran/drax-oran-ctrl
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
@@ -17,12 +17,12 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  # create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: orancontroller
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -34,6 +34,7 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
+  privileged: true
 
 service:
   type: ClusterIP
@@ -43,15 +44,21 @@ service:
 persistence:
   accessModes:
     - ReadWriteMany
-  enabled: true
+  enabled: false
   size: 5Gi
   storageClassName: acc-oran
   type: pvc
   ### TESTING
-  hostPath: /opt/pods/acc-oran
+  hostPath: /opt/pods/
   ### Production
   # hostPath: /opt/pods/oran
 
+config:
+  https: false
+  l3Namespace: "{{ .Release.Namespace }}"
+  redis:
+    hostname: 10.20.20.20
+    port: 32000
 
 ingress:
   enabled: false
