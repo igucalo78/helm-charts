@@ -30,8 +30,11 @@ git commit -m "$1" --author="$2"
 echo "##### Pushing everything excpet acc-dashboard"
 git push
 
-echo "##### Sleeping for 30 seconds..."
-sleep 30
+echo "##### Sleeping for 10 seconds."
+echo "##### Please check that the Helm repo has been updating before continuing."
+sleep 10
+
+read -p "Press enter to continue..."
 
 echo "##### Updating helm chart repo"
 helm repo update

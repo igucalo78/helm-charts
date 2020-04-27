@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: empty-db-config
+ labels:
+   {{- include "oran-clustercontrol.labels" . | nindent 4 }}
+data:
+  emptydb.db: |
+    

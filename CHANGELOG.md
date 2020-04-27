@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 26.04.2020.
+
+### Changed
+
+- Updated acc-sys-dashboard to 1.5.4
+- - Updated prometheus server not to use securityContext.fsGroup: 10001
+- - Updated prometheus alertmanager not to use securityContext.fsGroup: 65534
+- - Updated metrics-server not to use securityContext.fsGroup: 10001
+- Updated loki-stack to 0.35.1
+- - Updated loki not to use securityContext.fsGroup: 10001
+- Updated acc-dashboard to 0.13.2
+- - Using acc-sys-dashboard 1.5.4
+- - Using loki-stack 0.35.1
+
 ## 24.04.2020.
 
 ### Added 

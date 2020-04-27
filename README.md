@@ -4,15 +4,15 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.13.1   |0.13.1          |The All-In-One Accelleran Dashboard   |
-|acc-helm/acc-sys-dashboard    |1.5.3    |1.5.3           |Accelleran's System Overview Dashboard   |
+|acc-helm/acc-dashboard        |0.13.2   |0.13.2          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-sys-dashboard    |1.5.4    |1.5.4           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.11.1   |0.11.1          |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/drax                 |0.2.0    |0.2.0           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
 |acc-helm/kube-eagle           |1.1.5    |1.1.0           |Prometheus exporter for Kubernetes pod & node r...   |
-|acc-helm/loki-stack           |0.35.0   |v1.4.1       	  |Loki: like Prometheus, but for logs.
+|acc-helm/loki-stack           |0.35.1   |v1.4.1       	  |Loki: like Prometheus, but for logs.
 |acc-helm/metrics-server       |2.9.0    |0.3.6           |Metrics Server is a cluster-wide aggregator of ...   |
 |acc-helm/nats                 |0.1.0    |0.1.0        	  |Accelleran NATS   |
 |acc-helm/nkafka-helm          |0.2.2    |0.2.2           |A Helm chart for Kubernetes   |
@@ -30,14 +30,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 24.04.2020.
+## 26.04.2020.
 
-### Added 
+### Changed
 
-- drax beta 0.3.0 chart
-- - includes the oran-clstercontroller 0.1.0
-- oran-clustercontroler 0.1.0
-- - Now uses proper DockerHub image
-- - Includes all the files required
-- - Configured the redis hostname and port
+- Updated acc-sys-dashboard to 1.5.4
+- - Updated prometheus server not to use securityContext.fsGroup: 10001
+- - Updated prometheus alertmanager not to use securityContext.fsGroup: 65534
+- - Updated metrics-server not to use securityContext.fsGroup: 10001
+- Updated loki-stack to 0.35.1
+- - Updated loki not to use securityContext.fsGroup: 10001
+- Updated acc-dashboard to 0.13.2
+- - Using acc-sys-dashboard 1.5.4
+- - Using loki-stack 0.35.1
 

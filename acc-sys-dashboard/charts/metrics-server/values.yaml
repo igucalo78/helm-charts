@@ -43,7 +43,7 @@ securityContext:
     drop:
     - all
   readOnlyRootFilesystem: true
-  runAsGroup: 10001
+#  runAsGroup: 10001
   runAsNonRoot: true
   runAsUser: 10001
 service:
