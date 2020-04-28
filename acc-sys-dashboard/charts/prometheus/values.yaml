@@ -216,6 +216,7 @@ pushgateway:
 rbac:
   create: true
 server:
+  strategyType: Recreate
   affinity: {}
   alertmanagers: []
   baseURL: ""

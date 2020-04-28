@@ -11,14 +11,12 @@ metadata:
     {{- include "prometheus.server.labels" . | nindent 4 }}
   name: {{ template "prometheus.server.fullname" . }}
 spec:
+  strategy:
+    type: {{ .Values.server.strategyType }}
   selector:
     matchLabels:
       {{- include "prometheus.server.matchLabels" . | nindent 6 }}
   replicas: {{ .Values.server.replicaCount }}
-  {{- if .Values.server.strategy }}
-  strategy:
-{{ toYaml .Values.server.strategy | indent 4 }}
-  {{- end }}
   template:
     metadata:
     {{- if .Values.server.podAnnotations }}
