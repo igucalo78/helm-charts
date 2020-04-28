@@ -46,6 +46,7 @@ service:
 config:
   config_id: "production"
   defaultServiceNamespace: "accelleran"
+  defaultOranNamespace: "default"
   grafanaURL: "10.20.20.20"
   grafanaPort: "30300"
   druidURL: "10.20.20.20"

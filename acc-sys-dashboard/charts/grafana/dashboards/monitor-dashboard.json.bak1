@@ -17,7 +17,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1588079643570,
+  "iteration": 1581599420728,
   "links": [],
   "panels": [
     {
@@ -391,7 +391,7 @@
           "aggregators": [
             {
               "fieldName": "ueMeasurement.cellId",
-              "fieldNames": "beaconInfo.componentId",
+              "fieldNames": "ueMeasurement.cellId",
               "hidden": false,
               "name": "number",
               "type": "cardinality"
@@ -413,13 +413,10 @@
           },
           "customGranularity": "$granularity",
           "druidDS": "test2",
-          "errors": {
-            "aggregators": "You must supply at least one aggregator",
-            "customGranularity": "Invalid granularity."
-          },
+          "errors": {},
           "filters": [
             {
-              "dimension": "beaconInfo.componentId",
+              "dimension": "ueMeasurement.cellId",
               "negate": true,
               "type": "selector",
               "value": ""
@@ -1125,11 +1122,11 @@
       }
     },
     {
+      "datasource": "Druid",
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Druid",
       "fill": 1,
       "fillGradient": 1,
       "gridPos": {
@@ -1246,9 +1243,9 @@
               "type": "longSum"
             },
             {
-              "hidden": true,
+              "type": "count",
               "name": "cqiC",
-              "type": "count"
+              "hidden": true
             }
           ],
           "alias": "Channel $tag_channel",
@@ -1259,8 +1256,8 @@
             "type": "selector"
           },
           "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
+            "type": "arithmetic",
+            "fn": "+"
           },
           "currentSelect": {
             "dimension": "",
@@ -1290,199 +1287,199 @@
           "policy": "default",
           "postAggregators": [
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS0",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS0"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi0",
-              "type": "arithmetic"
+              "name": "cqi0"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS1",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS1"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi1",
-              "type": "arithmetic"
+              "name": "cqi1"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS2",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS2"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi2",
-              "type": "arithmetic"
+              "name": "cqi2"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS3",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS3"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi3",
-              "type": "arithmetic"
+              "name": "cqi3"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS4",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS4"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi4",
-              "type": "arithmetic"
+              "name": "cqi4"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS5",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS5"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi5",
-              "type": "arithmetic"
+              "name": "cqi5"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS6",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS6"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi6",
-              "type": "arithmetic"
+              "name": "cqi6"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS7",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS7"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi7",
-              "type": "arithmetic"
+              "name": "cqi7"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS8",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS8"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi8",
-              "type": "arithmetic"
+              "name": "cqi8"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS9",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS9"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi9",
-              "type": "arithmetic"
+              "name": "cqi9"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS10",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS10"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi10",
-              "type": "arithmetic"
+              "name": "cqi10"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS11",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS11"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi11",
-              "type": "arithmetic"
+              "name": "cqi11"
             },
             {
+              "fn": "/",
+              "type": "arithmetic",
               "fields": [
                 {
-                  "fieldName": "cqiS12",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiS12"
                 },
                 {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
+                  "type": "fieldAccess",
+                  "fieldName": "cqiC"
                 }
               ],
-              "fn": "/",
-              "name": "cqi12",
-              "type": "arithmetic"
+              "name": "cqi12"
             }
           ],
           "queryType": "timeseries",
@@ -1551,8 +1548,8 @@
       }
     }
   ],
-  "refresh": false,
-  "schemaVersion": 22,
+  "refresh": "10s",
+  "schemaVersion": 21,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1606,9 +1603,8 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "text": "Brussels",
+          "value": "Brussels"
         },
         "datasource": "Druid",
         "definition": "SELECT DISTINCT(\"ueMeasurement.cellId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
@@ -1654,5 +1650,5 @@
   "timezone": "",
   "title": "Cell Monitoring",
   "uid": "lCbesm1Zk",
-  "version": 1
+  "version": 16
 }
