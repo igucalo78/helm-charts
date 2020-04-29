@@ -2,8 +2,37 @@ apiVersion: v1
 entries:
   acc-dashboard:
   - apiVersion: v2
+    appVersion: 0.14.4
+    created: "2020-04-29T11:57:37.144836041Z"
+    dependencies:
+    - name: druid
+      repository: https://accelleran.github.io/helm-charts/
+      version: 0.3.0
+    - name: kafka
+      repository: https://accelleran.github.io/helm-charts/
+      version: 0.20.8
+    - name: nkafka-helm
+      repository: https://accelleran.github.io/helm-charts/
+      version: 0.2.3
+    - name: acc-sys-dashboard
+      repository: https://accelleran.github.io/helm-charts/
+      version: 1.5.6
+    - name: dash-front-back-end
+      repository: https://accelleran.github.io/helm-charts/
+      version: 0.12.1
+    - name: loki-stack
+      repository: https://accelleran.github.io/helm-charts/
+      version: 0.35.1
+    description: The All-In-One Accelleran Dashboard
+    digest: a444358a3bd2a7ff6fe7d0724585fd9837907693e576fc21f72941825ed91761
+    name: acc-dashboard
+    type: application
+    urls:
+    - https://accelleran.github.io/helm-charts/acc-dashboard-0.14.4.tgz
+    version: 0.14.4
+  - apiVersion: v2
     appVersion: 0.14.3
-    created: "2020-04-29T11:56:29.765817151Z"
+    created: "2020-04-29T11:57:37.108392Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -32,7 +61,7 @@ entries:
     version: 0.14.3
   - apiVersion: v2
     appVersion: 0.14.2
-    created: "2020-04-29T11:56:29.727998827Z"
+    created: "2020-04-29T11:57:37.067892581Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -61,7 +90,7 @@ entries:
     version: 0.14.2
   - apiVersion: v2
     appVersion: 0.14.1
-    created: "2020-04-29T11:56:29.681879491Z"
+    created: "2020-04-29T11:57:37.026175076Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -90,7 +119,7 @@ entries:
     version: 0.14.1
   - apiVersion: v2
     appVersion: 0.14.0
-    created: "2020-04-29T11:56:29.644014585Z"
+    created: "2020-04-29T11:57:36.985356623Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -119,7 +148,7 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 0.13.2
-    created: "2020-04-29T11:56:29.58452624Z"
+    created: "2020-04-29T11:57:36.922583327Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -148,7 +177,7 @@ entries:
     version: 0.13.2
   - apiVersion: v2
     appVersion: 0.13.1
-    created: "2020-04-29T11:56:29.53894641Z"
+    created: "2020-04-29T11:57:36.878242971Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -177,7 +206,7 @@ entries:
     version: 0.13.1
   - apiVersion: v2
     appVersion: 0.13.0
-    created: "2020-04-29T11:56:29.492421842Z"
+    created: "2020-04-29T11:57:36.840912617Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -206,7 +235,7 @@ entries:
     version: 0.13.0
   - apiVersion: v2
     appVersion: 0.12.0
-    created: "2020-04-29T11:56:29.428949861Z"
+    created: "2020-04-29T11:57:36.768481872Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -235,7 +264,7 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: 0.11.3
-    created: "2020-04-29T11:56:29.362716431Z"
+    created: "2020-04-29T11:57:36.699861077Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -264,7 +293,7 @@ entries:
     version: 0.11.3
   - apiVersion: v2
     appVersion: 0.11.2
-    created: "2020-04-29T11:56:29.297105756Z"
+    created: "2020-04-29T11:57:36.635701578Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -293,7 +322,7 @@ entries:
     version: 0.11.2
   - apiVersion: v2
     appVersion: 0.11.1
-    created: "2020-04-29T11:56:29.261191457Z"
+    created: "2020-04-29T11:57:36.592172298Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -322,7 +351,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 0.11.0
-    created: "2020-04-29T11:56:29.218346934Z"
+    created: "2020-04-29T11:57:36.555005177Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -351,7 +380,7 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: 0.10.1
-    created: "2020-04-29T11:56:29.174320492Z"
+    created: "2020-04-29T11:57:36.510505747Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -380,7 +409,7 @@ entries:
     version: 0.10.1
   - apiVersion: v2
     appVersion: 0.10.0
-    created: "2020-04-29T11:56:29.123495478Z"
+    created: "2020-04-29T11:57:36.463618348Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -409,7 +438,7 @@ entries:
     version: 0.10.0
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2020-04-29T11:56:30.048774242Z"
+    created: "2020-04-29T11:57:37.454458554Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -435,7 +464,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.8.0
-    created: "2020-04-29T11:56:30.025897831Z"
+    created: "2020-04-29T11:57:37.428655933Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -461,7 +490,7 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.7.0
-    created: "2020-04-29T11:56:30.004334279Z"
+    created: "2020-04-29T11:57:37.397322362Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -487,7 +516,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2020-04-29T11:56:29.981482099Z"
+    created: "2020-04-29T11:57:37.372491618Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -513,7 +542,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.5.1
-    created: "2020-04-29T11:56:29.951591343Z"
+    created: "2020-04-29T11:57:37.340967632Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -539,7 +568,7 @@ entries:
     version: 0.5.1
   - apiVersion: v2
     appVersion: 0.5.0
-    created: "2020-04-29T11:56:29.933215617Z"
+    created: "2020-04-29T11:57:37.315236284Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -565,7 +594,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-04-29T11:56:29.891269275Z"
+    created: "2020-04-29T11:57:37.285475972Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -591,7 +620,7 @@ entries:
     version: 0.4.1
   - apiVersion: v2
     appVersion: 0.4.0
-    created: "2020-04-29T11:56:29.868402762Z"
+    created: "2020-04-29T11:57:37.253015634Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -617,7 +646,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 0.3.1
-    created: "2020-04-29T11:56:29.833945377Z"
+    created: "2020-04-29T11:57:37.218647597Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -643,7 +672,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-04-29T11:56:29.805689232Z"
+    created: "2020-04-29T11:57:37.192651891Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -669,7 +698,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2020-04-29T11:56:29.782859371Z"
+    created: "2020-04-29T11:57:37.168813018Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -695,7 +724,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2020-04-29T11:56:29.08601786Z"
+    created: "2020-04-29T11:57:36.425242102Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -721,7 +750,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2020-04-29T11:56:29.057445769Z"
+    created: "2020-04-29T11:57:36.389628011Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -747,7 +776,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2020-04-29T11:56:29.028673579Z"
+    created: "2020-04-29T11:57:36.360079101Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -773,7 +802,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-04-29T11:56:28.999526416Z"
+    created: "2020-04-29T11:57:36.328579678Z"
     dependencies:
     - name: druid
       repository: https://accelleran.github.io/helm-charts/
@@ -800,7 +829,7 @@ entries:
   acc-sys-dashboard:
   - apiVersion: v1
     appVersion: 1.5.6
-    created: "2020-04-29T11:56:30.305479935Z"
+    created: "2020-04-29T11:57:37.72368205Z"
     description: Accelleran's System Overview Dashboard
     digest: 7bc86576a6e0e4d5542159462fdc2861b933b9230e0c7a3754c73c1799940194
     name: acc-sys-dashboard
@@ -809,7 +838,7 @@ entries:
     version: 1.5.6
   - apiVersion: v1
     appVersion: 1.5.5
-    created: "2020-04-29T11:56:30.2863623Z"
+    created: "2020-04-29T11:57:37.709006629Z"
     description: Accelleran's System Overview Dashboard
     digest: 453a70104f02329cc02d0f02dcfbe9bd45767365ad2a35709d92370372c8e13e
     name: acc-sys-dashboard
@@ -818,7 +847,7 @@ entries:
     version: 1.5.5
   - apiVersion: v1
     appVersion: 1.5.4
-    created: "2020-04-29T11:56:30.271707262Z"
+    created: "2020-04-29T11:57:37.687252451Z"
     description: Accelleran's System Overview Dashboard
     digest: 6f55bdad9c35d496fd69a4ab05b59323b043061bcea71b69055765ee53daf0ee
     name: acc-sys-dashboard
@@ -827,7 +856,7 @@ entries:
     version: 1.5.4
   - apiVersion: v1
     appVersion: 1.5.3
-    created: "2020-04-29T11:56:30.253991448Z"
+    created: "2020-04-29T11:57:37.668742802Z"
     description: Accelleran's System Overview Dashboard
     digest: da91cd2ad1651cf85dba65117e31bb272314bb416a904921b914521c325e812d
     name: acc-sys-dashboard
@@ -836,7 +865,7 @@ entries:
     version: 1.5.3
   - apiVersion: v1
     appVersion: 1.5.2
-    created: "2020-04-29T11:56:30.233771152Z"
+    created: "2020-04-29T11:57:37.653551673Z"
     description: Accelleran's System Overview Dashboard
     digest: 482994b675dc4d58617448e3c019fe42f1cee353bce76976684f51ab8914b1e1
     name: acc-sys-dashboard
@@ -845,7 +874,7 @@ entries:
     version: 1.5.2
   - apiVersion: v1
     appVersion: 1.5.1
-    created: "2020-04-29T11:56:30.217493442Z"
+    created: "2020-04-29T11:57:37.633880016Z"
     description: Accelleran's System Overview Dashboard
     digest: ec755fa66fe89aa4c1bfa8fa3d29d5f327f4ed0169e9a4e88479133ca7495df7
     name: acc-sys-dashboard
@@ -854,7 +883,7 @@ entries:
     version: 1.5.1
   - apiVersion: v1
     appVersion: 1.5.0
-    created: "2020-04-29T11:56:30.201010707Z"
+    created: "2020-04-29T11:57:37.617922818Z"
     description: Accelleran's System Overview Dashboard
     digest: 821753cbdb2035ba6ae0bd2fb194d7cba8a52f11607fda955a98600bdaf67cee
     name: acc-sys-dashboard
@@ -863,7 +892,7 @@ entries:
     version: 1.5.0
   - apiVersion: v1
     appVersion: 1.4.1
-    created: "2020-04-29T11:56:30.182742998Z"
+    created: "2020-04-29T11:57:37.600848749Z"
     description: Accelleran's System Overview Dashboard
     digest: 464dd02e99cb4d96d348c8cdd6fd63c48bf98ca405d06771e07a5665835b9666
     name: acc-sys-dashboard
@@ -872,7 +901,7 @@ entries:
     version: 1.4.1
   - apiVersion: v1
     appVersion: 1.4.0
-    created: "2020-04-29T11:56:30.16397281Z"
+    created: "2020-04-29T11:57:37.584879702Z"
     description: Accelleran's System Overview Dashboard
     digest: cd091c4f3aa7a4cf0451215e2f5555ad56e1933ddaf130272ddcec48cedb897e
     name: acc-sys-dashboard
@@ -881,7 +910,7 @@ entries:
     version: 1.4.0
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-04-29T11:56:30.152977754Z"
+    created: "2020-04-29T11:57:37.568202983Z"
     description: Accelleran's System Overview Dashboard
     digest: a5b5b0d6fd5593c4d55b01808ccc9aa2082016ee465e5ab2e52d36b5a475d56a
     name: acc-sys-dashboard
@@ -890,7 +919,7 @@ entries:
     version: 1.3.0
   - apiVersion: v1
     appVersion: 1.2.2
-    created: "2020-04-29T11:56:30.13817831Z"
+    created: "2020-04-29T11:57:37.549483806Z"
     description: Accelleran's System Overview Dashboard
     digest: 3d9c867aebe0c77db78811f2f445f8ccdf34fdf55379a590e3c29d00583bb3d1
     name: acc-sys-dashboard
@@ -899,7 +928,7 @@ entries:
     version: 1.2.2
   - apiVersion: v1
     appVersion: 1.2.1
-    created: "2020-04-29T11:56:30.123496471Z"
+    created: "2020-04-29T11:57:37.532569811Z"
     description: Accelleran's System Overview Dashboard
     digest: 0fee1209d57a6d8546b0aa3d75b10db6b063796177f1daaf2251edbcd38f25ac
     name: acc-sys-dashboard
@@ -908,7 +937,7 @@ entries:
     version: 1.2.1
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-04-29T11:56:30.099449311Z"
+    created: "2020-04-29T11:57:37.513151913Z"
     description: Accelleran's System Overview Dashboard
     digest: b33ace06edf238a9dafa6957c966cb951fd58b7850bc86af36d57d3686f22f08
     name: acc-sys-dashboard
@@ -917,7 +946,7 @@ entries:
     version: 1.1.1
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-04-29T11:56:30.083139554Z"
+    created: "2020-04-29T11:57:37.488287316Z"
     description: Accelleran's System Overview Dashboard
     digest: 9385d961bf6d25123744c382a17bd561274a6df2ba125457c75c42f5274b7501
     name: acc-sys-dashboard
@@ -926,7 +955,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2020-04-29T11:56:30.063003473Z"
+    created: "2020-04-29T11:57:37.468291151Z"
     description: Accelleran's System Overview Dashboard
     digest: 62ad0c320868cd3195c0ca76e6664b04dea1f22b1602175dfbc2beb38d7e1ec0
     name: acc-sys-dashboard
@@ -936,7 +965,7 @@ entries:
   dash-front-back-end:
   - apiVersion: v2
     appVersion: 0.12.0
-    created: "2020-04-29T11:56:30.31290402Z"
+    created: "2020-04-29T11:57:37.730521312Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: abfa5d23d6944a3c0976663694e67ceeaebe1041263cac20fd848956c84165f1
     name: dash-front-back-end
@@ -946,7 +975,7 @@ entries:
     version: 0.12.1
   - apiVersion: v2
     appVersion: 0.12.0
-    created: "2020-04-29T11:56:30.312122746Z"
+    created: "2020-04-29T11:57:37.729798694Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: a8257f269ea79f117287646d920a857e69733e69365d899f7483f95652b8e1cd
     name: dash-front-back-end
@@ -956,7 +985,7 @@ entries:
     version: 0.12.0
   - apiVersion: v2
     appVersion: 0.11.0
-    created: "2020-04-29T11:56:30.31124397Z"
+    created: "2020-04-29T11:57:37.729071416Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 8fa6a2314fd34832aeefdbbc66fbd0f5fdca822dfa0e715adbcd6466bfc6e9cd
     name: dash-front-back-end
@@ -966,7 +995,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 0.11.0
-    created: "2020-04-29T11:56:30.310522585Z"
+    created: "2020-04-29T11:57:37.728329754Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 1865ebd0c634913d2074fedf8b71a9c86a200eddcd50daf9dda0a1b0a5b883f2
     name: dash-front-back-end
@@ -976,7 +1005,7 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: 0.10.0
-    created: "2020-04-29T11:56:30.309850984Z"
+    created: "2020-04-29T11:57:37.727507177Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 3eda94906eb62be617a0f18d76493e3885cf33e49675b93b2c7d8c6fb9d2013a
     name: dash-front-back-end
@@ -986,7 +1015,7 @@ entries:
     version: 0.10.0
   - apiVersion: v2
     appVersion: 0.9.0
-    created: "2020-04-29T11:56:30.321909297Z"
+    created: "2020-04-29T11:57:37.743180189Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: ee40558f54523d290b5b2b4767a9655d48a91afa6fe7ad027c725b1eaf59f303
     name: dash-front-back-end
@@ -996,7 +1025,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.8.1
-    created: "2020-04-29T11:56:30.321301554Z"
+    created: "2020-04-29T11:57:37.741947785Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 92dcd78c1443e6b408c30aede3790520a1f2bd184306ba6d6343a7a12808020d
     name: dash-front-back-end
@@ -1006,7 +1035,7 @@ entries:
     version: 0.8.1
   - apiVersion: v2
     appVersion: 0.8.0
-    created: "2020-04-29T11:56:30.320661672Z"
+    created: "2020-04-29T11:57:37.74058358Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 55bb057235dd543bce8e990a96929af0bef623ad56c767efbd2a2238dbf9a9fb
     name: dash-front-back-end
@@ -1016,7 +1045,7 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.7.1
-    created: "2020-04-29T11:56:30.320018072Z"
+    created: "2020-04-29T11:57:37.73878708Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 3443c340f10a7a1a5fc7bd016ff959f399971a2e69f60384550ad1feab0b1757
     name: dash-front-back-end
@@ -1026,7 +1055,7 @@ entries:
     version: 0.7.1
   - apiVersion: v2
     appVersion: 0.7.0
-    created: "2020-04-29T11:56:30.319341235Z"
+    created: "2020-04-29T11:57:37.736971924Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: c6f6b07d96e719b169b1970932b74e8952f6f40391aaab233c65ffc66bfbd9d1
     name: dash-front-back-end
@@ -1036,7 +1065,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2020-04-29T11:56:30.318717578Z"
+    created: "2020-04-29T11:57:37.736347909Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 2e4b89c8a8f0da9bb9e8a7f7d20aabd4f4637d85b54a84f7b84919df59f9622c
     name: dash-front-back-end
@@ -1046,7 +1075,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.5.3
-    created: "2020-04-29T11:56:30.318008732Z"
+    created: "2020-04-29T11:57:37.735643093Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: d0cfea8bee0fb1a00bacc4f20987cede337db89e69b89280a19a5fd54f5cd2ae
     name: dash-front-back-end
@@ -1056,7 +1085,7 @@ entries:
     version: 0.5.3
   - apiVersion: v2
     appVersion: 0.5.2
-    created: "2020-04-29T11:56:30.317408627Z"
+    created: "2020-04-29T11:57:37.735042615Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: e12e658ef2517a8816641ca723452dbf01a17d41c2aa91d0140b5b9b83096cb7
     name: dash-front-back-end
@@ -1066,7 +1095,7 @@ entries:
     version: 0.5.2
   - apiVersion: v2
     appVersion: 0.5.1
-    created: "2020-04-29T11:56:30.316764135Z"
+    created: "2020-04-29T11:57:37.734363088Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: c637b32f4b3d1da41285a57ba34c935be9a2dabe258908e34c17beffea2ef07e
     name: dash-front-back-end
@@ -1076,7 +1105,7 @@ entries:
     version: 0.5.1
   - apiVersion: v2
     appVersion: 0.5.0
-    created: "2020-04-29T11:56:30.316118173Z"
+    created: "2020-04-29T11:57:37.733719896Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 8c219e73bfc6c2db853c79ef44e01b5053fbad9598d73b129df201df284e9a4c
     name: dash-front-back-end
@@ -1086,7 +1115,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 0.4.0
-    created: "2020-04-29T11:56:30.315427731Z"
+    created: "2020-04-29T11:57:37.733077311Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 5f0c89abbd35656b3162bcb6f11b91de533895ff676c38e6bca5fcb8827444c3
     name: dash-front-back-end
@@ -1096,7 +1125,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-04-29T11:56:30.314734502Z"
+    created: "2020-04-29T11:57:37.732442608Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 6ec784ca3edc6f36bc68c99b311ea3b33f344225a179bc6fc7873c2e9807b26f
     name: dash-front-back-end
@@ -1106,7 +1135,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2020-04-29T11:56:30.314133847Z"
+    created: "2020-04-29T11:57:37.73179559Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 9daf9fb967750d08d3abb11cc1d2ba36b4d79d6afd2dfccd36137be672d00c4e
     name: dash-front-back-end
@@ -1116,7 +1145,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2020-04-29T11:56:30.313529062Z"
+    created: "2020-04-29T11:57:37.731162876Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 8adf1132070f58c774c9235872994b950bc127d26b9047e8d014149904067d97
     name: dash-front-back-end
@@ -1126,7 +1155,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2020-04-29T11:56:30.309176136Z"
+    created: "2020-04-29T11:57:37.726825281Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 5eb5a86c3d0b8a09f903097340ee11f464316097e2f7330666f18a7d624a2d08
     name: dash-front-back-end
@@ -1136,7 +1165,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2020-04-29T11:56:30.308558546Z"
+    created: "2020-04-29T11:57:37.726192344Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: fc237e6bd378d4668777c09254523cd0bad9c8bc040d7b27c75a16f30c02534f
     name: dash-front-back-end
@@ -1146,7 +1175,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-04-29T11:56:30.30713005Z"
+    created: "2020-04-29T11:57:37.725355637Z"
     description: Frontend and backend of the Accelleran Dashboard
     digest: 28a10b53c9e894cd2885022e44c96f5a9ee0899703fa8753c73ff928d56a58e7
     name: dash-front-back-end
@@ -1157,7 +1186,7 @@ entries:
   drax:
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2020-04-29T11:56:30.337283895Z"
+    created: "2020-04-29T11:57:37.75926584Z"
     dependencies:
     - condition: nats.enabled
       name: nats
@@ -1176,7 +1205,7 @@ entries:
       repository: https://accelleran.github.io/helm-charts/
       version: 0.8.0
     description: All in one Accelleran dRAX
-    digest: 168e49376a52c7eee6a7887316160a109b437e35f1208cf256d402c96d5e81e1
+    digest: af3022144749330fd550a07ba6595e76e1fb5934e2a90ffca7b34d2f658eca14
     name: drax
     type: application
     urls:
@@ -1184,7 +1213,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2020-04-29T11:56:30.333291439Z"
+    created: "2020-04-29T11:57:37.755639966Z"
     dependencies:
     - condition: nats.enabled
       name: nats
@@ -1211,7 +1240,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-04-29T11:56:30.327951042Z"
+    created: "2020-04-29T11:57:37.751196075Z"
     dependencies:
     - condition: nats.enabled
       name: nats
@@ -1239,7 +1268,7 @@ entries:
   druid:
   - apiVersion: v1
     appVersion: 0.3.0
-    created: "2020-04-29T11:56:30.340077525Z"
+    created: "2020-04-29T11:57:37.766503796Z"
     description: Druid chart
     digest: 2c2737162c55c26f440744e21c16c58a56923350742ebd440e051cfc493947ba
     name: druid
@@ -1249,7 +1278,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: 0.2.2
-    created: "2020-04-29T11:56:30.339151895Z"
+    created: "2020-04-29T11:57:37.764198169Z"
     description: Druid chart
     digest: 9104294e912399275c3070fdfd9ff773881fdca2a11b5a7bbd75e7e466532083
     name: druid
@@ -1259,7 +1288,7 @@ entries:
     version: 0.2.2
   - apiVersion: v1
     appVersion: 0.2.1
-    created: "2020-04-29T11:56:30.33848652Z"
+    created: "2020-04-29T11:57:37.762545149Z"
     description: Druid chart
     digest: ab87699ab8982ab845d1e3577ccb2eea598d6f820d734840c4ee331594629a65
     name: druid
@@ -1269,7 +1298,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: 0.1.1
-    created: "2020-04-29T11:56:30.337862358Z"
+    created: "2020-04-29T11:57:37.760488499Z"
     description: Druid chart
     digest: f966911f5393379381299fc91a0cc50d3a0cc0779fe73ee4d6c387de5b25ac7e
     name: druid
@@ -1280,7 +1309,7 @@ entries:
   kafka:
   - apiVersion: v1
     appVersion: 5.0.1
-    created: "2020-04-29T11:56:30.348883014Z"
+    created: "2020-04-29T11:57:37.774748155Z"
     dependencies:
     - condition: kafka.zookeeper.enabled,zookeeper.enabled
       name: zookeeper
@@ -1314,7 +1343,7 @@ entries:
   kong:
   - apiVersion: v1
     appVersion: "1.4"
-    created: "2020-04-29T11:56:30.357518183Z"
+    created: "2020-04-29T11:57:37.781099899Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -1336,7 +1365,7 @@ entries:
   kube-eagle:
   - apiVersion: v1
     appVersion: 1.1.0
-    created: "2020-04-29T11:56:30.358655711Z"
+    created: "2020-04-29T11:57:37.783308821Z"
     description: Prometheus exporter for Kubernetes pod & node resource requests,
       limits and usage.
     digest: 60b6dbb2dac3654e1bc17bdc8e431f14692e974f747c58894d0acde35fb2de86
@@ -1347,7 +1376,7 @@ entries:
   loki-stack:
   - apiVersion: v1
     appVersion: v1.4.1
-    created: "2020-04-29T11:56:30.38979716Z"
+    created: "2020-04-29T11:57:37.821177352Z"
     dependencies:
     - condition: loki.enabled
       name: loki
@@ -1385,7 +1414,7 @@ entries:
     version: 0.35.1
   - apiVersion: v1
     appVersion: v1.4.1
-    created: "2020-04-29T11:56:30.375584971Z"
+    created: "2020-04-29T11:57:37.801793484Z"
     dependencies:
     - condition: loki.enabled
       name: loki
@@ -1424,7 +1453,7 @@ entries:
   metrics-server:
   - apiVersion: v1
     appVersion: 0.3.6
-    created: "2020-04-29T11:56:30.392819838Z"
+    created: "2020-04-29T11:57:37.822212518Z"
     description: Metrics Server is a cluster-wide aggregator of resource usage data.
     digest: 80474e3ff5cbb689cd30dca25b0220c8ed659779e18f6a019da78db66055d5ec
     home: https://github.com/kubernetes-incubator/metrics-server
@@ -1444,7 +1473,7 @@ entries:
   nats:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-04-29T11:56:30.394508343Z"
+    created: "2020-04-29T11:57:37.82290172Z"
     description: Accelleran NATS
     digest: 4a7c38e02051169baea4d9636a8d44781178e0952e402ae2d578822d26365dba
     name: nats
@@ -1455,7 +1484,7 @@ entries:
   nkafka-helm:
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2020-04-29T11:56:30.400945086Z"
+    created: "2020-04-29T11:57:37.825647327Z"
     description: A Helm chart for Kubernetes
     digest: 44e1194d6c486a073e37558654fb1ddf61e8fcfa82f5968721a493241174284c
     name: nkafka-helm
@@ -1465,7 +1494,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 0.2.2
-    created: "2020-04-29T11:56:30.399898952Z"
+    created: "2020-04-29T11:57:37.824944345Z"
     description: A Helm chart for Kubernetes
     digest: 4b43eae3e9a58e7e0187649de6f03982595843a2fb3f5cbe17cd2cff7dc28665
     name: nkafka-helm
@@ -1475,7 +1504,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 0.2.1
-    created: "2020-04-29T11:56:30.397837969Z"
+    created: "2020-04-29T11:57:37.824271973Z"
     description: A Helm chart for Kubernetes
     digest: 4f8e5ca48d6da0b48ebd0bcf63f4e33009e1a6d852388676d352d5606556f29a
     name: nkafka-helm
@@ -1485,7 +1514,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 0.1.5
-    created: "2020-04-29T11:56:30.396140413Z"
+    created: "2020-04-29T11:57:37.823597473Z"
     description: A Helm chart for Kubernetes
     digest: 67212419047561617379f49f3b21c2d0bb0b05aaf7a29ed315c807823d13d04b
     name: nkafka-helm
@@ -1496,7 +1525,7 @@ entries:
   prometheus:
   - apiVersion: v1
     appVersion: 2.15.2
-    created: "2020-04-29T11:56:30.406028135Z"
+    created: "2020-04-29T11:57:37.831830605Z"
     description: Prometheus is a monitoring system and time series database.
     digest: 09aa61653bb916baeade9058b97667e4a8df2ab94d7c8c69a8760e22b38a9824
     home: https://prometheus.io/
@@ -1519,7 +1548,7 @@ entries:
   provisioner:
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2020-04-29T11:56:30.418307978Z"
+    created: "2020-04-29T11:57:37.840386844Z"
     description: The Accelleran provisioner for bootstrap files
     digest: b951e1850c2b977f8b9818267561801ad813905dd938d72581019c0d8dbc35f9
     name: provisioner
@@ -1529,7 +1558,7 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.6.0
-    created: "2020-04-29T11:56:30.416404475Z"
+    created: "2020-04-29T11:57:37.839009481Z"
     description: The Accelleran provisioner for bootstrap files
     digest: 3e0fbf8e2addffc1d68eb6a43487a45356335e9947bed0b6ce4519afcc2a2ba4
     name: provisioner
@@ -1539,7 +1568,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-04-29T11:56:30.413824005Z"
+    created: "2020-04-29T11:57:37.837505705Z"
     description: The Accelleran provisioner for bootstrap files
     digest: 085cc2309fdf286a1028458b28573e75ba17e2d242af425718d915a7d55757fe
     name: provisioner
@@ -1549,7 +1578,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-04-29T11:56:30.41015303Z"
+    created: "2020-04-29T11:57:37.835948314Z"
     description: The Accelleran provisioner for bootstrap files
     digest: 526d1ba3c580804975d9d4aaf58ff6aaf5b6711c88d3ff0116d4aebb5d0ebb90
     name: provisioner
@@ -1559,7 +1588,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-04-29T11:56:30.408831932Z"
+    created: "2020-04-29T11:57:37.834564703Z"
     description: The Accelleran provisioner for bootstrap files
     digest: 47defb09f4d64978ad23b2b72b5ccb3a854230fdc29ee3b4506ece128e5f90a4
     name: provisioner
@@ -1569,7 +1598,7 @@ entries:
     version: 0.4.1
   - apiVersion: v2
     appVersion: 0.2.4
-    created: "2020-04-29T11:56:30.407487933Z"
+    created: "2020-04-29T11:57:37.833323457Z"
     description: The Accelleran provisioner for bootstrap files
     digest: e808ccf190dd792958b27555bca2dc361cdb5258cdc6dc6c3f4d63431a88b0cc
     name: provisioner
@@ -1580,7 +1609,7 @@ entries:
   provisioner-dhcp:
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2020-04-29T11:56:30.421456399Z"
+    created: "2020-04-29T11:57:37.842958887Z"
     description: A DHCP service for Provisioner discovery
     digest: bf5b7a779f5741365881bd04e9bcdf411494fc05b97a4e9e51fdbe1ebcd51816
     name: provisioner-dhcp
@@ -1590,7 +1619,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2020-04-29T11:56:30.420413597Z"
+    created: "2020-04-29T11:57:37.84192438Z"
     description: A DHCP service for Provisioner discovery
     digest: 5bf79dd26ebd66af6bc35785867c16f78ed417006e66dc5cd9c6273d6df580b1
     name: provisioner-dhcp
@@ -1600,7 +1629,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2020-04-29T11:56:30.419379792Z"
+    created: "2020-04-29T11:57:37.841223041Z"
     description: A DHCP service for Provisioner discovery
     digest: 8de81015f8b3c3c08b5a17f08a951694f19553f5bbae57c2383c805b588bfec1
     name: provisioner-dhcp
@@ -1611,7 +1640,7 @@ entries:
   redis:
   - apiVersion: v2
     appVersion: redis20190206
-    created: "2020-04-29T11:56:30.424912791Z"
+    created: "2020-04-29T11:57:37.846342525Z"
     description: Accelleran dRAX Redis
     digest: 8c169c8b976c5a435322011b4c7366bd89ab23e4b044c0cc2be7ef44460e2d11
     name: redis
@@ -1621,7 +1650,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: redis20190206
-    created: "2020-04-29T11:56:30.423681819Z"
+    created: "2020-04-29T11:57:37.845445983Z"
     description: Accelleran dRAX Redis
     digest: 741f306b6774c7b7a1ed25f0ad74defb020a290cfa0634596d9cfa06905b7256
     name: redis
@@ -1631,7 +1660,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-04-29T11:56:30.422593937Z"
+    created: "2020-04-29T11:57:37.844621425Z"
     description: Accelleran dRAX Redis
     digest: 34375524eb08edaad887fd4718bd4f1c88440ba620c09c2b3d7733f8995962cb
     name: redis
@@ -1639,4 +1668,4 @@ entries:
     urls:
     - https://accelleran.github.io/helm-charts/redis-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-29T11:56:28.95244826Z"
+generated: "2020-04-29T11:57:36.282364242Z"
