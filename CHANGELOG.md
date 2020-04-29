@@ -5,7 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 28.04.2020
+## 29.04.2020.
+
+### Changed
+
+- Updated nkafka to 0.2.3
+- - Updated postInstallhook to have a counter for installing curl and checking for Druid
+- - Script will exit 1 if things fail after some time, making the pod reset
+- - Otherwise, same behaviour as before
+- - This fixed an error occuring when installed from scrath, the nkafka pod did not have access to internet right away to get curl, and then would be stuck in a infinite loop trying to use curl which gave an curl not found error, this then did not allow the pod to get reset as the script would never finish
+- - Updated values to use Chart.AppVersion instead of AppVersion for proper Helm versioning
+- Updated acc-dashboard to 0.14.4
+- - Using nkafka 0.2.3
+
+## 28.04.2020.
 
 ### Changed
 

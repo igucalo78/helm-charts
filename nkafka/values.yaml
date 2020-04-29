@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.Version }}"
+version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/dash-nkafka
