@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - Reverting to nkafka 0.2.2 due to bug in 0.2.3
 - Updated nkafka to 0.2.4
 - - Trying fix for postStart script
+- Updating dash-fbe to 0.13.0
+- - Dashboard compatible with dbc989d
+- Updating acc-dashboard to 0.15.0
+- - Using dash-fbe 0.13.0
 
 ## 29.04.2020.
 

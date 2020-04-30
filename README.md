@@ -4,9 +4,9 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.14.5   |0.14.5          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-dashboard        |0.15.0   |0.15.0          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
-|acc-helm/dash-front-back-end  |0.12.1   |0.12.1          |Frontend and backend of the Accelleran Dashboard   |
+|acc-helm/dash-front-back-end  |0.13.0   |0.13.0          |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/drax                 |0.2.1    |0.2.1           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.3.0    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
@@ -41,3 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - Reverting to nkafka 0.2.2 due to bug in 0.2.3
 - Updated nkafka to 0.2.4
 - - Trying fix for postStart script
+- Updating dash-fbe to 0.13.0
+- - Dashboard compatible with dbc989d
+- Updating acc-dashboard to 0.15.0
+- - Using dash-fbe 0.13.0
