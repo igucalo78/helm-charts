@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 30.04.2020.
+
+### Changed
+
+- Updated acc-sys-dashboard to 1.5.7
+- - Updated monitor-dashboard.json
+- Updated acc-dashboard 0.14.5
+- - Using acc-sys-dashboard 1.5.7
+- - Reverting to nkafka 0.2.2 due to bug in 0.2.3
+- Updated nkafka to 0.2.4
+- - Trying fix for postStart script
+
 ## 29.04.2020.
 
 ### Changed

@@ -47,16 +47,18 @@ spec:
 
                     countUpdate=0
                     
-                    echo "$now" > status.log
-                    echo "-- Script started..." >> status.log
+                    echo "[PostStartScript] $now"
+                    echo "[PostStartScript] -- Script started..."
                     until apk update && apk add curl
                     do
                       countUpdate=$((countUpdate+1))
-                      if [ $countUpdate -eq 5 ]
+                      if [ $countUpdate -eq 2 ]
                       then
+                        echo "[PostStartScript] Cannot install curl, exiting..."
                         exit 1
                       else
-                        sleep 5
+                        echo "[PostStartScript] Cannot install curl, retrying $countUpdate..."
+                        sleep 1
                       fi
                     done
 
@@ -65,10 +67,12 @@ spec:
                     until curl -f -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor 
                     do
                       countUpdate=$((countUpdate+1))
-                      if [ $countUpdate -eq 5 ]
+                      if [ $countUpdate -eq 2 ]
                       then
+                        echo "[PostStartScript] Cannot reach Druid, exiting..."
                         exit 1
                       else
+                        echo "[PostStartScript] Cannot reach Druid, retrying $countUpdate..."
                         sleep 5
                       fi
                     done
@@ -76,22 +80,22 @@ spec:
                     response=$(curl -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor)
                     echo $response >> status.log
                     if echo "$response" | grep "test2" ; then
-                      echo "test2 OK" >> status.log
+                      echo "[PostStartScript] test2 OK"
                       until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
                     else
-                      echo "test2 BAD" >> status.log
+                      echo "[PostStartScript] test2 BAD, reseting and creating..."
                       until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
                       until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
                     fi
                     if echo "$response" | grep "state" ; then
-                      echo "state OK" >> status.log
+                      echo "[PostStartScript] state OK"
                       until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
                     else
-                      echo "state BAD" >> status.log
+                      echo "[PostStartScript] state BAD, reseting and creating..."
                       until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
                       until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
                     fi
-                    echo "-- Script finished!" >> status.log
+                    echo "[PostStartScript] -- Script finished!"
 
                     EOF
 #          ports:

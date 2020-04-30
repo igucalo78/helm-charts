@@ -16,7 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1588173696113,
+  "id": 2,
+  "iteration": 1588079643570,
   "links": [],
   "panels": [
     {
@@ -30,7 +31,7 @@
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
-        "h": 15,
+        "h": 16,
         "w": 12,
         "x": 0,
         "y": 0
@@ -161,7 +162,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Downlink Throughput",
+      "title": "Throughput",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -773,187 +774,6 @@
       }
     },
     {
-      "aliasColors": {
-        "\"8eb8a807-39c7-4ea0-9af4-5b6027dac1e9\"": "blue"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Druid",
-      "fill": 1,
-      "fillGradient": 2,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 15
-      },
-      "hiddenSeries": false,
-      "id": 12,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldName": "throughputReport.ulThroughput",
-              "hidden": true,
-              "name": "ulThroughputS",
-              "type": "doubleSum"
-            },
-            {
-              "hidden": true,
-              "name": "ulThroughputC",
-              "type": "count"
-            }
-          ],
-          "alias": "$tag_ueRicId",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "throughputReport.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "throughputReport.cellId",
-              "pattern": "$cell",
-              "type": "regex",
-              "value": "$cell"
-            }
-          ],
-          "limit": 5,
-          "measurement": "throughput",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "ulThroughputS",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "ulThroughputC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "ulThroughput",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "dlthroughput"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "shouldOverrideGranularity": true,
-          "tags": [
-            {
-              "key": "ueRicId",
-              "operator": "=~",
-              "value": "/^$ue$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Uplink Throughput",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "Kbits",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1143,7 +963,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 23
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 5,
@@ -1731,7 +1551,7 @@
       }
     }
   ],
-  "refresh": "2s",
+  "refresh": false,
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -1791,14 +1611,14 @@
           "value": "$__all"
         },
         "datasource": "Druid",
-        "definition": "SELECT DISTINCT(\"beaconInfo.componentId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+        "definition": "SELECT DISTINCT(\"ueMeasurement.cellId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "cell",
         "options": [],
-        "query": "SELECT DISTINCT(\"beaconInfo.componentId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+        "query": "SELECT DISTINCT(\"ueMeasurement.cellId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1812,7 +1632,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1834,5 +1654,5 @@
   "timezone": "",
   "title": "Cell Monitoring",
   "uid": "lCbesm1Zk",
-  "version": 2
+  "version": 1
 }
