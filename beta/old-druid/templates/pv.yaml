@@ -1,0 +1,18 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ include "druid-chart.fullname" . }}
+  labels:
+    {{- include "druid-chart.labels" . | nindent 4 }}
+    type: local
+spec:
+  storageClassName: {{ .Values.persistence.storageClassName }}
+  capacity:
+    storage: {{ .Values.persistence.size | quote }}
+  accessModes:
+    {{- range .Values.persistence.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  hostPath:
+     path: "{{ .Values.persistence.hostPath }}/{{ include "druid-chart.fullname" . }}"
+     type: DirectoryOrCreate

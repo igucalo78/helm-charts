@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 04.05.2020.
+
+### Changed
+
+- Updated druid to 0.4.0
+- - Make config maps for log rotating
+- - Edit startup script to echo to stdout
+- - Moved to proper Helm versioning
+- - Changed pull policy to IfNotPresent
+- Updated acc-dashboard to 0.16.0 
+- - Using druid 0.4.0
+
 ## 30.04.2020.
 
 ### Changed
