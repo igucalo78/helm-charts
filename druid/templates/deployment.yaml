@@ -72,6 +72,9 @@ spec:
             - name: conf-midman-prop
               mountPath: /opt/druid/conf/druid/single-server/micro-quickstart/middleManager/runtime.properties
               subPath: "runtime.properties"
+            - name: conf-mima-jvm
+              mountPath: /opt/druid/conf/druid/single-server/micro-quickstart/middleManager/jvm.config
+              subPath: "jvm.config"
             - name: conf-log4j2
               mountPath: /opt/druid/conf/druid/single-server/micro-quickstart/_common/log4j2.xml
               subPath: "log4j2.xml"
@@ -173,6 +176,9 @@ spec:
         - name: conf-midman-prop
           configMap:
             name: conf-midman-prop
+        - name: conf-mima-jvm
+          configMap:
+            name: conf-mima-jvm
         - name: conf-log4j2
           configMap:
             name: conf-log4j2

@@ -14,8 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - Edit startup script to echo to stdout
 - - Moved to proper Helm versioning
 - - Changed pull policy to IfNotPresent
+- Updated druid to 0.4.1
+- - Changing log levels to error
+- - Adding middleManager jvm.config
 - Updated acc-dashboard to 0.16.0 
 - - Using druid 0.4.0
+- Updated acc-dashboard to 0.16.1
+- - Using druid 0.4.1
 
 ## 30.04.2020.
 

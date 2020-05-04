@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: conf-mima-jvm
+  labels:
+    {{- include "druid-chart.labels" . | nindent 4 }}
+data:
+  jvm.config: |
+    -server
+    -Xms64m
+    -Xmx64m
+    -XX:+ExitOnOutOfMemoryError
+    -XX:+UseG1GC
+    -Duser.timezone=UTC
+    -Dfile.encoding=UTF-8
+    -Djava.io.tmpdir=var/tmp
+    -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager
+    -Dlog4j.configurationFile=conf/druid/_common/log4j2-task.xml
+    -Dservice=middleman

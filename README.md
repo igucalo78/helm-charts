@@ -4,11 +4,11 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.16.0   |0.16.0          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-dashboard        |0.16.1   |0.16.1          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.13.0   |0.13.0          |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/drax                 |0.2.1    |0.2.1           |All in one Accelleran dRAX   |
-|acc-helm/druid                |0.4.0    |0.3.0           |Druid chart   |
+|acc-helm/druid                |0.4.1    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
 |acc-helm/kube-eagle           |1.1.5    |1.1.0           |Prometheus exporter for Kubernetes pod & node r...   |
@@ -39,5 +39,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - Edit startup script to echo to stdout
 - - Moved to proper Helm versioning
 - - Changed pull policy to IfNotPresent
+- Updated druid to 0.4.1
+- - Changing log levels to error
+- - Adding middleManager jvm.config
 - Updated acc-dashboard to 0.16.0
 - - Using druid 0.4.0
+- Updated acc-dashboard to 0.16.1
+- - Using druid 0.4.1
+
