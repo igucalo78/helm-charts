@@ -74,4 +74,8 @@ provisioner:
     provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
 
     #The Port should be the same as the one in provisioner.service.port, deafult is 16002
-    provisionerPort: 16002  
+    provisionerPort: 16002 
+
+ntp-server:
+  # To enable/disable the installation of the dRAX NTP Server for cells
+  enabled: true 
