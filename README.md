@@ -4,9 +4,9 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.16.1   |0.16.1          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-dashboard        |0.17.0   |0.17.0          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
-|acc-helm/dash-front-back-end  |0.13.0   |0.13.0          |Frontend and backend of the Accelleran Dashboard   |
+|acc-helm/dash-front-back-end  |0.14.0   |0.14.0          |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/drax                 |0.2.1    |0.2.1           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.4.1    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
@@ -16,6 +16,7 @@
 |acc-helm/metrics-server       |2.9.0    |0.3.6           |Metrics Server is a cluster-wide aggregator of ...   |
 |acc-helm/nats                 |0.1.0    |0.1.0        	  |Accelleran NATS   |
 |acc-helm/nkafka-helm          |0.2.4    |0.2.2           |A Helm chart for Kubernetes   |
+|acc-helm/ntp-server           |0.1.0    |0.1.0           |NTP-Server for the Accelleran Cells   |   
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.8.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
 |acc-helm/provisioner-dhcp     |0.1.2    |0.1.4           |A DHCP service for Provisioner discovery   |
@@ -30,20 +31,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 04.05.2020.
+## 07.05.2020.
 
 ### Changed
 
-- Updated druid to 0.4.0
-- - Make config maps for log rotating
-- - Edit startup script to echo to stdout
-- - Moved to proper Helm versioning
+- Updated dash-fbe to 0.14.0
 - - Changed pull policy to IfNotPresent
-- Updated druid to 0.4.1
-- - Changing log levels to error
-- - Adding middleManager jvm.config
-- Updated acc-dashboard to 0.16.0
-- - Using druid 0.4.0
-- Updated acc-dashboard to 0.16.1
-- - Using druid 0.4.1
+- - Using 0.14.0 verison of the Docker image
+- - Has the B3 and B7 templates now
+- updated acc-dashboard to 0.17.0
+- - Using dash-fbe 0.14.0
+- Updated drax to 0.3.0
+- - Using ntp-server 0.1.0
+
+### Added
+
+- Added ntp-server 0.1.0
 
