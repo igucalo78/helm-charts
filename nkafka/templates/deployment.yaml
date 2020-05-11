@@ -24,6 +24,64 @@ spec:
       serviceAccountName: {{ include "nkafka-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: check-nats
+          image: busybox
+          command: ['sh', '-c', 'until nslookup {{ tpl .Values.natsUrl . }}; do echo [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.natsUrl . }}; sleep 2; done']
+        - name: check-kafka
+          image: busybox
+          command: ['sh', '-c', 'until nslookup {{ tpl .Values.kafkaUrl . }}; do echo [CHECK-SERVICES] Waiting for Kafka at {{ tpl .Values.kafkaUrl . }}; sleep 2; done']
+        - name: init-druid
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          env:
+            - name: RUST_LOG
+              value: info
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - "sh"
+            - "-c"
+            - |
+              /bin/sh <<'EOF'
+              now=$(date)
+  
+              countUpdate=0
+  
+              until curl -f -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor
+              do
+                countUpdate=$((countUpdate+1))
+                if [ $countUpdate -eq 4 ]
+                then
+                  echo "[PostStartScript] Cannot reach Druid, exiting..."
+                  exit 1
+                else
+                  echo "[PostStartScript] Cannot reach Druid, retrying $countUpdate..."
+                  sleep 2
+                fi
+              done
+  
+              response=$(curl -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor)
+              echo $response >> status.log
+              if echo "$response" | grep "test2" ; then
+                echo "[PostStartScript] test2 OK"
+                until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+              else
+                echo "[PostStartScript] test2 BAD, reseting and creating..."
+                until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+                until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+              fi
+              if echo "$response" | grep "state" ; then
+                echo "[PostStartScript] state OK"
+                until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+              else
+                echo "[PostStartScript] state BAD, reseting and creating..."
+                until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+                until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+              fi
+              echo "[PostStartScript] -- Script finished!"
+  
+              EOF 
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
