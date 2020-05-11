@@ -1,0 +1,70 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nkafka-pre-install-job
+  labels:
+    {{- include "nkafka-helm.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:      
+      containers:
+      - name: pre-install
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        
+        command:
+          - "sh"
+          - "-c"
+          - |
+          /bin/sh <<'EOF'
+          now=$(date)
+
+          echo "[PostStartScript] $now"
+          echo "[PostStartScript] -- Script started..."
+
+          countUpdate=0
+
+          until curl -f -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor
+          do
+            countUpdate=$((countUpdate+1))
+            if [ $countUpdate -eq 4 ]
+            then
+              echo "[PostStartScript] Cannot reach Druid, exiting..."
+              exit 1
+            else
+              echo "[PostStartScript] Cannot reach Druid, retrying $countUpdate..."
+              sleep 2
+            fi
+          done
+
+          response=$(curl -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor)
+          echo $response >> status.log
+          if echo "$response" | grep "test2" ; then
+            echo "[PostStartScript] test2 OK"
+            until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+          else
+            echo "[PostStartScript] test2 BAD, reseting and creating..."
+            until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+            until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+          fi
+          if echo "$response" | grep "state" ; then
+            echo "[PostStartScript] state OK"
+            until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+          else
+            echo "[PostStartScript] state BAD, reseting and creating..."
+            until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+            until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+          fi
+          echo "[PostStartScript] -- Script finished!"
+
+          EOF
+    
+      restartPolicy: OnFailure
+      terminationGracePeriodSeconds: 0
+      
+  backoffLimit: 3
+  completions: 1
+  parallelism: 1
