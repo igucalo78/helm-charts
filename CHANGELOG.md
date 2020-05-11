@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated nkafka to 0.2.6
-- - Using Docker version 0.2.3 which now has curl
+- Updated nkafka to 0.3.0
+- - Using Docker version 0.2.4 which now has curl
 - - Using 3 init containers now to check nats, kafka and apply supervisiors on druid
-- Updated acc-dashboard to 0.17.1
-- - Using nkafka 0.2.6
+- - Check nats and kafka use nc tools to check for open TCP sockets
+- - Init-druid uses curl
+- Updated acc-dashboard to 0.18.0
+- - Using nkafka 0.3.0
 
 ## 07.05.2020.
 

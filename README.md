@@ -4,7 +4,7 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.17.1   |0.17.1          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-dashboard        |0.18.0   |0.18.0          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.14.0   |0.14.0          |Frontend and backend of the Accelleran Dashboard   |
 |acc-helm/drax                 |0.2.1    |0.2.1           |All in one Accelleran dRAX   |
@@ -15,7 +15,7 @@
 |acc-helm/loki-stack           |0.35.1   |v1.4.1       	  |Loki: like Prometheus, but for logs.
 |acc-helm/metrics-server       |2.9.0    |0.3.6           |Metrics Server is a cluster-wide aggregator of ...   |
 |acc-helm/nats                 |0.1.0    |0.1.0        	  |Accelleran NATS   |
-|acc-helm/nkafka-helm          |0.2.6    |0.2.3           |A Helm chart for Kubernetes   |
+|acc-helm/nkafka-helm          |0.3.0    |0.2.4           |A Helm chart for Kubernetes   |
 |acc-helm/ntp-server           |0.1.0    |0.1.0           |NTP-Server for the Accelleran Cells   |   
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.8.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
@@ -35,10 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated nkafka to 0.2.6
-- - Using Docker version 0.2.3 which now has curl
+- Updated nkafka to 0.3.0
+- - Using Docker version 0.2.4 which now has curl
 - - Using 3 init containers now to check nats, kafka and apply supervisiors on druid
-- Updated acc-dashboard to 0.17.1
-- - Using nkafka 0.2.6
+- - Check nats and kafka use nc tools to check for open TCP sockets
+- - Init-druid uses curl
+- Updated acc-dashboard to 0.18.0
+- - Using nkafka 0.3.0
 
 

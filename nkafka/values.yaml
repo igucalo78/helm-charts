@@ -8,7 +8,7 @@ version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/dash-nkafka
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: 
   - name: accelleran-secret
@@ -19,6 +19,10 @@ kafkaUrl: "kafka.{{ .Release.Namespace }}:9092"
 natsUrl: "nats://nats-service.{{ .Release.Namespace }}:4222"
 druidOverlordUrl: "overlord.{{ .Release.Namespace }}:8081"
 # args: ["producer", "--kafka", "acc-dash-kafka:9092", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "nats://nats-service:4222", "--invert", "--replicate", "--threads", "1"]
+
+initConfigs:
+  natsService: "nats-service.{{ .Release.Namespace }}:4222"
+  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
 
 serviceAccount:
   # Specifies whether a service account should be created
