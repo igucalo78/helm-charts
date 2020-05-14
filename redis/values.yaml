@@ -8,7 +8,7 @@ version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/mwc
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -17,6 +17,10 @@ fullnameOverride: ""
 
 natsIp: "10.20.20.20"
 natsPort: "31000"
+
+backup:
+  enabled: true
+  deleteAfterDay: 7
 
 serviceAccount:
   # Specifies whether a service account should be created

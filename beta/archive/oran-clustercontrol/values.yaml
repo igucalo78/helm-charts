@@ -1,4 +1,4 @@
-# Default values for redis.
+# Default values for oran-clustercontrol.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,28 +7,25 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/mwc
-  pullPolicy: Always
+  repository: accelleran/drax-oran-ctrl
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-natsIp: "10.20.20.20"
-natsPort: "31000"
-
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  # create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: orancontroller
 
-podSecurityContext: 
-  fsGroup: 0
+podSecurityContext: {}
+  # fsGroup: 2000
 
 securityContext: 
   # capabilities:
@@ -37,13 +34,31 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
+  privileged: true
 
 service:
-  type: NodePort
-  port: 6379
-  nodePort: 32000
-  name: "redisport"
-  serviceName: redis-service
+  type: ClusterIP
+  port: 830
+  name: "oranport"
+
+persistence:
+  accessModes:
+    - ReadWriteMany
+  enabled: false
+  size: 5Gi
+  storageClassName: acc-oran
+  type: pvc
+  ### TESTING
+  hostPath: /opt/pods/
+  ### Production
+  # hostPath: /opt/pods/oran
+
+config:
+  https: false
+  l3Namespace: "{{ .Release.Namespace }}"
+  redis:
+    hostname: 10.20.20.20
+    port: 32000
 
 ingress:
   enabled: false
@@ -57,39 +72,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-persistence:
-  accessModes:
-    - ReadWriteOnce
-  enabled: true
-  size: 10Gi
-  storageClassName: acc-redis
-  type: pvc
-  ### TESTING
-  #hostPath: /opt/pods/acc-redis
-  ### Production
-  hostPath: /opt/pods/redis-storage
-
-# If you want the health check app, enabled this
-# WARNING: There is currently an error with the health check, do not enable this
-health:
-  enabled: false
-
-# If you enable the health, then you can enable livenessProbe and readinessProbe
-livenessProbe:
-  enabled: false
-  initialDelaySeconds: 5
-  periodSeconds: 5
-  timeoutSeconds: 5
-  successThreshold: 1
-  failureThreshold: 5
-readinessProbe:
-  enabled: false
-  initialDelaySeconds: 5
-  periodSeconds: 5
-  timeoutSeconds: 1
-  successThreshold: 1
-  failureThreshold: 5
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

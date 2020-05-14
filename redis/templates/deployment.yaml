@@ -34,6 +34,10 @@ spec:
             - name: health
               mountPath: /health
             {{- end }}
+            {{- if .Values.backup.enabled }}
+            - name: backup
+              mountPath: /backup-script
+            {{- end }}
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
@@ -68,6 +72,11 @@ spec:
             postStart:
               exec:
                 command: ["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ .Values.natsIp}}:{{ .Values.natsPort }}"]
+            {{- if .Values.backup.enabled }}
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "/backup/backup-db.sh"]
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -92,5 +101,11 @@ spec:
         - name: health
           configMap:
             name: {{ include "redis.fullname" . }}-health
+            defaultMode: 0755
+        {{- end }}
+        {{- if .Values.backup.enabled }}
+        - name: backup
+          configMap:
+            name: {{ include "redis.fullname" . }}-backup
             defaultMode: 0755
         {{- end }}

@@ -54,7 +54,8 @@ persistence:
   # hostPath: /opt/pods/oran
 
 config:
-  https: false
+  https: true
+  l3Version: "{{ .Chart.AppVersion }}" 
   l3Namespace: "{{ .Release.Namespace }}"
   redis:
     hostname: 10.20.20.20

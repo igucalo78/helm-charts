@@ -78,7 +78,7 @@ oran-clustercontrol:
   enabled: true
 
   config:
-    https: false
+    https: true
     l3Namespace: "{{ .Release.Namespace }}"
     redis:
       hostname: 10.20.20.20

@@ -32,8 +32,8 @@ spec:
           env:
             - name: SERVED_NAMESPACE
               value: "{{ tpl .Values.config.l3Namespace . }}"
-          command: ["sudo"]
-          args: ["/data/oran/ocstart"]
+#          command: ["sudo"]
+#          args: ["/data/oran/ocstart"]
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
@@ -42,17 +42,17 @@ spec:
 #            - name: acc-oran
 #              mountPath: /data
             - name: bootstrap-config
-              mountPath: /data/oran/oc.bootstrap
+              mountPath: /data/oc.bootstrap
               subPath: "oc.bootstrap"
-            - name: empty-db-config
-              mountPath: /data/oran/emptydb.db
-              subPath: "emptydb.db"
-            - name: l3-fdd-start-config
-              mountPath: /data/l3-fdd/l3start
-              subPath: "l3start" 
-            - name: l3-tdd-start-config
-              mountPath: /data/l3-tdd/l3start
-              subPath: "l3start"
+            - name: conf-l3-yaml
+              mountPath: /data/l3-template.yaml
+              subPath: "l3-template.yaml"
+            - name: conf-zlog
+              mountPath: /data/zlog.conf
+              subPath: "zlog.conf" 
+#            - name: l3-tdd-start-config
+#              mountPath: /data/l3-tdd/l3start
+#              subPath: "l3start"
           #livenessProbe:
           #  httpGet:
           #    path: /
@@ -84,12 +84,12 @@ spec:
         - name: bootstrap-config
           configMap:
             name: bootstrap-config
-        - name: empty-db-config
+        - name: conf-l3-yaml
           configMap:
-            name: empty-db-config
-        - name: l3-tdd-start-config
+            name: conf-l3-yaml
+        - name: conf-zlog
           configMap:
-            name: l3-tdd-start-config
-        - name: l3-fdd-start-config
-          configMap:
-            name: l3-fdd-start-config  
+            name: conf-zlog
+#        - name: l3-fdd-start-config
+#          configMap:
+#            name: l3-fdd-start-config  
