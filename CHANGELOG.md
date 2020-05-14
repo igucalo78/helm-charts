@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 11.05.2020.
+
+### Changed
+
+- Updated nkafka to 0.3.0
+- - Using Docker version 0.2.4 which now has curl
+- - Using 3 init containers now to check nats, kafka and apply supervisiors on druid
+- - Check nats and kafka use nc tools to check for open TCP sockets
+- - Init-druid uses curl
+- Updated acc-dashboard to 0.18.0
+- - Using nkafka 0.3.0
+
 ## 07.05.2020.
 
 ### Changed
