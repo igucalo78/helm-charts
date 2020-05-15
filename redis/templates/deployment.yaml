@@ -75,7 +75,7 @@ spec:
             {{- if .Values.backup.enabled }}
             preStop:
               exec:
-                command: ["/bin/sh", "-c", "/backup/backup-db.sh"]
+                command: ["/bin/sh", "-c", "/backup-script/backup-db.sh"]
             {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
