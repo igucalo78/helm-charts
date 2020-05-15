@@ -7,7 +7,7 @@
 |acc-helm/acc-dashboard        |0.18.0   |0.18.0          |The All-In-One Accelleran Dashboard   |
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.14.0   |0.14.0          |Frontend and backend of the Accelleran Dashboard   |
-|acc-helm/drax                 |0.2.1    |0.2.1           |All in one Accelleran dRAX   |
+|acc-helm/drax                 |0.4.0    |0.4.0           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.4.1    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
@@ -20,7 +20,7 @@
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.8.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
 |acc-helm/provisioner-dhcp     |0.1.2    |0.1.4           |A DHCP service for Provisioner discovery   |
-|acc-helm/redis                |0.3.0    |redis20190206   |Accelleran dRAX Redis   |
+|acc-helm/redis                |0.4.0    |redis20190206   |Accelleran dRAX Redis   |
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
 
@@ -31,16 +31,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 11.05.2020.
+## 15.05.2020.
 
 ### Changed
 
-- Updated nkafka to 0.3.0
-- - Using Docker version 0.2.4 which now has curl
-- - Using 3 init containers now to check nats, kafka and apply supervisiors on druid
-- - Check nats and kafka use nc tools to check for open TCP sockets
-- - Init-druid uses curl
-- Updated acc-dashboard to 0.18.0
-- - Using nkafka 0.3.0
+- Updated Redis to 0.4.0
+- - Have a backup script to backup db when pod is terminated
+- - Have the script also delete backups after X days
+- Updated drax to 0.4.0
+- - Using Redis 0.4.0
+- Prepared oran-clustercontroler in beta
 
 

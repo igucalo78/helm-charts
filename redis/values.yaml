@@ -18,6 +18,9 @@ fullnameOverride: ""
 natsIp: "10.20.20.20"
 natsPort: "31000"
 
+# Backup the redis db when the pod is terminated
+# Enabled or disable this feature
+# Choose after how many days should the backed up DBs be deleted
 backup:
   enabled: true
   deleteAfterDay: 7

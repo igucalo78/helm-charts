@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 15.05.2020.
+
+### Changed
+
+- Updated Redis to 0.4.0
+- - Have a backup script to backup db when pod is terminated
+- - Have the script also delete backups after X days
+- Updated drax to 0.4.0
+- - Using Redis 0.4.0
+- Prepared oran-clustercontroler in beta
+
 ## 11.05.2020.
 
 ### Changed
