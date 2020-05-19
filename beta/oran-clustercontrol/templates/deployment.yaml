@@ -50,9 +50,9 @@ spec:
             - name: conf-zlog
               mountPath: /data/zlog.conf
               subPath: "zlog.conf" 
-#            - name: l3-tdd-start-config
-#              mountPath: /data/l3-tdd/l3start
-#              subPath: "l3start"
+            - name: conf-orc-url
+              mountPath: /data/l3-template_url
+              subPath: "l3-template_url"
           #livenessProbe:
           #  httpGet:
           #    path: /
@@ -90,6 +90,6 @@ spec:
         - name: conf-zlog
           configMap:
             name: conf-zlog
-#        - name: l3-fdd-start-config
-#          configMap:
-#            name: l3-fdd-start-config  
+        - name: conf-orc-url
+          configMap:
+            name: conf-orc-url
