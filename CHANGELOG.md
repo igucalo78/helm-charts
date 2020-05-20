@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 20.05.2020.
+
+### Changed
+
+- Updated drax to 0.5.0
+- - Adding acc-service-monitor 0.1.0
+- Updated beta drax to 0.6.0
+- - Adding acc-service-monitor 0.1.0
+
+### Added
+
+- Added acc-service-monitor 0.1.0
+
 ## 19.05.2020.
 
 ### Changed

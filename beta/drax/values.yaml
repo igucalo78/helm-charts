@@ -88,6 +88,10 @@ ntp-server:
   # To enable/disable the installation of the dRAX NTP Server for cells
   enabled: true 
 
+acc-service-monitor:
+  # To enable/disable the installation of the dRAX Service monitor
+  enabled: true
+
 oran-clustercontrol:
   enabled: true
 

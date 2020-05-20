@@ -5,9 +5,10 @@
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
 |acc-helm/acc-dashboard        |0.18.0   |0.18.0          |The All-In-One Accelleran Dashboard   |
+|acc-service-monitor           |0.1.0    |0.1.0           |The Accelleran dRAX Service Monitor   |      
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |
 |acc-helm/dash-front-back-end  |0.14.0   |0.14.0          |Frontend and backend of the Accelleran Dashboard   |
-|acc-helm/drax                 |0.4.0    |0.4.0           |All in one Accelleran dRAX   |
+|acc-helm/drax                 |0.5.0    |0.5.0           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.4.1    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
@@ -31,15 +32,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 15.05.2020.
+## 20.05.2020.
 
 ### Changed
 
-- Updated Redis to 0.4.0
-- - Have a backup script to backup db when pod is terminated
-- - Have the script also delete backups after X days
-- Updated drax to 0.4.0
-- - Using Redis 0.4.0
-- Prepared oran-clustercontroler in beta
+- Updated drax to 0.5.0
+- - Adding acc-service-monitor 0.1.0
+- Updated beta drax to 0.6.0
+- - Adding acc-service-monitor 0.1.0
 
+### Added
 
+- Added acc-service-monitor 0.1.0
