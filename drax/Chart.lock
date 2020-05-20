@@ -14,5 +14,8 @@ dependencies:
 - name: ntp-server
   repository: https://accelleran.github.io/helm-charts/
   version: 0.1.0
-digest: sha256:ba337dce11f583f69d185640be5af62732b573fb64b45ee2dff6ef116ad06ebd
-generated: "2020-05-15T16:23:25.715863598+02:00"
+- name: acc-service-monitor
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:8315d92ba82515b86cedd0c7afcb6d751c8cd4dfcf2ee7e6864f1ecf2385eeeb
+generated: "2020-05-20T10:20:17.641777075Z"
