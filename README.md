@@ -4,7 +4,7 @@
 
 |NAME   |CHART VERSION   |APP VERSION   |DESCRIPTION   |
 |---|---|---|---|
-|acc-helm/acc-dashboard        |0.18.0   |0.18.0          |The All-In-One Accelleran Dashboard   |
+|acc-helm/acc-dashboard        |0.18.1   |0.18.1          |The All-In-One Accelleran Dashboard   |
 |acc-service-monitor           |0.1.0    |0.1.0           |The Accelleran dRAX Service Monitor   |      
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |   
 |acc-helm/configurator         |0.1.0    |0.1.0           |The configurator for the Accelleran dRAX |    
@@ -63,4 +63,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated beta/drax to 0.7.0
 - - Added configurator 0.1.0
 - - Updated values.yaml for global variables
-
+- Updated acc-dashboard to 0.18.1
+- - updated values file for dash-fbe to use global variable for kubeIp

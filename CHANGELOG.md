@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated beta/drax to 0.7.0
 - - Added configurator 0.1.0
 - - Updated values.yaml for global variables
+- Updated acc-dashboard to 0.18.1
+- - updated values file for dash-fbe to use global variable for kubeIp
 
 ## 20.05.2020.
 
