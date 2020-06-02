@@ -15,7 +15,7 @@ data:
     opt     wins    10.0.0.2
     option  domain  local
     option  lease   86400
-    option  provision  https://{{ .Values.configuration.provisionerIp }}:{{ .Values.configuration.provisionerPort }}
+    option  provision  https://{{ tpl .Values.configuration.provisionerIp . }}:{{ .Values.configuration.provisionerPort }}
     {{- if .Values.configuration.staticRoute }} 
     option staticroutes {{ .Values.configuration.staticRouteNetwork }} {{ .Values.configuration.staticRouteGateway }}
     {{- end }}

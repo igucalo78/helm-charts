@@ -9,7 +9,7 @@
 |acc-helm/acc-sys-dashboard    |1.5.7    |1.5.7           |Accelleran's System Overview Dashboard   |   
 |acc-helm/configurator         |0.1.0    |0.1.0           |The configurator for the Accelleran dRAX |    
 |acc-helm/dash-front-back-end  |0.14.0   |0.14.0          |Frontend and backend of the Accelleran Dashboard   |
-|acc-helm/drax                 |0.6.0    |0.6.0           |All in one Accelleran dRAX   |
+|acc-helm/drax                 |0.6.1    |0.6.1           |All in one Accelleran dRAX   |
 |acc-helm/druid                |0.4.1    |0.3.0           |Druid chart   |
 |acc-helm/kafka                |0.20.8   |5.0.1           |Apache Kafka is publish-subscribe messaging ret...   |
 |acc-helm/kong                 |1.2.0    |1.4             |The Cloud-Native Ingress and API-management   |
@@ -21,8 +21,8 @@
 |acc-helm/ntp-server           |0.1.0    |0.1.0           |NTP-Server for the Accelleran Cells   |   
 |acc-helm/prometheus           |10.3.1   |2.15.2          |Prometheus is a monitoring system and time seri...   |
 |acc-helm/provisioner          |0.8.0    |0.6.0           |The Accelleran provisioner for bootstrap files   |
-|acc-helm/provisioner-dhcp     |0.1.2    |0.1.4           |A DHCP service for Provisioner discovery   |
-|acc-helm/redis                |0.4.0    |redis20190206   |Accelleran dRAX Redis   |
+|acc-helm/provisioner-dhcp     |0.1.3    |0.1.4           |A DHCP service for Provisioner discovery   |
+|acc-helm/redis                |0.4.2    |redis20190206   |Accelleran dRAX Redis   |
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
 
@@ -44,10 +44,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated redis to 0.4.2
+- - Using global variable template for the natsIp
+- Updated provisioner-dhcp to 0.1.3
+- - Using global variable template for the provisionerIp
+- Updated drax to 0.6.1
+- - Using redis 0.4.2
+- - Using provisioner-dhcp 0.1.3
+- - Using global variable kubeIP in values.yaml
 - Updated drax to 0.6.0
 - - Added configurator 0.1.0
 - - updated values.yaml for drax
 - - - it now uses global variables to make setting helm chart values easy
+- Updated beta/drax to 0.7.1
+- - Using redis 0.4.2
+- - Using provisioner-dhcp 0.1.3
+- - Using global variable kubeIP in values.yaml
 - Updated beta/drax to 0.7.0
 - - Added configurator 0.1.0
 - - Updated values.yaml for global variables

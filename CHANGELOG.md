@@ -16,10 +16,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated redis to 0.4.2
+- - Using global variable template for the natsIp
+- Updated provisioner-dhcp to 0.1.3
+- - Using global variable template for the provisionerIp
+- Updated drax to 0.6.1
+- - Using redis 0.4.2
+- - Using provisioner-dhcp 0.1.3
+- - Using global variable kubeIP in values.yaml 
 - Updated drax to 0.6.0
 - - Added configurator 0.1.0
 - - updated values.yaml for drax
 - - - it now uses global variables to make setting helm chart values easy
+- Updated beta/drax to 0.7.1
+- - Using redis 0.4.2
+- - Using provisioner-dhcp 0.1.3
+- - Using global variable kubeIP in values.yaml
 - Updated beta/drax to 0.7.0
 - - Added configurator 0.1.0
 - - Updated values.yaml for global variables

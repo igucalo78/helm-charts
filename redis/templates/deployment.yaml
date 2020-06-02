@@ -71,7 +71,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ .Values.natsIp}}:{{ .Values.natsPort }}"]
+                command: ["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
             {{- if .Values.backup.enabled }}
             preStop:
               exec:

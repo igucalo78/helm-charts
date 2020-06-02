@@ -1,5 +1,6 @@
 global:
-  kubeIp: "10.30.30.30"
+  # Kubernetes Advertise Address, used as External address for services
+  kubeIp: "10.20.20.20"
 
 nats:
   # To enable/disable the installation of NATS
@@ -13,7 +14,6 @@ nats:
       # The port NATS is using
       nodePort: 31000
 
-
 redis:
   # To enable or disable the installation of redis
   enabled: true
@@ -22,7 +22,7 @@ redis:
   version: "redis20190206"
 
   # The External IP of where NATS is installed 
-  natsIp: 10.20.20.20
+  natsIp: "{{ .Values.global.kubeIp }}"
 
   # The port NATS is using, check in the above settings of NATS
   natsPort: 31000
@@ -48,7 +48,7 @@ provisioner-dhcp:
   # staticRouteGateway: Set the gateway to be used by the cells to reach the provisioner 10.22.10.52
   configuration:
     interface: eno1
-    provisionerIp: 10.20.20.20
+    provisionerIp: "{{ .Values.global.kubeIp }}"
     provisionerPort: 31610
     # If you enable staticRoute, then provide the network and gateway values
     staticRoute: false
@@ -126,5 +126,5 @@ oran-clustercontrol:
     https: true
     l3Namespace: "{{ .Release.Namespace }}"
     redis:
-      hostname: 10.20.20.20
+      hostname: "{{ .Values.global.kubeIp }}"
       port: 32000
