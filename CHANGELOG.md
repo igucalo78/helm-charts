@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 02.06.2020.
+
+### Added
+
+- Added configurator 0.1.0
+- - Is used to configure the drax package
+- - It inlcudes the provision cells on helm install
+- - Leaving room for other jobs to be added down the road in case postInstall scripts/jobs need to run
+
+### Changed
+
+- Updated drax to 0.6.0
+- - Added configurator 0.1.0
+- - updated values.yaml for drax
+- - - it now uses global variables to make setting helm chart values easy
+- Updated beta/drax to 0.7.0
+- - Added configurator 0.1.0
+- - Updated values.yaml for global variables
+
 ## 20.05.2020.
 
 ### Changed
