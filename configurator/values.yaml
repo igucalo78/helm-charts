@@ -83,6 +83,7 @@ affinity: {}
 kubeIp: "10.20.20.20"
 
 provisioner:
+  enabled: true
   image: curlimages/curl
   cells:
     exampleSerial1: exampleName10

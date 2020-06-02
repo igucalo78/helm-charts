@@ -98,23 +98,31 @@ acc-service-monitor:
   enabled: true
 
 configurator:
+  # To enabled or disable the installation of the dRAX Configurator
   enabled: true
 
   provisioner:
+    # Enable if the provisioner is installed as well
+    enabled: true
+
+    # Pre-provision the cells, create a list of serial: name as shown below
     cells:
       exampleSerial1: exampleName100
       exampleSerial2: exampleName200
 
+    # Redis hostname and port
     redis:
       hostname: "{{ .Values.global.kubeIp }}"
       port: "32000"
 
+    # Names of the pre-made configMaps for the keys and crts
     serverKeyName: prov-server-key
     serverCrtName: prov-server-crt
     clientKeyName: prov-client-key
     clientCrtName: prov-client-crt
     caCrtName: prov-ca-crt
 
+    # provisioner external (nodePort) ip and port
     provisionerApi: "{{ .Values.global.kubeIp }}"
     provisionerPort: 31610
 
