@@ -17,5 +17,8 @@ dependencies:
 - name: acc-service-monitor
   repository: https://accelleran.github.io/helm-charts/
   version: 0.1.0
-digest: sha256:8315d92ba82515b86cedd0c7afcb6d751c8cd4dfcf2ee7e6864f1ecf2385eeeb
-generated: "2020-05-20T10:20:17.641777075Z"
+- name: configurator
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:7243fe6486cc696309fc6abee25a6a619843030dcf0df11ccc05b9e4e626c6d0
+generated: "2020-06-02T16:37:34.160785851Z"

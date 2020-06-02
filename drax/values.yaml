@@ -1,3 +1,6 @@
+global:
+  kubeIp: "10.20.20.20"
+
 nats:
   # To enable/disable the installation of NATS
   enabled: true
@@ -91,3 +94,24 @@ ntp-server:
 acc-service-monitor:
   # To enable/disable the installation of the dRAX Service monitor
   enabled: true 
+
+configurator:
+  enabled: true
+
+  provisioner:
+    cells:
+      exampleSerial1: exampleName1000
+      exampleSerial2: exampleName2000
+
+    redis:
+      hostname: "{{ .Values.global.kubeIp }}"
+      port: "32000"
+
+    serverKeyName: prov-server-key
+    serverCrtName: prov-server-crt
+    clientKeyName: prov-client-key
+    clientCrtName: prov-client-crt
+    caCrtName: prov-ca-crt
+
+    provisionerApi: "{{ .Values.global.kubeIp }}"
+    provisionerPort: 31610
