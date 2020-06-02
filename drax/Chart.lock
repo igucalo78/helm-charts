@@ -19,6 +19,6 @@ dependencies:
   version: 0.1.0
 - name: configurator
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.1.0
-digest: sha256:20a2313a2a1230d8d91bfb83c5906364a1be7eb811df650769563b4990641f88
-generated: "2020-06-02T23:01:44.333408332Z"
+  version: 0.2.0
+digest: sha256:35b01a0a605e90b86a2b9261b6925d7670c5c185015fa1bb3764064463953b91
+generated: "2020-06-02T23:34:42.283830372Z"
