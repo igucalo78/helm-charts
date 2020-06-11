@@ -1,67 +1,48 @@
-# Default values for oran-clustercontrol.
+# Default values for acc-xapp-framework.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
+xapp:
+  comapny:
+  team:
+  xAppName:
+  image:
+  version:
+   
 
-image:
-  repository: accelleran/drax-oran-ctrl
-  pullPolicy: IfNotPresent
-
-imagePullSecrets:
-  - name: accelleran-secret
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  # create: false
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: orancontroller
+  name: ""
+
+podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: 
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
-  privileged: true
 
 service:
   type: ClusterIP
-  port: 830
-  name: "oranport"
-
-persistence:
-  accessModes:
-    - ReadWriteMany
-  enabled: false
-  size: 5Gi
-  storageClassName: acc-oran
-  type: pvc
-  ### TESTING
-  hostPath: /opt/pods/
-  ### Production
-  # hostPath: /opt/pods/oran
-
-config:
-  https: true
-  orchestratorUrl: 10.20.20.20
-  l3Version: "{{ .Chart.AppVersion }}" 
-  l3Namespace: "{{ .Release.Namespace }}"
-  cleanup: true
-  redis:
-    hostname: 10.20.20.20
-    port: 32000
+  # If service.type = NodePort, choose a port to be exposed on the node
+  nodePort: 31700
+  port: 80
 
 ingress:
   enabled: false
@@ -87,6 +68,13 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

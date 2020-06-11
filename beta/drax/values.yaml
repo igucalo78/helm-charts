@@ -128,11 +128,14 @@ configurator:
 
 oran-clustercontrol:
   enabled: true
-  pullPolicy: Always
+  image:
+    pullPolicy: Always
 
   config:
     https: true
+    orchestratorUrl: "{{ .Values.global.kubeIp }}"
     l3Namespace: "{{ .Release.Namespace }}"
+    cleanup: true
     redis:
       hostname: "{{ .Values.global.kubeIp }}"
       port: 32000

@@ -1,4 +1,4 @@
-# Default values for oran-clustercontrol.
+# Default values for redis.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,25 +7,31 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/drax-oran-ctrl
+  repository: redis
   pullPolicy: IfNotPresent
 
-imagePullSecrets:
-  - name: accelleran-secret
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+# Backup the redis db when the pod is terminated
+# Enabled or disable this feature
+# Choose after how many days should the backed up DBs be deleted
+backup:
+  enabled: true
+  deleteAfterDay: 7
+
 serviceAccount:
   # Specifies whether a service account should be created
-  # create: false
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: orancontroller
+  name:
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext: 
+  fsGroup: 0
 
 securityContext: 
   # capabilities:
@@ -34,34 +40,11 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
-  privileged: true
 
 service:
   type: ClusterIP
-  port: 830
-  name: "oranport"
-
-persistence:
-  accessModes:
-    - ReadWriteMany
-  enabled: false
-  size: 5Gi
-  storageClassName: acc-oran
-  type: pvc
-  ### TESTING
-  hostPath: /opt/pods/
-  ### Production
-  # hostPath: /opt/pods/oran
-
-config:
-  https: true
-  orchestratorUrl: 10.20.20.20
-  l3Version: "{{ .Chart.AppVersion }}" 
-  l3Namespace: "{{ .Release.Namespace }}"
-  cleanup: true
-  redis:
-    hostname: 10.20.20.20
-    port: 32000
+  port: 6379
+  name: "redis-service"
 
 ingress:
   enabled: false
@@ -75,6 +58,39 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+persistence:
+  accessModes:
+    - ReadWriteMany
+  enabled: false
+  size: 1Gi
+  storageClassName: acc-redis
+  type: pvc
+  ### TESTING
+  #hostPath: /opt/pods/acc-redis
+  ### Production
+  hostPath: /opt/pods/redis-storage
+
+# If you want the health check app, enabled this
+# WARNING: There is currently an error with the health check, do not enable this
+health:
+  enabled: false
+
+# If you enable the health, then you can enable livenessProbe and readinessProbe
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
