@@ -5,17 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 11.06.2020.
+## 12.06.2020.
 
 ### Added
 
 - Added xapp framework charts
 - - Added redis 
 - - Added api
+- Added oran-clustercontrol to main helm charts
+- - Still using AppVersion latest for testing
 
 ### Changed
 
 - Updating beta charts drax and oran-clustercontroler
+- Updated dash-fbe to 0.15.0
+- - It now has the netconf and rest apis
+- Updated acc-dashboard to 0.19.0
+- - Using dash-fbe 0.15.0
+- Updated drax to 0.7.2
+- - Using oran-clustercontrol 0.1.0
 
 ## 02.06.2020.
 
