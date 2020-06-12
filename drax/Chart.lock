@@ -20,5 +20,8 @@ dependencies:
 - name: configurator
   repository: https://accelleran.github.io/helm-charts/
   version: 0.2.0
-digest: sha256:35b01a0a605e90b86a2b9261b6925d7670c5c185015fa1bb3764064463953b91
-generated: "2020-06-02T23:34:42.283830372Z"
+- name: oran-clustercontrol
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:865a510ba7ad9c6ccd71e6fbcbd0677a4462c19cfbd5ac848ba38c16dd3ae740
+generated: "2020-06-12T09:14:02.914554508Z"
