@@ -4,15 +4,8 @@
 
 replicaCount: 1
 
-xapp:
-  comapny:
-  team:
-  xAppName:
-  image:
-  version:
-   
-
-imagePullSecrets: []
+imagePullSecrets:
+  - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
@@ -40,8 +33,6 @@ securityContext:
 
 service:
   type: ClusterIP
-  # If service.type = NodePort, choose a port to be exposed on the node
-  nodePort: 31700
   port: 80
 
 ingress:

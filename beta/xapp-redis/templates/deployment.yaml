@@ -41,7 +41,7 @@ spec:
               mountPath: /backup-script
             {{- end }}
           ports:
-            - name: {{ .Values.service.name }}
+            - name: {{ include "redis.fullname" . }}
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           {{- if .Values.livenessProbe.enabled }}

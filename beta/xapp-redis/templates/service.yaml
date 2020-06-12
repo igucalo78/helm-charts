@@ -9,6 +9,6 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       protocol: TCP
-      name: {{ .Values.service.name }}
+      name: {{ include "redis.fullname" . }}
   selector:
     {{- include "redis.selectorLabels" . | nindent 4 }}
