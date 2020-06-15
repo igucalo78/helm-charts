@@ -139,3 +139,7 @@ oran-clustercontrol:
     redis:
       hostname: "{{ .Values.global.kubeIp }}"
       port: 32000
+
+acc-l2-update:
+  # Enable the server that serves the Layer2 update files
+  enabled: true

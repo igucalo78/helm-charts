@@ -23,5 +23,8 @@ dependencies:
 - name: oran-clustercontrol
   repository: https://accelleran.github.io/helm-charts/
   version: 0.1.0
-digest: sha256:865a510ba7ad9c6ccd71e6fbcbd0677a4462c19cfbd5ac848ba38c16dd3ae740
-generated: "2020-06-12T09:14:02.914554508Z"
+- name: acc-l2-update
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:1da124c6115a1b67eb18c4ec82cd5a400a70e6f4ac0c5c749e5ede25c5c88088
+generated: "2020-06-15T11:14:32.15489593Z"
