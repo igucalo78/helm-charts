@@ -44,7 +44,7 @@ securityContext:
 service:
   type: ClusterIP
   port: 6379
-  name: "redis-service"
+  name: "xapp-redis-svc"
 
 ingress:
   enabled: false
