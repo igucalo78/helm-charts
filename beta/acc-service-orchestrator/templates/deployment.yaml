@@ -34,7 +34,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version	. }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: {{ include "acc-service-orchestrator.fullname" . }}
+            - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           #livenessProbe:

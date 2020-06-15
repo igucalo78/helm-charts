@@ -8,7 +8,8 @@ version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/acc-service-orchestrator 
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
+  #pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -39,6 +40,8 @@ securityContext:
   privileged: true
 
 service:
+  serviceName: acc-service-orchestrator
+  name: acc-ser-orc
   type: NodePort
   port: 80
   nodePort: 30502
