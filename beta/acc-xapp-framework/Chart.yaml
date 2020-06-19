@@ -21,3 +21,19 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 appVersion: 0.1.0
+
+# Dependencies
+dependencies:
+  - name: xapp-redis
+    condition: xapp-redis.enabled
+    version: 0.1.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: xapp-api
+    condition: xapp-api.enabled
+    version: 0.1.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: accelleran-xapp-anr
+    condition: accelleran-xapp-anr.enabled
+    version: 0.1.0
+    repository: https://accelleran.github.io/helm-charts/
+

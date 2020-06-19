@@ -1,0 +1,30 @@
+dependencies:
+- name: nats
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+- name: redis
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.4.2
+- name: provisioner-dhcp
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.3
+- name: provisioner
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.8.0
+- name: ntp-server
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+- name: acc-service-monitor
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.1.0
+- name: configurator
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.2.0
+- name: oran-clustercontrol
+  repository: https://accelleran.github.io/helm-charts/
+  version: 1.0.0
+- name: acc-l2-update
+  repository: https://accelleran.github.io/helm-charts/
+  version: 1.0.0
+digest: sha256:3f38f7fe472cc3d143d83572345814ab5fed7302613d7079c7e2446d53fcc8be
+generated: "2020-06-15T14:30:14.68758608Z"

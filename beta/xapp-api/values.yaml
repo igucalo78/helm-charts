@@ -41,7 +41,8 @@ securityContext:
   runAsUser: 0
 
 service:
-  type: ClusterIP
+  type: NodePort
+  nodePort: 31801
   port: 80
 
 ingress:
