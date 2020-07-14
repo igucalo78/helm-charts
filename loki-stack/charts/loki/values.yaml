@@ -165,8 +165,8 @@ securityContext:
   runAsUser: 10001
 
 service:
-  type: ClusterIP
-  nodePort:
+  type: NodePort
+  nodePort: 30302
   port: 3100
   annotations: {}
   labels: {}

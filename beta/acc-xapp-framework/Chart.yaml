@@ -30,7 +30,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: xapp-api
     condition: xapp-api.enabled
-    version: 0.1.0
+    version: 0.3.0
     repository: https://accelleran.github.io/helm-charts/
   - name: accelleran-xapp-anr
     condition: accelleran-xapp-anr.enabled

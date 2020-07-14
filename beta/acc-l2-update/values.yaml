@@ -1,4 +1,4 @@
-# Default values for redis.
+# Default values for acc-l2-update.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,33 +7,25 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: redis
+  repository: accelleran/acc-l2-update
   pullPolicy: IfNotPresent
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
-
-# Backup the redis db when the pod is terminated
-# Enabled or disable this feature
-# Choose after how many days should the backed up DBs be deleted
-backup:
-  enabled: true
-  deleteAfterDay: 7
 
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
-  # Annotations to add to the service account
-  annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext: 
-  fsGroup: 0
+podSecurityContext: {}
+  # fsGroup: 2000
 
-securityContext: 
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
@@ -42,10 +34,10 @@ securityContext:
   runAsUser: 0
 
 service:
+  name: acc-l2-update
   type: NodePort
-  #nodePort: 31802
-  port: 6379
-  name: "xapp-redis-svc"
+  nodePort: 30603
+  port: 80
 
 ingress:
   enabled: false
@@ -59,39 +51,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-persistence:
-  accessModes:
-    - ReadWriteMany
-  enabled: true
-  size: 1Gi
-  #storageClassName: acc-redis
-  type: pvc
-  ### TESTING
-  #hostPath: /opt/pods/acc-redis
-  ### Production
-  hostPath: /opt/pods
-
-# If you want the health check app, enabled this
-# WARNING: There is currently an error with the health check, do not enable this
-health:
-  enabled: false
-
-# If you enable the health, then you can enable livenessProbe and readinessProbe
-livenessProbe:
-  enabled: false
-  initialDelaySeconds: 5
-  periodSeconds: 5
-  timeoutSeconds: 5
-  successThreshold: 1
-  failureThreshold: 5
-readinessProbe:
-  enabled: false
-  initialDelaySeconds: 5
-  periodSeconds: 5
-  timeoutSeconds: 1
-  successThreshold: 1
-  failureThreshold: 5
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
