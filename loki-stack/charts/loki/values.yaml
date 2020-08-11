@@ -118,6 +118,7 @@ nodeSelector: {}
 ## - keep storageClassName same with below setting
 persistence:
   enabled: true
+  type: pvc
   accessModes:
   - ReadWriteOnce
   size: 10Gi
