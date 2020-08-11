@@ -121,7 +121,9 @@ persistence:
   accessModes:
   - ReadWriteOnce
   size: 10Gi
+  storageClassName: acc-loki
   annotations: {}
+  hostPath: /opt/pods/acc-drax-loki-storage
   # subPath: ""
   # existingClaim:
 
