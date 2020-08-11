@@ -117,11 +117,14 @@ nodeSelector: {}
 ## - create a pv which above 10Gi and has same namespace with loki
 ## - keep storageClassName same with below setting
 persistence:
-  enabled: false
+  enabled: true
+  type: pvc
   accessModes:
   - ReadWriteOnce
   size: 10Gi
+  storageClassName: acc-loki
   annotations: {}
+  hostPath: /opt/pods/acc-drax-loki-storage
   # subPath: ""
   # existingClaim:
 
@@ -159,10 +162,10 @@ resources: {}
 #   memory: 128Mi
 
 securityContext:
-  fsGroup: 10001
+  fsGroup: 0
 #  runAsGroup: 10001
-  runAsNonRoot: true
-  runAsUser: 10001
+#  runAsNonRoot: true
+  runAsUser: 0
 
 service:
   type: NodePort

@@ -1,0 +1,2 @@
+# To copy over the changes of file/folder from beta branch to master branch:
+git checkout beta acc-dashboard
