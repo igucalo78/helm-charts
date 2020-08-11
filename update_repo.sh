@@ -8,7 +8,7 @@
 
 # helm package verything except acc-dashboard
 echo "##### Packaging everything except acc-dashboard and drax charts"
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.txt*"  \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \) -exec sh -c '
  for i do
    helm package "$i"
  done' sh {} +
