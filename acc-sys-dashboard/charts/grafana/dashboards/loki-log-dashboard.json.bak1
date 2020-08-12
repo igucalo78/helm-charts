@@ -16,7 +16,8 @@
   "editable": true,
   "gnetId": 12019,
   "graphTooltip": 0,
-  "iteration": 1597238823897,
+  "id": 4,
+  "iteration": 1586868272139,
   "links": [],
   "panels": [
     {
@@ -63,10 +64,6 @@
         {
           "expr": "sum(count_over_time({namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$search\"[$__interval]))",
           "refId": "A"
-        },
-        {
-          "expr": "sum(count_over_time({source=~\"$Layer2\"} |~ \"$search\"[$__interval]))",
-          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -123,19 +120,14 @@
       "options": {
         "showLabels": true,
         "showTime": true,
-        "sortOrder": "Ascending",
+        "sortOrder": "Descending",
         "wrapLogMessage": true
       },
       "targets": [
         {
-          "expr": "{namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$search\" ",
+          "expr": "{namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$search\"",
           "hide": false,
           "refId": "A"
-        },
-        {
-          "expr": "{source=~\"$Layer2\"} |~ \"$search\" ",
-          "hide": false,
-          "refId": "B"
         }
       ],
       "timeFrom": null,
@@ -217,8 +209,8 @@
           },
           {
             "selected": false,
-            "text": "drax03",
-            "value": "drax03"
+            "text": "node1",
+            "value": "node1"
           }
         ],
         "query": "label_values(kubernetes_io_hostname)",
@@ -235,9 +227,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "l3-lange-koepoortstraat",
+          "text": "All",
           "value": [
-            "l3-lange-koepoortstraat"
+            "$__all"
           ]
         },
         "datasource": "Prometheus",
@@ -306,37 +298,11 @@
         "query": "",
         "skipUrlSync": false,
         "type": "textbox"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "L2-Lange-Koepoortstraat",
-          "value": "L2-Lange-Koepoortstraat"
-        },
-        "datasource": "Loki",
-        "definition": "label_values(source)",
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "Layer2",
-        "options": [],
-        "query": "label_values(source)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -356,5 +322,5 @@
   "timezone": "",
   "title": "Loki Log Dashboard",
   "uid": "liz0yRCZz",
-  "version": 1
+  "version": 9
 }

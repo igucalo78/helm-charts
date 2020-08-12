@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 12.08.2020.
+
+### Changed
+
+- Updated acc-sys-dashboard to 1.6.0
+- - Updated Loki dahsboard json in acc-sys-dashboard
+- - Support for picking up the Layer2 logs
+- Updated acc-dashboard to 0.21.0
+- - Using acc-sys-dashbaord 1.6.0
+- Updated redis to 0.5.0
+- - Using notifications in redis
+- Updated drax to 0.9.1
+- - Using redis 0.5.0
+
 ## 12.06.2020.
 
 ### Added
