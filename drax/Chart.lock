@@ -4,7 +4,7 @@ dependencies:
   version: 0.1.0
 - name: redis
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.4.2
+  version: 0.5.0
 - name: provisioner-dhcp
   repository: https://accelleran.github.io/helm-charts/
   version: 0.1.3
@@ -26,5 +26,5 @@ dependencies:
 - name: acc-l2-update
   repository: https://accelleran.github.io/helm-charts/
   version: 1.0.0
-digest: sha256:3f38f7fe472cc3d143d83572345814ab5fed7302613d7079c7e2446d53fcc8be
-generated: "2020-06-15T14:30:14.68758608Z"
+digest: sha256:f88ec62820d67ce95c473c9e912dac5a4cccbfd7fd354bdd35dd68dfb9f681cb
+generated: "2020-08-12T11:03:46.620227632Z"
