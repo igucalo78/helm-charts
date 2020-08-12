@@ -71,7 +71,13 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
+                command: 
+                  - sh
+                  - -c
+                  - "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}; 
+                    redis-cli config set notify-keyspace-events KEA"
+
+                    #["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
             {{- if .Values.backup.enabled }}
             preStop:
               exec:
