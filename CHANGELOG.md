@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 13.08.2020.
+
+### Changed
+
+- Updated loki-stack to 0.36.1
+- - Setting retention policy to 720h default for loki
+- Updated acc-dashboard to 0.21.1
+- - Using loki-stack 0.36.1
+- - Updated values.yaml file to include the retention policy of Prometheus
+
 ## 12.08.2020.
 
 ### Changed
