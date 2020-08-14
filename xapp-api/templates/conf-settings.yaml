@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
- name: conf-settings
+ name: {{ include "xapp-api.fullname" . }}-settings
  labels:
    {{- include "xapp-api.labels" . | nindent 4 }}
 data:
