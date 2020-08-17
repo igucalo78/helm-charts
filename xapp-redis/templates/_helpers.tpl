@@ -42,6 +42,10 @@ helm.sh/chart: {{ include "redis.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: xapp
+drax/xapp-name: {{ .Release.Name }}
+drax/xapp-component-name: {{ .Chart.Name }}
+drax/xapp-component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*
