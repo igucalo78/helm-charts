@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "provisioner-dhcp.selectorLabels" . | nindent 8 }}
+        {{- include "provisioner-dhcp.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

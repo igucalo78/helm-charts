@@ -8,16 +8,16 @@
 
 # helm package verything except acc-dashboard
 echo "##### Packaging everything except acc-dashboard and drax charts"
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.txt*"  \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.txt*"  \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \! -name "archive" \) -exec sh -c '
  for i do
    helm package "$i"
  done' sh {} +
 
-echo "##### Creating index.yaml for everything except acc-dashboard"
+echo "##### Creating index.yaml for everything except acc-dashboard and drax"
 # Create index yaml
 helm repo index . --url  https://accelleran.github.io/helm-charts/
 
-echo "##### Adding  everything excpet acc-dashboard"
+echo "##### Adding  everything excpet acc-dashboard and drax"
 #git add all except acc-dashboard
 find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard*" \! -name "drax*" \! -name ".git" \! -name "" \) -exec sh -c '
   for i do

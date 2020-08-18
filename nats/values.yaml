@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-version: "nats20190206"
+version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/mwc

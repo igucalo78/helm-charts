@@ -4,7 +4,7 @@ Expand the name of the chart.
 */}}
 {{- define "xapp-api.name" -}}
 {{- $name := printf "%s-%s" .Chart.Name .Chart.Version -}}
-{{- default $name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*

@@ -3,6 +3,7 @@
 Expand the name of the chart.
 */}}
 {{- define "acc-l2-update.name" -}}
+{{- $name := printf "%s-%s" .Chart.Name .Chart.Version | replace "." "-" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -15,7 +16,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default (include "acc-l2-update.name" .) .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -41,6 +42,10 @@ helm.sh/chart: {{ include "acc-l2-update.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: drax-core
+drax/name: L2UpdateServer
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*
