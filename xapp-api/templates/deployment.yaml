@@ -43,7 +43,7 @@ spec:
               containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: conf-settings
+            - name: {{ include "xapp-api.fullname" . }}-settings
               mountPath: /srv/flask_app/settings.py
               subPath: "settings.py"
           #livenessProbe:
@@ -69,6 +69,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: conf-settings
+        - name: {{ include "xapp-api.fullname" . }}-settings
           configMap:
-            name: conf-settings
+            name: {{ include "xapp-api.fullname" . }}-settings
