@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "acc-service-monitor.selectorLabels" . | nindent 8 }}
+        {{- include "acc-service-monitor.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
