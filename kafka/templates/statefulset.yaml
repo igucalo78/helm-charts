@@ -5,7 +5,6 @@ metadata:
   name: {{ include "kafka.fullname" . }}
   labels:
   {{- include "kafka.broker.labels" . | nindent 4 }}
-  {{- include "kafka.common.metaLabels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
@@ -29,7 +28,6 @@ spec:
 {{- end }}
       labels:
       {{- include "kafka.broker.labels" . | nindent 8 }}
-      {{- include "kafka.common.metaLabels" . | nindent 8 }}
         {{- if .Values.podLabels }}
         ## Custom pod labels
 {{ toYaml .Values.podLabels | indent 8 }}

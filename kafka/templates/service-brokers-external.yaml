@@ -36,7 +36,6 @@ metadata:
     {{- end }}
   name: {{ $root.Release.Name }}-{{ $i }}-external
   labels:
-  {{- include "kafka.common.metaLabels" . | nindent 4 }}
   {{- include "kafka.broker.labels" $root | nindent 4 }}
     pod: {{ $responsiblePod | quote }}
 spec:

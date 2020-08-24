@@ -5,7 +5,6 @@ metadata:
   name: {{ template "kafka.fullname" . }}-exporter
   labels:
   {{- include "kafka.monitor.labels" . | nindent 4 }}
-  {{- include "kafka.common.metaLabels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
@@ -20,7 +19,6 @@ spec:
 {{- end }}
       labels:
       {{- include "kafka.monitor.labels" . | nindent 8 }}
-      {{- include "kafka.common.metaLabels" . | nindent 8 }}
     spec:
       containers:
       - image: "{{ .Values.prometheus.kafka.image }}:{{ .Values.prometheus.kafka.imageTag }}"

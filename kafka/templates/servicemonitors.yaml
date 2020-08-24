@@ -5,7 +5,6 @@ metadata:
   name: {{ include "kafka.fullname" . }}
   namespace: {{ include "serviceMonitor.namespace" . }}
   labels:
-  {{- include "kafka.common.metaLabels" . | nindent 4 }}
   {{- include "kafka.monitor.labels" . | nindent 4 }}
   {{- toYaml .Values.prometheus.operator.serviceMonitor.selector | nindent 4 }}
 spec:
