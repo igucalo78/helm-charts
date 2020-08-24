@@ -8,6 +8,7 @@ metadata:
     chart: {{ template "loki.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{- include "loki.labels" . | nindent 4 }}
   annotations:
     {{- toYaml .Values.annotations | nindent 4 }}
 spec:
@@ -26,6 +27,7 @@ spec:
         app: {{ template "loki.name" . }}
         name: {{ template "loki.name" . }}
         release: {{ .Release.Name }}
+        {{- include "loki.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}

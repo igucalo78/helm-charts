@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "dash-front-back-end.selectorLabels" . | nindent 8 }}
+        {{- include "dash-front-back-end.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

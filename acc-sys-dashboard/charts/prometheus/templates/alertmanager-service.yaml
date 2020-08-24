@@ -8,6 +8,7 @@ metadata:
 {{- end }}
   labels:
     {{- include "prometheus.alertmanager.labels" . | nindent 4 }}
+    {{- include "prometheus.common.labels" . | nindent 4 }}
 {{- if .Values.alertmanager.service.labels }}
 {{ toYaml .Values.alertmanager.service.labels | indent 4 }}
 {{- end }}

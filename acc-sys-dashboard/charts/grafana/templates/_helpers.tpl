@@ -60,3 +60,19 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
     {{- .Release.Namespace -}}
   {{- end -}}
 {{- end -}}
+
+{{/*
+Common labels
+*/}}
+{{- define "grafana.labels" -}}
+helm.sh/chart: {{ include "grafana.chart" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: Grafana
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
+{{- end -}}
+

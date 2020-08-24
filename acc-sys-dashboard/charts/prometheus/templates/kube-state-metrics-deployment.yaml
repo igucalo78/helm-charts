@@ -7,6 +7,7 @@ metadata:
 {{ toYaml .Values.kubeStateMetrics.deploymentAnnotations | indent 4 }}
 {{- end }}
   labels:
+    {{- include "prometheus.common.labels" . | nindent 4 }}
     {{- include "prometheus.kubeStateMetrics.labels" . | nindent 4 }}
   name: {{ template "prometheus.kubeStateMetrics.fullname" . }}
 spec:
@@ -21,6 +22,7 @@ spec:
 {{ toYaml .Values.kubeStateMetrics.podAnnotations | indent 8 }}
     {{- end }}
       labels:
+        {{- include "prometheus.common.labels" . | nindent 8 }}
         {{- include "prometheus.kubeStateMetrics.labels" . | nindent 8 }}
 {{- if .Values.kubeStateMetrics.pod.labels }}
 {{ toYaml .Values.kubeStateMetrics.pod.labels | indent 8 }}

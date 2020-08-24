@@ -8,6 +8,7 @@ metadata:
 {{ toYaml .Values.server.statefulSet.headless.annotations | indent 4 }}
 {{- end }}
   labels:
+    {{- include "prometheus.common.labels" . | nindent 4 }}
     {{- include "prometheus.server.labels" . | nindent 4 }}
 {{- if .Values.server.statefulSet.headless.labels }}
 {{ toYaml .Values.server.statefulSet.headless.labels | indent 4 }}

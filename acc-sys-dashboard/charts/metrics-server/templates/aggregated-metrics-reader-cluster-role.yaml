@@ -8,6 +8,7 @@ metadata:
     chart: {{ template "metrics-server.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{- include "metrics-server.labels" . | nindent 4 }}
     rbac.authorization.k8s.io/aggregate-to-view: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-admin: "true"

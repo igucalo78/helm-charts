@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "druid-chart.selectorLabels" . | nindent 8 }}
+        {{- include "druid-chart.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
