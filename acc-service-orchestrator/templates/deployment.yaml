@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "acc-service-orchestrator.selectorLabels" . | nindent 8 }}
+        {{- include "acc-service-orchestrator.labels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
