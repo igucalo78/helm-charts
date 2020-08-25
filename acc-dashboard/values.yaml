@@ -47,7 +47,7 @@ loki-stack:
       table_manager:
         # Retention polocy for logs in Loki
         retention_deletes_enabled: true
-        retention_period: 700h
+        retention_period: 672h
       
 dash-front-back-end:
   service:
