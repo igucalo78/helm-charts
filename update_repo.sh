@@ -7,8 +7,8 @@
 
 
 # helm package verything except acc-dashboard
-echo "##### Packaging everything except acc-dashboard and drax charts"
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.txt*"  \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \! -name "archive" \) -exec sh -c '
+echo "##### Packaging everything except acc-dashboard, ric and drax charts"
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard" \! -name ".git" \! -name "*.tgz" \! -name "index.yaml" \! -name "*.txt*"  \! -name "*.sh*" \! -name "" \! -name "beta" \! -name "CHANGELOG.md" \! -name "README.md" \! -name "drax" \! -name "archive" \! -name "ric" \) -exec sh -c '
  for i do
    helm package "$i"
  done' sh {} +
@@ -17,9 +17,9 @@ echo "##### Creating index.yaml for everything except acc-dashboard and drax"
 # Create index yaml
 helm repo index . --url  https://accelleran.github.io/helm-charts/
 
-echo "##### Adding  everything excpet acc-dashboard and drax"
+echo "##### Adding  everything excpet acc-dashboard, ric and drax"
 #git add all except acc-dashboard
-find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard*" \! -name "drax*" \! -name ".git" \! -name "" \) -exec sh -c '
+find -maxdepth 1 -mindepth 1 \( \! -name "acc-dashboard*" \! -name "drax*" \! -name ".git" \! -name "" \! -name "ric*" \) -exec sh -c '
   for i do
     git add "$i"
   done' sh {} +
@@ -45,17 +45,23 @@ cd acc-dashboard && helm dependency update && cd ..
 echo "##### Updating the dependencies of drax"
 cd drax && helm dependency update && cd ..
 
+echo "##### Updating the dependencies of ric"
+cd ric && helm dependency update && cd ..
+
 echo "##### Pacakge acc-dashboard"
 helm package acc-dashboard
 
 echo "##### Pacakge drax"
 helm package drax
 
+echo "##### Pacakge ric"
+helm package ric
+
 echo "##### Update index.yaml"
 helm repo index . --url  https://accelleran.github.io/helm-charts/
 
 echo "##### Adding"
-git add acc-dashboard* drax* index.yaml
+git add acc-dashboard* drax* ric* index.yaml
 
 echo "##### Commiting"
 git commit -m "$1" --author="$2"

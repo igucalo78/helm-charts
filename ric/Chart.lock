@@ -1,0 +1,27 @@
+dependencies:
+- name: druid
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.4.2
+- name: kafka
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.20.9
+- name: nkafka-helm
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.3.1
+- name: acc-sys-dashboard
+  repository: https://accelleran.github.io/helm-charts/
+  version: 1.6.2
+- name: dash-front-back-end
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.15.1
+- name: loki-stack
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.36.2
+- name: acc-service-monitor
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.2.2
+- name: acc-service-orchestrator
+  repository: https://accelleran.github.io/helm-charts/
+  version: 0.3.1
+digest: sha256:f9f59227fe6eef4e504aa6f1befa9aca00664ac75adb68c06304c5566a825224
+generated: "2020-08-26T13:14:30.964970292Z"
