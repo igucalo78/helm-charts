@@ -27,6 +27,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: MONITORED_NAMESPACES
+              value: "{{ tpl .Values.monitoredNamespaces . }}"
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
