@@ -8,7 +8,7 @@ version: "{{ .Chart.AppVersion }}"
 
 image:
   repository: accelleran/acc-service-orchestrator 
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   #pullPolicy: IfNotPresent
 
 imagePullSecrets:

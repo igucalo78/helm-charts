@@ -41,6 +41,10 @@ helm.sh/chart: {{ include "acc-service-orchestrator.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: ServiceOrchestrator
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end }}
 
 {{/*
