@@ -44,7 +44,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: {{ include "xapp-api.fullname" . }}-settings
-              mountPath: /srv/flask_app/settings.py
+              mountPath: /app/settings.py
               subPath: "settings.py"
           #livenessProbe:
           #  httpGet:
