@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "acc-service-monitor.selectorLabels" . | nindent 8 }}
+        {{- include "acc-service-monitor.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -27,6 +27,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: MONITORED_NAMESPACES
+              value: "{{ tpl .Values.monitoredNamespaces . }}"
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
