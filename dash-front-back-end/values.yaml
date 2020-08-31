@@ -4,11 +4,12 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
-#version: latest
+#version: "{{ .Chart.AppVersion }}"
+version: latest
 
 image:
-  repository: accelleran/dash-front-back-end
+  # repository: accelleran/dash-front-back-end
+  repository: dashfbe
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
