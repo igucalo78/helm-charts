@@ -19,9 +19,9 @@ dependencies:
   version: 0.36.2
 - name: acc-service-monitor
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.2.2
+  version: 0.3.0
 - name: acc-service-orchestrator
   repository: https://accelleran.github.io/helm-charts/
-  version: 0.3.1
-digest: sha256:f9f59227fe6eef4e504aa6f1befa9aca00664ac75adb68c06304c5566a825224
-generated: "2020-08-26T13:14:30.964970292Z"
+  version: 0.4.0
+digest: sha256:337b99b64ca60f29db408a682245a12ae590f14c6693ccf1cf79f6395d6ae340
+generated: "2020-08-31T15:44:57.583777391Z"
