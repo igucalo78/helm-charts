@@ -1,1 +1,2 @@
 drax is updated to 0.9.2, but waiting for update on dashboard to support naming of the oran to 4rgc
+drax further updatde to 0.9.3 with new provisioner that support loki autoconfig, but waiting for dashbaord new release
