@@ -89,6 +89,9 @@ provisioner:
     exampleSerial1: exampleName10
     exampleSerial2: exampleName20
 
+  loki:
+    hostname: "{{ .Values.kubeIp }}"
+    port: "30302"
 
   redis:
     hostname: "{{ .Values.kubeIp }}"
