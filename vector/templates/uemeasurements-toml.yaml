@@ -38,16 +38,16 @@ data:
       [[transforms.log_to_metric_ue_measurement.metrics]]
         type = "gauge"
         field = "rsrp"
-        tags.cellId = "{{` {{cellId}} `}}" # optional
-        tags.ueRicId = "{{` {{ueRicId}} `}}"
-        tags.ueCellId = "{{` {{ueCellId}} `}}" # optional
+        tags.cellId = "{{`{{cellId}}`}}" # optional
+        tags.ueRicId = "{{`{{ueRicId}}`}}"
+        tags.ueCellId = "{{`{{ueCellId}}`}}" # optional
 
       [[transforms.log_to_metric_ue_measurement.metrics]]
         type = "gauge"
         field = "rsrq"
-        tags.cellId = "{{` {{cellId}} `}}" # optional
-        tags.ueRicId = "{{` {{ueRicId}} `}}"
-        tags.ueCellId = "{{` {{ueCellId}} `}}" # optional
+        tags.cellId = "{{`{{cellId}}`}}" # optional
+        tags.ueRicId = "{{`{{ueRicId}}`}}"
+        tags.ueCellId = "{{`{{ueCellId}}`}}" # optional
 
 
     [sinks.outUeMeas]
