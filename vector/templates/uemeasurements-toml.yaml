@@ -38,7 +38,7 @@ data:
       [[transforms.log_to_metric_ue_measurement.metrics]]
         type = "gauge"
         field = "rsrp"
-        tags.cellId = "{{cellId}}" # optional
+        tags.cellId = "{{` {{cellId}} `}}" # optional
         tags.ueRicId = "{{ueRicId}}"
         tags.ueCellId = "{{ueCellId}}" # optional
 
