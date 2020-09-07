@@ -46,20 +46,20 @@ data:
       [[transforms.log_to_metric_cqi.metrics]]
         type = "gauge"
         field = "widebandCqi"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
       [[transforms.log_to_metric_cqi.metrics]]
         type = "gauge"
         field = "cqiListSize"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
       [[transforms.log_to_metric_cqi.metrics]]
         type = "set"
         field = "cqiList"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
     [transforms.log_to_metric_cqi_list]
       inputs = ["parseCqiList"]
@@ -69,80 +69,80 @@ data:
         type = "gauge"
         field = "0"
         name = "cqi_ch_0"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "1"
         name = "cqi_ch_1"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "2"
         name = "cqi_ch_2"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "3"
         name = "cqi_ch_3"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "4"
         name = "cqi_ch_4"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "5"
         name = "cqi_ch_5"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "6"
         name = "cqi_ch_6"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "7"
         name = "cqi_ch_7"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "8"
         name = "cqi_ch_8"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "9"
         name = "cqi_ch_9"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "10"
         name = "cqi_ch_10"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "11"
         name = "cqi_ch_11"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
       [[transforms.log_to_metric_cqi_list.metrics]]
         type = "gauge"
         field = "12"
         name = "cqi_ch_12"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
 
     [sinks.out]

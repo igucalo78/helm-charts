@@ -38,14 +38,14 @@ data:
       [[transforms.log_to_metric_bler.metrics]]
         type = "gauge"
         field = "dlBler"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
       [[transforms.log_to_metric_bler.metrics]]
         type = "gauge"
         field = "ulBler"
-        tags.cellId = "{{cellId}}" # optional
-        tags.ueRicId = "{{ueRicId}}"
+        tags.cellId = "{{` {{cellId}} `}}" # optional
+        tags.ueRicId = "{{` {{ueRicId}} `}}"
 
 
     [sinks.outBler]
