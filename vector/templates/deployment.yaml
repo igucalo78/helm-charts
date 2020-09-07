@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vector.fullname" . }}
+  labels:
+    {{- include "vector.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "vector.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "vector.labels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "vector.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["vector", "-c", "throughput.toml","-c","bler.toml","-c","cqi.toml","-c","uemeasurements.toml"]
+          volumeMounts:
+            - name: bler-toml
+              mountPath: /influx/bler.toml
+              subPath: bler.toml
+            - name: cqi-toml
+              mountPath: /influx/cqi.toml
+              subPath: cqi.toml
+            - name: throughput-toml
+              mountPath: /influx/throughput.toml
+              subPath: throughput.toml
+            - name: uemeasurements-toml
+              mountPath: /influx/uemeasurements.toml
+              subPath: uemeasurements.toml
+          {{ if .Values.service.enabled }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{ end }}
+              #livenessProbe:
+              # httpGet:
+              #path: /
+              #port: http
+              #readinessProbe:
+              #httpGet:
+              #path: /
+              #port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - name: bler-toml
+          configMap:
+            name: bler-toml
+        - name: cqi-toml
+          configMap:
+            name: cqi-toml
+        - name: throughput-toml
+          configMap:
+            name: throughput-toml
+        - name: uemeasurements-toml
+          configMap:
+            name: uemeasurements-toml
