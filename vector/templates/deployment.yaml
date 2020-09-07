@@ -34,7 +34,7 @@ spec:
               subPath: bler.toml
             - name: cqi-toml
               mountPath: /influx/cqi.toml
-              subPath:cqi.toml
+              subPath: cqi.toml
             - name: throughput-toml
               mountPath: /influx/throughput.toml
               subPath: throughput.toml

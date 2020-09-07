@@ -7,7 +7,7 @@ data:
     [sources.inCqi]
       bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
       group_id = "vectorCqi"
-      topics = ["{{ tpl .Values.config.kafka.topic }}"]
+      topics = ["{{ tpl .Values.config.kafka.topic . }}"]
       type = "kafka"
 
     [transforms.parseJsonCqi]

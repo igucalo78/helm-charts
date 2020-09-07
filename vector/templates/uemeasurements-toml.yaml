@@ -7,7 +7,7 @@ data:
     [sources.inUeMeas]
       bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
       group_id = "vectorUeMeas"
-      topics = ["{{ tpl .Values.config.kafka.topic }}"]
+      topics = ["{{ tpl .Values.config.kafka.topic . }}"]
       type = "kafka"
 
     [transforms.parseJsonUeMeas]
