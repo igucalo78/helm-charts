@@ -60,3 +60,5 @@ data:
       type = "{{ .Values.config.influx.type }}"
       username = "{{ .Values.config.influx.username }}"
       password = "{{ .Values.config.influx.password }}"
+
+
