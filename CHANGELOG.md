@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 07.09.2020.
+
+### Changed
+
+- Updated acc-sys-dash to 1.6.3
+- - Including button panel plugin
+- Updated acc-dash to 0.21.5
+- - Using acc-sys-dash 1.6.3
+
 ## 26.08.2020.
 
 ### Added
