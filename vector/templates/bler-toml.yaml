@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: conf-init-druid
+  name: bler-toml
 data:
-  init-druid.sh: |-
+  bler.toml: |-
     [sources.inBler]
-    bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}" 
+      bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
       group_id = "vectorBler" 
       topics = ["{{ tpl .Values.config.kafka.topic }}"] 
       type = "kafka" 

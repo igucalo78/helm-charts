@@ -28,6 +28,19 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["vector", "-c", "throughput.toml","-c","bler.toml","-c","cqi.toml","-c","uemeasurements.toml"]
+          volumeMounts:
+            - name: bler-toml
+              mountPath: /influx/bler.toml
+              subPath: bler.toml
+            - name: cqi-toml
+              mountPath: /influx/cqi.toml
+              subPath:cqi.toml
+            - name: throughput-toml
+              mountPath: /influx/throughput.toml
+              subPath: throughput.toml
+            - name: uemeasurements-toml
+              mountPath: /influx/uemeasurements.toml
+              subPath: uemeasurements.toml
           {{ if .Values.service.enabled }}
           ports:
             - name: http
@@ -56,3 +69,16 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: bler-toml
+          configMap:
+            name: bler-toml
+        - name: cqi-toml
+          configMap:
+            name: cqi-toml
+        - name: throughput-toml
+          configMap:
+            name: throughput-toml
+        - name: uemeasurements-toml
+          configMap:
+            name: uemeasurements-toml

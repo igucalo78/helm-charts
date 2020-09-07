@@ -15,6 +15,20 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+config:
+  kafka:
+    hostname: "10.20.20.20"
+    port: 31090
+    topic:
+  influx:
+    hostname: "10.20.20.20"
+    port: 30303
+    database: test
+    namespace: df
+    type: influxdb_metrics
+    username: admin
+    password: password
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: false
