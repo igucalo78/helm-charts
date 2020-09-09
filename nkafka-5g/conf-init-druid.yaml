@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: conf-init-druid
+data:
+  init-druid.sh: |-
+    #!/bin/sh
+    echo "$(date) [INIT-DRUID] Starting..."
+
+    countUpdate=0
+
+    until curl -f -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor
+    do
+      countUpdate=$((countUpdate+1))
+      if [ $countUpdate -eq 4 ]
+      then
+        echo "$(date) [INIT-DRUID] Cannot reach Druid, exiting..."
+        sleep 5
+        # exit 1
+      else
+        echo "$(date) [INIT-DRUID] Cannot reach Druid, retrying $countUpdate..."
+        sleep 2
+      fi
+    done
+
+    response=$(curl -s {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor)
+    echo $response >> status.log
+    if echo "$response" | grep "test2" ; then
+      echo "$(date) [INIT-DRUID] test2 OK"
+      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+    else
+      echo "$(date) [INIT-DRUID] test2 BAD, reseting and creating..."
+      until curl -f -X POST -H "Content-Type: application/json" -d @supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/test2/reset ; do sleep 6; done
+    fi
+    if echo "$response" | grep "state" ; then
+      echo "$(date) [INIT-DRUID] state OK"
+      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+    else
+      echo "$(date) [INIT-DRUID] state BAD, reseting and creating..."
+      until curl -f -X POST -H "Content-Type: application/json" -d @state-supervisor.json {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor; do sleep 6; done
+      until curl -f -XPOST {{ tpl .Values.druidOverlordUrl . }}/druid/indexer/v1/supervisor/state/reset ; do sleep 6; done
+    fi
+    echo "$(date) [INIT-DRUID] Finished!"
