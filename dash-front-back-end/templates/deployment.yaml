@@ -28,10 +28,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: coreui-config
+            - name: {{ include "dash-front-back-end.fullname" . }}-coreui-config
               mountPath: /usr/src/dashboard/core-ui/build/config.js
               subPath: "config.js"
-            - name: server-config
+            - name: {{ include "dash-front-back-end.fullname" . }}-server-config
               mountPath: /usr/src/dashboard/server/config.json
               subPath: "config.json"
           ports:
@@ -63,9 +63,9 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: coreui-config
+        - name: {{ include "dash-front-back-end.fullname" . }}-coreui-config
           configMap: 
-            name: coreui-config
-        - name: server-config
+            name: {{ include "dash-front-back-end.fullname" . }}-coreui-config
+        - name: {{ include "dash-front-back-end.fullname" . }}-server-config
           configMap:
-            name: server-config
+            name: {{ include "dash-front-back-end.fullname" . }}-server-config
