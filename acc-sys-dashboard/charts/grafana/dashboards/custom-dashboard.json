@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1587125994199,
+  "iteration": 1597745449808,
   "links": [],
   "panels": [
     {
@@ -1288,7 +1288,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-dash-front-back-end.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-dash-front-back-end.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1365,7 +1365,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-druid.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-druid.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1442,7 +1442,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "((sum(kube_pod_container_status_running{pod=~\"acc-dash-kafka.*\",pod!=\"acc-dash-kafka-config.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-zookeeper.*\"}))or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "((sum(kube_pod_container_status_running{pod=~\".*-kafka.*\",pod!=\".*-kafka-config.*\"})+sum(kube_pod_container_status_running{pod=~\".*-zookeeper.*\"}))or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1519,7 +1519,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-nkafka.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-nkafka.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1596,7 +1596,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(sum(kube_pod_container_status_running{pod=~\"acc-dash-prometheus.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(sum(kube_pod_container_status_running{pod=~\".*-prometheus.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1673,7 +1673,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "((sum(kube_pod_container_status_running{pod=~\"acc-dash-kube-eagle.*\"})+sum(kube_pod_container_status_running{pod=~\"acc-dash-metrics-server.*\"})) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "((sum(kube_pod_container_status_running{pod=~\".*-kube-eagle.*\"})+sum(kube_pod_container_status_running{pod=~\".*-metrics-server.*\"})) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1827,7 +1827,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\"acc-dash-grafana.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-grafana.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -4371,5 +4371,5 @@
   "timezone": "",
   "title": "Accelleran dRAX System Dashboard",
   "uid": "yV0DdhyZz",
-  "version": 3
+  "version": 1
 }

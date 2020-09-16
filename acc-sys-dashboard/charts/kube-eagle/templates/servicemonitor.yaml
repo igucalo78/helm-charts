@@ -3,6 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
+    {{- include "kube-eagle.labels" . | nindent 4 }}
     app: {{ template "kube-eagle.name" . }}
     chart: {{ template "kube-eagle.chart" . }}
     release: {{ if .Values.serviceMonitor.additionalLabels -}}

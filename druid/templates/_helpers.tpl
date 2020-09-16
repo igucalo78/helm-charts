@@ -41,6 +41,10 @@ helm.sh/chart: {{ include "druid-chart.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: Druid
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*

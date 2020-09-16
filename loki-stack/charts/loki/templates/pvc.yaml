@@ -4,6 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ template "loki.fullname" . }}
   labels:
+    {{- include "loki.labels" . | nindent 4 }}
     app: {{ template "loki.name" . }}
     chart: {{ template "loki.chart" . }}
     release: {{ .Release.Name }}

@@ -7,6 +7,7 @@ metadata:
     chart: {{ template "kube-eagle.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{- include "kube-eagle.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -25,6 +26,7 @@ spec:
       labels:
         app: {{ template "kube-eagle.name" . }}
         release: {{ .Release.Name }}
+        {{- include "kube-eagle.labels" . | nindent 8 }}
     spec:
       {{- if .Values.podSecurityContext }}
       securityContext:

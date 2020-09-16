@@ -60,6 +60,22 @@ The service name to connect to Loki. Defaults to the same logic as "loki.fullnam
 {{- end -}}
 {{- end -}}
 
+{{/*
+Common labels
+*/}}
+{{- define "fluent-bit-loki.labels" -}}
+helm.sh/chart: {{ include "fluent-bit-loki.chart" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: FluentBit
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
+{{- end -}}
+
+
 {{- define "helm-toolkit.utils.joinListWithComma" -}}
 {{- $local := dict "first" true -}}
 {{- range $k, $v := . -}}{{- if not $local.first -}},{{- end -}}{{- $v -}}{{- $_ := set $local "first" false -}}{{- end -}}

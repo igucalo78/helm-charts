@@ -4,12 +4,10 @@
 
 replicaCount: 1
 
-# version: "{{ .Chart.AppVersion }}"
-version: latest
+version: "{{ .Chart.AppVersion }}"
 
 image:
-  # repository: accelleran/acc-service-monitor
-  repository: svcmon
+  repository: accelleran/acc-service-monitor
   pullPolicy: IfNotPresent
 
 imagePullSecrets:

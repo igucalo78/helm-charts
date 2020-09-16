@@ -4,12 +4,10 @@
 
 replicaCount: 1
 
-version: latest
-# version: "{{ .Chart.AppVersion }}"
+version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: svcorc 
-  # repository: accelleran/acc-service-orchestrator
+  repository: accelleran/acc-service-orchestrator 
   pullPolicy: IfNotPresent
   #pullPolicy: IfNotPresent
 

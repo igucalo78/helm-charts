@@ -93,10 +93,6 @@ ntp-server:
   # To enable/disable the installation of the dRAX NTP Server for cells
   enabled: true 
 
-acc-service-monitor:
-  # To enable/disable the installation of the dRAX Service monitor
-  enabled: true
-
 configurator:
   # To enabled or disable the installation of the dRAX Configurator
   enabled: true
@@ -109,6 +105,11 @@ configurator:
     cells:
       exampleSerial1: exampleName100
       exampleSerial2: exampleName200
+
+    # Loki hostname and port
+    loki:
+      hostname: "{{ .Values.global.kubeIp }}"
+      port: "30302"
 
     # Redis hostname and port
     redis:
@@ -126,10 +127,10 @@ configurator:
     provisionerApi: "{{ .Values.global.kubeIp }}"
     provisionerPort: 31610
 
-oran-clustercontrol:
+4g-radio-controller:
   enabled: true
   image:
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   config:
     https: true

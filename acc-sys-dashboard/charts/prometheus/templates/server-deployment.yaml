@@ -9,6 +9,7 @@ metadata:
 {{- end }}
   labels:
     {{- include "prometheus.server.labels" . | nindent 4 }}
+    {{- include "prometheus.common.labels" . | nindent 4 }}
   name: {{ template "prometheus.server.fullname" . }}
 spec:
   strategy:
@@ -24,6 +25,7 @@ spec:
 {{ toYaml .Values.server.podAnnotations | indent 8 }}
     {{- end }}
       labels:
+        {{- include "prometheus.common.labels" . | nindent 8 }}
         {{- include "prometheus.server.labels" . | nindent 8 }}
         {{- if .Values.server.podLabels}}
         {{ toYaml .Values.server.podLabels | nindent 8 }}

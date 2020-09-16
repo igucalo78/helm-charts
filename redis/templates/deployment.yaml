@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "redis.selectorLabels" . | nindent 8 }}
+        {{- include "redis.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -71,7 +71,13 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
+                command: 
+                  - sh
+                  - -c
+                  - "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}; 
+                    redis-cli config set notify-keyspace-events KEA"
+
+                    #["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
             {{- if .Values.backup.enabled }}
             preStop:
               exec:

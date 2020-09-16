@@ -35,9 +35,11 @@ spec:
               mountPath: /usr/src/dashboard/server/config.json
               subPath: "config.json"
           ports:
-            - name: {{ .Values.service.portname}}
+            - name: {{ .Values.service.portname }}
               containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocol }}
+            - name: {{ .Values.websocketService.portname }}
+              containerPort: {{ .Values.websocketService.port }}
           livenessProbe:
             httpGet:
               path: /

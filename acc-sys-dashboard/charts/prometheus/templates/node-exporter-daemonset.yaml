@@ -7,6 +7,7 @@ metadata:
 {{ toYaml .Values.nodeExporter.deploymentAnnotations | indent 4 }}
 {{- end }}
   labels:
+    {{- include "prometheus.common.labels" . | nindent 4 }}
     {{- include "prometheus.nodeExporter.labels" . | nindent 4 }}
   name: {{ template "prometheus.nodeExporter.fullname" . }}
 spec:
@@ -24,6 +25,7 @@ spec:
 {{ toYaml .Values.nodeExporter.podAnnotations | indent 8 }}
     {{- end }}
       labels:
+        {{- include "prometheus.common.labels" . | nindent 8 }}
         {{- include "prometheus.nodeExporter.labels" . | nindent 8 }}
 {{- if .Values.nodeExporter.pod.labels }}
 {{ toYaml .Values.nodeExporter.pod.labels | indent 8 }}

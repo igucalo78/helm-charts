@@ -3,6 +3,7 @@
 Expand the name of the chart.
 */}}
 {{- define "redis.name" -}}
+{{- $name := printf "%s-%s" .Chart.Name .Chart.Version -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -15,7 +16,7 @@ If release name contains chart name it will be used as a full name.
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $name := default (include "redis.name" .) .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -41,6 +42,10 @@ helm.sh/chart: {{ include "redis.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: xapp
+drax/xapp-name: {{ .Release.Name }}
+drax/xapp-component-name: {{ .Chart.Name }}
+drax/xapp-component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*

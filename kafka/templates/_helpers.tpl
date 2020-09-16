@@ -79,6 +79,10 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- define "kafka.common.metaLabels" -}}
 helm.sh/chart: {{ include "kafka.chart" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: Kafka
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{- define "kafka.broker.matchLabels" -}}

@@ -73,7 +73,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "redis-cli config set notify-keyspace-events KEA"]
+                command: ["/bin/sh", "-c", 'until [ "$(redis-cli ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 1; done; redis-cli config set notify-keyspace-events KEA']
             {{- if .Values.backup.enabled }}
             preStop:
               exec:

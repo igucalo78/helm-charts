@@ -26,6 +26,13 @@ chart: {{ template "prometheus.chart" . }}
 heritage: {{ .Release.Service }}
 {{- end -}}
 
+{{- define "prometheus.common.labels" -}}
+drax/role: ric
+drax/name: Prometheus
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
+{{- end -}}
+
 {{- define "prometheus.alertmanager.labels" -}}
 {{ include "prometheus.alertmanager.matchLabels" . }}
 {{ include "prometheus.common.metaLabels" . }}

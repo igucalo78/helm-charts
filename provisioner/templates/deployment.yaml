@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "provisioner.selectorLabels" . | nindent 8 }}
+        {{- include "provisioner.labels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

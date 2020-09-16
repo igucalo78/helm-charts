@@ -14,9 +14,18 @@ data:
         "node_port": {{ .Values.service.port }},
         "grafanaURL": "{{ tpl .Values.config.grafanaURL . }}",
         "grafanaPort": "{{ .Values.config.grafanaPort }}",
-        "druidURL": "{{ tpl .Values.config.druidURL . }}",
-        "druidPort": "{{ .Values.config.druidPort }}",
         "nodeApiURL": "{{ tpl .Values.config.nodeApiURL . }}",
-        "nodeApiPort": "{{ .Values.service.nodePort }}"
+        "nodeApiPort": "{{ .Values.service.nodePort }}",
+        "kafkaURL": "{{ tpl .Values.config.kafkaUrl . }}",
+        "kafkaPort": "{{ tpl .Values.config.kafkaPort . }}",
+        "svcOrchestratorHost": "{{ tpl .Values.config.svcOrchestratorHost . }}",
+        "svcOrchestratorPort": "{{ tpl .Values.config.svcOrchestratorPort . }}",
+        "svcMonitorHost": "{{ tpl .Values.config.svcMonitorHost . }}",
+        "svcMonitorPort": "{{ tpl .Values.config.svcMonitorPort . }}",
+        "pcixAppPodName": "{{ tpl .Values.config.pcixAppPodName . }}",
+        "pcixAppPort": "{{ tpl .Values.config.pcixAppPort . }}",
+        "ksqldbPodName": "{{ tpl .Values.config.ksqldbPodName . }}",
+        "ksqldbPort": "{{ tpl .Values.config.ksqldbPort . }}",
+        "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}" 
       }
     }
