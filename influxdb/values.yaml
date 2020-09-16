@@ -223,7 +223,8 @@ config:
   reporting_disabled: false
   rpc: {}
   meta: {}
-  data: {}
+  data:
+    max-values-per-tag: 0
   coordinator: {}
   retention: {}
   shard_precreation: {}
