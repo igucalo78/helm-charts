@@ -19,6 +19,8 @@ dashboardProviders:
       type: file
 dashboards:
   default:
+    influxdb-dashboard:
+      file: dashboards/influxdb-dashboard.json
     custom-dashboard:
       file: dashboards/custom-dashboard.json
     monitor-dashboard:
