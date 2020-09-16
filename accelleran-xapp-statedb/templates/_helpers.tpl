@@ -42,10 +42,10 @@ helm.sh/chart: {{ include "accelleran-xapp-statedb.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-drax/role: xapp
-drax/xapp-name: {{ .Release.Name }}
-drax/xapp-component-name: xapp-core
-drax/xapp-component-version: {{ .Chart.Version }}
+drax/role: ric
+drax/name: StateMonitor
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*

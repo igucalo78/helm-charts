@@ -8,7 +8,7 @@ data:
   xapp_configuration.py: |-
     configuration = {
         "metadata": {
-            "name": "{{ .Release.Name }}",
+            "name": "{{ .Values.xappFrameworkConfig.name }}",
             "configName": "",
             "namespace": "{{ .Release.Namespace }}",
         },

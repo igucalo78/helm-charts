@@ -44,6 +44,7 @@ initConfigs:
   kafkaService: "kafka.{{ .Release.Namespace }}:9092"
 
 xappFrameworkConfig:
+  name: "state-monitor"
   description: "This xApp provides the state of the cells"
   redisUrl: "{{ .Release.Name }}-xapp-redis.{{ .Release.Namespace }}"
   redisPort: 6379
