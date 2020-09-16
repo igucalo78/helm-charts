@@ -40,6 +40,9 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+initConfigs:
+  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
+
 xappFrameworkConfig:
   description: "This xApp provides the state of the cells"
   redisUrl: "{{ .Release.Name }}-xapp-redis.{{ .Release.Namespace }}"
