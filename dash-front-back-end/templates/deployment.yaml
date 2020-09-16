@@ -40,14 +40,14 @@ spec:
               protocol: {{ .Values.service.protocol }}
             - name: {{ .Values.websocketService.portname }}
               containerPort: {{ .Values.websocketService.port }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
-          readinessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
+              #livenessProbe:
+              #httpGet:
+              #path: /
+              #port: {{ .Values.service.port }}
+              #readinessProbe:
+              #httpGet:
+              #path: /
+              #port: {{ .Values.service.port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

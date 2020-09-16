@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: coreui-config
+  name: {{ include "dash-front-back-end.fullname" . }}-coreui-config
   labels:
     {{- include "dash-front-back-end.labels" . | nindent 4 }}
 data:
