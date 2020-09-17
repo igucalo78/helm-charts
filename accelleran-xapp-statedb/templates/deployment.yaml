@@ -6,6 +6,8 @@ metadata:
     {{- include "accelleran-xapp-statedb.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: {{ .Values.strategyType }}
   selector:
     matchLabels:
       {{- include "accelleran-xapp-statedb.selectorLabels" . | nindent 6 }}

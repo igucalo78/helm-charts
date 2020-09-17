@@ -27,6 +27,8 @@ xapp-api:
 ### The xApp Core values
 replicaCount: 1
 
+strategyType: Recreate
+
 # Version of the xApp Core to use
 version: "{{ .Chart.AppVersion }}"
 
