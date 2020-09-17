@@ -137,7 +137,7 @@ acc-state-db:
   xappConfig:
     apiGatewayUrl: '{{ .Values.global.kubeIp }}'
     apiGatewayPort: 31315
-    logLevel: 20  # CRITICAL=50, ERROR=40, WARNING=30, INFO=20, DEBUG=10, NOTSET=0
+    logLevel: 10  # CRITICAL=50, ERROR=40, WARNING=30, INFO=20, DEBUG=10, NOTSET=0
     stateDbUrl: '{{ .Values.global.kubeIp }}'
     stateDbPort: 32000
     kafkaStateTopic: 'Topic_State'
