@@ -60,7 +60,14 @@ loki-stack:
         retention_period: 672h
 
 dash-front-back-end:
-  service:
+
+  version: 0.17.0-beta2 
+
+  image:
+    repository: dash-fbe
+    pullPolicy: IfNotPresent
+
+    service:
     # The internal port used by WebGUI, default is 5000
     port: 5000
 
