@@ -162,6 +162,10 @@ vector:
   # Enable/disable installation of Vector 
   enabled: true
 
+  initConfigs:
+    kafkaService: "{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
+    influxdbService: "{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086"
+
   config:
     kafka:
       hostname: "{{ .Values.global.kubeIp }}"

@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1601026546936,
+  "id": 16,
+  "iteration": 1599075736419,
   "links": [],
   "panels": [
     {
@@ -236,7 +237,7 @@
           "measurement": "df.rsrp",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE \"cellId\" =~ /^$eNB$/ AND $timeFilter)",
+          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE $timeFilter)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -263,6 +264,119 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Total Number of UEs",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "200%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "id": 11,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "pluginVersion": "6.6.2",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.rsrp",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "select count(distinct(\"cellId\")) from (select * from \"df.rsrp\" WHERE $timeFilter)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "count"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total number of eNBs",
       "transparent": true,
       "type": "singlestat",
       "valueFontSize": "200%",
@@ -1740,14 +1854,14 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB",
-        "definition": "SELECT \"ueRicId\" FROM (SELECT \"ueRicId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "definition": "SHOW TAG VALUES ON test WITH KEY = \"ueRicId\"\n",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "UE",
         "options": [],
-        "query": "SELECT \"ueRicId\" FROM (SELECT \"ueRicId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "query": "SHOW TAG VALUES ON test WITH KEY = \"ueRicId\"\n",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1762,12 +1876,11 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": "All",
           "value": "$__all"
         },
         "datasource": "InfluxDB",
-        "definition": "SELECT \"ueCellId\" FROM (SELECT \"ueCellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "definition": "SHOW TAG VALUES ON test WITH KEY = \"ueCellId\"\n",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -1781,11 +1894,26 @@
           },
           {
             "selected": false,
+            "text": "Grote-Markt",
+            "value": "Grote-Markt"
+          },
+          {
+            "selected": false,
+            "text": "Kievitsplein",
+            "value": "Kievitsplein"
+          },
+          {
+            "selected": false,
+            "text": "Lange-Koepoortstraat",
+            "value": "Lange-Koepoortstraat"
+          },
+          {
+            "selected": false,
             "text": "Parking",
             "value": "Parking"
           }
         ],
-        "query": "SELECT \"ueCellId\" FROM (SELECT \"ueCellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "query": "SHOW TAG VALUES ON test WITH KEY = \"ueCellId\"\n",
         "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
@@ -1821,5 +1949,5 @@
   "timezone": "",
   "title": "Cell Monitoring Influx",
   "uid": "r9WbSHvGz",
-  "version": 1
+  "version": 10
 }

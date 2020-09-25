@@ -5,6 +5,75 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 25.09.2020.
+
+### Changed
+- Updated acc-sys to 1.6.5
+- - Updated InfluxDB dashbaord json
+- Updated Vector to 0.2.0
+- - Added initContainer to check for kafka and influxdb services before running vector
+
+## 07.09.2020.
+
+### Changed
+
+- Updated acc-sys-dash to 1.6.3
+- - Including button panel plugin
+- Updated acc-dash to 0.21.5
+- - Using acc-sys-dash 1.6.3
+
+## 26.08.2020.
+
+### Added
+
+- Added RIC helm chart
+- - Is previous acc-dashboard including the monitor and orchestrator
+
+### Changed
+
+- Updated service-monitor to 0.2.2
+- - Using an env variable to pick which namespace to monitor
+
+## 24.08.2020.
+
+### Added
+
+- Added acc-service-orchestrator 0.3.1 to master repo 
+- Added label to acc-service-orchestrator
+
+## 18.08.2020.
+
+### Changed
+
+- Updated drax to 0.9.2
+- - Using new versions of subchart that include the drax labels
+- - Using labels instead of selector labels in subcharts
+- - renamed oran-control to 4g-radio-controller
+
+## 13.08.2020.
+
+### Changed
+
+- Updated loki-stack to 0.36.1
+- - Setting retention policy to 720h default for loki
+- Updated acc-dashboard to 0.21.1
+- - Using loki-stack 0.36.1
+- - Updated values.yaml file to include the retention policy of Prometheus
+
+## 12.08.2020.
+
+### Changed
+
+- Updated acc-sys-dashboard to 1.6.0
+- - Updated Loki dahsboard json in acc-sys-dashboard
+- - Support for picking up the Layer2 logs
+- Updated acc-dashboard to 0.21.0
+- - Using acc-sys-dashbaord 1.6.0
+- Updated redis to 0.5.0
+- - Using notifications in redis
+- Updated drax to 0.9.1
+- - Using redis 0.5.0
+
 ## 12.06.2020.
 
 ### Added
