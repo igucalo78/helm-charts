@@ -10,8 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated acc-sys to 1.6.5
 - - Updated InfluxDB dashbaord json
+- Updated acc-sys to 1.6.6
+- - Fixed system health view to look for 4grc instad of oran
+- - setting null to 0 for pending and crashed pods instead of N/A to enable visual effects
 - Updated Vector to 0.2.0
 - - Added initContainer to check for kafka and influxdb services before running vector
+- Updated Vector to 0.2.1
+- - Fixed bug of using wrong appVersion in previous version
 
 ## 07.09.2020.
 

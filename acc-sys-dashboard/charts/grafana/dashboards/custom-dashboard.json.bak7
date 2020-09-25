@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1601031937599,
+  "iteration": 1597745449808,
   "links": [],
   "panels": [
     {
@@ -453,7 +452,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "0",
+          "text": "N/A",
           "value": "null"
         }
       ],
@@ -537,7 +536,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "0",
+          "text": "N/A",
           "value": "null"
         }
       ],
@@ -1137,7 +1136,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*4g-radio-controller.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*oran.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1147,7 +1146,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "4GRC",
+      "title": "Oran",
       "type": "stat"
     },
     {
