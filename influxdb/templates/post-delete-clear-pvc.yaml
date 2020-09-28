@@ -17,7 +17,8 @@ spec:
         args:
         - "delete"
         - "pvc"
-        - "{{ include "influxdb.fullname" . }}-data"
+        - "-l"
+        - "app.kubernetes.io/name={{ include "influxdb.name" . }}"
       serviceAccountName: {{ include "influxdb.fullname" . }}-pvc-deleter-sa
       securityContext:
         runAsUser: 0
