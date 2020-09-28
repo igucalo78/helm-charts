@@ -45,8 +45,8 @@ data:
       type: influxdb
       url: {{ tpl .Values.datasources.influxdbUrl . }}
       user: admin
-      password: "password"
-      database: "test"
+      password: password
+      database: test
       basicAuth: true
       basicAuthUser: admin
       basicAuthPassword: password
