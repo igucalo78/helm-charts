@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "influxdb.fullname" . }}-del-pvc 
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: post-delete-job
+        image: "bitnami/kubectl"
+        command: ["kubectl"]
+        args:
+        - "delete"
+        - "pvc"
+        - "{{ include "influxdb.fullname" . }}-data"
+      serviceAccountName: {{ include "influxdb.fullname" . }}-pvc-deleter-sa
+      securityContext:
+        runAsUser: 0
