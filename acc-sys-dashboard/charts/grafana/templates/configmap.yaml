@@ -39,6 +39,17 @@ data:
       name: Loki
       type: loki
       url: {{ tpl .Values.datasources.lokiUrl . }}
+    - access: proxy
+      isDefault: false
+      name: InfluxDB
+      type: influxdb
+      url: {{ tpl .Values.datasources.influxdbUrl . }}
+      user: admin
+      password: "password"
+      database: "test"
+      basicAuth: true
+      basicAuthUser: admin
+      basicAuthPassword: password
 {{- end -}}
 
 {{- if .Values.notifiers }}
