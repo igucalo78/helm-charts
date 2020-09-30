@@ -80,8 +80,6 @@ tolerations: []
 
 affinity: {}
 
-kubeIp: "10.20.20.20"
-
 provisioner:
   enabled: true
   image: curlimages/curl
@@ -90,11 +88,11 @@ provisioner:
     exampleSerial2: exampleName20
 
   loki:
-    hostname: "{{ .Values.kubeIp }}"
+    hostname: "10.20.20.20"
     port: "30302"
 
   redis:
-    hostname: "{{ .Values.kubeIp }}"
+    hostname: "10.20.20.20"
     port: "32000"
 
   serverKeyName: prov-server-key
