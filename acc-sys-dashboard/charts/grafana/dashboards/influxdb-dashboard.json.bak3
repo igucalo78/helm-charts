@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1601981001184,
+  "iteration": 1601893606024,
   "links": [],
   "panels": [
     {
@@ -79,7 +78,7 @@
           "measurement": "df.dlThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
+          "query": "SELECT sum(\"value\") FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -237,7 +236,7 @@
           "measurement": "df.rsrp",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE \"cellId\" =~ /^$eNB$/ AND time > now() - 10s)",
+          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE \"cellId\" =~ /^$eNB$/ AND $timeFilter)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -393,7 +392,7 @@
           "label": "avg(RSRP)",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -470,8 +469,8 @@
           "measurement": "df.ulThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
-          "rawQuery": true,
+          "query": "SELECT mean(\"value\") FROM \"df.dlThroughput\" WHERE (\"cellId\" = 'select tag value') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -529,7 +528,7 @@
           "label": "sum(UL Throughput)",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -661,7 +660,7 @@
           "label": "avg(RSRQ)",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -1303,8 +1302,8 @@
           "format": "short",
           "label": "avg(CQI per channel)",
           "logBase": 1,
-          "max": "15",
-          "min": "0",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
@@ -1437,7 +1436,7 @@
           "label": "avg(Wideband CQI)",
           "logBase": 1,
           "max": "15",
-          "min": "0",
+          "min": "1",
           "show": true
         },
         {
@@ -1748,7 +1747,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1775,11 +1774,12 @@
         "allValue": null,
         "current": {
           "selected": true,
+          "tags": [],
           "text": "All",
           "value": "$__all"
         },
         "datasource": "InfluxDB",
-        "definition": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "definition": "SELECT \"ueCellId\" FROM (SELECT \"ueCellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -1795,14 +1795,9 @@
             "selected": false,
             "text": "Parking",
             "value": "Parking"
-          },
-          {
-            "selected": false,
-            "text": "Dageraadplats",
-            "value": "Dageraadplats"
           }
         ],
-        "query": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
+        "query": "SELECT \"ueCellId\" FROM (SELECT \"ueCellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
         "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
@@ -1838,5 +1833,5 @@
   "timezone": "",
   "title": "Cell Monitoring Influx",
   "uid": "r9WbSHvGz",
-  "version": 5
+  "version": 2
 }

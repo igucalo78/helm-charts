@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 4,
-  "iteration": 1601981001184,
+  "iteration": 1601897619885,
   "links": [],
   "panels": [
     {
@@ -79,7 +79,7 @@
           "measurement": "df.dlThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
+          "query": "SELECT sum(\"value\") FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -237,7 +237,7 @@
           "measurement": "df.rsrp",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE \"cellId\" =~ /^$eNB$/ AND time > now() - 10s)",
+          "query": "select count(distinct(\"ueRicId\")) from (select * from \"df.rsrp\" WHERE \"cellId\" =~ /^$eNB$/ AND $timeFilter)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -470,8 +470,8 @@
           "measurement": "df.ulThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
-          "rawQuery": true,
+          "query": "SELECT mean(\"value\") FROM \"df.dlThroughput\" WHERE (\"cellId\" = 'select tag value') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1748,7 +1748,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1774,7 +1774,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1838,5 +1838,5 @@
   "timezone": "",
   "title": "Cell Monitoring Influx",
   "uid": "r9WbSHvGz",
-  "version": 5
+  "version": 3
 }

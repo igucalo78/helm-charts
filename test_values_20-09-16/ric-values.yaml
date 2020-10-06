@@ -69,10 +69,10 @@ loki-stack:
 
 dash-front-back-end:
 
-  version: 0.17.0-beta2 
+  version: 0.18.6
 
   image:
-    repository: dash-fbe
+    repository: dash-fbe-dev
     pullPolicy: IfNotPresent
 
     service:
@@ -130,7 +130,7 @@ acc-state-db:
   # Enable/disable installation of the State DB
   enabled: true
 
-  version: 0.7.5
+  version: 0.8.2
 
   # Image settings for the xApp Core
   image:

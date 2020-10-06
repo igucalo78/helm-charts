@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 06.10.2020.
+
+### Changed
+
+- Updated 4GRC to 1.1.1
+- - Fixed throughput and bler reporting
+- Updated L2 server to 1.1.1
+- - Using new version that fixed the thr and bler reporting
+- updated drax to 0.10.2
+- - Using 4grc 1.1.1
+- - Using L2 server 1.1.1
+- Updated acc-sys-dashboard to 1.7.5
+- - Updated InfluxDb Dashboard with fixes
+- updated ric to 1.2.5
+- - Using acc-sys 1.7.5
+
 ## 25.09.2020.
 
 ### Changed
