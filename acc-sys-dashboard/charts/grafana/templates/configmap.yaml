@@ -31,11 +31,6 @@ data:
       url: {{ tpl .Values.datasources.prometheusUrl . }}
     - access: proxy
       isDefault: false
-      name: Druid
-      type: paypal-druid-datasource
-      url: {{ tpl .Values.datasources.druidUrl . }}
-    - access: proxy
-      isDefault: false
       name: Loki
       type: loki
       url: {{ tpl .Values.datasources.lokiUrl . }}

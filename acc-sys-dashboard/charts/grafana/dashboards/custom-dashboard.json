@@ -1366,7 +1366,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*-druid.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-influxdb.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1376,7 +1376,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Druid",
+      "title": "InfluxDB",
       "type": "stat"
     },
     {

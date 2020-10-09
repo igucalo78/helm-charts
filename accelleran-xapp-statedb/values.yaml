@@ -51,7 +51,7 @@ xappFrameworkConfig:
   redisUrl: "{{ .Release.Name }}-xapp-redis.{{ .Release.Namespace }}"
   redisPort: 6379
   # If you want to flush the existing config, and use the config on helm install, enable the following
-  flushOnDeployment: true
+  flushOnDeployment: false
 
 xappConfig:
   apiGatewayUrl: '{{ .Values.global.kubeIp }}'

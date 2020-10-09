@@ -23,14 +23,11 @@ dashboards:
       file: dashboards/influxdb-dashboard.json
     custom-dashboard:
       file: dashboards/custom-dashboard.json
-    monitor-dashboard:
-      file: dashboards/monitor-dashboard.json
     loki-log-dashboard:
       file: dashboards/loki-log-dashboard.json
 dashboardsConfigMaps: {}
 datasources:
   prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
-  druidUrl: http://{{ .Release.Name }}-druid.{{ .Release.Namespace }}:8888
   lokiUrl: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}:3100
   influxdbUrl: http://{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086
 deploymentStrategy:

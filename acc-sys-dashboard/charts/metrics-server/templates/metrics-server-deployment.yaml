@@ -19,6 +19,7 @@ spec:
   template:
     metadata:
       labels:
+        {{- include "metrics-server.draxLabels" . | nindent 8 }}
         app: {{ template "metrics-server.name" . }}
         release: {{ .Release.Name }}
         {{- if .Values.podLabels }}

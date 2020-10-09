@@ -14,18 +14,18 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 0.4.10
+version: 0.5.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 0.4.2-beta1
+appVersion: 0.5.0
 
 
 # Dependencies
 dependencies:
   - name: xapp-redis
     condition: xapp-redis.enabled
-    version: 0.1.4
+    version: 0.1.5
     repository: https://accelleran.github.io/helm-charts/
   - name: xapp-api
     condition: xapp-api.enabled

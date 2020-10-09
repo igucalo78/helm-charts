@@ -225,6 +225,7 @@ config:
   meta: {}
   data:
     max-values-per-tag: 0
+    max-series-per-database: 0
   coordinator: {}
   retention: {}
   shard_precreation: {}

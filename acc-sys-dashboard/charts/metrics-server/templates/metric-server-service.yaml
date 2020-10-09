@@ -4,6 +4,7 @@ metadata:
   name: {{ template "metrics-server.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
+    {{- include "metrics-server.draxLabels" . | nindent 4 }}
     app: {{ template "metrics-server.name" . }}
     chart: {{ template "metrics-server.chart" . }}
     release: {{ .Release.Name }}
