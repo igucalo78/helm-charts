@@ -74,9 +74,15 @@ spec:
                 command: 
                   - sh
                   - -c
-                  - "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}; 
-                    redis-cli config set notify-keyspace-events KEA"
-
+                  - |
+                    /bin/sh <<'EOF'
+                    until [ $(redis-cli ping) == "PONG" ]; do sleep 1; done;
+                    echo "$(date) Redis ready" > /data/init.log
+                    redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }};
+                    echo "NATS URL set" >> /data/init.log
+                    redis-cli config set notify-keyspace-events KEA
+                    echo "Notifications enabled" >> /data/init.log
+                    EOF
                     #["/bin/sh", "-c", "redis-cli SET NATS_SERVICE_URL nats://{{ tpl .Values.natsIp . }}:{{ .Values.natsPort }}"]
             {{- if .Values.backup.enabled }}
             preStop:
