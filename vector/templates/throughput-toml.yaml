@@ -40,14 +40,12 @@ data:
         field = "dlThroughput"
         tags.cellId = "{{`{{cellId}}`}}" # optional
         tags.ueRicId = "{{`{{ueRicId}}`}}"
-        tags.timestamp = "{{`{{timestamp}}`}}"
 
       [[transforms.log_to_metric_throughput.metrics]]
         type = "gauge"
         field = "ulThroughput"
         tags.cellId = "{{`{{cellId}}`}}" # optional
         tags.ueRicId = "{{`{{ueRicId}}`}}"
-        tags.timestamp = "{{`{{timestamp}}`}}"
 
 
     [sinks.outThroughput]

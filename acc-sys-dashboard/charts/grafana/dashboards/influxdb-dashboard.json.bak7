@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1602497549397,
+  "iteration": 1602437552159,
   "links": [],
   "panels": [
     {
@@ -61,7 +61,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$eNB",
+          "alias": "$tag_cellId",
           "groupBy": [
             {
               "params": [
@@ -79,7 +79,7 @@
           "measurement": "df.dlThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY time($interval)",
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -133,7 +133,7 @@
       },
       "yaxes": [
         {
-          "decimals": 1,
+          "decimals": 0,
           "format": "Kbits",
           "label": "sum(DL Throughput)",
           "logBase": 1,
@@ -452,7 +452,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$eNB",
+          "alias": "$tag_cellId",
           "groupBy": [
             {
               "params": [
@@ -470,7 +470,7 @@
           "measurement": "df.ulThroughput",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY time($interval)",
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY \"cellId\",time($interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -524,7 +524,7 @@
       },
       "yaxes": [
         {
-          "decimals": 1,
+          "decimals": 0,
           "format": "Kbits",
           "label": "sum(UL Throughput)",
           "logBase": 1,
@@ -1739,7 +1739,7 @@
       }
     }
   ],
-  "refresh": "2s",
+  "refresh": "3s",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -1748,7 +1748,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1774,8 +1774,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "tags": [],
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1823,5 +1822,5 @@
   "timezone": "",
   "title": "Cell Monitoring",
   "uid": "r9WbSHvGz",
-  "version": 2
+  "version": 1
 }
