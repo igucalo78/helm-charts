@@ -44,3 +44,11 @@ The name of the zookeeper chroots job.
 {{- define "zookeeper.chroots" -}}
 {{- printf "%s-chroots" (include "zookeeper.fullname" .) | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "zookeeper.draxLabels" -}}
+drax/role: ric
+drax/name: Zookeeper
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
+{{- end -}}
+

@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1597745449808,
+  "id": 1,
+  "iteration": 1601031937599,
   "links": [],
   "panels": [
     {
@@ -452,7 +453,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -536,7 +537,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
+          "text": "0",
           "value": "null"
         }
       ],
@@ -1136,7 +1137,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*oran.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*4g-radio-controller.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1146,7 +1147,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Oran",
+      "title": "4GRC",
       "type": "stat"
     },
     {
@@ -1365,7 +1366,7 @@
       "pluginVersion": "6.6.2",
       "targets": [
         {
-          "expr": "(kube_pod_container_status_running{pod=~\".*-druid.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
+          "expr": "(kube_pod_container_status_running{pod=~\".*-influxdb.*\"} or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1)",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1375,7 +1376,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Druid",
+      "title": "InfluxDB",
       "type": "stat"
     },
     {

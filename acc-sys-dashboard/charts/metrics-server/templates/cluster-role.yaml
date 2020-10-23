@@ -8,7 +8,6 @@ metadata:
     chart: {{ template "metrics-server.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    {{- include "metrics-server.labels" . | nindent 4 }}
 rules:
   - apiGroups:
     - ""
@@ -24,6 +23,7 @@ rules:
   {{- if .Values.rbac.pspEnabled }}
   - apiGroups:
     - extensions
+    - policy
     resources:
     - podsecuritypolicies
     resourceNames:

@@ -35,17 +35,19 @@ spec:
               mountPath: /usr/src/dashboard/server/config.json
               subPath: "config.json"
           ports:
-            - name: {{ .Values.service.portname}}
+            - name: {{ .Values.service.portname }}
               containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocol }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
-          readinessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
+            - name: {{ .Values.websocketService.portname }}
+              containerPort: {{ .Values.websocketService.port }}
+              #livenessProbe:
+              #httpGet:
+              #path: /
+              #port: {{ .Values.service.port }}
+              #readinessProbe:
+              #httpGet:
+              #path: /
+              #port: {{ .Values.service.port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

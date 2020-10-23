@@ -40,22 +40,6 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Common labels
-*/}}
-{{- define "metrics-server.labels" -}}
-helm.sh/chart: {{ include "metrics-server.chart" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-drax/role: ric
-drax/name: MetricsServer
-drax/component-name: {{ .Chart.Name }}
-drax/component-version: {{ .Chart.Version }}
-{{- end -}}
-
-
-{{/*
 Create the name of the service account to use
 */}}
 {{- define "metrics-server.serviceAccountName" -}}
@@ -65,3 +49,14 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Common labels
+*/}}
+{{- define "metrics-server.draxLabels" -}}
+drax/role: ric
+drax/name: MetricsServer
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
+{{- end -}}
+

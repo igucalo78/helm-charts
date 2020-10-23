@@ -1,2 +1,9 @@
 # To copy over the changes of file/folder from beta branch to master branch:
-git checkout beta acc-dashboard
+
+# 1.a. if its a folder, first delet the folder
+# rm -rf drax
+
+# 2.a. Then checkout from beta 
+# git checkout beta drax
+
+# 1.b. If its a file, just the checkout is enough

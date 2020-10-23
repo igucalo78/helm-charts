@@ -2,24 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "metrics-server.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ template "metrics-server.name" . }}
     chart: {{ template "metrics-server.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    {{- include "metrics-server.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
       app: {{ template "metrics-server.name" . }}
       release: {{ .Release.Name }}
   replicas: {{ .Values.replicas }}
+  strategy:
+    type: {{ .Values.strategyType }}
   template:
     metadata:
       labels:
+        {{- include "metrics-server.draxLabels" . | nindent 8 }}
         app: {{ template "metrics-server.name" . }}
         release: {{ .Release.Name }}
-        {{- include "metrics-server.labels" . | nindent 8 }}
+        {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+        {{- end }}
       {{- with .Values.podAnnotations }}
       annotations:
       {{- range $key, $value := . }}
@@ -51,12 +56,12 @@ spec:
             - /metrics-server
             - --cert-dir=/tmp
             - --logtostderr
-            - --secure-port=8443
+            - --secure-port=4443
             {{- range .Values.args }}
             - {{ . }}
             {{- end }}
           ports:
-          - containerPort: 8443
+          - containerPort: 4443
             name: https
           livenessProbe:
             {{- toYaml .Values.livenessProbe | trim | nindent 12 }}

@@ -129,21 +129,6 @@ containers:
       - {{ . }}
     {{- end }}
   {{- end}}
-    lifecycle:
-      postStart:
-        exec:
-          command:
-          - "sh"
-          - "-c"
-          - |
-            /bin/sh <<'EOF'
-            now=$(date)
-            echo "$now" > /var/lib/grafana/status.log
-            echo "-- Script started..." >> /var/lib/grafana/status.log
-            mkdir /var/lib/grafana/plugins/druidplugin
-            cp -r /plugins/. /var/lib/grafana/plugins/druidplugin
-            echo "-- Finished copying the druidplugin..." >> /var/lib/grafana/status.log
-            EOF
     volumeMounts:
       - name: config
         mountPath: "/etc/grafana/grafana.ini"

@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "accelleran-xapp-statedb.fullname" . }}
+  labels:
+    {{- include "accelleran-xapp-statedb.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: {{ .Values.strategyType }}
+  selector:
+    matchLabels:
+      {{- include "accelleran-xapp-statedb.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "accelleran-xapp-statedb.labels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "accelleran-xapp-statedb.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-check-redis
+          image: accelleran/acc-generic-img:0.2.0
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
+        {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
+        - name: {{ .Chart.Name }}-flush-redis
+          image: accelleran/acc-generic-img:0.2.0
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
+        {{ end }}
+        - name: {{ .Chart.Name }}-check-kafka
+          image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfigs.kafkaService . }}; do echo $(date) [CHECK-SERVICES] Waiting for Kafka at {{ tpl .Values.initConfigs.kafkaService . }}; sleep 2; done']
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
+              mountPath: /src/xapp/xapp_configuration.py
+              subPath: "xapp_configuration.py"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
+          configMap:
+            name: {{ include "accelleran-xapp-statedb.fullname" . }}-config

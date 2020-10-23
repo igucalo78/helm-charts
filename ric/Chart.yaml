@@ -14,28 +14,26 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.0.0
+version: 1.1.12
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.0.0
+appVersion: 1.1.12
 
 # Dependencies
 dependencies:
-  - name: druid
-    version: 0.4.2
-    repository: https://accelleran.github.io/helm-charts/
   - name: kafka
+    condition: kafka.enabled
     version: 0.20.9
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-helm
-    version: 0.3.1
+    version: 1.0.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
-    version: 1.6.2
+    version: 2.2.1
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
-    version: 0.15.1
+    version: 0.17.0
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.36.2
@@ -48,4 +46,17 @@ dependencies:
     condition: acc-service-orchestrator.enabled
     version: 0.4.0
     repository: https://accelleran.github.io/helm-charts/
+  - name: acc-state-db
+    condition: acc-state-db.enabled
+    version: 0.5.2
+    repository: https://accelleran.github.io/helm-charts/
+  - name: influxdb
+    condition: influxdb.enabled
+    version: 4.9.4
+    repository: https://accelleran.github.io/helm-charts/
+  - name: vector
+    condition: vector.enabled
+    version: 0.2.2
+    repository: https://accelleran.github.io/helm-charts/
+
 
