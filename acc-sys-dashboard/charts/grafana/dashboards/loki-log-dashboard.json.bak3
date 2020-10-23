@@ -16,11 +16,11 @@
   "editable": true,
   "gnetId": 12019,
   "graphTooltip": 0,
-  "iteration": 1603465028900,
+  "iteration": 1603463384375,
   "links": [],
   "panels": [
     {
-      "content": "\n# Instructions\nWe show two Log panels and their accompamying filtering options on the top:\n- The left \"Pod/Container Logs\" - For which you have the following available filters: namespace, Node, Pod, Container, Pod/Container_Search\n- The right \"External Source Logs\" - For which you have one available filters: External_Source, External_Source_Search\n\nThe \"Pod/Container_Search\" can be used to filter for custom text in the \"Pod/Container Logs\" panel.\nThe \"External_Source_Search\" can be used to filter for custom text in the \"External Source Logs\" panel.\nThe \"Log Timeline\" can be used to filter based on date and time for both Logs Panels.\n\nIf you want to view one of the Log Panel full screen, you can left click on the Log Panel title and select \"View\" from the drop-down menu.\n\n\n\n",
+      "content": "\n# Instructions\nWe show two Log panels and their accompamying filtering options on the top:\n- The left \"Pod/Container Logs\" - For which you have the following available filters: namespace, Node, Pod, Container, Pod/Container_Search\n- The right \"External Source Logs\" - For which you have one available filters: External_Source, External_Source_Search\n\nThe \"Pod/Container_Search\" can be used to filter for custom text in the \"Pod/Container Logs\" panel.\n\nThe \"External_Source_Search\" can be used to filter for custom text in the \"External Source Logs\" panel.\n\nThe \"Log Timeline\" can be used to filter based on date and time for both Logs Panels.\n\n\n\n",
       "datasource": null,
       "gridPos": {
         "h": 8,
@@ -324,6 +324,7 @@
       {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "L2-Parking",
           "value": "L2-Parking"
         },
@@ -389,5 +390,5 @@
   "timezone": "",
   "title": "Loki Log Dashboard",
   "uid": "liz0yRCZz",
-  "version": 2
+  "version": 1
 }

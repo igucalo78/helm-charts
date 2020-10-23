@@ -16,27 +16,9 @@
   "editable": true,
   "gnetId": 12019,
   "graphTooltip": 0,
-  "iteration": 1603465028900,
+  "iteration": 1597238823897,
   "links": [],
   "panels": [
-    {
-      "content": "\n# Instructions\nWe show two Log panels and their accompamying filtering options on the top:\n- The left \"Pod/Container Logs\" - For which you have the following available filters: namespace, Node, Pod, Container, Pod/Container_Search\n- The right \"External Source Logs\" - For which you have one available filters: External_Source, External_Source_Search\n\nThe \"Pod/Container_Search\" can be used to filter for custom text in the \"Pod/Container Logs\" panel.\nThe \"External_Source_Search\" can be used to filter for custom text in the \"External Source Logs\" panel.\nThe \"Log Timeline\" can be used to filter based on date and time for both Logs Panels.\n\nIf you want to view one of the Log Panel full screen, you can left click on the Log Panel title and select \"View\" from the drop-down menu.\n\n\n\n",
-      "datasource": null,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 10,
-      "mode": "markdown",
-      "options": {},
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Instructions",
-      "transparent": true,
-      "type": "text"
-    },
     {
       "aliasColors": {},
       "bars": true,
@@ -46,22 +28,18 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 6,
       "legend": {
-        "alignAsTable": false,
         "avg": false,
         "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
         "max": false,
         "min": false,
-        "rightSide": false,
         "show": false,
         "total": false,
         "values": false
@@ -79,15 +57,15 @@
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(count_over_time({namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$Pod_Container_Search\"[$__interval]))",
+          "expr": "sum(count_over_time({namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$search\"[$__interval]))",
           "refId": "A"
         },
         {
-          "expr": "sum(count_over_time({source=~\"$External_Source\"} |~ \"$External_Source_Search\"[$__interval]))",
+          "expr": "sum(count_over_time({source=~\"$Layer2\"} |~ \"$search\"[$__interval]))",
           "refId": "B"
         }
       ],
@@ -135,10 +113,10 @@
     {
       "datasource": "Loki",
       "gridPos": {
-        "h": 24,
-        "w": 12,
+        "h": 25,
+        "w": 24,
         "x": 0,
-        "y": 11
+        "y": 4
       },
       "id": 2,
       "maxDataPoints": "",
@@ -150,42 +128,38 @@
       },
       "targets": [
         {
-          "expr": "{namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$Pod_Container_Search\" ",
+          "expr": "{namespace=\"$namespace\", instance=~\"$Pod\", node=~\"$Node\", container=~\"$Container\"} |~ \"$search\" ",
           "hide": false,
           "refId": "A"
+        },
+        {
+          "expr": "{source=~\"$Layer2\"} |~ \"$search\" ",
+          "hide": false,
+          "refId": "B"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Pod/Container Logs ",
+      "title": "Logs Panel",
       "type": "logs"
     },
     {
-      "datasource": "Loki",
+      "content": "<div style=\"text-align:center\"> For Grafana Loki blog example </div>\n\n\n",
+      "datasource": null,
       "gridPos": {
-        "h": 24,
-        "w": 12,
-        "x": 12,
-        "y": 11
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 29
       },
-      "id": 8,
-      "maxDataPoints": "",
-      "options": {
-        "showLabels": true,
-        "showTime": true,
-        "sortOrder": "Ascending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "expr": "{source=~\"$External_Source\"} |~ \"$External_Source_Search\" ",
-          "refId": "A"
-        }
-      ],
+      "id": 4,
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
-      "title": "External Source Logs",
-      "type": "logs"
+      "title": "",
+      "transparent": true,
+      "type": "text"
     }
   ],
   "schemaVersion": 22,
@@ -196,6 +170,7 @@
       {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "default",
           "value": "default"
         },
@@ -209,7 +184,7 @@
         "name": "namespace",
         "options": [],
         "query": "label_values(kube_pod_info, namespace)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -234,9 +209,20 @@
         "label": null,
         "multi": true,
         "name": "Node",
-        "options": [],
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "drax03",
+            "value": "drax03"
+          }
+        ],
         "query": "label_values(kubernetes_io_hostname)",
-        "refresh": 2,
+        "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -249,9 +235,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "All",
+          "text": "l3-lange-koepoortstraat",
           "value": [
-            "$__all"
+            "l3-lange-koepoortstraat"
           ]
         },
         "datasource": "Prometheus",
@@ -264,7 +250,7 @@
         "name": "Pod",
         "options": [],
         "query": "label_values(kube_pod_info{node=~\"^$Node$\"}, pod)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -291,7 +277,7 @@
         "name": "Container",
         "options": [],
         "query": "label_values(kube_pod_container_info{pod=\"$Pod\"}, container)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -309,7 +295,7 @@
         },
         "hide": 0,
         "label": null,
-        "name": "Pod_Container_Search",
+        "name": "search",
         "options": [
           {
             "selected": true,
@@ -324,8 +310,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "L2-Parking",
-          "value": "L2-Parking"
+          "selected": true,
+          "text": "L2-Lange-Koepoortstraat",
+          "value": "L2-Lange-Koepoortstraat"
         },
         "datasource": "Loki",
         "definition": "label_values(source)",
@@ -333,10 +320,10 @@
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "External_Source",
+        "name": "Layer2",
         "options": [],
         "query": "label_values(source)",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -345,26 +332,6 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "current": {
-          "selected": true,
-          "text": "",
-          "value": ""
-        },
-        "hide": 0,
-        "label": null,
-        "name": "External_Source_Search",
-        "options": [
-          {
-            "selected": true,
-            "text": "",
-            "value": ""
-          }
-        ],
-        "query": "",
-        "skipUrlSync": false,
-        "type": "textbox"
       }
     ]
   },
@@ -389,5 +356,5 @@
   "timezone": "",
   "title": "Loki Log Dashboard",
   "uid": "liz0yRCZz",
-  "version": 2
+  "version": 1
 }
