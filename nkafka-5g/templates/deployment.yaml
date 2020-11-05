@@ -40,14 +40,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           env:
             - name: RUST_LOG
-              value: info
+              value: {{ .Values.logLevel }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          volumeMounts:
-            - name: conf-4g-config
-              mountPath: /4GConfig.toml 
-              subPath: "4GConfig.toml"
           command: ["/nkafka"]
-          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "producer"]
+          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "producer"]
 #          ports:
 #            - name: http
 #              containerPort: 80
@@ -74,8 +70,8 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      volume:
-        - name: conf-4g-config
+      volumes:
+        - name: conf-init-druid
           configMap:
-            name: conf-4g-config
-
+            defaultMode: 0770
+            name: conf-init-druid
