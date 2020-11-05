@@ -4,4 +4,37 @@ metadata:
   name: conf-4g-config
 data:
   4GConfig.toml: |-
+    protobuf_file="messages_4g.pb"
+
+    [options]
+    timestamp_name="kafka_time"
+    rewrite_timestamp="insert"
+    max_len="1048756"
+    timeout="1000"
+    mask="UeMasked"
+    seq_mapper="true"
+    threads="1"
+    invert_service="true"
+    replicate_messages="true"
+
+
+    [[translate]]
+    topic="TOPIC_BEACONS"
+    protobuf_def=".BeaconPB.Beacon_PeerMessage"
+
+    [[translate]]
+    topic="Topic_OPENRAN.>"
+    protobuf_def=".OpenRANPB.OpenRAN_peerMessage"
+
+    [[translate]]
+    topic="Topic_OPENRAN_DATA"
+    protobuf_def=".OpenRANDataPB.Message"
+
+    [[translate]]
+    topic="Topic_OPENRAN_COMMANDS.>"
+    protobuf_def=".OpenRANCommandsPB.OpenRAN_commandMessage"
+
+    [[translate]]
+    topic="Topic_L2_STATS.>"
+    protobuf_def=".L2StatsPB.L2StatsMessage"
 
