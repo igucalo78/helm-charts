@@ -51,10 +51,6 @@ app.kubernetes.io/name: {{ include "ric.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
-{{- if .Values.nodeSelector }}
-      nodeSelector: {{- .Values.nodeSelector | toYaml | nindent 8 }}
-{{- end }}
-
 {{/*
 Create the name of the service account to use
 */}}
