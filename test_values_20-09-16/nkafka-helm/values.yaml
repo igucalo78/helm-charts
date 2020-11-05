@@ -1,0 +1,37 @@
+affinity: {}
+fullnameOverride: ""
+image:
+  repository: nkafkalocal
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+- name: accelleran-secret
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - host: chart-example.local
+    paths: []
+  tls: []
+initConfigs:
+  natsService: "nats-service.{{ .Release.Namespace }}:4222"
+  kafkaService: "{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
+kafkaUrl: "{{ .Release.Name }}-kafka.{{ .Release.Namespace }}:9092"
+nameOverride: ""
+natsUrl: "nats://nats-service.{{ .Release.Namespace }}:4222"
+nodeSelector: {}
+podSecurityContext: {}
+replicaCount: 1
+resources: {}
+securityContext:
+  runAsUser: 0
+service:
+  enabled: false
+  name: nkafka
+  nodePort: 30309
+  port: 80
+  type: NodePort
+serviceAccount:
+  create: false
+  name: null
+tolerations: []
+version: '{{ .Chart.AppVersion }}'
