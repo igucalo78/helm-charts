@@ -74,7 +74,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      volume:
+      volumes:
         - name: conf-4g-config
           configMap:
             name: conf-4g-config
