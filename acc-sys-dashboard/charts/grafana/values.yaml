@@ -25,6 +25,8 @@ dashboards:
       file: dashboards/custom-dashboard.json
     loki-log-dashboard:
       file: dashboards/loki-log-dashboard.json
+    5g-health-dashboard:
+      file: dashboards/5g-health-dashboard.json
 dashboardsConfigMaps: {}
 datasources:
   prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
