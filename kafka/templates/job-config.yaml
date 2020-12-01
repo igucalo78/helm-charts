@@ -15,7 +15,7 @@ spec:
     spec:
       {{- if .Values.nodeSelector }}
       nodeSelector:
-      {{ toYaml .Values.nodeSelector | indent 8 }}
+{{ toYaml .Values.nodeSelector | indent 8 }}
       {{- end -}}
       restartPolicy: OnFailure
       volumes:
