@@ -16,6 +16,10 @@ spec:
       labels:
         {{- include "influxdb.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end -}}
       containers:
       - name: {{ include "influxdb.fullname" . }}-set-auth
         image: "{{ .Values.setDefaultUser.image }}"

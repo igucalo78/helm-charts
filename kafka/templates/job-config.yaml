@@ -13,6 +13,10 @@ spec:
       labels:
       {{- include "kafka.config.matchLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end -}}
       restartPolicy: OnFailure
       volumes:
         - name: config-volume
