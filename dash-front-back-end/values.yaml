@@ -51,6 +51,9 @@ websocketService:
   nodePort: 31316
   portname: "websocket"
 
+initConfigs:
+  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
+
 config:
   config_id: "production"
   defaultServiceNamespace: "default"
