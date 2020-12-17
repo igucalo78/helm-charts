@@ -331,6 +331,7 @@ serverFiles:
       static_configs:
       - targets:
         - localhost:9090
+        - 10.55.1.2:30515
     - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
       job_name: kubernetes-apiservers
       kubernetes_sd_configs:

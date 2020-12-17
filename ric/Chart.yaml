@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.1.16
+version: 1.2.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.1.16
+appVersion: 1.2.0
 
 # Dependencies
 dependencies:
@@ -30,10 +30,10 @@ dependencies:
     version: 1.0.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
-    version: 2.3.3
+    version: 2.4.0
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
-    version: 0.17.0
+    version: 0.18.0
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.36.2
@@ -52,11 +52,15 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: influxdb
     condition: influxdb.enabled
-    version: 4.9.4
+    version: 4.10.0
     repository: https://accelleran.github.io/helm-charts/
   - name: vector
     condition: vector.enabled
     version: 0.2.2
+    repository: https://accelleran.github.io/helm-charts/
+  - name: vectorfiveg
+    condition: vectorfiveg.enabled
+    version: 0.1.0
     repository: https://accelleran.github.io/helm-charts/
 
 

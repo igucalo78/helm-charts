@@ -250,6 +250,7 @@ initScripts:
   scripts:
     init.iql: |+
       CREATE DATABASE "test" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
+      CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
 
 backup:
   enabled: false

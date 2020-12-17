@@ -1,0 +1,119 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: uemeasurementsfiveg-toml
+data:
+  uemeasurementsfiveg.toml: |-
+    [sources.inUeMeas]
+      bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
+      group_id = "vectorUeMeas"
+      topics = ["{{ tpl .Values.config.kafka.topic . }}"]
+      type = "kafka"
+
+      [transforms.parseJsonUeMeas]
+      type = "json_parser"
+      inputs = ["inUeMeas"]
+      drop_field = false # optional, default
+      drop_invalid = true
+      field = "message" # optional, default
+    
+    [transforms.filterUeMeas]
+      # General
+      type = "filter"
+      inputs = ["parseJsonUeMeas"]
+      # Condition
+      condition."RrcMeasurementReportResultInfo.exists" = true
+    
+    [transforms.parseUeMeas]
+      inputs = ["filterUeMeas"]
+      type   = "json_parser"
+      field  = "RrcMeasurementReportResultInfo"
+      drop_field = false # optional, default
+      drop_invalid = true
+    
+    [transforms.lua]
+      # General
+      type = "lua" # required
+      inputs = ["parseUeMeas"] # required
+      version = "2" # required
+    
+    # Hooks
+      hooks.process = """
+      function (event, emit)
+        m = {}
+        m.metric = {
+          name = "",
+          timestamp = os.date("!*t"),
+          kind = "absolute",
+          tags = {},
+          gauge = {
+            value = 0.0
+          }
+        }
+        for f, v in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.SsbRsrpResult) do
+          temp = m
+          temp.metric.name = "ssbRsrp"
+          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.NrCgi.NrCellId[f]
+          temp.metric.tags.cellId = cellId
+          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+          temp.metric.gauge.value = v
+          emit(temp)
+        end
+        for i,j in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.SsbRsrqResult) do
+          temp = m
+          temp.metric.name = "ssbRsrq"
+          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.NrCgi.NrCellId[i]
+          temp.metric.tags.cellId = cellId
+          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+          temp.metric.gauge.value = j
+          emit(temp)
+        end
+        for k, l in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.SsbSinrResult) do
+          temp = m
+          temp.metric.name = "ssbSinr"
+          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo.NeighbourCellInfo.NrCgi.NrCellId[k]
+          temp.metric.tags.cellId = cellId
+          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+          temp.metric.gauge.value = l
+          emit(temp)
+        end
+        temp = m
+        temp.metric.name = "ssbRsrp"
+        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
+        temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+        temp.metric.tags.cellId = cellId
+        temp.metric.gauge.value = event.log.ServingCellInfo.SsbRsrpResult
+        emit(temp)
+        temp = m
+        temp.metric.name = "ssbRsrq"
+        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
+        temp.metric.tags.ueId = event.log.GnbCuCpUeId
+        temp.metric.tags.cellId = cellId
+        temp.metric.gauge.value = event.log.ServingCellInfo.SsbRsrqResult
+        emit(temp)
+        temp = m
+        temp.metric.name = "ssbSinr"
+        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
+        temp.metric.tags.ueId = event.log.GnbCuCpUeId
+        temp.metric.tags.cellId = cellId
+        temp.metric.gauge.value = event.log.ServingCellInfo.SsbSinrResult
+        emit(temp)
+    
+      end
+    
+      """
+
+
+    [sinks.outUeMeas]
+      # General
+      bucket = "vector-bucket"
+      database = "{{ .Values.config.influx.database }}"
+      endpoint =  "http://{{ tpl .Values.config.influx.hostname . }}:{{ .Values.config.influx.port}}/"
+      inputs = ["lua"]
+      namespace = "{{ .Values.config.influx.namespace }}"
+      type = "{{ .Values.config.influx.type }}"
+      username = "{{ .Values.config.influx.username }}"
+      password = "{{ .Values.config.influx.password }}"
+
+
+

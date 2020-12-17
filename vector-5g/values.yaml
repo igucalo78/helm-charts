@@ -1,0 +1,46 @@
+affinity: {}
+config:
+  influx:
+    database: db_5G
+    hostname: 10.55.1.2
+    namespace: default
+    password: password
+    port: 30303
+    type: influxdb_metrics
+    username: admin
+  kafka:
+    hostname: 10.55.1.2
+    port: 31090
+    topic: 5gmessages
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: accelleran/vector
+imagePullSecrets:
+- name: accelleran-secret
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - host: chart-example.local
+    paths: []
+  tls: []
+initConfigs:
+  influxdbService: ric-influxdb-api:8086
+  kafkaService: ric-kafka:9092
+nameOverride: ""
+nodeSelector: {}
+podSecurityContext: {}
+replicaCount: 1
+resources: {}
+securityContext:
+  runAsUser: 0
+service:
+  enabled: false
+  port: 80
+  type: ClusterIP
+serviceAccount:
+  create: false
+  name: null
+tolerations: []
+version: '{{ .Chart.AppVersion }}'
