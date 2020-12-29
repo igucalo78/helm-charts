@@ -281,10 +281,10 @@ containers:
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
         {{ if .Values.nodeSelector }}
-          {{- toYaml .Values.nodeSelector | nindent 2 }}
+          {{- toYaml .Values.nodeSelector | indent 2 }}
         {{ end }}
         {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
-          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 2 }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | indent 2 }}
         {{ end }}
       {{- end }}
 {{- with .Values.affinity }}
