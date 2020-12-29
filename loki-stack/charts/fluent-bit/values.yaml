@@ -49,6 +49,11 @@ nameOverride: fluent-bit-loki
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 ## Pod Labels
 podLabels: {}
 

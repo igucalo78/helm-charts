@@ -66,6 +66,11 @@ priorityClassName: ""
 
 nodeSelector: {}  # Node label-values required to run zookeeper pods.
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 tolerations: []  # Node taint overrides for zookeeper pods.
 
 affinity: {}  # Criteria by which pod label-values influence scheduling for zookeeper pods.

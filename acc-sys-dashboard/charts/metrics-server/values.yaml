@@ -46,6 +46,11 @@ resources: {}
 
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 tolerations: []
 
 affinity: {}

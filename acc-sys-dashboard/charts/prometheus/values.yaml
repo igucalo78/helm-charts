@@ -22,6 +22,9 @@ alertmanager:
     tls: []
   name: alertmanager
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteMany
@@ -98,6 +101,9 @@ kubeStateMetrics:
     tag: v1.9.1
   name: kube-state-metrics
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   pod:
     labels: {}
   podAnnotations: {}
@@ -139,6 +145,9 @@ nodeExporter:
     tag: v0.18.1
   name: node-exporter
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   pod:
     labels: {}
   podAnnotations: {}
@@ -181,6 +190,9 @@ pushgateway:
     tls: []
   name: pushgateway
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteOnce
@@ -256,6 +268,9 @@ server:
   livenessProbeTimeout: 30
   name: server
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteMany

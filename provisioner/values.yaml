@@ -81,6 +81,11 @@ resources: {}
 
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 tolerations: []
 
 affinity: {}
@@ -94,3 +99,8 @@ nginx:
     nodePort: 31610
   provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
   provisionerPort: 16002
+
+  draxNodeSelectorEnabled: "false"
+
+  draxNodeSelector:
+    draxName: "main"

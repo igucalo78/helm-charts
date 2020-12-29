@@ -16,6 +16,9 @@ livenessProbe:
 logLevel: info
 metricsNamespace: eagle
 nodeSelector: {}
+draxNodeSelectorEnabled: "false"
+draxNodeSelector:
+  draxName: "main"
 podAnnotations: {}
 podSecurityContext:
   fsGroup: 99

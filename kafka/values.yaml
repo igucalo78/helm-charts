@@ -103,6 +103,11 @@ affinity: {}
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 ## Readiness probe config.
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
 ##
@@ -361,6 +366,11 @@ prometheus:
     ## Node labels for pod assignment
     ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
     nodeSelector: {}
+
+    draxNodeSelectorEnabled: "false"
+
+    draxNodeSelector:
+      draxName: "main"
 
   operator:
     ## Are you using Prometheus Operator?

@@ -1,13 +1,23 @@
 loki:
   enabled: true
 
+  draxNodeSelectorEnabled: "false"
+
+  draxNodeSelector:
+    draxName: "main"
+
 promtail:
   enabled: false 
 
 fluent-bit:
   enabled: true
   loki:
-    serviceName: "{{ .Release.Name }}-loki.{{ .Release.Namespace }}"  # Defaults to "${RELEASE}-loki" if not set  
+    serviceName: "{{ .Release.Name }}-loki.{{ .Release.Namespace }}"  # Defaults to "${RELEASE}-loki" if not set
+
+  draxNodeSelectorEnabled: "false"
+
+  draxNodeSelector:
+    draxName: "main"
 
 grafana:
   enabled: false

@@ -107,6 +107,9 @@ livenessProbe:
   timeoutSeconds: 30
 namespaceOverride: ""
 nodeSelector: {}
+draxNodeSelectorEnabled: "false"
+draxNodeSelector:
+  draxName: "main"
 notifiers: {}
 persistence:
   accessModes:
