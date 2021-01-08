@@ -1,38 +1,32 @@
-# Default values for acc-service-monitor.
+# Default values for dash-front-back-end.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
+#version: latest
 
 image:
-  repository: accelleran/acc-service-monitor
+  repository: accelleran/arm-dashboard-front-back-end
   pullPolicy: IfNotPresent
 
-imagePullSecrets:
+imagePullSecrets: 
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-# Namespaces to monitor, comma "," seperated
-monitoredNamespaces: "{{ .Release.Namespace }}"
-
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: accservicemonitor
-
-clusterRoleSettings:
-  clusterRoleName: arm-acc-service-monitor-clusterrole
-  clusterRoleBindingName: arm-acc-service-monitor-clusterrolebinding
+  name:
 
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext:
+securityContext: 
   # capabilities:
   #   drop:
   #   - ALL
@@ -41,11 +35,46 @@ securityContext:
   runAsUser: 0
 
 service:
+  enabled: true
   type: NodePort
-  port: 80
-  nodePort: 30500
-  name: "acc-ser-mon"
-  serviceName: acc-service-monitor
+  port: 5000
+  targetPort: 5000
+  nodePort: 30315
+  portname: http
+  protocol: TCP
+
+websocketService:
+  enabled: true
+  type: NodePort
+  port: 5001
+  targetPort: 5001
+  nodePort: 30316
+  portname: "websocket"
+
+initConfigs:
+  kafkaService: "ric-kafka.{{ .Release.Namespace }}:9092"
+
+config:
+  config_id: "production"
+  defaultServiceNamespace: "default"
+  defaultOranNamespace: "default"
+  grafanaURL: "52.47.149.39"
+  grafanaPort: "30300"
+  nodeApiURL: "52.47.149.39"
+  nodePort: "30315"
+  kafkaUrl: "52.47.149.39"
+  kafkaPort: "31090"
+  svcOrchestratorHost: "acc-service-orchestrator"
+  svcOrchestratorPort: "80"
+  svcMonitorHost: "acc-service-monitor"
+  svcMonitorPort: "80"
+  pcixAppPodName: "accelleran-drax-pci-010-pci-xapp-api"
+  pcixAppPort: "80"
+  ksqldbPodName: "52.47.149.39"
+  ksqldbPort: "30533"
+  LteRadioControllerLabel: "4G-Radio-Controller"
+  apiUrl: "52.47.149.39"
+  websocketPort: "30316"
 
 ingress:
   enabled: false
@@ -77,7 +106,7 @@ nodeSelector: {}
 draxNodeSelectorEnabled: "false"
 
 draxNodeSelector:
-  draxName: "main"
+  draxName: "arm1"
 
 tolerations: []
 

@@ -7,7 +7,7 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/acc-service-monitor
+  repository: accelleran/arm-acc-service-monitor
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
@@ -23,11 +23,7 @@ serviceAccount:
   create: true
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: accservicemonitor
-
-clusterRoleSettings:
-  clusterRoleName: arm-acc-service-monitor-clusterrole
-  clusterRoleBindingName: arm-acc-service-monitor-clusterrolebinding
+  name: armaccservicemonitor
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -43,9 +39,9 @@ securityContext:
 service:
   type: NodePort
   port: 80
-  nodePort: 30500
+  nodePort: 31500
   name: "acc-ser-mon"
-  serviceName: acc-service-monitor
+  serviceName: arm-acc-service-monitor
 
 ingress:
   enabled: false
@@ -77,7 +73,7 @@ nodeSelector: {}
 draxNodeSelectorEnabled: "false"
 
 draxNodeSelector:
-  draxName: "main"
+  draxName: "arm1"
 
 tolerations: []
 

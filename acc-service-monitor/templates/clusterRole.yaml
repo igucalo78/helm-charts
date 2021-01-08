@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: acc-service-monitor-clusterrole
+  name: {{ .Values.clusterRoleSettings.clusterRoleName }}
 rules:
 - apiGroups:
   - ""
