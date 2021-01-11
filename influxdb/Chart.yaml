@@ -19,4 +19,4 @@ maintainers:
 name: influxdb
 sources:
 - https://github.com/influxdata/influxdb
-version: 4.11.0
+version: 4.12.0
