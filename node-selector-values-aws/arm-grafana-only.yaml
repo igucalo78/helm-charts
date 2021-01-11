@@ -106,7 +106,8 @@ livenessProbe:
   initialDelaySeconds: 60
   timeoutSeconds: 30
 namespaceOverride: ""
-nodeSelector: {}
+nodeSelector:
+  draxName: arm1
 draxNodeSelectorEnabled: "false"
 draxNodeSelector:
   draxName: "main"
