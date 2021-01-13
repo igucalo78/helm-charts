@@ -49,7 +49,7 @@ spec:
               containerPort: 8081
           resources:
 {{ toYaml .Values.kubeStateMetrics.resources | indent 12 }}
-    {{- if .Values.imagePullSecrets }}
+    {{- if .Values.kubeStateMetrics.imagePullSecrets }}
       imagePullSecrets:
       {{ toYaml .Values.kubeStateMetrics.imagePullSecrets | indent 2 }}
     {{- end }}
