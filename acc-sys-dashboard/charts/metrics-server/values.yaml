@@ -27,14 +27,15 @@ hostNetwork:
   enabled: false
 
 image:
-  repository: accelleran/acc-metrics-server
-  tag: v0.4.1-acc-rc.2
+  architecture: amd64
+  # architecture: arm64 # arm64 version supported until v0.3.6
+  repository: k8s.gcr.io/metrics-server
+  tag: v0.3.6
   pullPolicy: IfNotPresent
 
 strategyType: Recreate
 
-imagePullSecrets:
-  - name: accelleran-secret
+imagePullSecrets: {}
 
 args: 
 # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
