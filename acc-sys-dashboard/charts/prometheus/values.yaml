@@ -99,6 +99,8 @@ kubeStateMetrics:
     pullPolicy: IfNotPresent
     repository: accelleran/acc-kube-state-metrics
     tag: v2.0.0-beta-acc
+  imagePullSecrets:
+    - name: accelleran-secret
   name: kube-state-metrics
   nodeSelector: {}
   draxNodeSelectorEnabled: "false"

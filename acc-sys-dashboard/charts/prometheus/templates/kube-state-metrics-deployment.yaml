@@ -51,7 +51,7 @@ spec:
 {{ toYaml .Values.kubeStateMetrics.resources | indent 12 }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-      {{ toYaml .Values.imagePullSecrets | indent 2 }}
+      {{ toYaml .Values.kubeStateMetrics.imagePullSecrets | indent 2 }}
     {{- end }}
       {{- if or (.Values.kubeStateMetrics.nodeSelector) (eq (tpl .Values.kubeStateMetrics.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:

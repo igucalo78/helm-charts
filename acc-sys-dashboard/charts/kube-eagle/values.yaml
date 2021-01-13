@@ -4,6 +4,8 @@ image:
   pullPolicy: IfNotPresent
   repository: accelleran/acc-kube-eagle
   tag: 1.1.4-acc
+imagePullSecrets:
+  - name: accelleran-secret
 ingress:
   annotations: {}
   enabled: false

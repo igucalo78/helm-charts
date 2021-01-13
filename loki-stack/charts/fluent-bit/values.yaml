@@ -43,6 +43,9 @@ image:
   tag: fluent-bit-plugin-v2.1.1-rc.1
   pullPolicy: IfNotPresent
 
+imagePullSecrets:
+  - name: accelleran-secret
+
 nameOverride: fluent-bit-loki
 
 ## Node labels for pod assignment
