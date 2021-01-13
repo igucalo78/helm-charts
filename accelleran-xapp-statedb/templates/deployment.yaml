@@ -25,12 +25,12 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: {{ .Chart.Name }}-check-redis
-          image: accelleran/acc-generic-img:0.2.0
+          image: {{ .Values.initConfigs.image }}
           imagePullPolicy: IfNotPresent
           command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
         {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
         - name: {{ .Chart.Name }}-flush-redis
-          image: accelleran/acc-generic-img:0.2.0
+          image: {{ .Values.initConfigs.image }}
           imagePullPolicy: IfNotPresent
           command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
         {{ end }}

@@ -53,6 +53,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 initConfigs:
+  image: accelleran/acc-generic-img:latest
   kafkaService: "kafka.{{ .Release.Namespace }}:9092"
 
 xappFrameworkConfig:
