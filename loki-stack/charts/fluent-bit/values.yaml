@@ -40,7 +40,7 @@ deploymentStrategy: RollingUpdate
 
 image:
   repository: accelleran/acc-loki
-  tag: fluent-bit-plugin-v1.4.1-acc-rc.0
+  tag: fluent-bit-plugin-v2.1.0-beta1
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
