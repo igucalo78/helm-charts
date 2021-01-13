@@ -28,7 +28,7 @@ hostNetwork:
 
 image:
   repository: accelleran/acc-metrics-server
-  tag: v0.4.1-acc
+  tag: v0.4.1-acc-rc.2
   pullPolicy: IfNotPresent
 
 strategyType: Recreate
