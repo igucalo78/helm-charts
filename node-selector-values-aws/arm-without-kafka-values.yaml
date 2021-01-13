@@ -105,12 +105,12 @@ acc-sys-dashboard:
   kube-eagle:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
-      draxName: "cloud1"
+      draxName: "{{ .Values.global.draxName }}"
 
   metrics-server:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
-      draxName: "{{ .Values.global.draxName }}"
+      draxName: "cloud1"
 
 loki-stack:
   fluent-bit:
