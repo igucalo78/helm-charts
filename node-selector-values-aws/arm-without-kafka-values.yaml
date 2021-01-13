@@ -108,9 +108,12 @@ acc-sys-dashboard:
       draxName: "{{ .Values.global.draxName }}"
 
   metrics-server:
+    image:
+      architecture: arm64
+
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
-      draxName: "cloud1"
+      draxName: "{{ .Values.global.draxName }}"
 
 loki-stack:
   fluent-bit:
