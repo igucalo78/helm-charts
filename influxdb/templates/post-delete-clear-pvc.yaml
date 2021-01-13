@@ -21,7 +21,7 @@ spec:
       {{- end }}
       containers:
       - name: post-delete-job
-        image: "bitnami/kubectl"
+        image: {{ .Values.postDeleteJob.image }}
         command: ["kubectl"]
         args:
         - "delete"

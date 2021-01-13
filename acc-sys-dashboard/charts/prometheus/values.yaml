@@ -97,8 +97,8 @@ kubeStateMetrics:
   enabled: true
   image:
     pullPolicy: IfNotPresent
-    repository: quay.io/coreos/kube-state-metrics
-    tag: v1.9.1
+    repository: accelleran/acc-kube-state-metrics
+    tag: v2.0.0-beta-acc
   name: kube-state-metrics
   nodeSelector: {}
   draxNodeSelectorEnabled: "false"

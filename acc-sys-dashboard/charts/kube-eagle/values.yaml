@@ -2,8 +2,8 @@ affinity: {}
 containerSecurityContext: {}
 image:
   pullPolicy: IfNotPresent
-  repository: quay.io/google-cloud-tools/kube-eagle
-  tag: 1.1.0
+  repository: accelleran/acc-kube-eagle
+  tag: 1.1.4-acc
 ingress:
   annotations: {}
   enabled: false

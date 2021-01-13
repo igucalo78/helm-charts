@@ -108,7 +108,7 @@ setDefaultUser:
   ## Image of the container used for job
   ## Default: appropriate/curl:latest
   ##
-  image: curlimages/curl:latest
+  image: accelleran/acc-generic-img:latest
 
   ## Deadline for job so it does not retry forever.
   ## Default: activeDeadline: 300
@@ -311,3 +311,6 @@ backup:
   #   destination: s3://bucket/path
   #   ## Optional. Specify if you're using an alternate S3 endpoint.
   #   # endpointUrl: ""
+
+postDeleteJob:
+  image: accelleran/acc-generic-img:latest
