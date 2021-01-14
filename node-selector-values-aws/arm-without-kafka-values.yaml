@@ -87,7 +87,7 @@ acc-sys-dashboard:
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
     nodeExporter:
-      draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+      draxNodeSelectorEnabled: "false"
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
     pushgateway:
@@ -117,7 +117,7 @@ acc-sys-dashboard:
 
 loki-stack:
   fluent-bit:
-    draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+    draxNodeSelectorEnabled: "false"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
 
