@@ -29,6 +29,8 @@ dashboards:
       file: dashboards/5g-health-dashboard.json
     5g-monitoring-dashboard:
       file: dashboards/5g-monitoring-dashboard.json
+    5g-pm-counters:
+      file: dashboards/5g-pm-counters.json
 dashboardsConfigMaps: {}
 datasources:
   prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
