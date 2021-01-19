@@ -43,6 +43,12 @@ kafka:
       PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
 
   zookeeper:
+    enabled: false
+
+    ## If the Zookeeper Chart is disabled a URL and port are required to connect
+    url: "acc-zoo-1-acc-zookeeper-client"
+    port: 2181
+
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "cloud1"

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "acc-zookeeper.fullname" . }}-client
+  name: {{ include "acc-zookeeper.fullname" . }}-follower
   labels:
     {{- include "acc-zookeeper.labels" . | nindent 4 }}
 spec:
