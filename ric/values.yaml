@@ -43,11 +43,24 @@ kafka:
       PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
 
   zookeeper:
+    # If the acc-zookeeper is enabled, disable the default one that comes with kafka confluent
+    enabled: false
+
+    ## If the Zookeeper Chart is disabled a URL and port are required to connect
+    url: "{{ .Release.Name }}-acc-zookeeper-client.{{ .Release.Namespace }}"
+    port: 2181
+
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
 
+acc-zookeeper:
+  enabled: true
 
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+ 
 nkafka-helm:
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
