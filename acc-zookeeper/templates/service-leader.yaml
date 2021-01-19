@@ -1,0 +1,22 @@
+{{ if .Values.services.leader.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "acc-zookeeper.fullname" . }}-client
+  labels:
+    {{- include "acc-zookeeper.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.services.leader.type }}
+  ports:
+    - port: {{ .Values.services.leader.port }}
+      protocol: {{ .Values.services.leader.protocol }}
+      name: {{ .Values.services.leader.name }}
+      {{ if contains "NodePort" .Values.services.leader.type }}
+      nodePort: {{ .Values.services.leader.nodePort }}
+      {{ end }}
+  {{ if .Values.services.leader.loadBalancerIP }}
+  loadBalancerIP: {{ tpl .Values.services.leader.loadBalancerIP . }}
+  {{ end }}
+  selector:
+    {{- include "acc-zookeeper.selectorLabels" . | nindent 4 }}
+{{ end }}

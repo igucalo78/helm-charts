@@ -37,9 +37,61 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-service:
-  type: ClusterIP
-  port: 80
+env:
+  ## The port on which the server will accept client requests.
+  ZOO_PORT: 2181
+
+  ## The number of Ticks that an ensemble member is allowed to perform leader
+  ## election.
+  ZOO_INIT_LIMIT: 5
+
+  ZOO_TICK_TIME: 2000
+
+  ## The maximum number of concurrent client connections that
+  ## a server in the ensemble will accept.
+  ZOO_MAX_CLIENT_CNXNS: 60
+
+  ## The number of Tick by which a follower may lag behind the ensembles leader.
+  ZK_SYNC_LIMIT: 10
+
+  ## The number of wall clock ms that corresponds to a Tick for the ensembles
+  ## internal time.
+  ZK_TICK_TIME: 2000
+
+  ZOO_AUTOPURGE_PURGEINTERVAL: 0
+  ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
+  ZOO_STANDALONE_ENABLED: false
+
+  ZOOKEEPER_ID: "1"
+  ZOOKEEPER_SERVER_1: zoo1
+
+  ZK_HEAP_SIZE: "1G"
+
+services:
+  client:
+    enabled: true
+    type: ClusterIP
+    port: 2181
+    name: zookeeper-client
+    protocol: TCP
+#    nodePort:
+#    loadBalancerIP:
+  follower:
+    enabled: true
+    type: ClusterIP
+    port: 2888
+    name: zookeeper-follower
+    protocol: TCP
+#    nodePort:
+#    loadBalancerIP:
+  leader:
+    enabled: true
+    type: ClusterIP
+    port: 3888
+    name: zookeeper-leader
+    protocol: TCP
+#    nodePort:
+#    loadBalancerIP:
 
 ingress:
   enabled: false
@@ -74,6 +126,11 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 
