@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1611138847784,
+  "id": 12,
+  "iteration": 1610637893527,
   "links": [],
   "panels": [
     {
@@ -25,13 +26,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -56,10 +50,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -69,9 +63,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(DL_GTP_THP_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval]) / increase(DL_GTP_THP_SAMPLES_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval])",
+          "expr": "increase(DL_GTP_THP_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[5m]) / increase(DL_GTP_THP_SAMPLES_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -126,13 +119,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -157,10 +143,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -170,9 +156,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(UL_GTP_THP_total{instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval]) / increase(UL_GTP_THP_SAMPLES_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval])",
+          "expr": "increase(UL_GTP_THP_total{instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [5m]) / increase(UL_GTP_THP_SAMPLES_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -227,13 +212,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -258,10 +236,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -271,9 +249,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval]) * 100 / increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [5m]) * 100 / increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -324,32 +301,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 5,
         "w": 4,
@@ -360,19 +311,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -394,13 +366,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -425,10 +390,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -438,9 +403,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -449,7 +413,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "increase(RRC CONNECTION ESTABLISHMENT ATTEMPTS)",
+      "title": "increase(RRC CONNECTION ESTABLISHMENT ATTEMPTS) [5m]",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -489,13 +453,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -504,11 +463,8 @@
       },
       "id": 39,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -518,32 +474,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -554,19 +484,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_EMERGENCY_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -584,32 +535,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -620,19 +545,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MT_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -650,32 +596,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -686,19 +606,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_DATA_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -716,32 +657,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -752,19 +667,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_VIDEO_CALL_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -782,32 +718,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -818,19 +728,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MPS_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -847,13 +778,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_EST_ATTEMPT <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -862,11 +788,8 @@
       },
       "id": 40,
       "links": [],
-      "options": {
-        "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_EST_ATTEMPT <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -876,32 +799,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -912,19 +809,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_HIGH_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -942,32 +860,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -978,19 +870,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_SIGNALLING_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1008,32 +921,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1044,19 +931,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_VOICE_CALL_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1074,32 +982,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1110,19 +992,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "  round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_SMS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1140,32 +1043,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "orange",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1176,19 +1053,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "orange",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MCS_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1205,13 +1103,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -1220,11 +1113,8 @@
       },
       "id": 17,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -1234,32 +1124,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 5,
         "w": 4,
@@ -1270,19 +1134,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1304,13 +1189,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -1335,10 +1213,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -1348,9 +1226,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -1359,7 +1236,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "increase(RRC CONNECTION SUCCESSES) ",
+      "title": "increase(RRC CONNECTION SUCCESSES) [5m]",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1400,13 +1277,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -1415,11 +1287,8 @@
       },
       "id": 41,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -1429,32 +1298,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1465,19 +1308,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_EMERGENCY_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1495,32 +1359,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1531,19 +1369,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MT_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1561,32 +1420,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1597,19 +1430,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MO_DATA_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1627,32 +1481,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1663,19 +1491,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MO_VIDEO_CALL_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1693,32 +1542,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1729,19 +1552,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MPS_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1758,13 +1602,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_SUCCESS <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -1773,11 +1612,8 @@
       },
       "id": 42,
       "links": [],
-      "options": {
-        "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_SUCCESS <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -1787,32 +1623,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1823,19 +1633,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_HIGH_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1853,32 +1684,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1889,19 +1694,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MO_SIGNALLING_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1919,32 +1745,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -1955,19 +1755,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MO_VOICE_CALL_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -1985,32 +1806,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -2021,19 +1816,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": " round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MO_SMS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2051,32 +1867,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -2087,19 +1877,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_SUCC_CAUSE_TYPE_MCS_PRIORITY_ACCESS_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2116,13 +1927,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -2131,11 +1937,8 @@
       },
       "id": 43,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -2145,32 +1948,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 5,
         "w": 4,
@@ -2181,19 +1958,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_FAIL_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2217,13 +2015,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2248,10 +2039,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
@@ -2261,9 +2052,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_FAIL_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_FAIL_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[5m])",
           "instant": false,
-          "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -2272,7 +2062,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "increase(RRC CONNECTION FAILURES)",
+      "title": "increase(RRC CONNECTION FAILURES) [5m]",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2313,13 +2103,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -2328,11 +2113,8 @@
       },
       "id": 54,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -2342,32 +2124,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -2378,19 +2134,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_NETWORK_REJECT_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2408,32 +2185,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -2444,19 +2195,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_NO_REPLY_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2474,32 +2246,6 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 3,
@@ -2510,19 +2256,40 @@
       "links": [],
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
+        "fieldOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [],
           "values": false
         },
-        "textMode": "auto"
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal"
       },
-      "pluginVersion": "7.3.5",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_OTHER_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
@@ -2539,13 +2306,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_FAIL <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -2554,11 +2316,8 @@
       },
       "id": 55,
       "links": [],
-      "options": {
-        "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_FAIL <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -2567,13 +2326,8 @@
     },
     {
       "cacheTimeout": null,
+      "content": "",
       "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -2582,11 +2336,8 @@
       },
       "id": 56,
       "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.5",
+      "mode": "html",
+      "options": {},
       "timeFrom": null,
       "timeShift": null,
       "title": "",
@@ -2594,8 +2345,8 @@
       "type": "text"
     }
   ],
-  "refresh": false,
-  "schemaVersion": 26,
+  "refresh": "1m",
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2609,7 +2360,6 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceId)",
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -2636,7 +2386,6 @@
         },
         "datasource": "Prometheus",
         "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceType)",
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -2653,51 +2402,6 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "5m",
-          "value": "5m"
-        },
-        "error": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "MinStep",
-        "options": [
-          {
-            "selected": false,
-            "text": "1m",
-            "value": "1m"
-          },
-          {
-            "selected": true,
-            "text": "5m",
-            "value": "5m"
-          },
-          {
-            "selected": false,
-            "text": "10m",
-            "value": "10m"
-          },
-          {
-            "selected": false,
-            "text": "30m",
-            "value": "30m"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          }
-        ],
-        "query": "1m,5m,10m,30m,1h",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
       }
     ]
   },
@@ -2722,5 +2426,5 @@
   "timezone": "",
   "title": "5G PM Counters",
   "uid": "sH2tHMJMk",
-  "version": 17
+  "version": 47
 }
