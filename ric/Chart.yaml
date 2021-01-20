@@ -26,10 +26,6 @@ dependencies:
     condition: acc-kafka.enabled
     version: 0.1.0
     repository: https://accelleran.github.io/helm-charts/
-  - name: kafka
-    condition: kafka.enabled
-    version: 0.21.1
-    repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-helm
     version: 1.0.0
     repository: https://accelleran.github.io/helm-charts/
@@ -65,10 +61,6 @@ dependencies:
   - name: vectorfiveg
     condition: vectorfiveg.enabled
     version: 0.3.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: acc-zookeeper
-    condition: acc-zookeeper.enabled
-    version: 0.1.0
     repository: https://accelleran.github.io/helm-charts/
 
 
