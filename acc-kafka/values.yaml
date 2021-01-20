@@ -5,12 +5,13 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: accelleran/acc-kafka
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "2.7.0"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
@@ -22,6 +23,14 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+
+env:
+  KAFKA_ADVERTISED_PORT: "31090"
+  KAFKA_ADVERTISED_HOST_NAME: "10.8.0.1"
+  KAFKA_ZOOKEEPER_CONNECT: "{{ .Release.Name }}-zookeeper.{{ .Release.Namespace }}:2181"
+  KAFKA_BROKER_ID: "0"
+  KAFKA_CREATE_TOPICS: "test2:1:1"
+  KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
 
 podAnnotations: {}
 
@@ -37,8 +46,13 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  enabled: true
+  type: NodePort
+  port: 9092
+  name: kafka
+  protocol: TCP
+  nodePort: 31090
+#  loadBalancerIP:
 
 ingress:
   enabled: false
@@ -74,6 +88,14 @@ autoscaling:
 
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 tolerations: []
 
 affinity: {}
+
+zookeeper:
+  enabled: true

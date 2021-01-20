@@ -40,6 +40,10 @@ helm.sh/chart: {{ include "acc-kafka.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+drax/role: ric
+drax/name: Kafka
+drax/component-name: {{ .Chart.Name }}
+drax/component-version: {{ .Chart.Version }}
 {{- end }}
 
 {{/*
