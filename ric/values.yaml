@@ -95,6 +95,12 @@ acc-sys-dashboard:
       # Retention policy on the Prometheus storage
       retention: 15d
 
+    extraScrapeConfigs: |
+      - job_name: 5gPmCountersXapp
+        static_configs:
+          - targets:
+            - "{{ .Values.global.kubeIp }}:30515"
+
   kube-eagle:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
