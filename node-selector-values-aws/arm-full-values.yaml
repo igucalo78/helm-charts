@@ -23,6 +23,8 @@ global:
   draxName: "arm1"
 
 acc-kafka:
+  enabled: true
+
   env:
     KAFKA_ADVERTISED_PORT: "31090"
     KAFKA_ADVERTISED_HOST_NAME: "{{ .Values.global.kubeIp }}"
