@@ -2,8 +2,10 @@ affinity: {}
 containerSecurityContext: {}
 image:
   pullPolicy: IfNotPresent
-  repository: quay.io/google-cloud-tools/kube-eagle
-  tag: 1.1.0
+  repository: accelleran/acc-kube-eagle
+  tag: 1.1.4-acc
+imagePullSecrets:
+  - name: accelleran-secret
 ingress:
   annotations: {}
   enabled: false
@@ -16,6 +18,9 @@ livenessProbe:
 logLevel: info
 metricsNamespace: eagle
 nodeSelector: {}
+draxNodeSelectorEnabled: "false"
+draxNodeSelector:
+  draxName: "main"
 podAnnotations: {}
 podSecurityContext:
   fsGroup: 99

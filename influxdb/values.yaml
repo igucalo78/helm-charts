@@ -2,7 +2,7 @@
 ## ref: https://hub.docker.com/r/library/influxdb/tags/
 image:
   repository: "influxdb"
-  tag: "1.8.0-alpine"
+  tag: "1.8.3"
   pullPolicy: IfNotPresent
   ## If specified, use these secrets to access the images
   # pullSecrets:
@@ -108,7 +108,7 @@ setDefaultUser:
   ## Image of the container used for job
   ## Default: appropriate/curl:latest
   ##
-  image: appropriate/curl:latest
+  image: accelleran/acc-generic-img:latest
 
   ## Deadline for job so it does not retry forever.
   ## Default: activeDeadline: 300
@@ -195,6 +195,11 @@ ingress:
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
 ##
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 ## Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
@@ -306,3 +311,6 @@ backup:
   #   destination: s3://bucket/path
   #   ## Optional. Specify if you're using an alternate S3 endpoint.
   #   # endpointUrl: ""
+
+postDeleteJob:
+  image: accelleran/acc-generic-img:latest

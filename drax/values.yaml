@@ -2,6 +2,26 @@ global:
   # Kubernetes Advertise Address, used as External address for services
   kubeIp: "10.20.20.20"
 
+  # dRAX Specific Node Selector
+  #   Description: This is a special nodeSelector field implemented for the
+  #                Accelleran dRAX Helm charts. You need to first label your
+  #                node in Kubernetes with a label "draxName" and give it a
+  #                <value>. For example for node <node_name>, you can use the
+  #                following command to label it:
+  #                kubectl label node <node_name> draxName=<value>.
+  #                You can then enabled this feature by setting
+  #                "draxNodeSelectorEnabled" to "true" (as a string with quotes!).
+  #                The in "draxName" set the value of the label you chose for
+  #                the node. This will in effect install all the dRAX Applications
+  #                on that node, without the need to edit all individual helm
+  #                charts. In case you want to add other nodeSelector options,
+  #                you have to add them to the helm chart specific values files.
+  #   Value type: string
+  #   Example:
+  #
+  draxNodeSelectorEnabled: "true"
+  draxName: "main"
+
 nats:
   # To enable/disable the installation of NATS
   enabled: true
@@ -13,6 +33,10 @@ nats:
     client:
       # The port NATS is using
       nodePort: 31000
+
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
 
 redis:
   # To enable or disable the installation of redis
@@ -35,6 +59,10 @@ redis:
     # Choose after how many days should the backed up DBs be deleted
     deleteAfterDay: 7
 
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+
 provisioner-dhcp:
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
@@ -55,6 +83,10 @@ provisioner-dhcp:
     staticRouteNetwork: 10.20.20.0/24
     staticRouteGateway: 10.22.10.52
 
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+
 provisioner:
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
@@ -67,6 +99,10 @@ provisioner:
 
   # Log level of the provisioner
   logLevel: "debug"
+
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
 
   # The nginx configuration
   nginx:
@@ -87,19 +123,35 @@ provisioner:
     provisionerUrl: "{{ .Release.Name }}-provisioner.{{ .Release.Namespace }}"
 
     #The Port should be the same as the one in provisioner.service.port, deafult is 16002
-    provisionerPort: 16002 
+    provisionerPort: 16002
+
+    draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+    draxNodeSelector:
+      draxName: "{{ .Values.global.draxName }}"
 
 ntp-server:
   # To enable/disable the installation of the dRAX NTP Server for cells
-  enabled: true 
+  enabled: true
+
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
 
 configurator:
   # To enabled or disable the installation of the dRAX Configurator
   enabled: true
 
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+
   provisioner:
     # Enable if the provisioner is installed as well
     enabled: true
+
+    draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+    draxNodeSelector:
+      draxName: "{{ .Values.global.draxName }}"
 
     # Pre-provision the cells, create a list of serial: name as shown below
     cells:
@@ -129,6 +181,11 @@ configurator:
 
 4g-radio-controller:
   enabled: true
+
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+
   image:
     pullPolicy: IfNotPresent
 
@@ -144,3 +201,7 @@ configurator:
 acc-l2-update:
   # Enable the server that serves the Layer2 update files
   enabled: true
+
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"

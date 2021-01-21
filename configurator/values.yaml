@@ -76,6 +76,11 @@ autoscaling:
 
 nodeSelector: {}
 
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 tolerations: []
 
 affinity: {}
@@ -103,6 +108,13 @@ provisioner:
 
   provisionerApi: "{{ .Values.kubeIp }}"
   provisionerPort: 31610
+
+  nodeSelector: {}
+
+  draxNodeSelectorEnabled: "false"
+
+  draxNodeSelector:
+    draxName: "main"
 
 
 

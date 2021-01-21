@@ -36,6 +36,15 @@ spec:
               mountPath: /config/cellconfig.yaml
               subPath: "cellconfig.yaml"
       restartPolicy: Never
+      {{- if or (.Values.provisioner.nodeSelector) (eq (tpl .Values.provisioner.draxNodeSelectorEnabled .) "true") }}
+      nodeSelector:
+        {{ if .Values.provisioner.nodeSelector }}
+          {{- toYaml .Values.provisioner.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.provisioner.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.provisioner.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
       volumes:
         - name: prov-ca-crt
           configMap:

@@ -27,14 +27,14 @@ hostNetwork:
   enabled: false
 
 image:
-  repository: k8s.gcr.io/metrics-server-amd64
+  repository: accelleran/acc-metrics-server
   tag: v0.3.6
   pullPolicy: IfNotPresent
 
 strategyType: Recreate
 
-imagePullSecrets: []
-# - registrySecretName
+imagePullSecrets:
+  - name: accelleran-secret
 
 args: 
 # enable this if you have self-signed certificates, see: https://github.com/kubernetes-incubator/metrics-server
@@ -45,6 +45,11 @@ args:
 resources: {}
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 

@@ -35,12 +35,10 @@ spec:
     {{- if .Values.priorityClassName }}
       priorityClassName: "{{ .Values.priorityClassName }}"
     {{- end }}
-    {{- if .Values.imagePullSecrets }}
+      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      {{- range .Values.imagePullSecrets }}
-        - name: {{ . }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- end }}
       serviceAccountName: {{ template "metrics-server.serviceAccountName" . }}
 {{- if .Values.hostNetwork.enabled }}
       hostNetwork: true
@@ -77,8 +75,15 @@ spec:
           {{- with .Values.extraVolumeMounts }}
           {{- toYaml . | nindent 10 }}
           {{- end }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-        {{- toYaml .Values.nodeSelector | trim | nindent 8 }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
       affinity:
         {{- toYaml .Values.affinity | trim | nindent 8 }}
       tolerations:

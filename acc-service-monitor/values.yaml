@@ -25,6 +25,10 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: accservicemonitor
 
+clusterRoleSettings:
+  clusterRoleName: arm-acc-service-monitor-clusterrole
+  clusterRoleBindingName: arm-acc-service-monitor-clusterrolebinding
+
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -69,6 +73,11 @@ resources: {}
   #   memory: 128Mi
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 

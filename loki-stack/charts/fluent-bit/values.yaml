@@ -39,15 +39,23 @@ annotations: {}
 deploymentStrategy: RollingUpdate
 
 image:
-  repository: grafana/fluent-bit-plugin-loki
-  tag: 1.4.1-amd64
+  repository: accelleran/acc-loki
+  tag: fluent-bit-plugin-v2.1.0-beta1
   pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: accelleran-secret
 
 nameOverride: fluent-bit-loki
 
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 ## Pod Labels
 podLabels: {}

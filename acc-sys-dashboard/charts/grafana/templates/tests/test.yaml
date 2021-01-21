@@ -35,9 +35,14 @@ spec:
     - name: {{ . }}
   {{- end}}
   {{- end }}
-  {{- with .Values.nodeSelector }}
+  {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
   nodeSelector:
-{{ toYaml . | indent 4 }}
+    {{ if .Values.nodeSelector }}
+      {{- toYaml .Values.nodeSelector | nindent 4 }}
+    {{ end }}
+    {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+      {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 4 }}
+    {{ end }}
   {{- end }}
   {{- with .Values.affinity }}
   affinity:

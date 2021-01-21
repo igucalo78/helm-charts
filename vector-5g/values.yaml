@@ -30,6 +30,9 @@ initConfigs:
   kafkaService: ric-kafka:9092
 nameOverride: ""
 nodeSelector: {}
+draxNodeSelectorEnabled: "false"
+draxNodeSelector:
+  draxName: "main"
 podSecurityContext: {}
 replicaCount: 1
 resources: {}

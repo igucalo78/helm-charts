@@ -12,7 +12,7 @@ metadata:
 spec:
   containers:
   - name: wget
-    image: "{{ .Values.testImage.repository }}:{{ .Values.testImage.tag }}"
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
     imagePullPolicy: {{ .Values.testImage.pullPolicy }}
     command: ['/bin/sh']
     args:

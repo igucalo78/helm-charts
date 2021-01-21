@@ -278,9 +278,14 @@ containers:
 {{- with .Values.extraContainers }}
 {{ tpl . $ | indent 2 }}
 {{- end }}
-{{- with .Values.nodeSelector }}
+{{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
 nodeSelector:
-{{ toYaml . | indent 2 }}
+{{ if .Values.nodeSelector }}
+{{- toYaml .Values.nodeSelector | indent 2 }}
+{{ end }}
+{{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+{{- tpl (toYaml .Values.draxNodeSelector) $ | indent 2 }}
+{{ end }}
 {{- end }}
 {{- with .Values.affinity }}
 affinity:

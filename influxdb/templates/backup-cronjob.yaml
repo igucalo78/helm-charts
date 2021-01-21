@@ -23,6 +23,15 @@ spec:
             {{- include "influxdb.selectorLabels" . | nindent 12 }}
         spec:
           restartPolicy: OnFailure
+          {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
+          nodeSelector:
+            {{ if .Values.nodeSelector }}
+              {{- toYaml .Values.nodeSelector | nindent 12 }}
+            {{ end }}
+            {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+              {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 12 }}
+            {{ end }}
+          {{- end }}
           volumes:
           - name: backup
           {{- if .Values.backup.persistence.enabled }}

@@ -29,7 +29,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: {{ .Chart.Name }}-check-redis
-          image: accelleran/acc-generic-img:0.2.0
+          image: {{ .Values.initConfigs.image }}
           imagePullPolicy: IfNotPresent
           command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.redis.url . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
       containers:
@@ -56,9 +56,14 @@ spec:
           #    port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
       {{- end }}
       {{- with .Values.affinity }}
       affinity:

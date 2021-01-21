@@ -32,7 +32,7 @@ data:
         Merge_Log On
         K8S-Logging.Parser {{ .Values.config.k8sLoggingParser }}
     [Output]
-        Name loki
+        Name grafana-loki
         Match *
         {{- if and .Values.loki.user .Values.loki.password }}
         Url {{ .Values.loki.serviceScheme }}://{{ .Values.loki.user }}:{{ .Values.loki.password }}@{{ tpl .Values.loki.serviceName . }}:{{ .Values.loki.servicePort }}{{ .Values.loki.servicePath }}

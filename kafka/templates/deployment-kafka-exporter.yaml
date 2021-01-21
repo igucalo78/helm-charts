@@ -38,8 +38,13 @@ spec:
       affinity:
 {{ toYaml .Values.prometheus.kafka.affinity | indent 8 }}
 {{- end }}
-{{- if .Values.prometheus.kafka.nodeSelector }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-{{ toYaml .Values.prometheus.kafka.nodeSelector | indent 8 }}
-{{- end }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
 {{- end }}
