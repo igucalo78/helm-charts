@@ -180,6 +180,7 @@ configurator:
     provisionerPort: 31610
 
 4g-radio-controller:
+  # Enable or disable the component
   enabled: true
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
@@ -190,10 +191,19 @@ configurator:
     pullPolicy: IfNotPresent
 
   config:
+    # If you are using the secure HTTPS protocol for the Kubernetes API, enable this option
     https: true
+
+    # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
+
+    # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
+
+    # Enable if you want the Layer3 pods to be deleted once dRAX is deleted
     cleanup: true
+
+    # Redis settings, can be reached through Kubernetes Advertise address, or can set this manually if the node IP where Redis is installed is known. This can be in situations where we want the Layer3 to communicate to Redis on the same node for latency purposes
     redis:
       hostname: "{{ .Values.global.kubeIp }}"
       port: 32000

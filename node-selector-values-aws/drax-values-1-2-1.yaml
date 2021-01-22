@@ -179,6 +179,7 @@ configurator:
     provisionerPort: 31610
 
 4g-radio-controller:
+  # Enable or disable the component
   enabled: true
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
@@ -190,9 +191,13 @@ configurator:
 
   config:
     https: true
+    # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
+
     l3Namespace: "{{ .Release.Namespace }}"
     cleanup: true
+
+    # Redis settings, can be reached through Kubernetes Advertise address, or can set this manually if the node IP where Redis is installed is known. This can be in situations where we want the Layer3 to communicate to Redis on the same node for latency purposes
     redis:
       hostname: "10.8.0.2"
       port: 32000
