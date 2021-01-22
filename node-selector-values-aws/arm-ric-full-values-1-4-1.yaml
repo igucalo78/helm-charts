@@ -109,9 +109,6 @@ acc-sys-dashboard:
       draxName: "{{ .Values.global.draxName }}"
 
   metrics-server:
-    image:
-      architecture: arm64
-
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"

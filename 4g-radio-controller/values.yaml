@@ -10,6 +10,10 @@ image:
   repository: accelleran/drax-oran-ctrl
   pullPolicy: IfNotPresent
 
+jobs:
+  preDelete:
+    image: accelleran/acc-generic-img:0.4.1
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""

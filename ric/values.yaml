@@ -262,7 +262,7 @@ influxdb:
 
 vector:
   # Enable/disable installation of Vector 
-  enabled: false
+  enabled: true
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:

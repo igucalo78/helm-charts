@@ -29,7 +29,7 @@ spec:
       {{- end }}
       containers:
       - name: pre-delete-job
-        image: accelleran/acc-generic-img:0.1.0
+        image: {{ .Values.jobs.preDelete.image }}
         command:
           - sh
           - "-c"
