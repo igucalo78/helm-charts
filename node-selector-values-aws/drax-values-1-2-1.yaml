@@ -190,7 +190,7 @@ configurator:
 
   config:
     https: true
-    orchestratorUrl: "10.8.0.2"
+    orchestratorUrl: "{{ .Values.global.kubeIp }}"
     l3Namespace: "{{ .Release.Namespace }}"
     cleanup: true
     redis:
