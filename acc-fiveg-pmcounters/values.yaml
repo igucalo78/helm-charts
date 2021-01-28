@@ -35,7 +35,8 @@ image:
 
 strategyType: Recreate
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
