@@ -33,6 +33,14 @@ image:
   repository: accelleran/acc-fiveg-pmcounters
   pullPolicy: IfNotPresent
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "0.5.0"
+
+initConfig:
+  kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+
 strategyType: Recreate
 
 imagePullSecrets:

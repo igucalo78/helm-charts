@@ -14,17 +14,17 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.4.2
+version: 1.5.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.4.2
+appVersion: 1.5.0
 
 # Dependencies
 dependencies:
   - name: acc-kafka
     condition: acc-kafka.enabled
-    version: 0.1.1
+    version: 0.2.0
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-helm
     version: 1.0.0
@@ -33,7 +33,7 @@ dependencies:
     version: 3.2.1
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
-    version: 0.20.0
+    version: 0.21.0
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.43.0
@@ -64,7 +64,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
-    version: 0.1.1
+    version: 0.2.0
     repository: https://accelleran.github.io/helm-charts/
 
 

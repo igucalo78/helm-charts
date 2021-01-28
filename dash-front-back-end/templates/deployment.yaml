@@ -22,10 +22,10 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: check-kafka
-          image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
-          imagePullPolicy: IfNotPresent
-          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfigs.kafkaService . }}; do echo $(date) [CHECK-SERVICES] Waiting for Kafka at {{ tpl .Values.initConfigs.kafkaService . }}; sleep 2; done']
+        - name: {{ .Chart.Name }}-check-kafka
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'echo KAFKA_URL="{{ tpl .Values.initConfig.kafkaUrl . }}" > kafka_url.py && python3 kafka-test.py']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

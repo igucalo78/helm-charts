@@ -27,6 +27,11 @@ spec:
       serviceAccountName: {{ include "acc-kafka.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-check-zookeeper
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.env.KAFKA_ZOOKEEPER_CONNECT . }}; do echo $(date) [CHECK-SERVICES] Waiting for zookeeper at {{ tpl .Values.env.KAFKA_ZOOKEEPER_CONNECT . }}; sleep 2; done']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
