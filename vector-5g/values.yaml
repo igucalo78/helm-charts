@@ -16,6 +16,10 @@ fullnameOverride: ""
 image:
   pullPolicy: IfNotPresent
   repository: accelleran/vector
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "0.5.1"
 imagePullSecrets:
 - name: accelleran-secret
 ingress:
@@ -25,9 +29,9 @@ ingress:
   - host: chart-example.local
     paths: []
   tls: []
-initConfigs:
+initConfig:
   influxdbService: ric-influxdb-api:8086
-  kafkaService: ric-kafka:9092
+  kafkaUrl: ric-kafka:9092
 nameOverride: ""
 nodeSelector: {}
 draxNodeSelectorEnabled: "false"

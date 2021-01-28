@@ -270,8 +270,8 @@ vector:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  initConfigs:
-    kafkaService: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+  initConfig:
+    kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
     influxdbService: "{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086"
 
   config:
@@ -303,8 +303,8 @@ vectorfiveg:
       port: 31090
       topic: 5gmessages
 
-  initConfigs:
-    kafkaService: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+  initConfig:
+    kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
     influxdbService: "{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086"
 
 acc-fiveg-pmcounters:

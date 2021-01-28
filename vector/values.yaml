@@ -10,13 +10,18 @@ image:
   repository: accelleran/vector
   pullPolicy: IfNotPresent
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "0.5.1"
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-initConfigs:
-  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
+initConfig:
+  kafkaUrl: "kafka.{{ .Release.Namespace }}:9092"
   influxdbService: "influxdb-api.{{ .Release.Namespace }}:8086"
 
 config:
