@@ -25,7 +25,7 @@ spec:
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', "echo "KAFKA_URL='{{ tpl .Values.initConfig.kafkaUrl . }}'" > kafka_url.py && python3 kafka-test.py"]
+          command: ['sh', '-c', 'echo "\u0022"KAFKA_URL="\u0027"{{ tpl .Values.initConfig.kafkaUrl . }}"\u0027""\u0022" > kafka_url.py && python3 kafka-test.py']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
