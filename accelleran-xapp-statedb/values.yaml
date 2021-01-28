@@ -47,14 +47,18 @@ image:
   repository: accelleran/acc-state-db
   pullPolicy: IfNotPresent
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "0.5.1"
+
+initConfig:
+  kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
-
-initConfigs:
-  image: accelleran/acc-generic-img:latest
-  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
 
 xappFrameworkConfig:
   name: "state-monitor"
