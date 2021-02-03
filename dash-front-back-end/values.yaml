@@ -80,6 +80,9 @@ config:
   LteRadioControllerLabel: "4G-Radio-Controller"
   apiUrl: "10.20.20.20"
   websocketPort: "31316"
+  kafkaTopics:
+    - "5gmessages"
+    - "Topic_State"
 
 ingress:
   enabled: false

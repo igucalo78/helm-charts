@@ -26,6 +26,7 @@ data:
         "pcixAppPort": "{{ tpl .Values.config.pcixAppPort . }}",
         "ksqldbPodName": "{{ tpl .Values.config.ksqldbPodName . }}",
         "ksqldbPort": "{{ tpl .Values.config.ksqldbPort . }}",
-        "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}" 
+        "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}",
+        "kafkaTopics": {{ tpl .Values.config.kafkaTopics . | toJson }}
       }
     }
