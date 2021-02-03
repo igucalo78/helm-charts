@@ -27,6 +27,6 @@ data:
         "ksqldbPodName": "{{ tpl .Values.config.ksqldbPodName . }}",
         "ksqldbPort": "{{ tpl .Values.config.ksqldbPort . }}",
         "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}",
-        "kafkaTopics": {{ tpl .Values.config.kafkaTopics . | toJson }}
+        "kafkaTopics": {{ .Values.config.kafkaTopics | toJson }}
       }
     }
