@@ -3,10 +3,10 @@ config:
   influx:
     database: db_5G
     hostname: 10.55.1.2
-    namespace: default
+    namespace: uemeasurement
     password: password
     port: 30303
-    type: influxdb_metrics
+    type: influxdb_logs
     username: admin
   kafka:
     hostname: 10.55.1.2

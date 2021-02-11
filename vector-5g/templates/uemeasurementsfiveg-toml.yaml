@@ -41,62 +41,28 @@ data:
       hooks.process = """
       function (event, emit)
         m = {}
-        m.metric = {
-          name = "",
+        m.log = {
           timestamp = os.date("!*t"),
-          kind = "absolute",
-          tags = {},
-          gauge = {
-            value = 0.0
-          }
+          nrCellId = "",
+          ueId = "",
+          measurement = {}
         }
         for f, v in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
           temp = m
-          temp.metric.name = "ssbRsrp"
-          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo[f].NeighbourCellInfo.NrCgi.NrCellId
-          temp.metric.tags.cellId = cellId
-          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
-          temp.metric.gauge.value = v.NeighbourCellInfo.SsbRsrpResult
-          emit(temp)
-        end
-        for i,j in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
-          temp = m
-          temp.metric.name = "ssbRsrq"
-          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo[i].NeighbourCellInfo.NrCgi.NrCellId
-          temp.metric.tags.cellId = cellId
-          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
-          temp.metric.gauge.value = j.NeighbourCellInfo.SsbRsrqResult
-          emit(temp)
-        end
-        for k, l in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
-          temp = m
-          temp.metric.name = "ssbSinr"
-          cellId = event.log.RrcMeasurementReportResultInfo.CellInfo[k].NeighbourCellInfo.NrCgi.NrCellId
-          temp.metric.tags.cellId = cellId
-          temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
-          temp.metric.gauge.value = l.NeighbourCellInfo.SsbSinrResult
+          temp.log.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+          temp.log.nrCellId = v.NeighbourCellInfo.NrCgi.NrCellId
+          temp.log.measurement.ssbRsrp = v.NeighbourCellInfo.SsbRsrpResult
+          temp.log.measurement.ssbRsrq = v.NeighbourCellInfo.SsbRsrqResult
+          temp.log.measurement.ssbSinr = v.NeighbourCellInfo.SsbSinrResult
           emit(temp)
         end
         temp = m
-        temp.metric.name = "ssbRsrp"
-        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
-        temp.metric.tags.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
-        temp.metric.tags.cellId = cellId
-        temp.metric.gauge.value = event.log.ServingCellInfo.SsbRsrpResult
-        emit(temp)
-        temp = m
-        temp.metric.name = "ssbRsrq"
-        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
-        temp.metric.tags.ueId = event.log.GnbCuCpUeId
-        temp.metric.tags.cellId = cellId
-        temp.metric.gauge.value = event.log.ServingCellInfo.SsbRsrqResult
-        emit(temp)
-        temp = m
-        temp.metric.name = "ssbSinr"
-        cellId = event.log.ServingCellInfo.NrCgi.NrCellId
-        temp.metric.tags.ueId = event.log.GnbCuCpUeId
-        temp.metric.tags.cellId = cellId
-        temp.metric.gauge.value = event.log.ServingCellInfo.SsbSinrResult
+        nrCellId = event.log.ServingCellInfo.NrCgi.NrCellId
+        temp.log.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+        temp.log.nrCellId = nrCellId
+        temp.log.measurement.ssbRsrp = event.log.ServingCellInfo.SsbRsrpResult
+        temp.log.measurement.ssbRsrq = event.log.ServingCellInfo.SsbRsrqResult
+        temp.log.measurement.ssbSinr = event.log.ServingCellInfo.SsbSinrResult
         emit(temp)
     
       end
@@ -107,6 +73,7 @@ data:
     [sinks.outUeMeas]
       # General
       bucket = "vector-bucket"
+      tags = ["nrCellId", "ueId"]
       database = "{{ .Values.config.influx.database }}"
       endpoint =  "http://{{ tpl .Values.config.influx.hostname . }}:{{ .Values.config.influx.port}}/"
       inputs = ["lua"]
