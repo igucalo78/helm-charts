@@ -38,6 +38,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  enabled: false
   type: ClusterIP
   port: 80
 
@@ -74,6 +75,11 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 
