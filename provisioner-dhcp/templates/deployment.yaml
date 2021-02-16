@@ -26,7 +26,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: prov-dhcp-conf

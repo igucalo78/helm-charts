@@ -10,6 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
+# For mounting the accelleran license
 accelleranLicense:
   enabled: true
   licenseSecretName: accelleran-license

@@ -10,6 +10,11 @@ image:
   repository: accelleran/drax-oran-ctrl
   pullPolicy: IfNotPresent
 
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: true
+  licenseSecretName: accelleran-license
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""

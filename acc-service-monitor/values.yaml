@@ -10,6 +10,11 @@ image:
   repository: accelleran/acc-service-monitor
   pullPolicy: IfNotPresent
 
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: true
+  licenseSecretName: accelleran-license
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
