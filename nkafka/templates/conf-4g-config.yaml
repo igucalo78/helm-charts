@@ -7,15 +7,21 @@ data:
     protobuf_file="messages_4g.pb"
 
     [options]
-    timestamp_name="kafka_time"
-    rewrite_timestamp="insert"
-    max_len="1048756"
-    timeout="1000"
-    mask="UeMasked"
-    seq_mapper="true"
-    threads="1"
-    invert_service="true"
-    replicate_messages="true"
+    topic="{{ tpl .Values.configs.kafkaPublishTopic . }}"
+    rewrite_timestamp="never"
+    max_len=1048756
+    timeout=1000
+    # ueRicID = False, ue_generic true
+    mask={{ .Values.configs.genericUeId }}
+    # Should be none, how to map vector to meesgae
+    seq_mapper="{{ tpl .Values.configs.seqMapper . }}"
+    threads=1
+    invert_service=false
+    replicate_messages=false
+    compact=true
+    offset="auto"
+    # puts the nats of the topic of teh nats subject, put it in the acual message
+    subject="topic"
 
 
     [[translate]]
@@ -23,7 +29,7 @@ data:
     protobuf_def=".BeaconPB.Beacon_PeerMessage"
 
     [[translate]]
-    topic="Topic_OPENRAN.>"
+    topic="Topic_OPENRAN"
     protobuf_def=".OpenRANPB.OpenRAN_peerMessage"
 
     [[translate]]
@@ -31,10 +37,9 @@ data:
     protobuf_def=".OpenRANDataPB.Message"
 
     [[translate]]
-    topic="Topic_OPENRAN_COMMANDS.>"
+    topic="Topic_OPENRAN_COMMANDS"
     protobuf_def=".OpenRANCommandsPB.OpenRAN_commandMessage"
 
     [[translate]]
-    topic="Topic_L2_STATS.>"
+    topic="Topic_L2_STATS"
     protobuf_def=".L2StatsPB.L2StatsMessage"
-

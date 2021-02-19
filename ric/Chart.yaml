@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.5.8
+version: 1.5.9
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.5.8
+appVersion: 1.5.9
 
 # Dependencies
 dependencies:
@@ -26,8 +26,8 @@ dependencies:
     condition: acc-kafka.enabled
     version: 0.2.0
     repository: https://accelleran.github.io/helm-charts/
-  - name: nkafka-helm
-    version: 1.0.0
+  - name: nkafka-4g
+    version: 2.0.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     version: 3.2.5

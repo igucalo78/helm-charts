@@ -25,29 +25,26 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: check-nats
-          image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
-          imagePullPolicy: IfNotPresent
-          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfigs.natsService . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.initConfigs.natsService . }}; sleep 2; done']
-        - name: check-kafka
-          image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
-          imagePullPolicy: IfNotPresent
-          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfigs.kafkaService . }}; do echo $(date) [CHECK-SERVICES] Waiting for Kafka at {{ tpl .Values.initConfigs.kafkaService . }}; sleep 2; done']
+        - name: {{ .Chart.Name }}-check-nats
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.natsUrl . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.natsUrl . }}; sleep 2; done']
+        - name: {{ .Chart.Name }}-check-kafka
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
-          env:
-            - name: RUST_LOG
-              value: info
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: conf-4g-config
               mountPath: /4GConfig.toml 
               subPath: "4GConfig.toml"
           command: ["/nkafka"]
-          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "producer"]
+          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
 #          ports:
 #            - name: http
 #              containerPort: 80

@@ -4,24 +4,34 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
-
 image:
-  repository: accelleran/dash-nkafka
+  repository: accelleran/nkafka_5g
   pullPolicy: IfNotPresent
+  tag: ""
+
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
 
 imagePullSecrets: 
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-kafkaUrl: "kafka.{{ .Release.Namespace }}:9092"
-natsUrl: "nats://nats-service.{{ .Release.Namespace }}:4222"
-# args: ["producer", "--kafka", "acc-dash-kafka:9092", "--pb", "/messages.pb", "--group", "helm-demo", "--rewrite-time", "insert", "--seq-to-map", "--nats", "nats://nats-service:4222", "--invert", "--replicate", "--threads", "1"]
+kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
+natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
-initConfigs:
-  natsService: "nats-service.{{ .Release.Namespace }}:4222"
-  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
+configs:
+  # The Topic on Kafka where NKafka will publish the data
+  kafkaPublishTopic: "test2"
+  # If set to false, will use the ueRicId. If set to true, will use the generic UE ID shown on teh dashboard. WARNING: if using generic UE ID, you will not have the ueRicId which is necessary for some dRAX commands.
+  genericUeId: "false"
+  # How vectors will be published to JSON Kafka messages. Default set to none.
+  seqMapper: "none"
+  # The log level can be commented out, or set to info or debug
+  logLevel: info
 
 serviceAccount:
   # Specifies whether a service account should be created
