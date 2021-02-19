@@ -155,9 +155,10 @@ configurator:
 
     # Pre-provision the cells, create a list of serial: name as shown below
     cells:
-      E1010-GC01-ACC171109000105: Parking
-      E1010-GC01-ACC171109000088: Dageraadplats
+      E1010-GC01-ACC171109000105: Warehouse
+      E1010-GC01-ACC171109000088: Production2
       E1011-GC01-ACC170620000069: Marnixplaats
+      E1010-GC01-ACC171109000029: Production1
 
     # Loki hostname and port
     loki:
