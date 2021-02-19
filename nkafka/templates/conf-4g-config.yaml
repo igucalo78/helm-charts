@@ -8,7 +8,7 @@ data:
 
     [options]
     topic="{{ tpl .Values.configs.kafkaPublishTopic . }}"
-    rewrite_timestamp="never"
+    rewrite_timestamp="insert"
     max_len=1048756
     timeout=1000
     # ueRicID = False, ue_generic true
@@ -19,7 +19,7 @@ data:
     invert_service=false
     replicate_messages=false
     compact=true
-    offset="auto"
+    offset="0"
     # puts the nats of the topic of teh nats subject, put it in the acual message
     subject="topic"
 
