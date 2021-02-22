@@ -11,17 +11,16 @@ data:
     rewrite_timestamp="insert"
     max_len=1048756
     timeout=1000
-    # ueRicID = False, ue_generic true
-    mask={{ .Values.configs.genericUeId }}
-    # Should be none, how to map vector to meesgae
+    mask=true
     seq_mapper="{{ tpl .Values.configs.seqMapper . }}"
     threads=1
     invert_service=false
     replicate_messages=false
     compact=true
     offset="0"
-    # puts the nats of the topic of teh nats subject, put it in the acual message
     subject="topic"
+    ric_id_name="{{ .Values.configs.ueRicIdName }}"
+    drax_id_name="{{ .Values.configs.ueDraxIdName}}"
 
 
     [[translate]]

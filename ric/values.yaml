@@ -65,6 +65,9 @@ nkafka-4g:
     seqMapper: "none"
     # The log level can be commented out, or set to info or debug
     logLevel: info
+    ueRicIdName: "ueRicId"
+    ueDraxIdName: "ueDraxId"
+
 
 acc-sys-dashboard:
   grafana:

@@ -32,6 +32,8 @@ configs:
   seqMapper: "none"
   # The log level can be commented out, or set to info or debug
   logLevel: info
+  ueRicIdName: "ueRicId"
+  ueDraxIdName: "ueDraxId"
 
 serviceAccount:
   # Specifies whether a service account should be created
