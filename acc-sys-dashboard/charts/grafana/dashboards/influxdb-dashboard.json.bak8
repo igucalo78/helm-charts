@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1614167373589,
+  "id": 2,
+  "iteration": 1602497549397,
   "links": [],
   "panels": [
     {
@@ -24,13 +25,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -54,10 +48,10 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -67,7 +61,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$UE",
+          "alias": "$eNB",
           "groupBy": [
             {
               "params": [
@@ -139,7 +133,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:75",
           "decimals": 1,
           "format": "Kbits",
           "label": "sum(DL Throughput)",
@@ -149,7 +142,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:76",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -173,12 +165,6 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -210,6 +196,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "pluginVersion": "6.6.2",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -295,13 +282,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -325,10 +305,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -437,13 +416,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -467,10 +439,10 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -580,13 +552,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -610,10 +575,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -720,13 +684,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -750,10 +707,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1371,13 +1327,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -1401,10 +1350,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1512,13 +1460,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -1542,10 +1483,10 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1661,13 +1602,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
@@ -1691,10 +1625,10 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
+      "pluginVersion": "6.6.2",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1805,22 +1739,21 @@
       }
     }
   ],
-  "refresh": "",
-  "schemaVersion": 26,
+  "refresh": "2s",
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": "*",
+        "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
         "datasource": "InfluxDB",
         "definition": "SELECT \"ueRicId\" FROM (SELECT \"ueRicId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -1828,7 +1761,7 @@
         "name": "UE",
         "options": [],
         "query": "SELECT \"ueRicId\" FROM (SELECT \"ueRicId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1839,15 +1772,15 @@
         "useTags": false
       },
       {
-        "allValue": "*",
+        "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
+          "tags": [],
           "text": "All",
           "value": "$__all"
         },
         "datasource": "InfluxDB",
         "definition": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -1855,7 +1788,7 @@
         "name": "eNB",
         "options": [],
         "query": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"df.rsrp\" WHERE time > now() - 10s )",
-        "refresh": 2,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1890,5 +1823,5 @@
   "timezone": "",
   "title": "Cell Monitoring",
   "uid": "r9WbSHvGz",
-  "version": 1
+  "version": 2
 }
