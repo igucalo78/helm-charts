@@ -9,14 +9,14 @@ data:
     [options]
     topic="{{ tpl .Values.configs.kafkaPublishTopic . }}"
     rewrite_timestamp="insert"
-    max_len=1048756
-    timeout=1000
-    mask=true
+    max_len="1048756"
+    timeout="1000"
+    mask="true"
     seq_mapper="{{ tpl .Values.configs.seqMapper . }}"
-    threads=1
-    invert_service=false
-    replicate_messages=false
-    compact=true
+    threads="1"
+    invert_service="false"
+    replicate_messages="false"
+    compact="true"
     offset="0"
     subject="topic"
     ric_id_name="{{ .Values.configs.ueRicIdName }}"
@@ -28,7 +28,7 @@ data:
     protobuf_def=".BeaconPB.Beacon_PeerMessage"
 
     [[translate]]
-    topic="Topic_OPENRAN"
+    topic="Topic_OPENRAN.>"
     protobuf_def=".OpenRANPB.OpenRAN_peerMessage"
 
     [[translate]]
@@ -36,9 +36,9 @@ data:
     protobuf_def=".OpenRANDataPB.Message"
 
     [[translate]]
-    topic="Topic_OPENRAN_COMMANDS"
+    topic="Topic_OPENRAN_COMMANDS.>"
     protobuf_def=".OpenRANCommandsPB.OpenRAN_commandMessage"
 
     [[translate]]
-    topic="Topic_L2_STATS"
+    topic="Topic_L2_STATS.>"
     protobuf_def=".L2StatsPB.L2StatsMessage"
