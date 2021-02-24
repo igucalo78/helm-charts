@@ -91,7 +91,9 @@ spec:
         - name: conf-4g-config
           configMap:
             name: conf-4g-config
+        {{ if .Values.accelleranLicense.enabled }}
         - name: accelleran-license
           secret:
             secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+        {{ end }}
 
