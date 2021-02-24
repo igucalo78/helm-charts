@@ -10,11 +10,6 @@ image:
   repository: accelleran/accelleran-xapp-api
   pullPolicy: IfNotPresent
 
-# For mounting the accelleran license
-accelleranLicense:
-  enabled: true
-  licenseSecretName: accelleran-license
-
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""

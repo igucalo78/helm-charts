@@ -39,11 +39,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           {{ if .Values.accelleranLicense.enabled }}
           image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
-          command: ["/encrypt"]
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
-          command: ["/nkafka"]
           {{ end }}
+          command: ["/nkafka"]
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: RUST_LOG

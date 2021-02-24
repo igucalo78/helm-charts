@@ -11,11 +11,6 @@ image:
   repository: accelleran/dash-front-back-end
   pullPolicy: IfNotPresent
 
-# For mounting the accelleran license
-accelleranLicense:
-  enabled: true
-  licenseSecretName: accelleran-license
-
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
