@@ -47,6 +47,12 @@ spec:
             - name: conf-4g-config
               mountPath: /4GConfig.toml 
               subPath: "4GConfig.toml"
+            {{ if .Values.accelleranLicense.enabled }}
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+            {{ end }}
           command: ["/nkafka"]
           args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
 #          ports:
