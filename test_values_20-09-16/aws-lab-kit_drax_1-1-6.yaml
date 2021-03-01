@@ -3,6 +3,9 @@ global:
   kubeIp: "10.55.1.2"
 
 nats:
+  nodeSelector:
+    draxName: "edge"
+
   # To enable/disable the installation of NATS
   enabled: true
 
@@ -15,6 +18,10 @@ nats:
       nodePort: 31000
 
 redis:
+
+  nodeSelector:
+    draxName: "edge"
+
   # To enable or disable the installation of redis
   enabled: true
   
@@ -36,6 +43,9 @@ redis:
     deleteAfterDay: 7
 
 provisioner-dhcp:
+  nodeSelector:
+    draxName: "edge"
+
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
 
@@ -56,6 +66,9 @@ provisioner-dhcp:
     staticRouteGateway: 10.22.10.52
 
 provisioner:
+  nodeSelector:
+    draxName: "edge"
+
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
 
@@ -90,10 +103,16 @@ provisioner:
     provisionerPort: 16002 
 
 ntp-server:
+  nodeSelector:
+    draxName: "edge"
+
   # To enable/disable the installation of the dRAX NTP Server for cells
   enabled: true 
 
 configurator:
+  nodeSelector:
+    draxName: "edge"
+
   # To enabled or disable the installation of the dRAX Configurator
   enabled: false
 
@@ -128,6 +147,9 @@ configurator:
     provisionerPort: 31610
 
 4g-radio-controller:
+  nodeSelector:
+    draxName: "edge"
+
   enabled: true
   image:
     pullPolicy: IfNotPresent
@@ -142,5 +164,8 @@ configurator:
       port: 32000
 
 acc-l2-update:
+  nodeSelector:
+    draxName: "edge"
+
   # Enable the server that serves the Layer2 update files
   enabled: true
