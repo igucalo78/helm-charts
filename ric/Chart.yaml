@@ -24,7 +24,7 @@ appVersion: 1.5.12
 dependencies:
   - name: acc-kafka
     condition: acc-kafka.enabled
-    version: 0.2.0
+    version: 0.3.0
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-4g
     version: 2.1.0

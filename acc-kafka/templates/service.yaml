@@ -16,11 +16,9 @@ spec:
       {{ end }}
     - port: {{ .Values.env.JMX_PORT }}
       protocol: TCP
-      nodePort: 31095
       name: "jmx"
     - port: {{ .Values.jmxExporter.service.port }}
       protocol: TCP
-      nodePort: 31444
       name: "jmxexporter"
   {{ if .Values.service.loadBalancerIP }}
   loadBalancerIP: {{ tpl .Values.service.loadBalancerIP . }}

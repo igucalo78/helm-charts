@@ -7,8 +7,8 @@ metadata:
 data:
  config.yaml: |
   startDelaySeconds: 3
-  #hostPort: {{ include "acc-kafka.fullname" . }}:{{ .Values.env.JMX_PORT }}
-  hostPort: 10.55.2.2:31095
+  hostPort: {{ include "acc-kafka.fullname" . }}:{{ .Values.env.JMX_PORT }}
+  #hostPort: 10.55.2.2:31095
   username:
   password: 
   rules:
