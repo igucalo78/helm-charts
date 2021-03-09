@@ -31,6 +31,8 @@ dashboards:
       file: dashboards/5g-monitoring-dashboard.json
     5g-pm-counters:
       file: dashboards/5g-pm-counters.json
+    kafka-cluster-monitoring:
+      file: dashboards/kafka-cluster-monitoring.json
 dashboardsConfigMaps: {}
 datasources:
   prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
