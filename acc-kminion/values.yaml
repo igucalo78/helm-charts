@@ -146,3 +146,8 @@ podSecurityPolicy:
 podsLabels: {}
 podsAnnotations: {}
 deploymentLabels: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
