@@ -48,8 +48,8 @@ acc-kminion:
   enabled: true
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
-    draxNodeSelector:
-      draxName: "{{ .Values.global.draxName }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
 
 nkafka-4g:
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
