@@ -160,20 +160,20 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{ - if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
         {{ if .Values.nodeSelector }}
-          {{ - toYaml .Values.nodeSelector | nindent 8 }}
-          {{ end }}
-          {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
-          {{ - tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
-          {{ end }}
-      {{ - end }}
-    {{- with .Values.affinity }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
+      {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- end }}
