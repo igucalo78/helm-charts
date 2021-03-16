@@ -25,24 +25,40 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: {{ .Chart.Name }}-check-redis
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
         {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
         - name: {{ .Chart.Name }}-flush-redis
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
         {{ end }}
         - name: {{ .Chart.Name }}-check-kafka
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.initConfig.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config

@@ -42,6 +42,12 @@ strategyType: Recreate
 # Version of the xApp Core to use
 version: "{{ .Chart.AppVersion }}"
 
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: true
+  licenseSecretName: accelleran-license
+
+
 # Image settings for the xApp Core
 image:
   repository: accelleran/acc-state-db
