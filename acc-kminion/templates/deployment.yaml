@@ -32,6 +32,7 @@ spec:
         prometheus.io/path: "/metrics"
         {{- end }}
       labels:
+        {{- include "kafka-minion.draxLabels" . | nindent 8 }}
         app.kubernetes.io/name: {{ include "kafka-minion.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/name: {{ include "kafka-minion.name" . }}

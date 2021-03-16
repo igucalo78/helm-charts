@@ -8,6 +8,7 @@ metadata:
     {{- toYaml .Values.service.annotations | nindent 4 }}
   {{- end }}
   labels:
+    {{- include "kafka-minion.draxLabels" . | nindent 4 }}
     helm.sh/chart: {{ include "kafka-minion.chart" . }}
     app.kubernetes.io/name: {{ include "kafka-minion.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
