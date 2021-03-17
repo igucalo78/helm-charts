@@ -36,7 +36,7 @@ acc-kafka:
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
 
   draxNodeSelector:
-    draxName: "{{ .Values.global.draxName }}"
+    draxName: "edge"
 
   zookeeper:
     enabled: true
@@ -53,7 +53,7 @@ acc-kminion:
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
-    draxName: "{{ .Values.global.draxName }}"
+    draxName: "edge"
 
 nkafka-4g:
   draxNodeSelectorEnabled: "true"
