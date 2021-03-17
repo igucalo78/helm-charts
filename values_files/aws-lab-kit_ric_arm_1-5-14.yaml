@@ -48,6 +48,9 @@ acc-kafka:
 acc-kminion:
   enabled: true
 
+  kafka:
+    brokers: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
