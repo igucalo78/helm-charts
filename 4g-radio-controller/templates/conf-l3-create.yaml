@@ -61,7 +61,11 @@ data:
     spec: 
       containers:
         - name: l3-container
+          {{ if .Values.accelleranLicense.enabled }}
+          image: accelleran/drax-l3-<!duplex!>-license:{{ tpl .Values.config.l3Version . }}
+          {{ else }}
           image: accelleran/drax-l3-<!duplex!>:{{ tpl .Values.config.l3Version . }}
+          {{ end }}
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /data/l3.bootstrap
