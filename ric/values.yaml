@@ -124,10 +124,14 @@ acc-sys-dashboard:
         static_configs:
           - targets:
             - "{{ .Values.global.kubeIp }}:30515"
-      - job_name: kafkaMonitoring
+      - job_name: kafkaMonitoringJmx
         static_configs:
           - targets:
             - "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:5556"
+      - job_name: kafkaMonitoringKminion
+        static_configs:
+          - targets:
+            - "ric-acc-kminion:8080"
 
   kube-eagle:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
