@@ -85,7 +85,7 @@ config:
     - "accelleran.drax.5g.ric.raw.cu_state"
     - "accelleran.drax.5g.ric.raw.ue_measurements"
     - "accelleran.drax.4g.ric.raw.service_discovery"
-    - "accelleran.drax.all.ric.processed.auto_neighbor_rel"
+    - "accelleran.drax.all.ric.processed.anr"
 
 ingress:
   enabled: false
