@@ -68,6 +68,12 @@ data:
           {{ end }}
           imagePullPolicy: Always
           volumeMounts:
+            {{ if .Values.accelleranLicense.enabled }}
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+            {{ end }}
             - mountPath: /data/l3.bootstrap
               name: l3-bootstrap-<!lowInstanceId!>
               subPath: "l3.bootstrap"
@@ -77,6 +83,11 @@ data:
           securityContext:
             privileged: true
       volumes:
+        {{ if .Values.accelleranLicense.enabled }}
+        - name: accelleran-license
+          secret:
+            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+        {{ end }}
         - name: l3-bootstrap-<!lowInstanceId!>
           configMap:
             name: l3-bootstrap-<!lowInstanceId!>

@@ -25,29 +25,17 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: {{ .Chart.Name }}-check-redis
-          {{ if .Values.accelleranLicense.enabled }}
-          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
-          {{ else }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
-          {{ end }}
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
         {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
         - name: {{ .Chart.Name }}-flush-redis
-          {{ if .Values.accelleranLicense.enabled }}
-          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
-          {{ else }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
-          {{ end }}
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
         {{ end }}
         - name: {{ .Chart.Name }}-check-kafka
-          {{ if .Values.accelleranLicense.enabled }}
-          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
-          {{ else }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
-          {{ end }}
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.initConfig.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
       containers:
@@ -64,6 +52,12 @@ spec:
             - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
               mountPath: /src/xapp/xapp_configuration.py
               subPath: "xapp_configuration.py"
+            {{ if .Values.accelleranLicense.enabled }}
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+            {{ end }}
           ports:
             - containerPort: {{ .Values.service.port }}
 #          livenessProbe:
@@ -94,6 +88,11 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
+        {{ if .Values.accelleranLicense.enabled }}
+        - name: accelleran-license
+          secret:
+            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+        {{ end }}
         - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
           configMap:
             name: {{ include "accelleran-xapp-statedb.fullname" . }}-config

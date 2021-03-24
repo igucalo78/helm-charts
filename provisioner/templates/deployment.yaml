@@ -44,6 +44,12 @@ spec:
             - name: provisioner-db
               mountPath: /cells.db
               subPath: provisioner-db/cells.db
+            {{ if .Values.accelleranLicense.enabled }}
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+            {{ end }}
           # livenessProbe:
           #  httpGet:
           #    path: /
@@ -77,3 +83,8 @@ spec:
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "provisioner.fullname" . }}{{- end }}
           {{- end -}}
+        {{ if .Values.accelleranLicense.enabled }}
+        - name: accelleran-license
+          secret:
+            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+        {{ end }}
