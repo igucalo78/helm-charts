@@ -87,7 +87,7 @@ xappConfig:
     value: 20
   - name: 'KAFKA_LISTEN_TOPICS'
     type: list
-    value: 'test2, Topic_State'
+    value: 'accelleran.drax.4g.ric.raw.ue_measurements, accelleran.drax.4g.ric.raw.network_state'
   - name: 'periodic_publish'
     type: string
     value: 'True'
