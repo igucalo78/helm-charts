@@ -11,7 +11,7 @@ config:
   kafka:
     hostname: 10.55.1.2
     port: 31090
-    topic: 5gmessages
+    topic: accelleran.drax.5g.ric.raw.ue_measurements
 fullnameOverride: ""
 image:
   pullPolicy: IfNotPresent

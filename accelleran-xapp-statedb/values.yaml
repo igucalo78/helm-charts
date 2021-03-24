@@ -74,8 +74,9 @@ xappConfig:
   logLevel: 20  # CRITICAL=50, ERROR=40, WARNING=30, INFO=20, DEBUG=10, NOTSET=0
   stateDbUrl: '{{ .Values.global.kubeIp }}'
   stateDbPort: 32000
-  kafkaStateTopic: 'Topic_State'
-  kafkaBeaconTopic: 'test2'
+  kafkaStateTopic: 'accelleran.drax.4g.ric.raw.network_state'
+  kafkaBeaconTopic: 'accelleran.drax.4g.ric.raw.service_discovery'
+  kafkaUeMeasTopic: 'accelleran.drax.4g.ric.raw.ue_measurements'
   kafkaUrl: '{{ .Values.global.kubeIp }}'
   kafkaPort: 31090
   expire_timer: 5000000000

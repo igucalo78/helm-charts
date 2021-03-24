@@ -82,9 +82,10 @@ config:
   websocketPort: "31316"
   topologyExpired: 5000
   kafkaTopics:
-    - "5gmessages"
-    - "Topic_State"
-    - "Topic_ANR"
+    - "accelleran.drax.5g.ric.raw.cu_state"
+    - "accelleran.drax.5g.ric.raw.ue_measurements"
+    - "accelleran.drax.4g.ric.raw.service_discovery"
+    - "accelleran.drax.all.ric.processed.auto_neighbor_rel"
 
 ingress:
   enabled: false

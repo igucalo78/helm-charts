@@ -28,7 +28,7 @@ config:
   kafka:
     hostname: "10.20.20.20"
     port: 31090
-    topic: test2
+    topic: accelleran.drax.4g.ric.raw.ue_measurements
   influx:
     hostname: "10.20.20.20"
     port: 30303

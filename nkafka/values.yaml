@@ -29,8 +29,6 @@ kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
 natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 configs:
-  # The Topic on Kafka where NKafka will publish the data
-  kafkaPublishTopic: "test2"
   # If set to false, will use the ueRicId. If set to true, will use the generic UE ID shown on teh dashboard. WARNING: if using generic UE ID, you will not have the ueRicId which is necessary for some dRAX commands.
   genericUeId: "false"
   # How vectors will be published to JSON Kafka messages. Default set to none.

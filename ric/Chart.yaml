@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.5.15
+version: 1.5.17
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.5.15
+appVersion: 1.5.17
 
 # Dependencies
 dependencies:
@@ -31,7 +31,7 @@ dependencies:
     version: 1.4.2
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-4g
-    version: 2.1.0
+    version: 2.2.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     version: 3.2.7
@@ -60,15 +60,15 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: vector
     condition: vector.enabled
-    version: 0.5.0
+    version: 0.6.0
     repository: https://accelleran.github.io/helm-charts/
   - name: vectorfiveg
     condition: vectorfiveg.enabled
-    version: 0.4.3
+    version: 0.5.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
-    version: 0.2.1
+    version: 0.3.0
     repository: https://accelleran.github.io/helm-charts/
 
 

@@ -6,7 +6,7 @@ data:
   cqi.toml: |-
     [sources.inCqi]
       bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
-      group_id = "vectorCqi"
+      group_id = "VECTOR_4G"
       topics = ["{{ tpl .Values.config.kafka.topic . }}"]
       type = "kafka"
 

@@ -23,6 +23,7 @@ data:
             'STATE_DB_URL': '{{ tpl .Values.xappConfig.stateDbUrl . }}',
             'STATE_DB_PORT': {{ .Values.xappConfig.stateDbPort }},
             'KAFKA_STATE_TOPIC': '{{ tpl .Values.xappConfig.kafkaStateTopic . }}',
+            'KAFKA_UE_MEAS_TOPIC': '{{ tpl .Values.xappConfig.kafkaUeMeasTopic . }}',
             'KAFKA_BEACON_TOPIC': '{{ tpl .Values.xappConfig.kafkaBeaconTopic . }}',
             'KAFKA_URL': '{{ tpl .Values.xappConfig.kafkaUrl . }}',
             'KAFKA_PORT': '{{ .Values.xappConfig.kafkaPort }}',
