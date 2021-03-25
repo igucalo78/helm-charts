@@ -62,7 +62,7 @@ data:
       containers:
         - name: l3-container
           image: accelleran/drax-l3-<!duplex!>:{{ tpl .Values.config.l3Version . }}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ tpl .Values.config.l3PullPolicy . }}
           volumeMounts:
             - mountPath: /data/l3.bootstrap
               name: l3-bootstrap-<!lowInstanceId!>

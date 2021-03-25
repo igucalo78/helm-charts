@@ -129,13 +129,18 @@ configurator:
 
 4g-radio-controller:
   enabled: true
+
+  version: "{{ .Chart.AppVersion }}"
+
   image:
     pullPolicy: IfNotPresent
 
   config:
     https: true
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
+    l3Version: "{{ .Chart.AppVersion }}"
     l3Namespace: "{{ .Release.Namespace }}"
+    l3PullPolicy: "IfNotPresent"
     cleanup: true
     redis:
       hostname: "{{ .Values.global.kubeIp }}"
@@ -144,3 +149,9 @@ configurator:
 acc-l2-update:
   # Enable the server that serves the Layer2 update files
   enabled: true
+
+  version: "{{ .Chart.AppVersion }}"
+
+  image:
+    pullPolicy: IfNotPresent
+
