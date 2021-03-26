@@ -24,13 +24,17 @@ appVersion: 1.6.0
 dependencies:
   - name: acc-kafka
     condition: acc-kafka.enabled
-    version: 0.2.0
+    version: 0.3.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: acc-kminion
+    condition: acc-kminion.enabled
+    version: 1.4.2
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-4g
     version: 2.2.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
-    version: 3.2.6
+    version: 3.2.7
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     version: 0.23.0
@@ -40,7 +44,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-service-monitor
     condition: acc-service-monitor.enabled
-    version: 0.5.0
+    version: 0.6.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-service-orchestrator
     condition: acc-service-orchestrator.enabled
@@ -66,6 +70,7 @@ dependencies:
     condition: acc-fiveg-pmcounters.enabled
     version: 0.2.1
     repository: https://accelleran.github.io/helm-charts/
+
 
 
 

@@ -1,6 +1,6 @@
 global:
   # Kubernetes advertise IP, external address used by services
-  kubeIp: "3.64.61.188"
+  kubeIp: "10.55.2.2"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -19,7 +19,7 @@ global:
   #   Value type: string
   #   Example:
   #
-  draxNodeSelectorEnabled: "true"
+  draxNodeSelectorEnabled: "false"
   draxName: "arm1"
 
 acc-kafka:
@@ -31,6 +31,7 @@ acc-kafka:
     KAFKA_BROKER_ID: "0"
     KAFKA_CREATE_TOPICS: "test2:1:1,Topic_State:1:1,5gmessages:1:1"
     KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    JMX_PORT: "9010"
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
 
@@ -43,6 +44,9 @@ acc-kafka:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
+
+acc-kminion:
+  enabled: true
 
 nkafka-4g:
   draxNodeSelectorEnabled: "true"
@@ -109,7 +113,15 @@ acc-sys-dashboard:
         static_configs:
           - targets:
             - "{{ .Values.global.kubeIp }}:30515"
-
+      - job_name: kafkaMonitoringJmx
+        static_configs:
+          - targets:
+            - "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:5556"
+      - job_name: kafkaMonitoringKminion
+        static_configs:
+          - targets:
+            - "ric-acc-kminion:8080"
+ 
   kube-eagle:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
@@ -189,11 +201,9 @@ dash-front-back-end:
     # The IP that is set here must be globally available so that any browser can reach it, so that the front end can communicate to the backend. Preferable, use the publicly exposed IP that can reach the Kubernetes Advertise IP. If only a private Kubernetes Advertise IP is set here, the dRAX Dashbaord will only work when openning a browser on a computer that can reach the private Kuebrnetes Advertise IP.
     apiUrl: "{{ .Values.global.kubeIp }}"
     websocketPort: "31316"
-    topologyExpired: 5000
     kafkaTopics:
       - "5gmessages"
       - "Topic_State"
-      - "Topic_ANR"
 
 acc-service-monitor:
   # Enable/disable installation of the Service Monitor

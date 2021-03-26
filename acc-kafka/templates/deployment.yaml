@@ -49,6 +49,9 @@ spec:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
               protocol: {{ .Values.service.protocol }}
+            - name: jmx
+              containerPort: 9010
+              protocol: TCP 
 #          livenessProbe:
 #            httpGet:
 #              path: /
@@ -59,6 +62,41 @@ spec:
 #              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        - name: "jmx-prometheus-exporter"
+          securityContext:
+            {{- toYaml .Values.jmxExporter.securityContext | nindent 12 }}
+          image: "{{ .Values.jmxExporter.image.repository }}:{{ .Values.jmxExporter.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.jmxExporter.image.pullPolicy }}
+          {{- if .Values.env }}
+          env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key | upper | replace "." "_" }}
+              value: {{ tpl $value $ | quote }}
+            {{- end }}
+          {{- end }}
+          volumeMounts:
+          - mountPath: /opt/jmx_exporter/config.yml
+            subPath: config.yaml
+            name: kafka-jmxexporter
+          ports:
+            - name: {{ .Values.jmxExporter.service.name }}
+              containerPort: {{ .Values.jmxExporter.service.port }}
+              protocol: {{ .Values.jmxExporter.service.protocol }}
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: kafka-jmxexporter
+        configMap:
+          name: {{ include "acc-kafka.fullname" . }}-jmx-config
+
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
         {{ if .Values.nodeSelector }}
