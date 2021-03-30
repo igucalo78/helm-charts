@@ -52,7 +52,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-state-db
     condition: acc-state-db.enabled
-    version: 0.10.0
+    version: 0.11.0
     repository: https://accelleran.github.io/helm-charts/
   - name: influxdb
     condition: influxdb.enabled
