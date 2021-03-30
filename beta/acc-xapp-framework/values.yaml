@@ -20,9 +20,9 @@ accelleran-xapp-anr:
 
   xappConfig:
     logLevel: 20
-    anrTopic: "Topic_ANR"
-    wanrTopic: "Topic_WANR"
-    kafkaTopic: "test2"
+    anrTopic: "accelleran.drax.all.ric.processed.anr"
+    wanrTopic: "accelleran.drax.all.ric.processed.wanr"
+    kafkaTopic: "accelleran.drax.4g.ric.raw.ue_measurements"
     kafkaUrl: "{{ .Values.global.kubeIp }}"
     kafkaPort: "31090"
     convergenceTimerThreshold: 2  # in seconds

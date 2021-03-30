@@ -56,10 +56,11 @@ image:
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
-  tag: "0.5.1"
+  tag: "0.6.0"
 
 initConfig:
   kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+  kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -80,8 +81,9 @@ xappConfig:
   logLevel: 20  # CRITICAL=50, ERROR=40, WARNING=30, INFO=20, DEBUG=10, NOTSET=0
   stateDbUrl: '{{ .Values.global.kubeIp }}'
   stateDbPort: 32000
-  kafkaStateTopic: 'Topic_State'
-  kafkaBeaconTopic: 'test2'
+  kafkaStateTopic: 'accelleran.drax.4g.ric.raw.network_state'
+  kafkaBeaconTopic: 'accelleran.drax.4g.ric.raw.service_discovery'
+  kafkaUeMeasTopic: 'accelleran.drax.4g.ric.raw.ue_measurements'
   kafkaUrl: '{{ .Values.global.kubeIp }}'
   kafkaPort: 31090
   expire_timer: 5000000000

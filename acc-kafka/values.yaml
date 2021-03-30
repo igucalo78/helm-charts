@@ -35,7 +35,7 @@ env:
   KAFKA_ADVERTISED_HOST_NAME: "10.8.0.1"
   KAFKA_ZOOKEEPER_CONNECT: "{{ .Release.Name }}-zookeeper.{{ .Release.Namespace }}:2181"
   KAFKA_BROKER_ID: "0"
-  KAFKA_CREATE_TOPICS: "test2:1:1,Topic_State:1:1,5gmessages:1:1"
+  KAFKA_CREATE_TOPICS: "accelleran.drax.4g.ric.raw.service_discovery:1:1,accelleran.drax.4g.ric.raw.ue_measurements:1:1,accelleran.drax.5g.ric.raw.cu_state:1:1,accelleran.drax.5g.ric.raw.ue_measurements:1:1,accelleran.drax.5g.ric.raw.pm_counters:1:1,accelleran.drax.5g.ric.raw.messages:1:1"
   KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
   JMX_PORT: "9010"
 

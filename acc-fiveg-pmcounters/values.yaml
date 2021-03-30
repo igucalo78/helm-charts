@@ -36,11 +36,11 @@ image:
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
-  tag: "0.5.1"
+  tag: "0.6.0"
 
 initConfig:
   kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
-
+  kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 strategyType: Recreate
 
 imagePullSecrets:
@@ -87,7 +87,7 @@ xappConfig:
     value: 20
   - name: 'KAFKA_LISTEN_TOPICS'
     type: list
-    value: 'test2, Topic_State'
+    value: 'accelleran.drax.4g.ric.raw.ue_measurements, accelleran.drax.4g.ric.raw.network_state'
   - name: 'periodic_publish'
     type: string
     value: 'True'
@@ -99,10 +99,10 @@ xappConfig:
     value: 'none'
   - name: 'PM_COUNTER_TOPIC'
     type: string
-    value: '5gmessages'
+    value: 'accelleran.drax.5g.ric.raw.pm_counters'
   - name: 'PROCESSED_PM_COUNTER_TOPIC'
     type: string
-    value: '5g_pm_counters'
+    value: 'accelleran.drax.5g.ric.processed.pm_counters'
   - name: 'split_message'
     type: string
     value: 'True'

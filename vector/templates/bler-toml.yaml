@@ -6,7 +6,7 @@ data:
   bler.toml: |-
     [sources.inBler]
       bootstrap_servers = "{{ tpl .Values.config.kafka.hostname . }}:{{ .Values.config.kafka.port}}"
-      group_id = "vectorBler" 
+      group_id = "VECTOR_4G_BLER" 
       topics = ["{{ tpl .Values.config.kafka.topic . }}"] 
       type = "kafka" 
 

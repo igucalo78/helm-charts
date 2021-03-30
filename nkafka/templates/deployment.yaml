@@ -14,6 +14,8 @@ spec:
       {{- include "nkafka-helm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
       labels:
         {{- include "nkafka-helm.labels" . | nindent 8 }}
     spec:
@@ -32,7 +34,7 @@ spec:
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
+          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py {{ tpl .Values.initConfig.kafkaTopicsCheck . }}']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -47,6 +49,9 @@ spec:
             - name: conf-4g-config
               mountPath: /4GConfig.toml 
               subPath: "4GConfig.toml"
+            - name: conf-4g-topics
+              mountPath: /4GTopics.toml 
+              subPath: "4GTopics.toml"  
             {{ if .Values.accelleranLicense.enabled }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
@@ -92,6 +97,9 @@ spec:
         - name: conf-4g-config
           configMap:
             name: conf-4g-config
+        - name: conf-4g-topics
+          configMap:
+            name: conf-4g-topics
         {{ if .Values.accelleranLicense.enabled }}
         - name: accelleran-license
           secret:
