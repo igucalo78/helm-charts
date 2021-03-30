@@ -13,6 +13,11 @@ image:
   repository: accelleran/provisioner
   pullPolicy: Always
 
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: false
+  licenseSecretName: accelleran-license
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""

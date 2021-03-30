@@ -9,13 +9,13 @@ data:
     [options]
     topic="accelleran.drax.4g.ric.raw.messages"
     rewrite_timestamp="insert"
-    max_len=1048756
-    timeout=1000
+    max_len="1048756"
+    timeout="1000"
     mask="true"
     seq_mapper="{{ tpl .Values.configs.seqMapper . }}"
-    threads=1
-    invert_service=false
-    replicate_messages=false
+    threads="1"
+    invert_service="false"
+    replicate_messages="false"
     compact="true"
     offset="0"
     subject="topic"

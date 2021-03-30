@@ -6,6 +6,10 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
+accelleranLicense:
+  enabled: false
+  licenseSecretName: accelleran-license
+
 image:
   repository: accelleran/acc-l2-update
   pullPolicy: IfNotPresent

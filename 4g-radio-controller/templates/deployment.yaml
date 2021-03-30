@@ -27,7 +27,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: SERVED_NAMESPACE
@@ -39,6 +43,12 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           volumeMounts:
+            {{ if .Values.accelleranLicense.enabled }}
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+            {{ end }}
 #            - name: acc-oran
 #              mountPath: /data
             - name: bootstrap-config
@@ -111,6 +121,11 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
+        {{ if .Values.accelleranLicense.enabled }}
+        - name: accelleran-license
+          secret:
+            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+        {{ end }}
 #        - name: acc-oran
 #          {{- if .Values.persistence.enabled }}
 #          persistentVolumeClaim:
