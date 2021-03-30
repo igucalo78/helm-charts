@@ -37,7 +37,13 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
+          command: ["/nkafka"]
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: RUST_LOG
               value: {{ .Values.logLevel }}
@@ -46,7 +52,6 @@ spec:
             - name: conf-5g-config
               mountPath: /5GConfig.toml
               subPath: "5GConfig.toml"
-          command: ["/nkafka"]
           args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "five-g", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "-f", "/5GTopics.toml"]
 #          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "producer"]
 #            - name: http

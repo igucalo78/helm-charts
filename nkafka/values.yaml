@@ -17,7 +17,7 @@ initImage:
 
 # For mounting the accelleran license
 accelleranLicense:
-  enabled: false
+  enabled: true
   licenseSecretName: accelleran-license
 
 imagePullSecrets: 

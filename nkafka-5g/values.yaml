@@ -10,6 +10,11 @@ image:
   repository: accelleran/nkafka_5g
   pullPolicy: IfNotPresent
 
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: true
+  licenseSecretName: accelleran-license
+
 imagePullSecrets: 
   - name: accelleran-secret
 nameOverride: ""
