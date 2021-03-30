@@ -7,7 +7,7 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 accelleranLicense:
-  enabled: true
+  enabled: false
   licenseSecretName: accelleran-license
 
 image:

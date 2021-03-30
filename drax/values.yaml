@@ -22,6 +22,9 @@ global:
   draxNodeSelectorEnabled: "true"
   draxName: "main"
 
+  # Accelleran license
+  #TBA
+
 nats:
   # To enable/disable the installation of NATS
   enabled: true

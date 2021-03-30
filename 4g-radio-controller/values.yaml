@@ -8,7 +8,7 @@ version: "{{ .Chart.AppVersion }}"
 
 # For mounting the accelleran license
 accelleranLicense:
-  enabled: true
+  enabled: false
   licenseSecretName: accelleran-license
 
 image:
