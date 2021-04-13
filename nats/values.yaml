@@ -6,7 +6,7 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
-customLabels: []
+customLabels: {}
 #  exampleLabelName: exampleLabelValue
 
 image:
