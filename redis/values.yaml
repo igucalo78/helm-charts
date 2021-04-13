@@ -6,6 +6,9 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
+customLabels: []
+#  exampleLabelName: exampleLabelValue
+
 image:
   repository: accelleran/mwc
   pullPolicy: IfNotPresent
