@@ -67,6 +67,7 @@ config:
   orchestratorUrl: 10.20.20.20
   l3Version: "{{ .Chart.AppVersion }}" 
   l3Namespace: "{{ .Release.Namespace }}"
+  l3PullPolicy: "IfNotPresent"
   cleanup: true
   redis:
     hostname: 10.20.20.20
