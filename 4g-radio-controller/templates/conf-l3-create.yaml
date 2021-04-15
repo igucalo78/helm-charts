@@ -66,7 +66,7 @@ data:
           {{ else }}
           image: accelleran/drax-l3-<!duplex!>:{{ tpl .Values.config.l3Version . }}
           {{ end }}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ tpl .Values.config.l3PullPolicy . }}
           volumeMounts:
             {{ if .Values.accelleranLicense.enabled }}
             - mountPath: "/etc/license/license.crt"
