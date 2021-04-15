@@ -85,7 +85,7 @@ config:
   kafkaTopics:
     - "accelleran.drax.5g.ric.raw.cu_state"
     - "accelleran.drax.5g.ric.raw.ue_measurements"
-    - "accelleran.drax.4g.ric.raw.service_discovery"
+    - "accelleran.drax.4g.ric.raw.network_state"
     - "accelleran.drax.all.ric.processed.anr"
 
 ingress:
