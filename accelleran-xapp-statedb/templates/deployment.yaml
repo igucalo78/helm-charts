@@ -50,8 +50,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
-              mountPath: /src/xapp/xapp_configuration.py
-              subPath: "xapp_configuration.py"
+              mountPath: /src/xapp/xapp_configuration.json
+              subPath: "xapp_configuration.json"
             {{ if .Values.accelleranLicense.enabled }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
