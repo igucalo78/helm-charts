@@ -87,7 +87,7 @@ xappConfig:
   kafkaUrl: '{{ .Values.global.kubeIp }}'
   kafkaPort: 31090
   expire_timer: 5000000000 # in nano-seconds
-  periodicPublish: 'true'
+  periodicPublish: true
   publishInterval: 2  # in seconds
 
 serviceAccount:
