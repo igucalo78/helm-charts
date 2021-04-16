@@ -10,7 +10,7 @@ data:
         "metadata": {
             "name": "{{ .Values.xappFrameworkConfig.name }}",
             "configName": "",
-            "namespace": "{{ .Release.Namespace }}",
+            "namespace": "{{ .Release.Namespace }}"
         },
         "description": "This xApp detects changes in the state of the cells and publishes this data either on request through the REST API, or periodically through KAFKA",
         "last_modified": "06/07/2020 23:32:00",
