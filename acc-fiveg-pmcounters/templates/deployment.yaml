@@ -26,16 +26,6 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: {{ .Chart.Name }}-check-redis
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
-          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
-        {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
-        - name: {{ .Chart.Name }}-flush-redis
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
-          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
-        {{ end }}
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}

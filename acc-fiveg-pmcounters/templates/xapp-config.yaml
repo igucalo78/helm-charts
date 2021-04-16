@@ -15,8 +15,6 @@ data:
         "description": "{{ .Values.description }}",
         "last_modified": "14/08/2020 22:17:00",
         'config': {
-            'REDIS_URL': '{{ tpl .Values.xappFrameworkConfig.redisUrl . }}',
-            'REDIS_PORT': {{ .Values.xappFrameworkConfig.redisPort }},
 
             {{ range .Values.draxConfig }}
             {{ if eq .type "int" }}
