@@ -396,6 +396,8 @@ acc-5g-infrastructure:
   nats:
     enabled: true
 
+    nameOverride: "nats-5g"
+
     service:
       serviceName: '{{ include "nats.fullname" . }}'
       client:
@@ -417,6 +419,8 @@ acc-5g-infrastructure:
 
   redis:
     enabled: true
+
+    nameOverride: "redis-5g"
 
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
