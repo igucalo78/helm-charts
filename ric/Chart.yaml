@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.10.2
+version: 1.10.3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.10.2
+appVersion: 1.10.3
 
 # Dependencies
 dependencies:
@@ -68,7 +68,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
-    version: 0.4.0
+    version: 0.4.1
     repository: https://accelleran.github.io/helm-charts/
 
 
