@@ -24,7 +24,7 @@ global:
 
   # 4G/5G Options
   enable4G: true
-  enable5G: false
+  enable5G: true
 
 acc-kafka:
   enabled: true
