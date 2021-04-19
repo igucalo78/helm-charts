@@ -28,6 +28,8 @@ data:
         "ksqldbPort": "{{ tpl .Values.config.ksqldbPort . }}",
         "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}",
         "topologyExpired": {{ .Values.config.topologyExpired }},
+        "enable5G": {{ tpl .Values.config.enable5G . }},
+        "enable4G": {{ tpl .Values.config.enable4G . }},
         "kafkaTopics": {{ .Values.config.kafkaTopics | toJson }}
       }
     }
