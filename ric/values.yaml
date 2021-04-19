@@ -219,8 +219,6 @@ dash-front-back-end:
     apiUrl: "{{ .Values.global.kubeIp }}"
     websocketPort: "31316"
     topologyExpired: 5000
-    enable4G: "true"
-    enable5G: "true"
     kafkaTopics:
       - "accelleran.drax.5g.ric.raw.cu_state"
       - "accelleran.drax.5g.ric.raw.ue_measurements"
