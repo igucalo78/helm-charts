@@ -447,13 +447,13 @@ acc-5g-infrastructure:
       size: 10Gi
       storageClassName: acc-redis-5g
       type: pvc
-      hostPath: /opt/pods/5g-redis-storage
+      hostPath: /opt/pods/redis-storage-5g
 
   metallb:
     # This installs the MetalLB LoadBalancer. Please make sure to do the required preparation before enabling the installation:
     # https://metallb.universe.tf/installation/
     # If you have your own Load Balancer in Kubernetes, you can skip this installation - set it to false.
-    enabled: false
+    enabled: true
 
   # Autoconfigure the MetalLB, give a range of IPs which the load balancer can give out
     configInline:
@@ -462,3 +462,43 @@ acc-5g-infrastructure:
           protocol: layer2
           addresses:
             - 10.55.1.20-10.55.1.60
+
+nkafka-5g:
+  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
+  draxNodeSelector:
+    draxName: "{{ .Values.global.draxName }}"
+
+  kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+  natsUrl: "{{ .Release.Name }}-nats-5g.{{ .Release.Namespace }}:4222"
+
+  initConfig:
+    kafkaTopicsCheck: "accelleran.drax.5g.ric.raw.messages,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state"
+
+  configs:
+    logLevel: logLevel
+
+  options:
+    - name: "topic"
+      value: "accelleran.drax.5g.ric.raw.messages"
+    - name: "rewrite_timestamp"
+      value: "insert"
+    - name: "max_len"
+      value: "1048756"
+    - name: "timeout"
+      value: "1000"
+    - name: "mask"
+      value: "true"
+    - name: "seq_mapper"
+      value: "none"
+    - name: "threads"
+      value: "1"
+    - name: "invert_service"
+      value: "false"
+    - name: "replicate_messages"
+      value: "false"
+    - name: "compact"
+      value: "true"
+    - name: "offset"
+      value: "auto"
+    - name: "subject"
+      value: "topic"
