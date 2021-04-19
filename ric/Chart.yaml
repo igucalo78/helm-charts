@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 1.11.1
+version: 1.11.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 1.11.1
+appVersion: 1.11.2
 
 # Dependencies
 dependencies:
@@ -28,7 +28,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-kminion
     condition: acc-kminion.enabled
-    version: 1.4.3
+    version: 1.4.4
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-4g
     version: 2.2.0

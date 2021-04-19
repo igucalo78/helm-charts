@@ -1,6 +1,6 @@
 global:
   # Kubernetes advertise IP, external address used by services
-  kubeIp: "10.20.20.20"
+  kubeIp: "10.55.1.2"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
