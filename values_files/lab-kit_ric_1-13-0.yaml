@@ -1,6 +1,6 @@
 global:
   # Kubernetes advertise IP, external address used by services
-  kubeIp: "10.20.20.20"
+  kubeIp: "10.55.1.2"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -24,7 +24,7 @@ global:
 
   # 4G/5G Options
   enable4G: true
-  enable5G: false
+  enable5G: true
 
 acc-kafka:
   enabled: true

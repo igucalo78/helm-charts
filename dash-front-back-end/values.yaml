@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  enable4G: true
+  enable5G: false
+
 replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
@@ -82,8 +86,6 @@ config:
   apiUrl: "10.20.20.20"
   websocketPort: "31316"
   topologyExpired: 5000
-  enable4G: "true"
-  enable5G: "true"
   kafkaTopics:
     - "accelleran.drax.5g.ric.raw.cu_state"
     - "accelleran.drax.5g.ric.raw.ue_measurements"
