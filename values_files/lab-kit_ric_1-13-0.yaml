@@ -401,15 +401,15 @@ acc-5g-infrastructure:
       client:
         name: "natsport"
         port: 4222
-        nodePort:
+#        nodePort:
       cluster:
         name: "clusterport"
         port: 6222
-        nodePort:
+#        nodePort:
       monitoring:
         name: "consoleport"
         port: 8222
-        nodePort:
+#        nodePort:
 
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
@@ -432,7 +432,7 @@ acc-5g-infrastructure:
     service:
       type: NodePort
       port: 6379
-      nodePort:
+#      nodePort:
       name: "redisport"
       serviceName: '{{ include "redis.fullname" . }}'
 
