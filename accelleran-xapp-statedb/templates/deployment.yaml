@@ -42,7 +42,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if .Values.accelleranLicense.enabled }}
+          {{ if .Values.global.accelleranLicense.enabled }}
           image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
@@ -52,7 +52,7 @@ spec:
             - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
               mountPath: /src/xapp/xapp_configuration.json
               subPath: "xapp_configuration.json"
-            {{ if .Values.accelleranLicense.enabled }}
+            {{ if .Values.global.accelleranLicense.enabled }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
               name: accelleran-license
@@ -88,10 +88,10 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        {{ if .Values.accelleranLicense.enabled }}
+        {{ if .Values.global.accelleranLicense.enabled }}
         - name: accelleran-license
           secret:
-            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+            secretName: {{ .Values.global.accelleranLicense.licenseSecretName}}
         {{ end }}
         - name: {{ include "accelleran-xapp-statedb.fullname" . }}-config
           configMap:

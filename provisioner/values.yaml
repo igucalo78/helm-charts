@@ -2,6 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  # For mounting the accelleran license
+  accelleranLicense:
+    enabled: false
+    licenseSecretName: accelleran-license
+
 replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
@@ -12,11 +18,6 @@ strategyType: Recreate
 image:
   repository: accelleran/provisioner
   pullPolicy: Always
-
-# For mounting the accelleran license
-accelleranLicense:
-  enabled: false
-  licenseSecretName: accelleran-license
 
 imagePullSecrets:
   - name: accelleran-secret

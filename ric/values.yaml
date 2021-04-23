@@ -1,30 +1,57 @@
 global:
-  # Kubernetes advertise IP, external address used by services
+  # Kubernetes advertise IP
+  #   Description:  Supply the Kubernetes Advertise address of your Kubernetes cluster.
+  #                 This is used by some services that are exposed via a nodePort.
+  #
+  #   Value type:   string
+  #
   kubeIp: "10.20.20.20"
 
+
   # dRAX Specific Node Selector
-  #   Description: This is a special nodeSelector field implemented for the
-  #                Accelleran RIC Helm charts. You need to first label your
-  #                node in Kubernetes with a label "draxName" and give it a
-  #                <value>. For example for node <node_name>, you can use the
-  #                following command to label it:
-  #                kubectl label node <node_name> draxName=<value>.
-  #                You can then enabled this feature by setting
-  #                "draxNodeSelectorEnabled" to "true" (as a string with quotes!).
-  #                The in "draxName" set the value of the label you chose for
-  #                the node. This will in effect install all the RIC Application
-  #                on that node, without the need to edit all individual helm
-  #                charts. In case you want to add other nodeSelector options,
-  #                you have to add them to the helm chart specific values files.
-  #   Value type: string
-  #   Example:
+  #   Description:  This is a special nodeSelector field implemented for the
+  #                 Accelleran RIC Helm charts. You need to first label your
+  #                 node in Kubernetes with a label "draxName" and give it a
+  #                 <value>. For example for node <node_name>, you can use the
+  #                 following command to label it:
+  #                 kubectl label node <node_name> draxName=<value>.
+  #                 You can then enabled this feature by setting
+  #                 "draxNodeSelectorEnabled" to "true" (as a string with quotes!).
+  #                 The in "draxName" set the value of the label you chose for
+  #                 the node. This will in effect install all the RIC Application
+  #                 on that node, without the need to edit all individual helm
+  #                 charts. In case you want to add other nodeSelector options,
+  #                 you have to add them to the helm chart specific values files.
+  #
+  #   Value type:   string
   #
   draxNodeSelectorEnabled: "false"
   draxName: "main"
 
+
   # 4G/5G Options
+  #   Description:  Depending on the product bought, you may enable or disable the accompanying features.
+  #
+  #   Value type:   bool
+  #
   enable4G: true
   enable5G: false
+
+
+  # Accelleran License
+  #   Description:  In order to use the Accelleran products, you need to have a license from Accelleran.
+  #                 Please contact Accelleran to get the license.
+  #                 The license file should be saved as a Kubernetes secret. The name of the secret should be
+  #                 supplied here under the "licenseSecretName" field.
+  #                 To create the secret you can use the following command:
+  #                 kubectl create secret generic accelleran-license --from-file=license.crt
+  #
+  # Value type:     enabled: bool
+  #                 licenseSecretName: string
+  #
+  accelleranLicense:
+    enabled: false
+    licenseSecretName: accelleran-license
 
 acc-kafka:
   enabled: true

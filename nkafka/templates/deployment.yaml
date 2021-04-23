@@ -39,7 +39,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if .Values.accelleranLicense.enabled }}
+          {{ if .Values.global.accelleranLicense.enabled }}
           image: "{{ .Values.image.repository }}-license:{{ .Values.image.tag | default .Chart.AppVersion }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -52,7 +52,7 @@ spec:
             - name: conf-4g-topics
               mountPath: /4GTopics.toml 
               subPath: "4GTopics.toml"  
-            {{ if .Values.accelleranLicense.enabled }}
+            {{ if .Values.global.accelleranLicense.enabled }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
               name: accelleran-license
@@ -100,9 +100,9 @@ spec:
         - name: conf-4g-topics
           configMap:
             name: conf-4g-topics
-        {{ if .Values.accelleranLicense.enabled }}
+        {{ if .Values.global.accelleranLicense.enabled }}
         - name: accelleran-license
           secret:
-            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+            secretName: {{ .Values.global.accelleranLicense.licenseSecretName}}
         {{ end }}
 

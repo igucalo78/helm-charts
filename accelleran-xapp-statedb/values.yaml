@@ -6,6 +6,11 @@
 global:
   kubeIp: "10.20.20.20"
 
+  # For mounting the accelleran license
+  accelleranLicense:
+    enabled: false
+    licenseSecretName: accelleran-license
+
 
 ### The xApp Framework elements values
 # This is the xApp Redis DB
@@ -33,7 +38,6 @@ xapp-api:
   draxNodeSelector:
     draxName: "main"
 
-
 ### The xApp Core values
 replicaCount: 1
 
@@ -41,12 +45,6 @@ strategyType: Recreate
 
 # Version of the xApp Core to use
 version: "{{ .Chart.AppVersion }}"
-
-# For mounting the accelleran license
-accelleranLicense:
-  enabled: false
-  licenseSecretName: accelleran-license
-
 
 # Image settings for the xApp Core
 image:
