@@ -39,7 +39,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: false
+    enabled: true
     licenseSecretName: accelleran-license
 
 nats:
