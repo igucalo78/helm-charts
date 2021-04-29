@@ -7,7 +7,7 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: test-service-orchestrator
   pullPolicy: IfNotPresent
   #pullPolicy: IfNotPresent
 
@@ -46,7 +46,7 @@ service:
   name: acc-ser-orc
   type: NodePort
   port: 80
-  nodePort: 30502
+  nodePort: 31502
 
 ingress:
   enabled: false
