@@ -42,7 +42,7 @@ securityContext:
   privileged: true
 
 service:
-  serviceName: acc-service-orchestrator
+  serviceName: test-service-orchestrator
   name: acc-ser-orc
   type: NodePort
   port: 80
