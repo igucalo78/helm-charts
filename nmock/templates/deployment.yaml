@@ -47,9 +47,9 @@ spec:
               echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
               while true; do sleep 30; done;
               EOF
-#          volumeMounts:
-#            - name: nmock
-#              mountPath: /home/xapp/
+          volumeMounts:
+            - name: nmock
+              mountPath: /home/xapp/
           ports:
             - name: {{ .Values.sshService.name }}
               containerPort: {{ .Values.sshService.port }}
