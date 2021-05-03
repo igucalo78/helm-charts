@@ -23,6 +23,15 @@ imagePullSecrets:
 
 sshPassword: "password1!"
 
+persistence:
+  accessModes:
+    - ReadWriteMany
+  enabled: true
+  size: 10Gi
+  storageClassName: nmock
+  type: pvc
+  hostPath: /opt/pods/nmock
+
 nameOverride: ""
 fullnameOverride: ""
 

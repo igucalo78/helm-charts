@@ -47,6 +47,9 @@ spec:
               echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
               while true; do sleep 30; done;
               EOF
+          volumeMounts:
+            - name: nmock
+              mountPath: /home/xapp/
           ports:
             - name: {{ .Values.sshService.name }}
               containerPort: {{ .Values.sshService.port }}
@@ -77,3 +80,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: nmock
+            {{- if .Values.persistence.enabled }}
+            persistentVolumeClaim:
+              claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{ - else }}{{ include "nmock.fullname" . }}{{ - end }}
+            {{ - end }}
