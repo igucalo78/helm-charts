@@ -45,6 +45,7 @@ spec:
               /bin/bash <<'EOF'
               sudo service ssh start
               echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
+              sudo chown -R xapp:xapp /home/xapp/
               while true; do sleep 30; done;
               EOF
           volumeMounts:
