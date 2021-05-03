@@ -80,9 +80,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      volumes:
-        - name: nmock
-            {{- if .Values.persistence.enabled }}
-            persistentVolumeClaim:
-              claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "nmock.fullname" . }}{{- end }}
-            {{- end }}
+#      volumes:
+#        - name: nmock
+#            {{- if .Values.persistence.enabled }}
+#            persistentVolumeClaim:
+#              claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "nmock.fullname" . }}{{- end }}
+#            {{- end }}
