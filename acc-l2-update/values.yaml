@@ -2,10 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-global:
-  accelleranLicense:
-    enabled: false
-    licenseSecretName: accelleran-license
+accelleranLicense:
+  enabled: "true"
+  licenseSecretName: "accelleran-license"
 
 replicaCount: 1
 

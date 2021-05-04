@@ -27,7 +27,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if .Values.global.accelleranLicense.enabled }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
           image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
@@ -43,7 +43,7 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           volumeMounts:
-            {{ if .Values.global.accelleranLicense.enabled }}
+            {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
               name: accelleran-license
@@ -121,10 +121,10 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        {{ if .Values.global.accelleranLicense.enabled }}
+        {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
         - name: accelleran-license
           secret:
-            secretName: {{ .Values.global.accelleranLicense.licenseSecretName}}
+            secretName: {{ tpl .Values.accelleranLicense.licenseSecretName . }}
         {{ end }}
 #        - name: acc-oran
 #          {{- if .Values.persistence.enabled }}
