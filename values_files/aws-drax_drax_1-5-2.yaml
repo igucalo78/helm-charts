@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "172.31.36.102"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -85,7 +85,7 @@ redis:
 
 provisioner-dhcp:
   # To enable/disable the installation of the dRAX Provisioner DHCP
-  enabled: true
+  enabled: false
 
   # The configuration file for the dRAX Provisioner DHCP
   # interface: The interface used by the Kubernetes cluster
@@ -95,7 +95,7 @@ provisioner-dhcp:
   # staticRouteNetwork: Set the network where the provisioner is, example 10.20.20.0/24
   # staticRouteGateway: Set the gateway to be used by the cells to reach the provisioner 10.22.10.52
   configuration:
-    interface: eno1
+    interface: eth0
     provisionerIp: "{{ .Values.global.kubeIp }}"
     provisionerPort: 31610
     # If you enable staticRoute, then provide the network and gateway values
@@ -109,7 +109,7 @@ provisioner-dhcp:
 
 provisioner:
   # To enable/disable the installation of the dRAX Provisioner DHCP
-  enabled: true
+  enabled: false
 
   accelleranLicense:
     enabled: "{{ .Values.global.accelleranLicense.enabled }}"
@@ -155,7 +155,7 @@ provisioner:
 
 ntp-server:
   # To enable/disable the installation of the dRAX NTP Server for cells
-  enabled: true
+  enabled: false
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
@@ -163,7 +163,7 @@ ntp-server:
 
 configurator:
   # To enabled or disable the installation of the dRAX Configurator
-  enabled: true
+  enabled: false
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
@@ -205,7 +205,7 @@ configurator:
 
 4g-radio-controller:
   # Enable or disable the component
-  enabled: true
+  enabled: false
 
   accelleranLicense:
     enabled: "{{ .Values.global.accelleranLicense.enabled }}"
@@ -241,7 +241,7 @@ configurator:
 
 acc-l2-update:
   # Enable the server that serves the Layer2 update files
-  enabled: true
+  enabled: false
 
   accelleranLicense:
     enabled: "{{ .Values.global.accelleranLicense.enabled }}"
