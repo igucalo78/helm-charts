@@ -47,14 +47,16 @@ data:
           ueId = "",
           measurement = {}
         }
-        for f, v in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
-          temp = m
-          temp.log.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
-          temp.log.nrCellId = v.NeighbourCellInfo.NrCgi.NrCellId
-          temp.log.measurement.ssbRsrp = v.NeighbourCellInfo.SsbRsrpResult
-          temp.log.measurement.ssbRsrq = v.NeighbourCellInfo.SsbRsrqResult
-          temp.log.measurement.ssbSinr = v.NeighbourCellInfo.SsbSinrResult
-          emit(temp)
+        if event.log.RrcMeasurementReportResultInfo.CellInfo ~= nil then      
+          for f, v in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
+            temp = m
+            temp.log.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId
+            temp.log.nrCellId = v.NeighbourCellInfo.NrCgi.NrCellId
+            temp.log.measurement.ssbRsrp = v.NeighbourCellInfo.SsbRsrpResult
+            temp.log.measurement.ssbRsrq = v.NeighbourCellInfo.SsbRsrqResult
+            temp.log.measurement.ssbSinr = v.NeighbourCellInfo.SsbSinrResult
+            emit(temp)
+          end
         end
         temp = m
         nrCellId = event.log.ServingCellInfo.NrCgi.NrCellId
