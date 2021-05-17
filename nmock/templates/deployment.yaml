@@ -48,6 +48,16 @@ spec:
               sudo chown -R xapp /home/xapp/
               while true; do sleep 30; done;
               EOF
+          env:
+            - name: NMOCK_NATS
+              value: "nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}"
+            - name: NMOCK_REDIS
+              value: "redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}"
+            - name: RUST_LOG
+              value: "{{ .Values.config.logLevel }}"
+            {{- if .Values.extraEnvs }}
+            {{ toYaml .Values.extraEnvs | nindent 12 }}
+            {{- end }}
           volumeMounts:
             - name: nmock
               mountPath: /home/xapp/

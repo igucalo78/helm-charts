@@ -23,6 +23,17 @@ imagePullSecrets:
 
 sshPassword: "password1!"
 
+config:
+  logLevel: "debug"
+  natsUrl: "10.55.1.2"
+  natsPort: "31000"
+  redisUrl: "10.55.1.2"
+  redisPort: "32000"
+
+extraEnvs: []
+#  - name: ex1
+#    value: ex1
+
 persistence:
   accessModes:
     - ReadWriteMany
