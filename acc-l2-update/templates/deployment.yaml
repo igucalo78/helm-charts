@@ -25,13 +25,13 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if .Values.global.accelleranLicense.enabled }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
           image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{ if .Values.global.accelleranLicense.enabled }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
           volumeMounts:
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
@@ -69,9 +69,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-        {{ if .Values.global.accelleranLicense.enabled }}
+        {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
       volumes:
         - name: accelleran-license
           secret:
-            secretName: {{ .Values.global.accelleranLicense.licenseSecretName}}
+            secretName: {{ tpl .Values.accelleranLicense.licenseSecretName . }}
         {{ end }}

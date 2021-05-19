@@ -6,10 +6,10 @@
 global:
   kubeIp: "10.20.20.20"
 
-  # For mounting the accelleran license
-  accelleranLicense:
-    enabled: false
-    licenseSecretName: accelleran-license
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: "false"
+  licenseSecretName: "accelleran-license"
 
 
 ### The xApp Framework elements values

@@ -47,7 +47,7 @@ data:
           ueId = "",
           measurement = {}
         }
-        if event.log.RrcMeasurementReportResultInfo.CellInfo ~= nil then      
+        if event.log.RrcMeasurementReportResultInfo.CellInfo ~= nil then
           for f, v in pairs(event.log.RrcMeasurementReportResultInfo.CellInfo) do
             temp = m
             temp.log.ueId = event.log.RrcMeasurementReportResultInfo.GnbCuCpUeId

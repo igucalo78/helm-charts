@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "10.55.1.2"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -35,12 +35,12 @@ global:
   #                 To create the secret you can use the following command:
   #                 kubectl create secret generic accelleran-license --from-file=license.crt
   #
-  # Value type:     enabled: string
+  # Value type:     enabled: bool
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "true"
-    licenseSecretName: "accelleran-license"
+    enabled: true
+    licenseSecretName: accelleran-license
 
 nats:
   # To enable/disable the installation of NATS
@@ -111,10 +111,6 @@ provisioner:
   # To enable/disable the installation of the dRAX Provisioner DHCP
   enabled: true
 
-  accelleranLicense:
-    enabled: "{{ .Values.global.accelleranLicense.enabled }}"
-    licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
-
   strategyType: Recreate
  
   # The service port used by the privisioner
@@ -179,8 +175,10 @@ configurator:
 
     # Pre-provision the cells, create a list of serial: name as shown below
     cells:
-      exampleSerial1: exampleName100
-      exampleSerial2: exampleName200
+      E1010-GC01-ACC171109000105: Warehouse
+      E1010-GC01-ACC171109000088: Production2
+      E1011-GC01-ACC170620000069: Marnixplaats
+      E1010-GC01-ACC171109000029: Production1
 
     # Loki hostname and port
     loki:
@@ -206,10 +204,6 @@ configurator:
 4g-radio-controller:
   # Enable or disable the component
   enabled: true
-
-  accelleranLicense:
-    enabled: "{{ .Values.global.accelleranLicense.enabled }}"
-    licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
@@ -242,10 +236,6 @@ configurator:
 acc-l2-update:
   # Enable the server that serves the Layer2 update files
   enabled: true
-
-  accelleranLicense:
-    enabled: "{{ .Values.global.accelleranLicense.enabled }}"
-    licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
