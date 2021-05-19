@@ -60,7 +60,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: nmock
-              mountPath: /home/xapp/
+              mountPath: /home/xapp/exposed-folder
           ports:
             - name: {{ .Values.sshService.name }}
               containerPort: {{ .Values.sshService.port }}
