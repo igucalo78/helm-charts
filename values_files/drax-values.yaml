@@ -1,0 +1,24 @@
+global:
+  # The Kubernetes advertise IP, $KUBE_IP
+  kubeIp: "10.20.20.20"
+
+  # If using a node label, enable the dRAX Node Selector and specify the draxName label value
+  draxNodeSelectorEnabled: "false"
+  draxName: "main"
+
+provisioner-dhcp:
+  configuration:
+    # Set the interface where the dRAX can reach the E1000 4G DUs
+    interface: eno1
+
+configurator:
+  provisioner:
+    # Pre-provision the E1000 4G DUs, create a list of serial: name as shown below
+    cells:
+      E1011-GC01-ACC180104000012: cell-1
+      E1011-GC01-ACC180104000013: cell-2
+
+4g-radio-controller:
+  config:
+    # Choose the namespace where the 4G CU pods will be installed. By default its in the same namespace as dRAX, otherwise $KUBE_NS_4G_CU
+    l3Namespace: "{{ .Release.Namespace }}"

@@ -1,0 +1,36 @@
+global:
+  # The Kubernetes advertise IP, $KUBE_IP
+  kubeIp: "10.20.20.20"
+
+  # If using a node label, enable the dRAX Node Selector and specify the draxName label value
+  draxNodeSelectorEnabled: "false"
+  draxName: "main"
+
+  # Depending on the licencse you buy from Accelleran, you can install the dRAX 4G, 5G or both
+  enable4G: true
+  enable5G: false
+
+dash-front-back-end:
+  config:
+    # The namespace where the 4G CUs will be running, $KUBE_NS_4G_CU
+    defaultServiceNamespace: "default"
+
+    # The namespace where dRAX is installed, $KUBE_NS_DRAX
+    defaultOranNamespace: "default"
+
+    # URL that the frontend uses to reach the backend, should be an IP reachable from the web browser when opening the dRAX Dashboard. By default its set to the $KUBE_IP. If the Kubernetes advertise address is exposed on a public IP, the public IP can be given here
+    apiUrl: "{{ .Values.global.kubeIp }}"
+
+acc-service-monitor:
+  # Enter all namespaces used by your dRAx deployment. If using the "default" namespace everywhere, can be left to default, otherwise create a comma-separated-list of namespace names
+  monitoredNamespaces: "{{ .Release.Namespace }}"
+
+acc-5g-infrastructure:
+  metallb:
+    configInline:
+      address-pools:
+        - name: default
+          protocol: layer2
+          # IP pool range that will be given out to 5G E1, F1 and GTP interfaces exposed outside of Kubernetes
+          addresses:
+            - 10.55.1.20-10.55.1.60
