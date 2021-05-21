@@ -11,7 +11,7 @@ customLabels: {}
 
 image:
   repository: accelleran/mwc
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret

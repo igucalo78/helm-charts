@@ -147,10 +147,15 @@ spec:
       imagePullSecrets:
        {{ toYaml .Values.imagePullSecrets | indent 2 }}
     {{- end }}
-    {{- if .Values.server.nodeSelector }}
+      {{- if or (.Values.server.nodeSelector) (eq (tpl .Values.server.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-{{ toYaml .Values.server.nodeSelector | indent 8 }}
-    {{- end }}
+        {{ if .Values.server.nodeSelector }}
+          {{- toYaml .Values.server.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.server.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.server.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
     {{- if .Values.server.securityContext }}
       securityContext:
 {{ toYaml .Values.server.securityContext | indent 8 }}

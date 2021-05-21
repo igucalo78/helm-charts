@@ -26,6 +26,10 @@ data:
         "pcixAppPort": "{{ tpl .Values.config.pcixAppPort . }}",
         "ksqldbPodName": "{{ tpl .Values.config.ksqldbPodName . }}",
         "ksqldbPort": "{{ tpl .Values.config.ksqldbPort . }}",
-        "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}" 
+        "LteRadioControllerLabel": "{{ tpl .Values.config.LteRadioControllerLabel . }}",
+        "topologyExpired": {{ .Values.config.topologyExpired }},
+        "enable5G": {{ .Values.global.enable5G }},
+        "enable4G": {{ .Values.global.enable4G }},
+        "kafkaTopics": {{ .Values.config.kafkaTopics | toJson }}
       }
     }

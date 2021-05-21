@@ -21,6 +21,11 @@ spec:
       serviceAccountName: {{ include "dash-front-back-end.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-check-kafka
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.initConfig.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py {{ tpl .Values.initConfig.kafkaTopicsCheck . }}']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -50,9 +55,14 @@ spec:
               #port: {{ .Values.service.port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
       {{- end }}
     {{- with .Values.affinity }}
       affinity:

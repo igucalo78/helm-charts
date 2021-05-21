@@ -14,6 +14,8 @@ spec:
       {{- include "nkafka-helm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
       labels:
         {{- include "nkafka-helm.labels" . | nindent 8 }}
     spec:
@@ -32,12 +34,12 @@ spec:
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
+          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py {{ tpl .Values.initConfig.kafkaTopicsCheck . }}']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          {{ if .Values.accelleranLicense.enabled }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
           image: "{{ .Values.image.repository }}-license:{{ .Values.image.tag | default .Chart.AppVersion }}"
           {{ else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -45,9 +47,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: conf-4g-config
-              mountPath: /4GConfig.toml
+              mountPath: /4GConfig.toml 
               subPath: "4GConfig.toml"
-            {{ if .Values.accelleranLicense.enabled }}
+            - name: conf-4g-topics
+              mountPath: /4GTopics.toml 
+              subPath: "4GTopics.toml"  
+            {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
               name: accelleran-license
@@ -57,7 +62,6 @@ spec:
           #args: ["-c", "sleep 1000"]
           command: ["/nkafka"]
           args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
-#          ports:
 #          ports:
 #            - name: http
 #              containerPort: 80
@@ -93,9 +97,12 @@ spec:
         - name: conf-4g-config
           configMap:
             name: conf-4g-config
-        {{ if .Values.accelleranLicense.enabled }}
+        - name: conf-4g-topics
+          configMap:
+            name: conf-4g-topics
+        {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
         - name: accelleran-license
           secret:
-            secretName: {{ .Values.accelleranLicense.licenseSecretName}}
+            secretName: {{ tpl .Values.accelleranLicense.licenseSecretName . }}
         {{ end }}
 

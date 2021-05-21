@@ -44,8 +44,8 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 drax/role: xapp
 drax/name: {{ .Release.Name }}
-drax/component-name: {{ .Chart.Name }}
-drax/component-version: {{ .Chart.Version }}
+drax/xapp-component-name: {{ .Chart.Name }}
+drax/xapp-component-version: {{ .Chart.Version }}
 {{- end -}}
 
 {{/*

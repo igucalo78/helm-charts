@@ -5,6 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 17.12.2020.
+
+### Added
+
+- Adding 5g dashbaord
+- Adding 5g monitoring dashbaord in grafana
+- Adding inlfuxdb 5g datasource in grafana
+- Adding db5G database in influxdb
+- Adding vector-5g 
+
+## 06.10.2020.
+
+### Changed
+
+- Updated 4GRC to 1.1.1
+- - Fixed throughput and bler reporting
+- Updated L2 server to 1.1.1
+- - Using new version that fixed the thr and bler reporting
+- updated drax to 0.10.2
+- - Using 4grc 1.1.1
+- - Using L2 server 1.1.1
+- Updated acc-sys-dashboard to 1.7.5
+- - Updated InfluxDb Dashboard with fixes
+- updated ric to 1.2.5
+- - Using acc-sys 1.7.5
+
+## 25.09.2020.
+
+### Changed
+- Updated acc-sys to 1.6.5
+- - Updated InfluxDB dashbaord json
+- Updated acc-sys to 1.6.6
+- - Fixed system health view to look for 4grc instad of oran
+- - setting null to 0 for pending and crashed pods instead of N/A to enable visual effects
+- Updated Vector to 0.2.0
+- - Added initContainer to check for kafka and influxdb services before running vector
+- Updated Vector to 0.2.1
+- - Fixed bug of using wrong appVersion in previous version
+
 ## 07.09.2020.
 
 ### Changed

@@ -10,20 +10,26 @@ image:
   repository: accelleran/vector
   pullPolicy: IfNotPresent
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "0.6.0"
+
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-initConfigs:
-  kafkaService: "kafka.{{ .Release.Namespace }}:9092"
+initConfig:
+  kafkaUrl: "kafka.{{ .Release.Namespace }}:9092"
   influxdbService: "influxdb-api.{{ .Release.Namespace }}:8086"
+  kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 
 config:
   kafka:
     hostname: "10.20.20.20"
     port: 31090
-    topic: test2
+    topic: accelleran.drax.4g.ric.raw.ue_measurements
   influx:
     hostname: "10.20.20.20"
     port: 30303
@@ -82,6 +88,11 @@ resources: {}
   #   memory: 128Mi
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 

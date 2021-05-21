@@ -13,10 +13,6 @@ spec:
       labels:
       {{- include "kafka.config.matchLabels" . | nindent 8 }}
     spec:
-      {{- if .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml .Values.nodeSelector | indent 8 }}
-      {{- end }}
       restartPolicy: OnFailure
       volumes:
         - name: config-volume
@@ -30,4 +26,13 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: "/usr/local/script"
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
+      nodeSelector:
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
 {{- end -}}

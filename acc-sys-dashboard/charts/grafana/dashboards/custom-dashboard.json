@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1601031937599,
+  "id": 3,
+  "iteration": 1609858749492,
   "links": [],
   "panels": [
     {
@@ -182,7 +182,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "eagle_node_resource_allocatable_memory_bytes",
+          "expr": "sum(eagle_node_resource_allocatable_memory_bytes)",
           "instant": true,
           "legendFormat": "",
           "refId": "A"
@@ -268,7 +268,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "eagle_node_resource_allocatable_cpu_cores",
+          "expr": "sum(eagle_node_resource_allocatable_cpu_cores)",
           "instant": true,
           "legendFormat": "",
           "refId": "A"
@@ -3857,7 +3857,7 @@
       "options": {
         "dataLinks": []
       },
-      "percentage": false,
+      "percentage": true,
       "pluginVersion": "6.5.2",
       "pointradius": 2,
       "points": false,
@@ -3869,13 +3869,27 @@
       "targets": [
         {
           "expr": "(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\",kubernetes_io_hostname=~\"$Node\"})",
-          "legendFormat": "Total Disk Usage",
+          "hide": true,
+          "legendFormat": "Total Disk Usage {{device}}",
           "refId": "A"
         },
         {
           "expr": "sum by (kubernetes_io_hostname)(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
-          "legendFormat": "Node {{kubernetes_io_hostname}}",
+          "hide": false,
+          "legendFormat": "{{kubernetes_io_hostname}} - Disk Usage",
           "refId": "B"
+        },
+        {
+          "expr": "sum by (kubernetes_io_hostname)(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"})",
+          "hide": false,
+          "legendFormat": "{{kubernetes_io_hostname}} - Total Disk Size",
+          "refId": "C"
+        },
+        {
+          "expr": "(sum by (kubernetes_io_hostname)(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\"}))-(sum by (kubernetes_io_hostname)(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\"}))",
+          "hide": false,
+          "legendFormat": "{{kubernetes_io_hostname}} - Available Disk Space",
+          "refId": "D"
         }
       ],
       "thresholds": [],
@@ -3885,7 +3899,7 @@
       "title": "Disk Usage History",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 1,
         "value_type": "individual"
       },
       "type": "graph",
@@ -4042,14 +4056,14 @@
           "refId": "B"
         },
         {
-          "expr": "sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})-sum(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\",kubernetes_io_hostname=~\"$Node\"})",
+          "expr": "sum by (kubernetes_io_hostname)(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})-sum by (kubernetes_io_hostname)(container_fs_usage_bytes{device=~\"^/dev/.*$\",id=\"/\",kubernetes_io_hostname=~\"$Node\"})",
           "format": "table",
           "hide": false,
           "instant": true,
           "refId": "C"
         },
         {
-          "expr": "sum(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})",
+          "expr": "sum by (kubernetes_io_hostname)(container_fs_limit_bytes{device=~\"^/dev/.*$\",id=\"/\", kubernetes_io_hostname=~\"$Node\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -4234,7 +4248,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -4351,7 +4365,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {

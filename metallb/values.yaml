@@ -1,0 +1,6 @@
+# Default values for metallb.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ipRange: 10.55.1.20-10.55.1.50
+

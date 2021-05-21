@@ -1,0 +1,22 @@
+{{ if .Values.services.follower.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "acc-zookeeper.fullname" . }}-follower
+  labels:
+    {{- include "acc-zookeeper.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.services.follower.type }}
+  ports:
+    - port: {{ .Values.services.follower.port }}
+      protocol: {{ .Values.services.follower.protocol }}
+      name: {{ .Values.services.follower.name }}
+      {{ if contains "NodePort" .Values.services.follower.type }}
+      nodePort: {{ .Values.services.follower.nodePort }}
+      {{ end }}
+  {{ if .Values.services.follower.loadBalancerIP }}
+  loadBalancerIP: {{ tpl .Values.services.follower.loadBalancerIP . }}
+  {{ end }}
+  selector:
+    {{- include "acc-zookeeper.selectorLabels" . | nindent 4 }}
+{{ end }}

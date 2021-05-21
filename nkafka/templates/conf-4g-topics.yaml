@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: conf-4g-topics
+data:
+  4GTopics.toml: |-
+    [[translate]]
+    nats_topic="TOPIC_BEACONS"
+    protobuf_def=".BeaconPB.Beacon_PeerMessage"
+    kafka_topic="accelleran.drax.4g.ric.raw.service_discovery"
+
+    [[translate]]
+    nats_topic="Topic_OPENRAN"
+    protobuf_def=".OpenRANPB.OpenRAN_peerMessage"
+
+    [[translate]]
+    nats_topic="Topic_OPENRAN_DATA"
+    protobuf_def=".OpenRANDataPB.Message"
+    kafka_topic="accelleran.drax.4g.ric.raw.ue_measurements"
+
+    [[translate]]
+    nats_topic="Topic_OPENRAN_COMMANDS"
+    protobuf_def=".OpenRANCommandsPB.OpenRAN_commandMessage"
+
+    [[translate]]
+    nats_topic="Topic_L2_STATS"
+    protobuf_def=".L2StatsPB.L2StatsMessage"

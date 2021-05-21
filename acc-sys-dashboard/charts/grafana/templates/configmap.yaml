@@ -45,6 +45,17 @@ data:
       basicAuth: true
       basicAuthUser: admin
       basicAuthPassword: password
+    - access: proxy
+      isDefault: false
+      name: InfluxDB-5G
+      type: influxdb
+      url: {{ tpl .Values.datasources.influxdbUrl . }}
+      user: admin
+      password: password
+      database: db_5G
+      basicAuth: true
+      basicAuthUser: admin
+      basicAuthPassword: password
 {{- end -}}
 
 {{- if .Values.notifiers }}

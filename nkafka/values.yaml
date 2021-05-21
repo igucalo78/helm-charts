@@ -2,6 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+
+# For mounting the accelleran license
+accelleranLicense:
+  enabled: "true"
+  licenseSecretName: "accelleran-license"
+
 replicaCount: 1
 
 image:
@@ -15,12 +21,11 @@ initImage:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-# For mounting the accelleran license
-accelleranLicense:
-  enabled: false
-  licenseSecretName: accelleran-license
+initConfig:
+  kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
+  kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 
-imagePullSecrets: 
+imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
@@ -29,8 +34,6 @@ kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
 natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 configs:
-  # The Topic on Kafka where NKafka will publish the data
-  kafkaPublishTopic: "test2"
   # If set to false, will use the ueRicId. If set to true, will use the generic UE ID shown on teh dashboard. WARNING: if using generic UE ID, you will not have the ueRicId which is necessary for some dRAX commands.
   genericUeId: "false"
   # How vectors will be published to JSON Kafka messages. Default set to none.

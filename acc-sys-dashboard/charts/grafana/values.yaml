@@ -25,6 +25,14 @@ dashboards:
       file: dashboards/custom-dashboard.json
     loki-log-dashboard:
       file: dashboards/loki-log-dashboard.json
+    5g-health-dashboard:
+      file: dashboards/5g-health-dashboard.json
+    5g-monitoring-dashboard:
+      file: dashboards/5g-monitoring-dashboard.json
+    5g-pm-counters:
+      file: dashboards/5g-pm-counters.json
+    kafka-cluster-monitoring:
+      file: dashboards/kafka-cluster-monitoring.json
 dashboardsConfigMaps: {}
 datasources:
   prometheusUrl: http://{{ .Release.Name }}-prometheus-server.{{ .Release.Namespace }}:80
@@ -36,7 +44,7 @@ downloadDashboards:
   env: {}
 downloadDashboardsImage:
   pullPolicy: IfNotPresent
-  repository: appropriate/curl
+  repository: curlimages/curl
   tag: latest
 env: {}
 envFromSecret: ""
@@ -70,8 +78,8 @@ grafana.ini:
     org_role: Viewer
 image:
   pullPolicy: IfNotPresent
-  repository: accelleran/dash-grafana
-  tag: 0.3.0
+  repository: grafana/grafana
+  tag: 7.3.7
   pullSecrets: 
   - accelleran-secret
 ingress:
@@ -103,6 +111,9 @@ livenessProbe:
   timeoutSeconds: 30
 namespaceOverride: ""
 nodeSelector: {}
+draxNodeSelectorEnabled: "false"
+draxNodeSelector:
+  draxName: "main"
 notifiers: {}
 persistence:
   accessModes:

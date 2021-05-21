@@ -22,6 +22,9 @@ alertmanager:
     tls: []
   name: alertmanager
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteMany
@@ -94,10 +97,15 @@ kubeStateMetrics:
   enabled: true
   image:
     pullPolicy: IfNotPresent
-    repository: quay.io/coreos/kube-state-metrics
-    tag: v1.9.1
+    repository: accelleran/acc-kube-state-metrics
+    tag: v2.0.0-beta-acc
+  imagePullSecrets:
+    - name: accelleran-secret
   name: kube-state-metrics
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   pod:
     labels: {}
   podAnnotations: {}
@@ -139,6 +147,9 @@ nodeExporter:
     tag: v0.18.1
   name: node-exporter
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   pod:
     labels: {}
   podAnnotations: {}
@@ -181,6 +192,9 @@ pushgateway:
     tls: []
   name: pushgateway
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteOnce
@@ -256,6 +270,9 @@ server:
   livenessProbeTimeout: 30
   name: server
   nodeSelector: {}
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   persistentVolume:
     accessModes:
     - ReadWriteMany

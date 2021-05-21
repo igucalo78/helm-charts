@@ -25,8 +25,19 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
+          volumeMounts:
+            - mountPath: "/etc/license/license.crt"
+              subPath: "license.crt"
+              name: accelleran-license
+              readOnly: true
+          {{ end }}
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
@@ -41,9 +52,14 @@ spec:
               #port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
       {{- end }}
     {{- with .Values.affinity }}
       affinity:
@@ -53,3 +69,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+        {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
+      volumes:
+        - name: accelleran-license
+          secret:
+            secretName: {{ tpl .Values.accelleranLicense.licenseSecretName . }}
+        {{ end }}

@@ -15,6 +15,11 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
 redis:
   url: '10.233.37.164'
 
@@ -78,6 +83,11 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 

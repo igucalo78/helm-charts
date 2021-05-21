@@ -2,6 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+accelleranLicense:
+  enabled: "true"
+  licenseSecretName: "accelleran-license"
+
 replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
@@ -9,6 +13,10 @@ version: "{{ .Chart.AppVersion }}"
 image:
   repository: accelleran/drax-oran-ctrl
   pullPolicy: IfNotPresent
+
+jobs:
+  preDelete:
+    image: accelleran/acc-generic-img:0.4.1
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -90,6 +98,11 @@ resources: {}
   #   memory: 128Mi
 
 nodeSelector: {}
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
 
 tolerations: []
 

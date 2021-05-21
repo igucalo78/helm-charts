@@ -37,14 +37,23 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
+          {{ if .Values.accelleranLicense.enabled }}
+          image: "{{ .Values.image.repository }}-license:{{ tpl .Values.version . }}"
+          {{ else }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ end }}
+          command: ["/nkafka"]
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: RUST_LOG
               value: {{ .Values.logLevel }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/nkafka"]
-          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "producer"]
-#          ports:
+          volumeMounts:
+            - name: conf-5g-config
+              mountPath: /5GConfig.toml
+              subPath: "5GConfig.toml"
+          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "five-g", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "-f", "/5GTopics.toml"]
+#          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "{{ tpl .Values.natsUrl . }}", "-f", "/5GConfig.toml", "producer"]
 #            - name: http
 #              containerPort: 80
 #              protocol: TCP
@@ -58,9 +67,14 @@ spec:
 #              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
       {{- end }}
     {{- with .Values.affinity }}
       affinity:
@@ -71,7 +85,6 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: conf-init-druid
+        - name: conf-5g-config
           configMap:
-            defaultMode: 0770
-            name: conf-init-druid
+            name: conf-5g-config
