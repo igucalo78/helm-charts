@@ -46,6 +46,9 @@ drax/role: drax-core
 drax/name: Nats
 drax/component-name: {{ .Chart.Name }}
 drax/component-version: {{ .Chart.Version }}
+{{ if .Values.customLabels }}
+{{ toYaml .Values.customLabels }}
+{{ end }}
 {{- end -}}
 
 {{/*

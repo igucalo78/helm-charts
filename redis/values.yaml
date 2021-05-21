@@ -6,6 +6,9 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
+customLabels: {}
+#  exampleLabelName: exampleLabelValue
+
 image:
   repository: accelleran/mwc
   pullPolicy: IfNotPresent
@@ -48,7 +51,7 @@ securityContext:
 service:
   type: NodePort
   port: 6379
-  nodePort: 32000
+#  nodePort: 32000
   name: "redisport"
   serviceName: redis-service
 
