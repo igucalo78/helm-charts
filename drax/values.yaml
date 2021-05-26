@@ -46,10 +46,14 @@ nats:
   # To enable/disable the installation of NATS
   enabled: true
 
+  customLabels:
+    drax/technology: 4g
+
   # The version of the Docker image to use
   version: "nats20190206"
 
   service:
+    serviceName: "nats-service"
     client:
       # The port NATS is using
       nodePort: 31000
@@ -65,7 +69,10 @@ redis:
   # The version of the Docker image to use
   version: "redis20190206"
 
-  # The External IP of where NATS is installed 
+  customLabels:
+    drax/technology: 4g
+
+  # The External IP of where NATS is installed
   natsIp: "{{ .Values.global.kubeIp }}"
 
   # The port NATS is using, check in the above settings of NATS
@@ -78,6 +85,9 @@ redis:
 
     # Choose after how many days should the backed up DBs be deleted
     deleteAfterDay: 7
+
+  service:
+    nodePort: 32000
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
