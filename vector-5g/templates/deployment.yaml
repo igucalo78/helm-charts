@@ -36,11 +36,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["vector", "-c", "uemeasurementsfiveg.toml"]
+          command: ["vector", "-c", "uemeasurementsfiveg.toml", "-c", "uethroughputfiveg.toml" ]
           volumeMounts:
             - name: uemeasurementsfiveg-toml
               mountPath: /influx/uemeasurementsfiveg.toml
               subPath: uemeasurementsfiveg.toml
+            - name: uethroughputfiveg-toml
+              mountPath: /influx/uethroughputfiveg.toml
+              subPath: uethroughputfiveg.toml
           {{ if .Values.service.enabled }}
           ports:
             - name: http
@@ -78,3 +81,6 @@ spec:
         - name: uemeasurementsfiveg-toml
           configMap:
             name: uemeasurementsfiveg-toml
+        - name: uethroughputfiveg-toml
+          configMap:
+            name: uethroughputfiveg-toml
