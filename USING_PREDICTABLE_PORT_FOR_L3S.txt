@@ -1,0 +1,26 @@
+1. Update yaml file in 4grc
+Edit the following file: /helm-charts/4g-radio-controller/template/conf-l3-service-create.yaml
+
+Edit the following lines to include "nodePort: <!port!>":
+
+...
+spec:
+  ports:
+    - name: netconf-port
+      port: 830
+      protocol: TCP
+      nodePort: <!port!>
+...
+
+2. You need to package the standalone 4g-radio-controler helm chart with the changes, and icnlude it in the drax helm chart.
+a) First package the 4GRC:
+helm package 4g-radio-controller
+
+You should see a message saying:
+Successfully packaged chart and saved it to: /root/helm-charts/4g-radio-controller-1.1.6.tgz
+
+b) Copy the packaged .tgz file to drax/charts
+cp /root/helm-charts/4g-radio-controller-1.1.6.tgz /root/helm-charts/drax/charts
+
+3. You patch is now included in the drax package, and you can re-install dRAX for thechanges to take effect. Now your netconf port that is exposed via NodePort in Kubernetes will be predictable. The exposed ports will be 305XX, where XX is the ending digits of the InstanceID of your cell.
+IMPORTANT NOTE: 30500-30505 ports are already used, so please give you cell an InstanceID that ends with a digit starting from 6, so for example cell6, cell7,...
