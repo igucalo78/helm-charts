@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "10.22.24.101"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -39,7 +39,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "true"
+    enabled: "false"
     licenseSecretName: "accelleran-license"
 
 nats:
@@ -225,6 +225,8 @@ configurator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
+  version: "branches_tognolli-master_r5.0_fead5aa2"
+
   image:
     pullPolicy: IfNotPresent
 
@@ -234,6 +236,8 @@ configurator:
 
     # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
+
+    l3Version: "branches_tognolli-master_r5.0_fead5aa2"
 
     # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
@@ -261,7 +265,7 @@ acc-l2-update:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "{{ .Chart.AppVersion }}"
+  version: "branches_tognolli-master_r5.0_fead5aa2"
 
   image:
     pullPolicy: IfNotPresent

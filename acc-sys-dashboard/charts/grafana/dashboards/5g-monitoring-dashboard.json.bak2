@@ -15,164 +15,23 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1613039973571,
+  "id": 6,
+  "iteration": 1608210300036,
   "links": [],
   "panels": [
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "#73BF69",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "InfluxDB-5G",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 19,
-        "y": 0
-      },
-      "id": 6,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "pluginVersion": "6.6.2",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "default.ssbRsrp",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT count(distinct(\"ueId\")) FROM (select * from \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) and time> now()-1m)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              },
-              {
-                "params": [],
-                "type": "count"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "cellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Total Number of UEs",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "max"
-    },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB-5G",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 23,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 4
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 2,
@@ -189,10 +48,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -202,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "$tag_cellId",
           "groupBy": [
             {
               "params": [
@@ -212,7 +70,7 @@
             },
             {
               "params": [
-                "nrCellId"
+                "cellId"
               ],
               "type": "tag"
             },
@@ -223,7 +81,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "uemeasurement.vector",
+          "measurement": "default.ssbRsrp",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -232,7 +90,7 @@
             [
               {
                 "params": [
-                  "measurement.ssbRsrp"
+                  "value"
                 ],
                 "type": "field"
               },
@@ -244,7 +102,7 @@
           ],
           "tags": [
             {
-              "key": "nrCellId",
+              "key": "cellId",
               "operator": "=~",
               "value": "/^$Cell$/"
             },
@@ -283,7 +141,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -306,20 +164,13 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB-5G",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 23,
-        "x": 0,
-        "y": 12
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
       "hiddenSeries": false,
       "id": 4,
@@ -336,10 +187,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -349,7 +199,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "$tag_cellId",
           "groupBy": [
             {
               "params": [
@@ -359,7 +209,7 @@
             },
             {
               "params": [
-                "nrCellId"
+                "cellId"
               ],
               "type": "tag"
             },
@@ -370,7 +220,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "uemeasurement.vector",
+          "measurement": "default.ssbRsrq",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -379,7 +229,7 @@
             [
               {
                 "params": [
-                  "measurement.ssbRsrq"
+                  "value"
                 ],
                 "type": "field"
               },
@@ -391,7 +241,7 @@
           ],
           "tags": [
             {
-              "key": "nrCellId",
+              "key": "cellId",
               "operator": "=~",
               "value": "/^$Cell$/"
             },
@@ -430,7 +280,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -453,20 +303,13 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB-5G",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 23,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 20
+        "y": 9
       },
       "hiddenSeries": false,
       "id": 3,
@@ -483,10 +326,9 @@
       "linewidth": 1,
       "nullPointMode": "connected",
       "options": {
-        "alertThreshold": true
+        "dataLinks": []
       },
       "percentage": false,
-      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -496,7 +338,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "$tag_cellId",
           "groupBy": [
             {
               "params": [
@@ -506,7 +348,7 @@
             },
             {
               "params": [
-                "nrCellId"
+                "cellId"
               ],
               "type": "tag"
             },
@@ -517,7 +359,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "uemeasurement.vector",
+          "measurement": "default.ssbSinr",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -526,7 +368,7 @@
             [
               {
                 "params": [
-                  "measurement.ssbSinr"
+                  "value"
                 ],
                 "type": "field"
               },
@@ -538,7 +380,7 @@
           ],
           "tags": [
             {
-              "key": "nrCellId",
+              "key": "cellId",
               "operator": "=~",
               "value": "/^$Cell$/"
             },
@@ -577,7 +419,7 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -596,7 +438,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 26,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -609,15 +451,14 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB-5G",
-        "definition": "",
-        "error": null,
+        "definition": "SELECT \"ueId\" FROM (SELECT \"ueId\",\"value\" FROM \"default.ssbRsrp\" WHERE time > now() - 1m )",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "UE",
         "options": [],
-        "query": "SELECT \"ueId\" FROM (SELECT \"ueId\",\"measurement.ssbRsrp\" FROM \"uemeasurement.vector\" WHERE time > now() - 1m )",
+        "query": "SELECT \"ueId\" FROM (SELECT \"ueId\",\"value\" FROM \"default.ssbRsrp\" WHERE time > now() - 1m )",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -631,20 +472,19 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
         "datasource": "InfluxDB-5G",
-        "definition": "",
-        "error": null,
+        "definition": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"default.ssbRsrp\" WHERE time > now() - 1m )",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
         "name": "Cell",
         "options": [],
-        "query": "SELECT \"nrCellId\" FROM (SELECT \"nrCellId\",\"measurement.ssbRsrp\" FROM \"uemeasurement.vector\" WHERE time > now() - 1m )",
+        "query": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"value\" FROM \"default.ssbRsrp\" WHERE time > now() - 1m )",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -658,12 +498,11 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
-      "2s",
       "5s",
       "10s",
       "30s",
@@ -677,7 +516,7 @@
     ]
   },
   "timezone": "",
-  "title": "5G UE Monitoring",
+  "title": "5G Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 12
+  "version": 10
 }

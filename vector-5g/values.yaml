@@ -12,6 +12,8 @@ config:
     hostname: 10.55.1.2
     port: 31090
     topic: accelleran.drax.5g.ric.raw.ue_measurements
+    pmCounterTopic: accelleran.drax.5g.ric.raw.pm_counters
+
 fullnameOverride: ""
 image:
   pullPolicy: IfNotPresent
@@ -21,13 +23,13 @@ initImage:
   pullPolicy: IfNotPresent
   tag: "0.6.0"
 imagePullSecrets:
-- name: accelleran-secret
+  - name: accelleran-secret
 ingress:
   annotations: {}
   enabled: false
   hosts:
-  - host: chart-example.local
-    paths: []
+    - host: chart-example.local
+      paths: []
   tls: []
 initConfig:
   influxdbService: ric-influxdb-api:8086
@@ -52,4 +54,4 @@ serviceAccount:
   create: false
   name: null
 tolerations: []
-version: '{{ .Chart.AppVersion }}'
+version: "{{ .Chart.AppVersion }}"

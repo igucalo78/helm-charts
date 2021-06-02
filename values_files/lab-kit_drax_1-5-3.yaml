@@ -72,7 +72,7 @@ redis:
   customLabels:
     drax/technology: 4g
 
-  # The External IP of where NATS is installed 
+  # The External IP of where NATS is installed
   natsIp: "{{ .Values.global.kubeIp }}"
 
   # The port NATS is using, check in the above settings of NATS
