@@ -223,7 +223,7 @@ dash-front-back-end:
     defaultOranNamespace: "default"
 
     # The IP that is set here must be globally available so that any browser can reach it, so that the front end can communicate to the backend. Preferable, use the publicly exposed IP that can reach the Kubernetes Advertise IP. If only a private Kubernetes Advertise IP is set here, the dRAX Dashbaord will only work when openning a browser on a computer that can reach the private Kuebrnetes Advertise IP.
-    grafanaURL: "35.180.234.27"
+    grafanaURL: "10.8.0.1"
 
     # The external nodePort used by Grafana, default is 30300
     grafanaPort: "30300"
@@ -245,7 +245,7 @@ dash-front-back-end:
     LteRadioControllerLabel: "4G-Radio-Controller"
 
     # The IP that is set here must be globally available so that any browser can reach it, so that the front end can communicate to the backend. Preferable, use the publicly exposed IP that can reach the Kubernetes Advertise IP. If only a private Kubernetes Advertise IP is set here, the dRAX Dashbaord will only work when openning a browser on a computer that can reach the private Kuebrnetes Advertise IP.
-    apiUrl: "35.180.234.27"
+    apiUrl: "10.8.0.1"
     websocketPort: "31316"
     topologyExpired: 5000
     kafkaTopics:
