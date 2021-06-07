@@ -15,10 +15,160 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1613039973571,
+  "iteration": 1622552465735,
   "links": [],
   "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-5G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 16,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "ueId: $tag_ueId",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "ueId"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "uemeasurement.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"measurement.dlGtpThp\") *8 FROM \"uemeasurement.vector\" WHERE (\"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time($__interval), \"/^$UE$/\" fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "measurement.dlGtpThp"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "*8"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "DL Throughput per UE",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:287",
+          "decimals": 0,
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:288",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
     {
       "cacheTimeout": null,
       "colorBackground": false,
@@ -169,9 +319,9 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 23,
-        "x": 0,
+        "h": 12,
+        "w": 12,
+        "x": 12,
         "y": 4
       },
       "hiddenSeries": false,
@@ -202,7 +352,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "nrCellId: $tag_nrCellId",
           "groupBy": [
             {
               "params": [
@@ -278,6 +428,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:730",
           "decimals": 0,
           "format": "short",
           "label": null,
@@ -287,6 +438,156 @@
           "show": true
         },
         {
+          "$$hashKey": "object:731",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-5G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 16,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "ueId: $tag_ueId",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "ueId"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "uemeasurement.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "measurement.ulGtpThp"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "*8"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "UL Throughput per UE",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:287",
+          "decimals": 0,
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:288",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -317,9 +618,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 23,
-        "x": 0,
-        "y": 12
+        "w": 12,
+        "x": 12,
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 4,
@@ -349,7 +650,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "nrcellId: $tag_nrCellId",
           "groupBy": [
             {
               "params": [
@@ -425,6 +726,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:861",
           "decimals": 0,
           "format": "short",
           "label": null,
@@ -434,6 +736,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:862",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -464,9 +767,9 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 23,
-        "x": 0,
-        "y": 20
+        "w": 12,
+        "x": 12,
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 3,
@@ -496,7 +799,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_nrCellId",
+          "alias": "nrcellId: $tag_nrCellId",
           "groupBy": [
             {
               "params": [
@@ -572,6 +875,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:992",
           "decimals": 0,
           "format": "short",
           "label": null,
@@ -581,6 +885,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:993",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -604,7 +909,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -631,7 +936,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -658,7 +963,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -679,5 +984,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 12
+  "version": 2
 }

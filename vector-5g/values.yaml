@@ -12,6 +12,8 @@ config:
     hostname: 10.55.1.2
     port: 31090
     topic: accelleran.drax.5g.ric.raw.ue_measurements
+    pmCounterTopic: accelleran.drax.5g.ric.raw.pm_counters
+
 fullnameOverride: ""
 image:
   pullPolicy: IfNotPresent

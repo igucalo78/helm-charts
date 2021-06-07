@@ -6,9 +6,12 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
+customLabels: {}
+#  exampleLabelName: exampleLabelValue
+
 image:
   repository: accelleran/mwc
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -36,18 +39,19 @@ securityContext:
   runAsUser: 0
 
 service:
+  serviceName: "nats-service"
   client:
     name: "natsport"
     port: 4222
-    nodePort: 31000
+#    nodePort: 31000
   cluster:
     name: "clusterport"
     port: 6222
-    nodePort: 31001
+#    nodePort: 31001
   monitoring:
     name: "consoleport"
     port: 8222
-    nodePort: 31002
+#    nodePort: 31002
 
 ingress:
   enabled: false
