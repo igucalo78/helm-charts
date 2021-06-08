@@ -61,7 +61,20 @@ spec:
           #command: ["/bin/sh"]
           #args: ["-c", "sleep 1000"]
           command: ["/nkafka"]
-          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
+          args:
+            {{  range .Values.args }}
+            - {{ tpl . $ }}
+            {{ end }}
+            {{ if .Values.configs.logLevel }}
+              {{ if eq .Values.configs.logLevel "info" }}
+            - "-v"
+              {{ end }}
+              {{ if eq .Values.configs.logLevel "debug" }}
+            - "-vv"
+              {{ end }}
+            {{ end }}
+
+#          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
 #          ports:
 #            - name: http
 #              containerPort: 80

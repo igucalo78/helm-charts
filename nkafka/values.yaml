@@ -22,6 +22,8 @@ initImage:
   tag: "latest"
 
 initConfig:
+  natsCheckEnabled: true
+  kafkaCheckEnabled: true
   kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
   kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 
@@ -29,6 +31,8 @@ imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
+
+args: ["--kafka", "{{ .Values.kafkaUrl }}", "--group", "helm-demo", "--nats", "nats://{{ .Values.natsUrl }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml"]
 
 kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
 natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
