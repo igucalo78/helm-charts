@@ -115,9 +115,11 @@ spec:
         - name: {{ include "nkafka-helm.fullname" . }}-4g-config
           configMap:
             name: {{ include "nkafka-helm.fullname" . }}-4g-config
+
         - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
           configMap:
             name: {{ include "nkafka-helm.fullname" . }}-4g-topics
+
         {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
         - name: accelleran-license
           secret:
