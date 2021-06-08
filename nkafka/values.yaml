@@ -34,7 +34,7 @@ fullnameOverride: ""
 kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
 natsUrl: &natsUrl "nats-service.{{ .Release.Namespace }}:4222"
 
-args: ["--kafka", "{{ .Values.kafkaUrl }}", "--group", "helm-demo", "--nats", "nats://"*natsUrl, "-f", "/4GConfig.toml", "-f", "/4GTopics.toml"]
+args: ["--kafka", "{{ .Values.kafkaUrl }}", "--group", "helm-demo", "--nats", !concat ["nats://", *natsUrl], "-f", "/4GConfig.toml", "-f", "/4GTopics.toml"]
 
 configs:
   # If set to false, will use the ueRicId. If set to true, will use the generic UE ID shown on teh dashboard. WARNING: if using generic UE ID, you will not have the ueRicId which is necessary for some dRAX commands.
