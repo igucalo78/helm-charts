@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: conf-4g-topics
+  name: {{ include "nkafka-helm.fullname" . }}-4g-topics
 data:
   4GTopics.toml: |-
     [[translate]]

@@ -46,10 +46,10 @@ spec:
           {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
-            - name: conf-4g-config
-              mountPath: /4GConfig.toml 
+            - name: {{ include "nkafka-helm.fullname" . }}-4g-config
+              mountPath: /4GConfig.toml
               subPath: "4GConfig.toml"
-            - name: conf-4g-topics
+            - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
               mountPath: /4GTopics.toml 
               subPath: "4GTopics.toml"  
             {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
@@ -107,12 +107,12 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: conf-4g-config
+        - name: {{ include "nkafka-helm.fullname" . }}-4g-config
           configMap:
-            name: conf-4g-config
-        - name: conf-4g-topics
+            name: {{ include "nkafka-helm.fullname" . }}-4g-config
+        - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
           configMap:
-            name: conf-4g-topics
+            name: {{ include "nkafka-helm.fullname" . }}-4g-topics
         {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
         - name: accelleran-license
           secret:
