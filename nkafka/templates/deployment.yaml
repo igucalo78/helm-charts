@@ -26,15 +26,20 @@ spec:
       serviceAccountName: {{ include "nkafka-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if or (.Values.initConfig.natsCheckEnabled) (.Values.initConfig.kafkaCheckEnabled) }}
       initContainers:
+        {{ if .Values.initConfig.natsCheckEnabled }}
         - name: {{ .Chart.Name }}-check-nats
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.natsUrl . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.natsUrl . }}; sleep 2; done']
+        {{ end }}
+        {{ if .Values.initConfig.kafkaCheckEnabled }}
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py {{ tpl .Values.initConfig.kafkaTopicsCheck . }}']
+        {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -67,10 +72,10 @@ spec:
             {{ end }}
             {{ if .Values.configs.logLevel }}
               {{ if eq .Values.configs.logLevel "info" }}
-            - "-v"
+            - -v
               {{ end }}
               {{ if eq .Values.configs.logLevel "debug" }}
-            - "-vv"
+            - -vv
               {{ end }}
             {{ end }}
 
