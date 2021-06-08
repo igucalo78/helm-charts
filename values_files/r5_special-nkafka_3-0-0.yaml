@@ -36,7 +36,7 @@ natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 # If you want to run the NKafka tool with custom argument, you can override them here. Note all the args need to be strings!
 # For example:
- overrideArgs: ["--nats", "nats://nats-service.default:4222", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", "-vv"]
+overrideArgs: ["--nats", "nats://nats-service.default:4222", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", "-vv"]
 #overrideArgs: []
 
 configs:
