@@ -40,6 +40,7 @@ spec:
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py {{ tpl .Values.initConfig.kafkaTopicsCheck . }}']
         {{ end }}
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -55,8 +56,8 @@ spec:
               mountPath: /4GConfig.toml
               subPath: "4GConfig.toml"
             - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
-              mountPath: /4GTopics.toml 
-              subPath: "4GTopics.toml"  
+              mountPath: /4GTopics.toml
+              subPath: "4GTopics.toml"
             {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
             - mountPath: "/etc/license/license.crt"
               subPath: "license.crt"
