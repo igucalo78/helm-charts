@@ -31,7 +31,7 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
-args: ["--kafka", "{{ .Values.kafkaUrl }}", "--group", "helm-demo", "--nats", "nats://{{ include nkafka-helm.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml"]
+args: ["--kafka", "{{ .Values.kafkaUrl }}", "--group", "helm-demo", "--nats", "nats://{{ template nkafka-helm.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml"]
 
 kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
 natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
