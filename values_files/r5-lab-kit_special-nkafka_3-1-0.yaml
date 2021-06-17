@@ -5,7 +5,7 @@
 
 # For mounting the accelleran license
 accelleranLicense:
-  enabled: "true"
+  enabled: "false"
   licenseSecretName: "accelleran-license"
 
 replicaCount: 1
@@ -23,7 +23,7 @@ initImage:
 
 initConfig:
   natsCheckEnabled: true
-  kafkaCheckEnabled: true
+  kafkaCheckEnabled: false
   kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
 
 imagePullSecrets:
@@ -36,8 +36,8 @@ natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 # If you want to run the NKafka tool with custom argument, you can override them here. Note all the args need to be strings!
 # For example:
-# overrideArgs: ["--nats", "nats://nats-service.default:4222", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", "-f", "/4GAllTopics.toml", "-vv"]
-overrideArgs: []
+ overrideArgs: ["--nats", "nats://nats-service.default:4222", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", "-f", "/4GAllTopics.toml", "-vv"]
+#overrideArgs: []
 
 configs:
   # If set to false, will use the ueRicId. If set to true, will use the generic UE ID shown on teh dashboard. WARNING: if using generic UE ID, you will not have the ueRicId which is necessary for some dRAX commands.
@@ -45,10 +45,10 @@ configs:
   # How vectors will be published to JSON Kafka messages. Default set to none.
   seqMapper: "none"
   # The log level can be commented out, or set to info or debug
-  logLevel: info
+  logLevel: debug
   ueRicIdName: "ueRicId"
   ueDraxIdName: "ueDraxId"
-  logAllTopics: false
+  logAllTopics: true
 
 serviceAccount:
   # Specifies whether a service account should be created
