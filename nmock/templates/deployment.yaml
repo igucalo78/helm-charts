@@ -46,6 +46,9 @@ spec:
               sudo service ssh start
               echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
               sudo chown -R xapp /home/xapp/
+              echo "export NMOCK_NATS=nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}" >> /home/xapp/environment
+              echo "export NMOCK_REDIS=redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}" >> /home/xapp/environment
+              echo "export RUST_LOG={{ .Values.config.logLevel }}" >> /home/xapp/environment
               while true; do sleep 30; done;
               EOF
           env:
