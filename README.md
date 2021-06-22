@@ -45,5 +45,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - State DB
-    - The persistency of the State DB Configuration is turned off to avoid misconfiguration when upgrading the RIC
+    - The persistence of the State DB Configuration is turned off to avoid misconfiguration when upgrading the RIC
 
