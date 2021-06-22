@@ -63,7 +63,7 @@ ingress:
 persistence:
   accessModes:
     - ReadWriteMany
-  enabled: true
+  enabled: false
   size: 1Gi
   #storageClassName: acc-redis
   type: pvc
