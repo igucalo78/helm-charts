@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "172.31.36.102"
+  kubeIp: "10.55.1.2"
 
 
   # dRAX Specific Node Selector
@@ -50,7 +50,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "false"
+    enabled: "true"
     licenseSecretName: "accelleran-license"
 
 acc-kafka:
@@ -265,7 +265,6 @@ acc-service-monitor:
   monitoredNamespaces: "{{ .Release.Namespace }}"
 
 acc-service-orchestrator:
-
   # Enable/disable installation of the Service Orchestrator
   enabled: true
 
