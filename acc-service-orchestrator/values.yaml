@@ -16,6 +16,10 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+kubeIp: "10.55.1.2"
+
+default5gVersion: "0.7"
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
