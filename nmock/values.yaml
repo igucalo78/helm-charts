@@ -1,28 +1,54 @@
-# Default values for acc-service-orchestrator.
+# Default values for nmock.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
-
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: accelleran/nmock
   pullPolicy: IfNotPresent
-  #pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+initConfig:
+  natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 imagePullSecrets:
   - name: accelleran-secret
+
+sshPassword: "password1!"
+
+config:
+  logLevel: "debug"
+  natsUrl: "10.55.1.2"
+  natsPort: "31000"
+  redisUrl: "10.55.1.2"
+  redisPort: "32000"
+
+extraEnvs: []
+#  - name: ex1
+#    value: ex1
+
+persistence:
+  accessModes:
+    - ReadWriteMany
+  enabled: true
+  size: 10Gi
+  storageClassName: nmock
+  type: pvc
+  hostPath: /opt/pods/nmock
+
 nameOverride: ""
 fullnameOverride: ""
 
-kubeIp: "10.55.1.2"
-
-default5gVersion: "0.7"
-
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -34,21 +60,19 @@ podAnnotations: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: 
+securityContext:
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  runAsUser: 0
-  privileged: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
-service:
-  serviceName: acc-service-orchestrator
-  name: acc-ser-orc
+sshService:
+  name: "ssh"
   type: NodePort
-  port: 80
-  nodePort: 30502
+  port: 22
+  nodePort: 30950
 
 ingress:
   enabled: false
@@ -57,7 +81,11 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: []
+      paths:
+      - path: /
+        backend:
+          serviceName: chart-example.local
+          servicePort: 80
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -85,7 +113,6 @@ autoscaling:
 nodeSelector: {}
 
 draxNodeSelectorEnabled: "false"
-
 draxNodeSelector:
   draxName: "main"
 

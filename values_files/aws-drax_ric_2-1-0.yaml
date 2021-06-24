@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "172.31.36.102"
 
 
   # dRAX Specific Node Selector
@@ -35,7 +35,7 @@ global:
   #   Value type:   bool
   #
   enable4G: true
-  enable5G: false
+  enable5G: true
 
 
   # Accelleran License
@@ -50,7 +50,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "true"
+    enabled: "false"
     licenseSecretName: "accelleran-license"
 
 acc-kafka:
@@ -198,6 +198,11 @@ loki-stack:
         retention_period: 672h
 
 dash-front-back-end:
+  version: "latest"
+
+  image:
+    repository: accelleran_dashboard
+
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
@@ -265,6 +270,11 @@ acc-service-monitor:
   monitoredNamespaces: "{{ .Release.Namespace }}"
 
 acc-service-orchestrator:
+  version: "0.9.0"
+
+  image:
+    repository: test-ser-orc
+
   # Enable/disable installation of the Service Orchestrator
   enabled: true
 
@@ -439,7 +449,7 @@ acc-5g-infrastructure:
       client:
         name: "natsport"
         port: 4222
-#        nodePort:
+        nodePort: 31100
       cluster:
         name: "clusterport"
         port: 6222
@@ -472,7 +482,7 @@ acc-5g-infrastructure:
     service:
       type: NodePort
       port: 6379
-#      nodePort:
+      nodePort: 32200
       name: "redisport"
       serviceName: '{{ include "redis.fullname" . }}'
 
@@ -511,7 +521,7 @@ nkafka-5g:
     kafkaTopicsCheck: "accelleran.drax.5g.ric.raw.messages,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state"
 
   configs:
-    logLevel: info
+    logLevel: debug
 
   options:
     - name: "topic"
