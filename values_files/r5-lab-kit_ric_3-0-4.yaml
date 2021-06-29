@@ -47,7 +47,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "true"
+    enabled: "false"
     licenseSecretName: "accelleran-license"
 
 acc-kafka:
