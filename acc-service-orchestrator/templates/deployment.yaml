@@ -33,6 +33,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version	. }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: KUBE_IP
+              value: "{{ tpl .Values.kubeIp . }}"
+            - name: DEFAULT_5G_VERSION
+              value: "{{ tpl .Values.default5gVersion . }}"
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}

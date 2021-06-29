@@ -4,10 +4,10 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
+version: "0.1.0"
 
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: test-svc-orc-10
   pullPolicy: IfNotPresent
   #pullPolicy: IfNotPresent
 
@@ -15,10 +15,6 @@ imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
-
-kubeIp: "10.55.1.2"
-
-default5gVersion: "0.7"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -44,11 +40,11 @@ securityContext:
   privileged: true
 
 service:
-  serviceName: acc-service-orchestrator
+  serviceName: acc-service-orc-test-10
   name: acc-ser-orc
   type: NodePort
   port: 80
-  nodePort: 30502
+  nodePort: 31502
 
 ingress:
   enabled: false

@@ -55,6 +55,9 @@ spec:
             - name: {{ include "nkafka-helm.fullname" . }}-4g-config
               mountPath: /4GConfig.toml
               subPath: "4GConfig.toml"
+            - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
+              mountPath: /4GKafkaTopics.toml
+              subPath: "4GKafkaTopics.toml"
             {{ if .Values.configs.logAllTopics }}
             - name: {{ include "nkafka-helm.fullname" . }}-4g-all-topics
               mountPath: /4GAllTopics.toml
@@ -75,7 +78,7 @@ spec:
             - {{ tpl . $ }}
             {{ end }}
           {{ else }}
-          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
+          args: ["--kafka", "{{ tpl .Values.kafkaUrl . }}", "--group", "helm-demo", "--nats", "nats://{{ tpl .Values.natsUrl . }}", "-f", "/4GConfig.toml", "-f", "/4GTopics.toml","-f", "/4GKafkaTopics.toml", {{ if .Values.configs.logLevel }}{{ if eq .Values.configs.logLevel "info" }}"-v"{{ end }}{{ if eq .Values.configs.logLevel "debug" }}"-vv"{{ end }}{{ end }}]
           {{ end }}
 #          ports:
 #            - name: http
@@ -112,7 +115,9 @@ spec:
         - name: {{ include "nkafka-helm.fullname" . }}-4g-config
           configMap:
             name: {{ include "nkafka-helm.fullname" . }}-4g-config
-
+        - name: {{ include "nkafka-helm.fullname" . }}-4g-topics
+          configMap:
+            name: {{ include "nkafka-helm.fullname" . }}-4g-topics
         {{ if .Values.configs.logAllTopics }}
         - name: {{ include "nkafka-helm.fullname" . }}-4g-all-topics
           configMap:

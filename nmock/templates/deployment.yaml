@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nmock.fullname" . }}
+  labels:
+    {{- include "nmock.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "nmock.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "nmock.labels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nmock.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-check-nats
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: [ 'sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfig.natsUrl . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.initConfig.natsUrl . }}; sleep 2; done' ]
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              sudo service ssh start
+              echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
+              sudo chown -R xapp /home/xapp/
+              echo "export NMOCK_NATS=nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}" >> /home/xapp/environment
+              echo "export NMOCK_REDIS=redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}" >> /home/xapp/environment
+              echo "export RUST_LOG={{ .Values.config.logLevel }}" >> /home/xapp/environment
+              while true; do sleep 30; done;
+              EOF
+          env:
+            - name: NMOCK_NATS
+              value: "nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}"
+            - name: NMOCK_REDIS
+              value: "redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}"
+            - name: RUST_LOG
+              value: "{{ .Values.config.logLevel }}"
+            {{- if .Values.extraEnvs }}
+            {{ toYaml .Values.extraEnvs | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            - name: nmock
+              mountPath: /home/xapp/exposed-folder
+          ports:
+            - name: {{ .Values.sshService.name }}
+              containerPort: {{ .Values.sshService.port }}
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
+      nodeSelector:
+        {{ if .Values.nodeSelector }}
+          {{- toYaml .Values.nodeSelector | nindent 8 }}
+        {{ end }}
+        {{ if eq (tpl .Values.draxNodeSelectorEnabled .) "true" }}
+          {{- tpl (toYaml .Values.draxNodeSelector) $ | nindent 8 }}
+        {{ end }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: nmock
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "nmock.fullname" . }}{{- end }}
+          {{- end }}
+#      volumes:
+#        - name: nmock
+#            {{- if .Values.persistence.enabled }}
+#            persistentVolumeClaim:
+#              claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ include "nmock.fullname" . }}{{- end }}
+#            {{- end }}

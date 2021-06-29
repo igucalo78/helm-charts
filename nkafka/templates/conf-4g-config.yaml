@@ -21,3 +21,4 @@ data:
     subject="topic"
     ric_id_name="{{ .Values.configs.ueRicIdName }}"
     drax_id_name="{{ .Values.configs.ueDraxIdName}}"
+    orig_id_name=".UniqueRicId"
