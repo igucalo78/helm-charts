@@ -15,8 +15,8 @@
 | acc-helm/acc-sys-dashboard                |  3.2.9             |  3.2.9                             |  Accelleran's System Overview Dashboard | 
 | acc-helm/acc-zookeeper                    |  0.1.0             |  3.6.2                             |  A Helm chart for Kubernetes | 
 | acc-helm/configurator                     |  0.3.0             |  0.2.0                             |  The configurator of Accelleran dRAX | 
-| acc-helm/dash-front-back-end              |  0.27.3            |  0.25.4                            |  Frontend and backend of the Accelleran Dashboard | 
-| acc-helm/drax                             |  2.0.0             |  2.0.0                             |  All in one Accelleran dRAX |  
+| acc-helm/dash-front-back-end              |  1.0.1             |  1.0.1                            |  Frontend and backend of the Accelleran Dashboard | 
+| acc-helm/drax                             |  2.1.0             |  2.1.0                             |  All in one Accelleran dRAX |  
 | acc-helm/influxdb                         |  5.0.0             |  1.8.3                             |  Scalable datastore for metrics, events, and rea... |  
 | acc-helm/kube-eagle                       |  1.1.5             |  1.1.0                             |  Prometheus exporter for Kubernetes pod & node r... | 
 | acc-helm/loki-stack                       |  0.43.0            |  v1.4.1                            |  Loki: like Prometheus, but for logs. | 
@@ -28,7 +28,7 @@
 | acc-helm/provisioner                      |  0.11.1            |  0.7.0                             |  The Accelleran provisioner for bootstrap files | 
 | acc-helm/provisioner-dhcp                 |  0.2.0             |  0.1.4                             |  A DHCP service for Provisioner discovery | 
 | acc-helm/redis                            |  0.6.3             |  redis20190206                     |  Accelleran dRAX Redis | 
-| acc-helm/ric                              |  2.0.1             |  2.0.1                             |  A Helm chart for Kubernetes | 
+| acc-helm/ric                              |  2.1.0             |  2.1.0                             |  A Helm chart for Kubernetes | 
 | acc-helm/vector                           |  0.6.0             |  0.2.0                             |  A Helm chart for Kubernetes | 
 | acc-helm/vectorfiveg                      |  0.5.2             |  0.2.0                             |  A Helm chart for Kubernetes | 
 
@@ -41,9 +41,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2021-07-07
+### Added
+- ric [2.1.0]:
+  - Adding xApp Development Environment
+    - You can now deploy the xApp Development Environment via the dRAX Dashboard
+  - The xApp Services exposed
+    - The services of each xApp are now listed under the Services button in the xApp Overview list   
+  - 5G CU Version selection
+    - You can now choose the exact version of the Accelleran 5G CU you want to deploy
+    - By default, when deploying the 5G CU you will install the latest stable version for the particular dRAX version
+
+### Changed
+- ric [2.1.0]:
+  - Using 5G CU 1.0.0 version
+    - The default version of the 5G CU is now 1.0.0
+    - This contains pre-flight checks for the InstanceID  
+- drax [2.1.0]:
+  - Updating version to keep in sync with ric
+    
+
 ## 2021-06-21
 ### Fixed
-
-- State DB
+- ric [2.0.1]:
+  - State DB
     - The persistence of the State DB Configuration is turned off to avoid misconfiguration when upgrading the RIC
 
