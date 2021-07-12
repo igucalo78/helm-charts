@@ -17,6 +17,10 @@ image:
 jobs:
   preDelete:
     image: accelleran/acc-generic-img:0.4.1
+  netconfConfig:
+    enabled: true
+    image: accelleran/acc-python-generic-img:0.1.0
+    netconfHost: "netconf-oran-controller"
 
 imagePullSecrets:
   - name: accelleran-secret
