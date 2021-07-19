@@ -38,25 +38,25 @@ spec:
             - sh
             - "-c"
             - |
-            /bin/bash <<'EOF'
+              /bin/bash <<'EOF'
 
-            #!/bin/bash
+              #!/bin/bash
 
-            # upgrade pip
-            # python3 -m pip install -U pip
+              # upgrade pip
+              # python3 -m pip install -U pip
 
-            # Install netconf python lib
-            # pip3 install netconf-client==1.7.1
+              # Install netconf python lib
+              # pip3 install netconf-client==1.7.1
 
-            # make sure that netconf is running
-            python3 /rpcs/check-netconf.py
+              # make sure that netconf is running
+              python3 /rpcs/check-netconf.py
 
-            # Run 4grc-netconf-config.py script
-            python3 /rpcs/4grc-netconf-delete-config.py
+              # Run 4grc-netconf-config.py script
+              python3 /rpcs/4grc-netconf-delete-config.py
 
-            exit 0
+              exit 0
 
-            EOF
+              EOF
         {{ end }}
       {{ end }}
       containers:
