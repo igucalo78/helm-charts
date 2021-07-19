@@ -198,6 +198,11 @@ loki-stack:
         retention_period: 672h
 
 dash-front-back-end:
+  version: "latest"
+
+  image:
+    repository: accelleran_dashboard
+
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
