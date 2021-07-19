@@ -29,7 +29,7 @@ spec:
         - name: {{ .Chart.Name }}-check-redis
           image: "{{ .Values.jobs.checkRedis.repository }}:{{ .Values.jobs.checkRedis.tag }}"
           imagePullPolicy: {{ .Values.jobs.checkRedis.pullPolicy }}
-          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.config.redis.hostname . }} -p {{ tpl .Values.config.redis.port . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for dRAX-4G REDIS; sleep 2; done; echo Redis online']
+          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.config.redis.hostname . }} -p {{ .Values.config.redis.port }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for dRAX-4G REDIS; sleep 2; done; echo Redis online']
         {{ end }}
         {{ if .Values.jobs.netconfDeleteConfig.enabled }}
         - name: {{ .Chart.Name }}-delete-config
