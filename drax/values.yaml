@@ -228,6 +228,19 @@ configurator:
   image:
     pullPolicy: IfNotPresent
 
+  # Pre- and Post- start jobs that can be enabled or disabled
+  jobs:
+    # Set enabled to true if you wish the 4G Radio Controller to be automatically configured on deployment.
+    # If set to false, you have to configure it from the dRAx Dashbaord or using a NetConf RPC after the dRAX is deployed
+    netconfConfig:
+      enabled: true
+    # Make sure dRAX-4G Redis is up and running before starting.
+    checkRedis:
+      enabled: true
+    # If the 4G Radio Controller is already configured in REDIS from a previous installation, you can delete that configuration if you want using the following job
+    netconfDeleteConfig:
+      enabled: false
+
   config:
     # If you are using the secure HTTPS protocol for the Kubernetes API, enable this option
     https: true

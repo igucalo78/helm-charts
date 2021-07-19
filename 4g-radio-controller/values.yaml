@@ -21,6 +21,15 @@ jobs:
     enabled: true
     image: accelleran/acc-python-generic-img:0.1.0
     netconfHost: "netconf-oran-controller"
+  checkRedis:
+    enabled: true
+    repository: accelleran/acc-generic-img
+    pullPolicy: IfNotPresent
+    tag: "0.6.0"
+  netconfDeleteConfig:
+    enabled: false
+    image: accelleran/acc-python-generic-img:0.1.0
+    netconfHost: "netconf-oran-controller"
 
 imagePullSecrets:
   - name: accelleran-secret
