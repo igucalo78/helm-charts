@@ -54,8 +54,6 @@ spec:
             # Run 4grc-netconf-config.py script
             python3 /rpcs/4grc-netconf-config.py
 
-            sleep 3600
-
             exit 0
 
             EOF
