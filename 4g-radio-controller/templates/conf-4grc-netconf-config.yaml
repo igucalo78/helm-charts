@@ -15,7 +15,8 @@ data:
 
     session = connect_ssh(host=HOST, port=PORT, username="helm", password="helm")
     mgr = Manager(session, timeout=120)
-    models = """<enb-internal xmlns="http://accelleran.com/ns/yang/accelleran-enb-internal" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
+    rc-config = """<config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+                  <enb-internal xmlns="http://accelleran.com/ns/yang/accelleran-enb-internal" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
                   	    <feature-flags xc:operation="create">
                   	    <handout-enabled>true</handout-enabled>
                   	    <handin-enabled>true</handin-enabled>
@@ -80,7 +81,8 @@ data:
                   	</ric-controller-config>
 
                   </enb-internal>
+                </config>
 
                 """
 
-    print(mgr.edit_config(config=models,target='running', default_operation=None))
+    print(mgr.edit_config(config=rc-config,target='running', default_operation=None))
