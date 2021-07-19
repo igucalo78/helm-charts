@@ -23,40 +23,13 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{ if or (.Values.jobs.checkRedis.enabled) (.Values.jobs.netconfDeleteConfig.enabled) }}
+      {{ if or (.Values.jobs.checkRedis.enabled) }}
       initContainers:
         {{ if .Values.jobs.checkRedis.enabled }}
         - name: {{ .Chart.Name }}-check-redis
           image: "{{ .Values.jobs.checkRedis.repository }}:{{ .Values.jobs.checkRedis.tag }}"
           imagePullPolicy: {{ .Values.jobs.checkRedis.pullPolicy }}
           command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.config.redis.hostname . }} -p {{ .Values.config.redis.port }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for dRAX-4G REDIS; sleep 2; done; echo Redis online']
-        {{ end }}
-        {{ if .Values.jobs.netconfDeleteConfig.enabled }}
-        - name: {{ .Chart.Name }}-delete-config
-          image: "{{ .Values.jobs.netconfDeleteConfig.image }}"
-          command:
-            - sh
-            - "-c"
-            - |
-              /bin/bash <<'EOF'
-
-              #!/bin/bash
-
-              # upgrade pip
-              # python3 -m pip install -U pip
-
-              # Install netconf python lib
-              # pip3 install netconf-client==1.7.1
-
-              # make sure that netconf is running
-              python3 /rpcs/check-netconf.py
-
-              # Run 4grc-netconf-config.py script
-              python3 /rpcs/4grc-netconf-delete-config.py
-
-              exit 0
-
-              EOF
         {{ end }}
       {{ end }}
       containers:

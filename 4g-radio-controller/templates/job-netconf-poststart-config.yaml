@@ -34,6 +34,9 @@ spec:
           - name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-config
             mountPath: /rpcs/4grc-netconf-config.py
             subPath: "4grc-netconf-config.py"
+          - name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-delete-config
+            mountPath: /rpcs/4grc-netconf-delete-config.py
+            subPath: "4grc-netconf-delete-config.py"
         command:
           - sh
           - "-c"
@@ -51,6 +54,11 @@ spec:
             # make sure that netconf is running
             python3 /rpcs/check-netconf.py
 
+            {{ if .Values.jobs.netconfDeleteConfig.enabled }}
+            # If the delete config job is enabled, run the following script
+            python3 /rpcs/4grc-netconf-delete-config.py
+            {{ end }}
+
             # Run 4grc-netconf-config.py script
             python3 /rpcs/4grc-netconf-config.py
 
@@ -65,4 +73,8 @@ spec:
         - name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-config
           configMap:
             name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-config
+
+        - name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-delete-config
+          configMap:
+            name: {{ include "oran-clustercontrol.fullname" . }}-4g-netconf-delete-config
 {{- end }} 
