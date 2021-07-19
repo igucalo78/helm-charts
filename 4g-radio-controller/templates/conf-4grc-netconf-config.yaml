@@ -15,7 +15,7 @@ data:
 
     session = connect_ssh(host=HOST, port=PORT, username="helm", password="helm")
     mgr = Manager(session, timeout=120)
-    rc-config = """<config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+    rc_config = """<config xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
                   <enb-internal xmlns="http://accelleran.com/ns/yang/accelleran-enb-internal" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
                   	    <feature-flags xc:operation="create">
                   	    <handout-enabled>true</handout-enabled>
@@ -85,4 +85,4 @@ data:
 
                 """
 
-    print(mgr.edit_config(config=rc-config,target='running', default_operation=None))
+    print(mgr.edit_config(config=rc_config,target='running', default_operation=None))
