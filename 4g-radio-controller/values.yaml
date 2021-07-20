@@ -21,13 +21,12 @@ jobs:
     enabled: true
     image: accelleran/acc-generic-img:latest
     netconfHost: "netconf-oran-controller"
+    deleteExistingConfig: false
   checkRedis:
     enabled: true
     repository: accelleran/acc-generic-img
     pullPolicy: IfNotPresent
     tag: "0.6.0"
-  netconfDeleteConfig:
-    enabled: false
 
 imagePullSecrets:
   - name: accelleran-secret

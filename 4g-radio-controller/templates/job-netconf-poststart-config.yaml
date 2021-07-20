@@ -54,7 +54,7 @@ spec:
             # make sure that netconf is running
             python3 /rpcs/check-netconf.py
 
-            {{ if .Values.jobs.netconfDeleteConfig.enabled }}
+            {{ if .Values.jobs.netconfConfig.deleteExistingConfig }}
             # If the delete config job is enabled, run the following script
             python3 /rpcs/4grc-netconf-delete-config.py
             {{ end }}
