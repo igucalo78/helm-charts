@@ -10,11 +10,10 @@ customLabels: {}
 #  exampleLabelName: exampleLabelValue
 
 image:
-  repository: accelleran/mwc
+  repository: redis
   pullPolicy: IfNotPresent
 
-imagePullSecrets:
-  - name: accelleran-secret
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
