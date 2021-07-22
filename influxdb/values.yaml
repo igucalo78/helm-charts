@@ -8,7 +8,6 @@ image:
   # pullSecrets:
   #   - registry-secret
 
-
 serviceAccount:
   create: true
   name:
@@ -18,17 +17,20 @@ serviceAccount:
 ## ref: https://docs.influxdata.com/influxdb/v1.7/tools/api/#ping-http-endpoint
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 ##
-livenessProbe: {}
+livenessProbe:
+  {}
   # initialDelaySeconds: 30
   # timeoutSeconds: 5
   # scheme: HTTP
 
-readinessProbe: {}
+readinessProbe:
+  {}
   # initialDelaySeconds: 5
   # timeoutSeconds: 1
   # scheme: HTTP
 
-securityContext: {}
+securityContext:
+  {}
   # runAsUser: 999
   # runAsGroup: 999
 
@@ -130,7 +132,6 @@ setDefaultUser:
   restartPolicy: OnFailure
 
   user:
-
     ## The user name
     ## Default: "admin"
     username: "admin"
@@ -170,11 +171,11 @@ ingress:
   tls: false
   # secretName: my-tls-cert # only needed if tls above is true
   hostname: influxdb.foobar.com
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: "nginx"
     # kubernetes.io/tls-acme: "true"
   path: /
-
 
 ## Add custom volume and volumeMounts
 # volumes:
@@ -218,7 +219,8 @@ tolerations: []
 ## The InfluxDB image uses several environment variables to automatically
 ## configure certain parts of the server.
 ## Ref: https://hub.docker.com/_/influxdb/
-env: {}
+env:
+  {}
   # - name: INFLUXDB_DB
   #   value: "demo"
 
@@ -254,8 +256,8 @@ initScripts:
   enabled: true
   scripts:
     init.iql: |+
-      CREATE DATABASE "test" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
-      CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
+      CREATE DATABASE "db_4G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_4G"
+      CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_5G"
 
 backup:
   enabled: false
@@ -267,9 +269,9 @@ backup:
       # cpu: 2
       ephemeral-storage: "8Gi"
     # limits:
-      # memory: 1Gi
-      # cpu: 4
-      # ephemeral-storage: "16Gi"
+    # memory: 1Gi
+    # cpu: 4
+    # ephemeral-storage: "16Gi"
   ## If backup destination is PVC, or want to use intermediate PVC before uploading to object store.
   persistence:
     enabled: false
@@ -292,7 +294,6 @@ backup:
   #    serviceAccountSecret: influxdb-backup-key
   #    serviceAccountSecretKey: key.json
   #    destination: gs://bucket/influxdb
-
   ## Azure
   ## Secret is expected to have connection string stored in `connection-string` field
   ## Existing container will be used or private one withing storage account will be created.
@@ -300,7 +301,6 @@ backup:
   #   storageAccountSecret: influxdb-backup-azure-key
   #   destination_container: influxdb-container
   #   destination_path: ""
-
   ## Amazon S3 or compatible
   ## Secret is expected to have AWS (or compatible) credentials stored in `credentials` field.
   ## Please look at https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-where

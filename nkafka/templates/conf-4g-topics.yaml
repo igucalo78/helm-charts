@@ -55,4 +55,9 @@ data:
     [[translate]]
     nats_topic="RC4G_CTRL_UE_MEASUREMENT_DATA"
     kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"
-    
+    [[translate]]
+    nats_topic="ENB_STATS_CQI_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"
+    [[translate]]
+    nats_topic="ENB_STATS_L2_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"
