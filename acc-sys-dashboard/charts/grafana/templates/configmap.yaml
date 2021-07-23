@@ -36,12 +36,12 @@ data:
       url: {{ tpl .Values.datasources.lokiUrl . }}
     - access: proxy
       isDefault: false
-      name: InfluxDB
+      name: InfluxDB-4G
       type: influxdb
       url: {{ tpl .Values.datasources.influxdbUrl . }}
       user: admin
       password: password
-      database: test
+      database: db_4G
       basicAuth: true
       basicAuthUser: admin
       basicAuthPassword: password

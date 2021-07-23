@@ -9,18 +9,18 @@ dashboardProviders:
   dashboardproviders.yaml:
     apiVersion: 1
     providers:
-    - disableDeletion: false
-      editable: true
-      folder: ""
-      name: default
-      options:
-        path: /var/lib/grafana/dashboards/default
-      orgId: 1
-      type: file
+      - disableDeletion: false
+        editable: true
+        folder: ""
+        name: default
+        options:
+          path: /var/lib/grafana/dashboards/default
+        orgId: 1
+        type: file
 dashboards:
   default:
-    influxdb-dashboard:
-      file: dashboards/influxdb-dashboard.json
+    4g-monitoring-dashboard:
+      file: dashboards/4g-monitoring-dashboard.json
     custom-dashboard:
       file: dashboards/custom-dashboard.json
     loki-log-dashboard:
@@ -76,14 +76,14 @@ image:
   pullPolicy: IfNotPresent
   repository: accelleran/dash-grafana
   tag: 0.4.0
-  pullSecrets: 
-  - accelleran-secret
+  pullSecrets:
+    - accelleran-secret
 ingress:
   annotations: {}
   enabled: false
   extraPaths: []
   hosts:
-  - grafana.local
+    - grafana.local
   labels: {}
   path: /
   tls: []
@@ -114,7 +114,7 @@ draxNodeSelector:
 notifiers: {}
 persistence:
   accessModes:
-  - ReadWriteMany
+    - ReadWriteMany
   enabled: true
   size: 10Gi
   storageClassName: grafana
