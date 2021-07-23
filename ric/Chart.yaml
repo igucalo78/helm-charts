@@ -73,7 +73,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-5g-infrastructure
     condition: global.enable5G
-    version: 0.1.0
+    version: 0.2.0
     repository: https://accelleran.github.io/5g-helm-charts
   - name: nkafka-5g
     condition: global.enable5G
