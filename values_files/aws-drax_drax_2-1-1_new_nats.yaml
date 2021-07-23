@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "172.31.36.102"
 
   # dRAX Specific Node Selector
   #   Description: This is a special nodeSelector field implemented for the
@@ -39,7 +39,7 @@ global:
   #                 licenseSecretName: string
   #
   accelleranLicense:
-    enabled: "true"
+    enabled: "false"
     licenseSecretName: "accelleran-license"
 
 nats:
@@ -99,7 +99,7 @@ provisioner-dhcp:
   # staticRouteNetwork: Set the network where the provisioner is, example 10.20.20.0/24
   # staticRouteGateway: Set the gateway to be used by the cells to reach the provisioner 10.22.10.52
   configuration:
-    interface: eno1
+    interface: eth0
     provisionerIp: "{{ .Values.global.kubeIp }}"
     provisionerPort: 31610
     # If you enable staticRoute, then provide the network and gateway values
@@ -167,7 +167,7 @@ ntp-server:
 
 configurator:
   # To enabled or disable the installation of the dRAX Configurator
-  enabled: true
+  enabled: false
 
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:

@@ -106,12 +106,12 @@ nats:
 service:
   serviceName: "nats-service"
   type: NodePort
-  client:
-    nodePort: 31000
-  cluster:
-    nodePort: 31001
-  monitoring:
-    nodePort: 31002
+#  client:
+#    nodePort: 31000
+#  cluster:
+#    nodePort: 31001
+#  monitoring:
+#    nodePort: 31002
 
 draxNodeSelectorEnabled: "false"
 
