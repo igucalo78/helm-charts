@@ -1,3 +1,7 @@
+### Added
+- ric [2.1.1]
+  - Adding NATS Monitoring Grafana Dashboard
+    - Adding NATS dashboard on Grafana for monitoring
 ### Changed
 - ric [2.1.1]
   - Updating to 2.1.1 to keep in sync with dRAX package

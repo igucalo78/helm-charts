@@ -54,6 +54,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added option to delete existing 4G Radio Controller configuration  
     - Since the 4GRC configuration is now set automatically, you may want to delete the existing configuration and apply the deployment time one. We have added an option for the 4GRC to delete the existing configuration. It found in the values file of drax under: 4g-radio-controller.jobs.netconfConfig.deleteExistingConfig.
     - If you don't enable this option, and have existing 4GRC configuration from a previous installation, the existing configuration will be taken.
+- ric [2.1.1]
+  - Adding NATS Monitoring Grafana Dashboard
+    - Adding NATS dashboard on Grafana for monitoring
 ### Changed
 - drax [2.1.1]
   - Updating Redis to use official Redis Docker image, version 6.2.4
