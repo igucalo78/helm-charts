@@ -17,6 +17,16 @@ image:
 jobs:
   preDelete:
     image: accelleran/acc-generic-img:0.4.1
+  netconfConfig:
+    enabled: true
+    image: accelleran/acc-generic-img:latest
+    netconfHost: "netconf-oran-controller"
+    deleteExistingConfig: false
+  checkRedis:
+    enabled: true
+    repository: accelleran/acc-generic-img
+    pullPolicy: IfNotPresent
+    tag: "0.6.0"
 
 imagePullSecrets:
   - name: accelleran-secret

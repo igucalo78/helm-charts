@@ -28,8 +28,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
+            {{- if .Values.persistence.enabled }}
             - name: acc-redis
               mountPath: /data
+            {{- end }}
             {{- if .Values.health.enabled }}
             - name: health
               mountPath: /health
