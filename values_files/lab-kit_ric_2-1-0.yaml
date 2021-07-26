@@ -272,6 +272,8 @@ acc-service-orchestrator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
+  kubeIp: '{{ .Values.global.kubeIp }}'
+
 acc-state-db:
   # Enable/disable installation of the State DB
   enabled: true

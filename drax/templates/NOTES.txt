@@ -1,1 +1,3 @@
-
+### Added
+- drax [2.2.0]
+  - Sync with ric package

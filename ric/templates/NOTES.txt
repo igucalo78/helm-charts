@@ -1,0 +1,3 @@
+### Added
+- ric [2.2.0]
+  - Adding 5G Neighbor List configuration

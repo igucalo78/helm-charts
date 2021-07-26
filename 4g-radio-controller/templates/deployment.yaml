@@ -23,6 +23,15 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if or (.Values.jobs.checkRedis.enabled) }}
+      initContainers:
+        {{ if .Values.jobs.checkRedis.enabled }}
+        - name: {{ .Chart.Name }}-check-redis
+          image: "{{ .Values.jobs.checkRedis.repository }}:{{ .Values.jobs.checkRedis.tag }}"
+          imagePullPolicy: {{ .Values.jobs.checkRedis.pullPolicy }}
+          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.config.redis.hostname . }} -p {{ .Values.config.redis.port }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for dRAX-4G REDIS; sleep 2; done; echo Redis online']
+        {{ end }}
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

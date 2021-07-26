@@ -14,21 +14,21 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 2.1.0
+version: 2.2.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 2.1.0
+appVersion: 2.2.0
 
 # Dependencies
 dependencies:
   - name: nats
     condition: nats.enabled
-    version: 0.2.4
+    version: 0.8.4
     repository: https://accelleran.github.io/helm-charts/
   - name: redis
     condition: redis.enabled
-    version: 0.6.3
+    version: 0.7.0
     repository: https://accelleran.github.io/helm-charts/
   - name: provisioner-dhcp
     condition: provisioner-dhcp.enabled
@@ -48,9 +48,9 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: 4g-radio-controller
     condition: 4g-radio-controller.enabled
-    version: 1.5.2
+    version: 1.6.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-l2-update
     condition: acc-l2-update.enabled
-    version: 1.5.2
+    version: 1.6.0
     repository: https://accelleran.github.io/helm-charts/
