@@ -1,3 +1,10 @@
+###############################################
+
+###############################################
+# Accelleran dRAX RIC                         #
+###############################################
+
+Changelog:
 ### Added
 - ric [2.1.1]
   - Adding NATS Monitoring Grafana Dashboard
@@ -7,3 +14,5 @@
   - Updating to 2.1.1 to keep in sync with dRAX package
   - Updated 5G-Infrastructure
     - Updated to version 0.2.0 which uses the new Redis and Nats as drax package
+
+###############################################
