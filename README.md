@@ -65,6 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updating to 2.1.1 to keep in sync with dRAX package
   - Updated 5G-Infrastructure with new Redis and NATS
     - Updated to version 0.2.0 which uses the new Redis and Nats as drax package
+### Fixed
+- ric [2.1.1]
+  - Fixed bug in Service Orchestrator when manually choosing the 5G CU NetConf node port
 
 ## 2021-07-08
 ### Added
