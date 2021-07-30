@@ -240,6 +240,7 @@ configurator:
 
     # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
+#    orchestratorUrl: "35.180.18.161"
 
     # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
