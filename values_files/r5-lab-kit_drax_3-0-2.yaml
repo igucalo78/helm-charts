@@ -120,7 +120,7 @@ provisioner:
     licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
 
   strategyType: Recreate
- 
+
   # The service port used by the privisioner
   service:
     port: 16002
@@ -221,7 +221,7 @@ configurator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "branches_tognolli-master_r5.0_408bb8ef"
+  version: "master-candidate_4e47eefc"
 
   image:
     pullPolicy: IfNotPresent
@@ -245,7 +245,7 @@ configurator:
     # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
 
-    l3Version: "branches_tognolli-master_r5.0_408bb8ef"
+    l3Version: "master-candidate_4e47eefc"
 
     # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
@@ -273,7 +273,7 @@ acc-l2-update:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "branches_tognolli-master_r5.0_408bb8ef"
+  version: "master-candidate_4e47eefc"
 
   image:
     pullPolicy: IfNotPresent
