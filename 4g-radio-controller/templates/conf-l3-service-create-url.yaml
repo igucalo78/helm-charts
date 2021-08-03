@@ -6,4 +6,4 @@ metadata:
    {{- include "oran-clustercontrol.labels" . | nindent 4 }}
 data:
   l3-service-create_url: |
-    <!orchestratorUrl!>/api/v1/namespaces/<!lowNamespace!>/<!kubernetesPath!>s
+    <!orchestratorUrl!>/ api/v1/ namespaces  /<!lowNamespace!>/ <!kubernetesPath!>s

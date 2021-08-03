@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1628001535386,
+  "id": 5,
+  "iteration": 1627031753925,
   "links": [],
   "panels": [
     {
@@ -86,8 +86,8 @@
           "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(s) FROM (SELECT mean(\"DschThroughput\") as s FROM \"df.vector\" WHERE (\"ueId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time(1s), \"cellId\") WHERE $timeFilter GROUP BY time(1s),\"cellId\"",
-          "rawQuery": true,
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time(1s), \"cellId\", \"ueRicId\") GROUP BY time(1s)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -100,7 +100,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               }
             ]
           ],
@@ -501,8 +501,8 @@
           "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(s) FROM (SELECT mean(\"UschThroughput\") as s FROM \"df.vector\" WHERE (\"ueId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time(1s), \"cellId\") WHERE $timeFilter GROUP BY time(1s),\"cellId\"",
-          "rawQuery": true,
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time(1s), \"cellId\", \"ueRicId\") GROUP BY time(1s)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -515,7 +515,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               }
             ]
           ],
@@ -1836,7 +1836,6 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB-4G",
-        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -1863,7 +1862,6 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB-4G",
-        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
