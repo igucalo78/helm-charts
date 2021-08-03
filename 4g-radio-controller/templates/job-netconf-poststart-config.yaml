@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "oran-clustercontrol.labels" . | nindent 4 }}
   annotations:
-    "helm.sh/hook": post-install
+    "helm.sh/hook": post-install,post-upgrade,post-rollback
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   template:

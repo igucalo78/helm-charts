@@ -77,7 +77,7 @@ data:
                   	    <publish-measurement-data>true</publish-measurement-data>
                   	    <publish-ue-data>true</publish-ue-data>
                   	    <measurement-type>periodic</measurement-type>
-                        <orchestrator-url>{{ if .Values.config.https }}https://{{ else }}http://{{ end }}{{ tpl .Values.config.orchestratorUrl . }}:{{ if .Values.config.https }}6442{{ else }}8080{{ end }}</orchestrator-url>
+                        <orchestrator-url>{{ if .Values.config.https }}https://{{ else }}http://{{ end }}{{ tpl .Values.config.orchestratorUrl . }}:{{ if .Values.config.https }}6443{{ else }}8080{{ end }}</orchestrator-url>
                   	</ric-controller-config>
 
                   </enb-internal>
