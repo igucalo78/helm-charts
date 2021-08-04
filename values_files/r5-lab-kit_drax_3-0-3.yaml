@@ -221,7 +221,7 @@ configurator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "master-candidate_4e47eefc"
+  version: "dev-drax-refactor_86fa4b41"
 
   image:
     pullPolicy: IfNotPresent
@@ -245,7 +245,7 @@ configurator:
     # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
 
-    l3Version: "master-candidate_4e47eefc"
+    l3Version: "dev-drax-refactor_86fa4b41"
 
     # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
@@ -273,7 +273,7 @@ acc-l2-update:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "master-candidate_4e47eefc"
+  version: "dev-drax-refactor_86fa4b41"
 
   image:
     pullPolicy: IfNotPresent

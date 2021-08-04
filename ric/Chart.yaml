@@ -38,7 +38,7 @@ dependencies:
     version: 3.4.0
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
-    version: 2.0.0
+    version: 2.0.2
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.43.0
@@ -53,7 +53,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-state-db
     condition: acc-state-db.enabled
-    version: 0.14.4
+    version: 0.14.5
     repository: https://accelleran.github.io/helm-charts/
   - name: influxdb
     condition: influxdb.enabled
