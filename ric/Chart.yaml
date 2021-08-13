@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 3.0.0-rc1
+version: 3.0.0-rc2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 3.0.0-rc1
+appVersion: 3.0.0-rc2
 
 # Dependencies
 dependencies:
@@ -49,7 +49,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-service-orchestrator
     condition: acc-service-orchestrator.enabled
-    version: 1.1.0
+    version: 1.1.1
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-state-db
     condition: acc-state-db.enabled
