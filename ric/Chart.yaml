@@ -32,7 +32,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: nkafka-4g
     condition: nkafka-4g.enabled
-    version: 3.7.0
+    version: 3.7.1
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     version: 3.4.0
@@ -77,7 +77,7 @@ dependencies:
     repository: https://accelleran.github.io/5g-helm-charts
   - name: nkafka-5g
     condition: global.enable5G
-    version: 0.3.0
+    version: 0.4.1
     repository: https://accelleran.github.io/5g-helm-charts
 
 
