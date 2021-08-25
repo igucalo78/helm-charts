@@ -54,5 +54,14 @@ spec:
              curl -X POST http://{{ include "influxdb.fullname" . }}-api:{{ .Values.config.http.bind_address | default 8086 }}/query \
              --data-urlencode \
              "q=CREATE USER \"${INFLUXDB_USER}\" WITH PASSWORD '${INFLUXDB_PASSWORD}' {{ .Values.setDefaultUser.user.privileges }}"
+
+             curl -X POST http://{{ include "influxdb.fullname" . }}-api:{{ .Values.config.http.bind_address | default 8086 }}/query \
+             --data-urlencode \
+             "q=CREATE DATABASE \"db_4G\" WITH DURATION 5d REPLICATION 1 NAME \"rp_5d_4G\""
+
+             curl -X POST http://{{ include "influxdb.fullname" . }}-api:{{ .Values.config.http.bind_address | default 8086 }}/query \
+             --data-urlencode \
+             "q=CREATE DATABASE \"db_5G\" WITH DURATION 5d REPLICATION 1 NAME \"rp_5d_5G\""
+
       restartPolicy: {{ .Values.setDefaultUser.restartPolicy }}
 {{- end -}}
