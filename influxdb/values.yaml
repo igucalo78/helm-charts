@@ -253,8 +253,9 @@ config:
 initScripts:
   enabled: true
   scripts:
-    init.iql: |+
+    init_4g.iql: |+
       CREATE DATABASE "db_4G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_4G"
+    init_5g.iql: |+
       CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_5G"
 
 backup:
