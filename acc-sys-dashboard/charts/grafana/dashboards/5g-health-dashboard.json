@@ -15,11 +15,10 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1629983845252,
+  "iteration": 1630327128992,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -27,8 +26,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 111,
-      "panels": [],
+      "id": 113,
       "title": "Cluster Information",
       "type": "row"
     },
@@ -317,7 +315,7 @@
       "gridPos": {
         "h": 6,
         "w": 12,
-        "x": 12,
+        "x": 9,
         "y": 1
       },
       "id": 35,
@@ -1051,9 +1049,9 @@
         "x": 0,
         "y": 7
       },
-      "id": 103,
+      "id": 111,
       "panels": [],
-      "title": "CU Elements Supported",
+      "title": "Deployed CU Components",
       "type": "row"
     },
     {
@@ -1185,6 +1183,146 @@
       "type": "stat"
     },
     {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 103,
+      "panels": [],
+      "title": "CU Elements Supported",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 12
+      },
+      "id": 105,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "first"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*ds-ctrl.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of supported UEs",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 3,
+        "y": 12
+      },
+      "id": 107,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "first"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*f1-ap.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of supported DUs",
+      "type": "stat"
+    },
+    {
       "cacheTimeout": null,
       "datasource": "Prometheus",
       "fieldConfig": {
@@ -1213,7 +1351,7 @@
         "h": 3,
         "w": 3,
         "x": 6,
-        "y": 8
+        "y": 12
       },
       "id": 106,
       "links": [],
@@ -1276,7 +1414,7 @@
         "h": 3,
         "w": 3,
         "x": 9,
-        "y": 8
+        "y": 12
       },
       "id": 108,
       "links": [],
@@ -1307,7 +1445,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Number of supported CUCPs",
+      "title": "Number of supported CUUPs",
       "type": "stat"
     },
     {
@@ -1339,7 +1477,7 @@
         "h": 3,
         "w": 3,
         "x": 12,
-        "y": 8
+        "y": 12
       },
       "id": 109,
       "links": [],
@@ -1374,139 +1512,13 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 8
-      },
-      "id": 105,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "first"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\".*ds-ctrl.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Number of supported UEs",
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 8
-      },
-      "id": 107,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "first"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "sum(kube_pod_container_status_running{pod=~\".*f1-ap.*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Number of supported DUs",
-      "type": "stat"
-    },
-    {
       "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 15
       },
       "id": 98,
       "panels": [],
@@ -1561,7 +1573,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 12
+        "y": 16
       },
       "id": 67,
       "links": [],
@@ -1649,7 +1661,7 @@
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 12
+        "y": 16
       },
       "id": 68,
       "links": [],
@@ -1731,7 +1743,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 12
+        "y": 16
       },
       "id": 75,
       "links": [],
@@ -1772,7 +1784,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 19
       },
       "id": 96,
       "panels": [],
@@ -1827,7 +1839,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 16
+        "y": 20
       },
       "id": 79,
       "links": [],
@@ -1909,7 +1921,7 @@
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 16
+        "y": 20
       },
       "id": 81,
       "links": [],
@@ -1991,7 +2003,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 16
+        "y": 20
       },
       "id": 82,
       "links": [],
@@ -2073,7 +2085,7 @@
         "h": 3,
         "w": 2,
         "x": 6,
-        "y": 16
+        "y": 20
       },
       "id": 83,
       "links": [],
@@ -2155,7 +2167,7 @@
         "h": 3,
         "w": 2,
         "x": 8,
-        "y": 16
+        "y": 20
       },
       "id": 84,
       "links": [],
@@ -2237,7 +2249,7 @@
         "h": 3,
         "w": 2,
         "x": 10,
-        "y": 16
+        "y": 20
       },
       "id": 86,
       "links": [],
@@ -2319,7 +2331,7 @@
         "h": 3,
         "w": 2,
         "x": 12,
-        "y": 16
+        "y": 20
       },
       "id": 87,
       "links": [],
@@ -2401,7 +2413,7 @@
         "h": 3,
         "w": 2,
         "x": 14,
-        "y": 16
+        "y": 20
       },
       "id": 88,
       "links": [],
@@ -2483,7 +2495,7 @@
         "h": 3,
         "w": 2,
         "x": 16,
-        "y": 16
+        "y": 20
       },
       "id": 89,
       "links": [],
@@ -2566,7 +2578,7 @@
         "h": 3,
         "w": 2,
         "x": 18,
-        "y": 16
+        "y": 20
       },
       "id": 90,
       "links": [],
@@ -2649,7 +2661,7 @@
         "h": 3,
         "w": 2,
         "x": 20,
-        "y": 16
+        "y": 20
       },
       "id": 92,
       "links": [],
@@ -2731,7 +2743,7 @@
         "h": 3,
         "w": 2,
         "x": 22,
-        "y": 16
+        "y": 20
       },
       "id": 93,
       "links": [],
@@ -2773,7 +2785,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 23
       },
       "id": 65,
       "panels": [],
@@ -2828,7 +2840,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 20
+        "y": 24
       },
       "id": 80,
       "links": [],
@@ -2911,7 +2923,7 @@
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 20
+        "y": 24
       },
       "id": 85,
       "links": [],
@@ -2993,7 +3005,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 20
+        "y": 24
       },
       "id": 104,
       "links": [],
@@ -3076,7 +3088,7 @@
         "h": 3,
         "w": 2,
         "x": 6,
-        "y": 20
+        "y": 24
       },
       "id": 91,
       "links": [],
@@ -3117,7 +3129,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 27
       },
       "id": 63,
       "panels": [
@@ -3333,7 +3345,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 28
       },
       "id": 31,
       "panels": [
@@ -3589,7 +3601,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 29
       },
       "id": 15,
       "panels": [
@@ -3834,7 +3846,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 30
       },
       "id": 7,
       "panels": [],
@@ -3996,5 +4008,5 @@
   "timezone": "",
   "title": "Accelleran dRAX 5G System Dashboard",
   "uid": "786sGw2Mk",
-  "version": 1
+  "version": 8
 }
