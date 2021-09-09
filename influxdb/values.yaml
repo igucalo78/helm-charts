@@ -109,6 +109,7 @@ setDefaultUser:
   ## Default: appropriate/curl:latest
   ##
   image: accelleran/acc-generic-img:latest
+  pullPolicy: IfNotPresent
 
   ## Deadline for job so it does not retry forever.
   ## Default: activeDeadline: 300
@@ -317,3 +318,4 @@ backup:
 
 postDeleteJob:
   image: accelleran/acc-generic-img:latest
+  pullPolicy: IfNotPresent

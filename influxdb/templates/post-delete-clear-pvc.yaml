@@ -22,6 +22,7 @@ spec:
       containers:
       - name: post-delete-job
         image: {{ .Values.postDeleteJob.image }}
+        imagePullPolicy: {{ .Values.postDeleteJob.pullPolicy | quote }}
         command: ["kubectl"]
         args:
         - "delete"

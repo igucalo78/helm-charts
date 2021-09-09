@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 3.0.0-rc2
+version: 3.0.0-rc3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 3.0.0-rc2
+appVersion: 3.0.0-rc3
 
 # Dependencies
 dependencies:
@@ -36,7 +36,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: provisioner
     condition: provisioner.enabled
-    version: 0.11.1
+    version: 0.11.2
     repository: https://accelleran.github.io/helm-charts/
   - name: ntp-server
     condition: ntp-server.enabled

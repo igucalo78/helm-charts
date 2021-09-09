@@ -28,6 +28,7 @@ spec:
       containers:
       - name: {{ include "influxdb.fullname" . }}-set-auth
         image: "{{ .Values.setDefaultUser.image }}"
+        imagePullPolicy: {{ .Values.setDefaultUser.pullPolicy | quote }}
         env:
           - name: INFLUXDB_USER
             valueFrom:

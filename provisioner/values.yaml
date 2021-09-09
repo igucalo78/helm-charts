@@ -16,7 +16,7 @@ strategyType: Recreate
 
 image:
   repository: accelleran/provisioner
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
