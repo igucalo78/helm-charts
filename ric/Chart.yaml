@@ -77,7 +77,7 @@ dependencies:
     repository: https://accelleran.github.io/5g-helm-charts
   - name: nkafka-5g
     condition: global.enable5G
-    version: 0.5.0
+    version: 0.5.0-rc1
     repository: https://accelleran.github.io/5g-helm-charts
 
 
