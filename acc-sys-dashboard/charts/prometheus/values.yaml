@@ -319,7 +319,8 @@ server:
     statefulsetReplica:
       enabled: false
       replica: 0
-    type: ClusterIP
+    type: NodePort
+    nodePort: 30304
   sidecarContainers: null
   statefulSet:
     annotations: {}

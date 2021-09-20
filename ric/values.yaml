@@ -167,6 +167,14 @@ acc-sys-dashboard:
         static_configs:
           - targets:
             - "ric-acc-kminion:8080"
+      - job_name: nats4GMonitoring
+        static_configs:
+          - targets:
+            - "nats-service:7777"
+      - job_name: nats5GMonitoring
+        static_configs:
+          - targets:
+            - "ric-nats-5g:7777"
 
   kube-eagle:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
@@ -436,18 +444,9 @@ acc-5g-infrastructure:
 
     service:
       serviceName: '{{ include "nats.fullname" . }}'
+      type: NodePort
       client:
-        name: "natsport"
-        port: 4222
-#        nodePort:
-      cluster:
-        name: "clusterport"
-        port: 6222
-#        nodePort:
-      monitoring:
-        name: "consoleport"
-        port: 8222
-#        nodePort:
+        nodePort: 31100
 
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
@@ -472,7 +471,7 @@ acc-5g-infrastructure:
     service:
       type: NodePort
       port: 6379
-#      nodePort:
+      nodePort: 32200
       name: "redisport"
       serviceName: '{{ include "redis.fullname" . }}'
 
@@ -499,7 +498,14 @@ acc-5g-infrastructure:
           addresses:
             - 10.55.1.20-10.55.1.60
 
+  jaeger:
+    enabled: true
+
 nkafka-5g:
+  accelleranLicense:
+    enabled: "{{ .Values.global.accelleranLicense.enabled }}"
+    licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
+
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"

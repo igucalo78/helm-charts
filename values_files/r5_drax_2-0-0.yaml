@@ -225,7 +225,7 @@ configurator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "branches_tognolli-master_r5.0_fead5aa2"
+  version: "branches_tognolli-master_r5.0_e730951a"
 
   image:
     pullPolicy: IfNotPresent
@@ -237,7 +237,7 @@ configurator:
     # The orchestratorUrl is used for contacting the Kubernetes API, hence this should be the Kubernetes Advertise IP
     orchestratorUrl: "{{ .Values.global.kubeIp }}"
 
-    l3Version: "branches_tognolli-master_r5.0_fead5aa2"
+    l3Version: "branches_tognolli-master_r5.0_e730951a"
 
     # Choose the namespace where the Layer3 pods will be installed. By default its in teh same namespace as dRAX
     l3Namespace: "{{ .Release.Namespace }}"
@@ -265,7 +265,7 @@ acc-l2-update:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  version: "branches_tognolli-master_r5.0_fead5aa2"
+  version: "branches_tognolli-master_r5.0_e730951a"
 
   image:
     pullPolicy: IfNotPresent

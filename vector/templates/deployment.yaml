@@ -36,17 +36,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["vector", "-c", "throughput.toml","-c","bler.toml","-c","cqi.toml","-c","uemeasurements.toml"]
+          command: ["vector","-c","l2stats.toml","-c","cqi.toml","-c","uemeasurements.toml"]
           volumeMounts:
-            - name: bler-toml
-              mountPath: /influx/bler.toml
-              subPath: bler.toml
             - name: cqi-toml
               mountPath: /influx/cqi.toml
               subPath: cqi.toml
-            - name: throughput-toml
-              mountPath: /influx/throughput.toml
-              subPath: throughput.toml
+            - name: l2stats-toml
+              mountPath: /influx/l2stats.toml
+              subPath: l2stats.toml
             - name: uemeasurements-toml
               mountPath: /influx/uemeasurements.toml
               subPath: uemeasurements.toml
@@ -84,15 +81,12 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: bler-toml
-          configMap:
-            name: bler-toml
         - name: cqi-toml
           configMap:
             name: cqi-toml
-        - name: throughput-toml
+        - name: l2stats-toml
           configMap:
-            name: throughput-toml
+            name: l2stats-toml
         - name: uemeasurements-toml
           configMap:
             name: uemeasurements-toml

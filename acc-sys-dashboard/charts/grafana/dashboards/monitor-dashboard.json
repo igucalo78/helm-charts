@@ -12,598 +12,33 @@
       }
     ]
   },
-  "description": "Monitors the basic KPIs reported by RIC",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1588173696113,
+  "id": 5,
+  "iteration": 1627031753925,
   "links": [],
   "panels": [
     {
-      "aliasColors": {
-        "\"8eb8a807-39c7-4ea0-9af4-5b6027dac1e9\"": "blue"
-      },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Druid",
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
-        "h": 15,
+        "h": 13,
         "w": 12,
         "x": 0,
         "y": 0
-      },
-      "hiddenSeries": false,
-      "id": 4,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldName": "throughputReport.dlThroughput",
-              "hidden": true,
-              "name": "dlThroughputS",
-              "type": "doubleSum"
-            },
-            {
-              "hidden": true,
-              "name": "dlThroughputC",
-              "type": "count"
-            }
-          ],
-          "alias": "$tag_ueRicId",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "throughputReport.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "throughputReport.cellId",
-              "pattern": "$cell",
-              "type": "regex",
-              "value": "$cell"
-            }
-          ],
-          "limit": 5,
-          "measurement": "throughput",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "dlThroughputS",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "dlThroughputC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "dlThroughput",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "dlthroughput"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "shouldOverrideGranularity": true,
-          "tags": [
-            {
-              "key": "ueRicId",
-              "operator": "=~",
-              "value": "/^$ue$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Downlink Throughput",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "Kbits",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Druid",
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 10,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.4.3",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldName": "ueMeasurement.ueCellId",
-              "name": "cellId",
-              "type": "stringLast"
-            }
-          ],
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "aggregators": "You must supply at least one aggregator"
-          },
-          "filters": [
-            {
-              "dimension": "ueMeasurement.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            }
-          ],
-          "limit": 5,
-          "queryType": "timeseries",
-          "refId": "A",
-          "shouldOverrideGranularity": true
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Serving Cell",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "100%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPrefix": false,
-      "colorValue": true,
-      "colors": [
-        "#E0B400",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Druid",
-      "decimals": 0,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 18,
-        "y": 0
-      },
-      "id": 8,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldName": "ueMeasurement.cellId",
-              "fieldNames": "beaconInfo.componentId",
-              "hidden": false,
-              "name": "number",
-              "type": "cardinality"
-            }
-          ],
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "aggregators": "You must supply at least one aggregator",
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "beaconInfo.componentId",
-              "negate": true,
-              "type": "selector",
-              "value": ""
-            }
-          ],
-          "groupBy": [],
-          "limit": 5,
-          "measurement": "existence",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT COUNT(DISTINCT(\"cellId\") ) FROM (SELECT \"cellId\",allOnAir FROM \"cell_info\" WHERE time > now() - 5s) where allOnAir = 1",
-          "queryType": "timeseries",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "ue"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              }
-            ]
-          ],
-          "shouldOverrideGranularity": true,
-          "tags": []
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Number of Cells",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorPostfix": false,
-      "colorValue": true,
-      "colors": [
-        "#E0B400",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "datasource": "Druid",
-      "decimals": 0,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 21,
-        "y": 0
-      },
-      "id": 7,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "options": {},
-      "pluginVersion": "6.5.3",
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldNames": "ueMeasurement.ueRicId",
-              "name": "number",
-              "type": "cardinality"
-            }
-          ],
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {},
-          "filters": [
-            {
-              "dimension": "ueMeasurement.ueRicId",
-              "negate": true,
-              "type": "selector",
-              "value": ""
-            }
-          ],
-          "limit": 5,
-          "queryType": "timeseries",
-          "refId": "A",
-          "shouldOverrideGranularity": true
-        }
-      ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Number of UEs",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "200%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "aliasColors": {
-        "RSRP \"Antwerp\"": "orange"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Druid",
-      "fill": 1,
-      "fillGradient": 2,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 6
       },
       "hiddenSeries": false,
       "id": 2,
@@ -618,11 +53,12 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -632,99 +68,53 @@
       "steppedLine": false,
       "targets": [
         {
-          "aggregators": [
+          "alias": "$UE",
+          "groupBy": [
             {
-              "fieldName": "ueMeasurement.rsrp",
-              "hidden": true,
-              "name": "_rsrp",
-              "type": "longSum"
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
             },
             {
-              "hidden": true,
-              "name": "count",
-              "type": "count"
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
             }
           ],
-          "alias": "RSRP $tag_cellId",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "ueMeasurement.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "ueMeasurement.attached",
-              "type": "selector",
-              "value": "1"
-            },
-            {
-              "dimension": "ueMeasurement.cellId",
-              "pattern": "$cell",
-              "type": "regex"
-            }
-          ],
-          "limit": 5,
-          "measurement": "measurement",
+          "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "_rsrp",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "count",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "rsrp",
-              "type": "arithmetic"
-            }
-          ],
-          "query": "SELECT \"rsrp\" FROM \"measurement\" WHERE (\"ueRicId\" =~ /^$ue$/) AND $timeFilter GROUP BY \"cellId\", \"ueRicId\"",
-          "queryType": "timeseries",
-          "rawQuery": true,
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.dlThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY time($interval)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "rsrp"
+                  "DschThroughput"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
               }
             ]
           ],
-          "shouldOverrideGranularity": true,
           "tags": [
             {
-              "key": "ueRicId",
+              "key": "ueId",
               "operator": "=~",
-              "value": "/^$ue$/"
+              "value": "/^$UE$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
             }
           ]
         }
@@ -733,7 +123,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "RSRP",
+      "title": "Aggregated Downlink Throughput",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -750,15 +140,17 @@
       },
       "yaxes": [
         {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
+          "$$hashKey": "object:75",
+          "decimals": 1,
+          "format": "Kbits",
+          "label": "sum(DL Throughput)",
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:76",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -773,23 +165,154 @@
       }
     },
     {
-      "aliasColors": {
-        "\"8eb8a807-39c7-4ea0-9af4-5b6027dac1e9\"": "blue"
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
       },
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "id": 12,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.6.2",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "df.rsrp",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "select count(distinct(\"ueId\")) from (select \"ueId\",\"UeMeasurement.rsrp\"  from \"df.vector\" WHERE \"cellId\" =~ /^$eNB$/ AND time > now() - 5s)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "/^$eNB$/"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ueRicId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Total Number of Active UEs",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "200%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Druid",
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 15
+        "x": 12,
+        "y": 5
       },
       "hiddenSeries": false,
-      "id": 12,
+      "id": 8,
       "legend": {
         "avg": false,
         "current": false,
@@ -801,11 +324,12 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -815,82 +339,33 @@
       "steppedLine": false,
       "targets": [
         {
-          "aggregators": [
+          "alias": "$tag_cellId",
+          "groupBy": [
             {
-              "fieldName": "throughputReport.ulThroughput",
-              "hidden": true,
-              "name": "ulThroughputS",
-              "type": "doubleSum"
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
             },
             {
-              "hidden": true,
-              "name": "ulThroughputC",
-              "type": "count"
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
             }
           ],
-          "alias": "$tag_ueRicId",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "throughputReport.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "throughputReport.cellId",
-              "pattern": "$cell",
-              "type": "regex",
-              "value": "$cell"
-            }
-          ],
-          "limit": 5,
-          "measurement": "throughput",
+          "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "ulThroughputS",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "ulThroughputC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "ulThroughput",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
-          "refId": "A",
+          "query": "SELECT mean(\"value\") FROM \"df.rsrp\" WHERE (\"cellId\" =~ /^$eNB$/ AND \"ueRicId\" =~ /^$UE$/) AND $timeFilter GROUP BY time($__interval), \"cellId\"",
+          "rawQuery": false,
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "dlthroughput"
+                  "UeMeasurement.rsrp"
                 ],
                 "type": "field"
               },
@@ -900,12 +375,17 @@
               }
             ]
           ],
-          "shouldOverrideGranularity": true,
           "tags": [
             {
-              "key": "ueRicId",
+              "key": "cellId",
               "operator": "=~",
-              "value": "/^$ue$/"
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
             }
           ]
         }
@@ -914,7 +394,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Uplink Throughput",
+      "title": "Average RSRP per eNB",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -931,15 +411,16 @@
       },
       "yaxes": [
         {
-          "decimals": 0,
-          "format": "Kbits",
-          "label": null,
+          "$$hashKey": "object:355",
+          "format": "short",
+          "label": "avg(RSRP)",
           "logBase": 1,
           "max": null,
           "min": "0",
           "show": true
         },
         {
+          "$$hashKey": "object:356",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -958,195 +439,24 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Druid",
-      "fill": 1,
-      "fillGradient": 2,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 15
-      },
-      "hiddenSeries": false,
-      "id": 3,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregators": [
-            {
-              "fieldName": "ueMeasurement.rsrq",
-              "hidden": true,
-              "name": "_rsrq",
-              "type": "longSum"
-            },
-            {
-              "hidden": true,
-              "name": "_count",
-              "type": "count"
-            }
-          ],
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "ueMeasurement.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "ueMeasurement.attached",
-              "type": "selector",
-              "value": "1"
-            },
-            {
-              "dimension": "ueMeasurement.cellId",
-              "pattern": "$cell",
-              "type": "regex"
-            }
-          ],
-          "limit": 5,
-          "measurement": "measurement",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "_rsrq",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "_count",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "rsrq",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "rsrq"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "shouldOverrideGranularity": true,
-          "tags": [
-            {
-              "key": "ueRicId",
-              "operator": "=~",
-              "value": "/^$ue$/"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "RSRQ",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
         },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Druid",
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 2,
       "gridPos": {
-        "h": 8,
+        "h": 13,
         "w": 12,
         "x": 0,
-        "y": 23
+        "y": 13
       },
       "hiddenSeries": false,
-      "id": 5,
+      "id": 9,
       "legend": {
         "avg": false,
         "current": false,
@@ -1158,11 +468,12 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1172,92 +483,53 @@
       "steppedLine": false,
       "targets": [
         {
-          "aggregators": [
+          "alias": "$tag_cellId",
+          "groupBy": [
             {
-              "fieldName": "cqiReport.widebandCqi",
-              "hidden": true,
-              "name": "cqiS",
-              "type": "longSum"
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
             },
             {
-              "hidden": true,
-              "name": "cqiC",
-              "type": "count"
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
             }
           ],
-          "alias": "Channel $tag_channel",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "cqiReport.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "cqiReport.cellId",
-              "pattern": "$cell",
-              "type": "regex"
-            }
-          ],
-          "limit": 5,
-          "measurement": "cqi",
+          "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
+          "query": "SELECT SUM(\"meanValue\") FROM (SELECT mean(\"value\") as meanValue FROM \"df.ulThroughput\" WHERE (\"ueRicId\" =~ /^$UE$/ AND \"cellId\" =~ /^$eNB$/) AND $timeFilter GROUP BY time($interval), \"cellId\", \"ueRicId\") GROUP BY time($interval)",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "cqi"
+                  "UschThroughput"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
               }
             ]
           ],
-          "shouldOverrideGranularity": true,
           "tags": [
             {
-              "key": "ueRicId",
+              "key": "ueId",
               "operator": "=~",
-              "value": "/^$ue$/"
+              "value": "/^$UE$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
             }
           ]
         }
@@ -1266,7 +538,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Wideband CQI",
+      "title": "Aggregated Uplink Throughput",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1283,14 +555,17 @@
       },
       "yaxes": [
         {
-          "format": "none",
-          "label": null,
+          "$$hashKey": "object:536",
+          "decimals": 1,
+          "format": "Kbits",
+          "label": "sum(UL Throughput)",
           "logBase": 1,
-          "max": "15",
+          "max": null,
           "min": "0",
           "show": true
         },
         {
+          "$$hashKey": "object:537",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1309,17 +584,24 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Druid",
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
-      "fillGradient": 1,
+      "fillGradient": 2,
       "gridPos": {
-        "h": 8,
+        "h": 12,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 13
       },
       "hiddenSeries": false,
-      "id": 11,
+      "id": 13,
       "legend": {
         "avg": false,
         "current": false,
@@ -1331,12 +613,12 @@
       },
       "lines": true,
       "linewidth": 1,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "6.5.2",
+      "pluginVersion": "7.3.7",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1346,344 +628,51 @@
       "steppedLine": false,
       "targets": [
         {
-          "aggregators": [
+          "alias": "$tag_cellId",
+          "groupBy": [
             {
-              "fieldName": "cqiReport.cqiList.0",
-              "hidden": true,
-              "name": "cqiS0",
-              "type": "longSum"
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
             },
             {
-              "fieldName": "cqiReport.cqiList.1",
-              "hidden": true,
-              "name": "cqiS1",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.2",
-              "hidden": true,
-              "name": "cqiS2",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.3",
-              "hidden": true,
-              "name": "cqiS3",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.4",
-              "hidden": true,
-              "name": "cqiS4",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.5",
-              "hidden": true,
-              "name": "cqiS5",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.6",
-              "hidden": true,
-              "name": "cqiS6",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.7",
-              "hidden": true,
-              "name": "cqiS7",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.8",
-              "hidden": true,
-              "name": "cqiS8",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.9",
-              "hidden": true,
-              "name": "cqiS9",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.10",
-              "hidden": true,
-              "name": "cqiS10",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.11",
-              "hidden": true,
-              "name": "cqiS11",
-              "type": "longSum"
-            },
-            {
-              "fieldName": "cqiReport.cqiList.12",
-              "hidden": true,
-              "name": "cqiS12",
-              "type": "longSum"
-            },
-            {
-              "hidden": true,
-              "name": "cqiC",
-              "type": "count"
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
             }
           ],
-          "alias": "Channel $tag_channel",
-          "currentAggregator": {
-            "type": "count"
-          },
-          "currentFilter": {
-            "type": "selector"
-          },
-          "currentPostAggregator": {
-            "fn": "+",
-            "type": "arithmetic"
-          },
-          "currentSelect": {
-            "dimension": "",
-            "metric": ""
-          },
-          "customGranularity": "$granularity",
-          "druidDS": "test2",
-          "errors": {
-            "customGranularity": "Invalid granularity."
-          },
-          "filters": [
-            {
-              "dimension": "cqiReport.ueRicId",
-              "pattern": "$ue",
-              "type": "regex",
-              "value": "$ue"
-            },
-            {
-              "dimension": "cqiReport.cellId",
-              "pattern": "$cell",
-              "type": "regex"
-            }
-          ],
-          "limit": 5,
-          "measurement": "cqi",
+          "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "postAggregators": [
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS0",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi0",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS1",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi1",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS2",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi2",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS3",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi3",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS4",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi4",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS5",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi5",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS6",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi6",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS7",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi7",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS8",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi8",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS9",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi9",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS10",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi10",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS11",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi11",
-              "type": "arithmetic"
-            },
-            {
-              "fields": [
-                {
-                  "fieldName": "cqiS12",
-                  "type": "fieldAccess"
-                },
-                {
-                  "fieldName": "cqiC",
-                  "type": "fieldAccess"
-                }
-              ],
-              "fn": "/",
-              "name": "cqi12",
-              "type": "arithmetic"
-            }
-          ],
-          "queryType": "timeseries",
-          "refId": "A",
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "cqi"
+                  "UeMeasurement.rsrq"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
               }
             ]
           ],
-          "shouldOverrideGranularity": true,
           "tags": [
             {
-              "key": "ueRicId",
+              "key": "cellId",
               "operator": "=~",
-              "value": "/^$ue$/"
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
             }
           ]
         }
@@ -1692,7 +681,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CQI",
+      "title": "Average RSRQ per eNB",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1709,14 +698,1116 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:717",
+          "format": "short",
+          "label": "avg(RSRQ)",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:718",
           "format": "short",
           "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "CH0",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.0"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH1",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.1"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH2",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.2"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH3",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.3"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH4",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.4"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH5",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.5"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH6",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.6"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH7",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.7"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH8",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.8"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH9",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.9"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH10",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.10"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH11",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.11"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        },
+        {
+          "alias": "CH12",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "M",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cqiMeasurement.12"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average CQI per channel",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1716",
+          "decimals": 0,
+          "format": "short",
+          "label": "avg(CQI per channel)",
           "logBase": 1,
           "max": "15",
           "min": "0",
           "show": true
         },
         {
+          "$$hashKey": "object:1717",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 11,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$tag_cellId",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"value\") FROM \"df.vector\" WHERE (\"cellId\" =~ /^$eNB$/ AND \"ueRicId\" =~ /^$UE$/) AND $timeFilter GROUP BY time($__interval), \"cellId\"",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "WidebandCqi"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            },
+            {
+              "condition": "AND",
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average Wideband CQI per eNB",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:897",
+          "decimals": 0,
+          "format": "short",
+          "label": "avg(Wideband CQI)",
+          "logBase": 1,
+          "max": "15",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:898",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 37
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$tag_cellId",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"value\") FROM \"df.dlThroughput\" WHERE (\"cellId\" = 'select tag value') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "DownlinkBler"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " / 1000000"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average Downlink BLER per eNB",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2484",
+          "decimals": 0,
+          "format": "percent",
+          "label": "avg(DL BLER)",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2485",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB-4G",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 37
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$tag_cellId",
+          "groupBy": [
+            {
+              "params": [
+                "$interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "cellId"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "df.vector",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT mean(\"value\") FROM \"df.dlThroughput\" WHERE (\"cellId\" = 'select tag value') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "UplinkBler"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  " / 1000000"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "ueId",
+              "operator": "=~",
+              "value": "/^$UE$/"
+            },
+            {
+              "condition": "AND",
+              "key": "cellId",
+              "operator": "=~",
+              "value": "/^$eNB$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Average Uplink BLER per eNB",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2670",
+          "decimals": 0,
+          "format": "percent",
+          "label": "avg(UL BLER)",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2671",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1731,28 +1822,28 @@
       }
     }
   ],
-  "refresh": "2s",
-  "schemaVersion": 22,
+  "refresh": "30s",
+  "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": ".*",
+        "allValue": "*",
         "current": {
           "selected": false,
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Druid",
-        "definition": "UE",
+        "datasource": "InfluxDB-4G",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
-        "name": "ue",
+        "name": "UE",
         "options": [],
-        "query": "SELECT DISTINCT(\"ueMeasurement.ueRicId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+        "query": "SELECT \"ueId\" FROM (SELECT \"ueId\",\"UeMeasurement.rsrp\" FROM \"df.vector\" WHERE time > now() - 30m )",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1764,41 +1855,21 @@
         "useTags": false
       },
       {
-        "current": {
-          "selected": false,
-          "text": "PT5S",
-          "value": "PT5S"
-        },
-        "hide": 0,
-        "label": null,
-        "name": "granularity",
-        "options": [
-          {
-            "selected": false,
-            "text": "PT5S",
-            "value": "PT5S"
-          }
-        ],
-        "query": "PT5S",
-        "skipUrlSync": false,
-        "type": "textbox"
-      },
-      {
-        "allValue": ".*",
+        "allValue": "*",
         "current": {
           "selected": false,
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Druid",
-        "definition": "SELECT DISTINCT(\"beaconInfo.componentId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+        "datasource": "InfluxDB-4G",
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": false,
-        "name": "cell",
+        "name": "eNB",
         "options": [],
-        "query": "SELECT DISTINCT(\"beaconInfo.componentId\") FROM \"test2\" WHERE \"__time\" >= CURRENT_TIMESTAMP - INTERVAL '5' SECOND",
+        "query": "SELECT \"cellId\" FROM (SELECT \"cellId\",\"UeMeasurement.rsrp\" FROM \"df.vector\" WHERE time > now() - 30m )",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1812,13 +1883,13 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
-      "1s",
       "2s",
+      "3s",
       "5s",
       "10s",
       "30s",
@@ -1833,6 +1904,6 @@
   },
   "timezone": "",
   "title": "Cell Monitoring",
-  "uid": "lCbesm1Zk",
-  "version": 2
+  "uid": "r9WbSHvGz",
+  "version": 1
 }

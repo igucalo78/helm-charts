@@ -1,27 +1,63 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: conf-4g-topics
+  name: {{ include "nkafka-helm.fullname" . }}-4g-topics
 data:
-  4GTopics.toml: |-
+  4GKafkaTopics.toml: |-
     [[translate]]
-    nats_topic="TOPIC_BEACONS"
-    protobuf_def=".BeaconPB.Beacon_PeerMessage"
-    kafka_topic="accelleran.drax.4g.ric.raw.service_discovery"
-
+    nats_topic="ENB_CTRL_CELL_ANNOUNCEMENT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
     [[translate]]
-    nats_topic="Topic_OPENRAN"
-    protobuf_def=".OpenRANPB.OpenRAN_peerMessage"
-
+    nats_topic="ENB_CTRL_L2_SERVICE_HEARTBEAT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
     [[translate]]
-    nats_topic="Topic_OPENRAN_DATA"
-    protobuf_def=".OpenRANDataPB.Message"
-    kafka_topic="accelleran.drax.4g.ric.raw.ue_measurements"
-
+    nats_topic="ENB_CTRL_L3_SERVICE_HEARTBEAT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
     [[translate]]
-    nats_topic="Topic_OPENRAN_COMMANDS"
-    protobuf_def=".OpenRANCommandsPB.OpenRAN_commandMessage"
-
+    nats_topic="RC4G_CTRL_DATAMODEL_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
     [[translate]]
-    nats_topic="Topic_L2_STATS"
-    protobuf_def=".L2StatsPB.L2StatsMessage"
+    nats_topic="ENB_CTRL_CELL_ON_AIR_STATUS_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_CELL_ANNOUNCEMENT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_CELL_CONFIG_INFO"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_UE_ADMISSION_REQUEST"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_UE_ADMISSION_RESPONSE"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_UE_STATUS_INDICATION"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="ENB_CTRL_UE_STATUS_CONFIRM"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_SERVICE_LOST"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_SERVICE_FOUND"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_DATA_MODEL_REQUEST"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_CELL_STOP_REQUEST"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_CELL_REMOVE_REQUEST"
+    kafka_topic ="accelleran.drax.4g.ric.raw.service_discovery"
+    [[translate]]
+    nats_topic="RC4G_CTRL_UE_MEASUREMENT_DATA"
+    kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"
+    [[translate]]
+    nats_topic="ENB_STATS_CQI_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"
+    [[translate]]
+    nats_topic="ENB_STATS_L2_REPORT"
+    kafka_topic ="accelleran.drax.4g.ric.raw.ue_measurements"

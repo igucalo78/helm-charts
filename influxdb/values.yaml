@@ -109,6 +109,7 @@ setDefaultUser:
   ## Default: appropriate/curl:latest
   ##
   image: accelleran/acc-generic-img:latest
+  pullPolicy: IfNotPresent
 
   ## Deadline for job so it does not retry forever.
   ## Default: activeDeadline: 300
@@ -250,12 +251,15 @@ config:
 # If the container finds any files with the extensions .sh or .iql inside of the
 # /docker-entrypoint-initdb.d folder, it will execute them. The order they are
 # executed in is determined by the shell. This is usually alphabetical order.
+#### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#### THIS DOES NOT WORK, IF YOU WANT TO CREATE A DB OR ANY OTHER INFLUX COMMAND, USE THE POST INSTALL SCRIPT IN TEH TEMAPLTES FOLDER
 initScripts:
   enabled: true
   scripts:
-    init.iql: |+
-      CREATE DATABASE "test" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
-      CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d"
+    init_4g.iql: |+
+      CREATE DATABASE "db_4G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_4G"
+    init_5g.iql: |+
+      CREATE DATABASE "db_5G" WITH DURATION 5d REPLICATION 1 NAME "rp_5d_5G"
 
 backup:
   enabled: false
@@ -314,3 +318,4 @@ backup:
 
 postDeleteJob:
   image: accelleran/acc-generic-img:latest
+  pullPolicy: IfNotPresent

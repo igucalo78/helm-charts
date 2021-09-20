@@ -65,3 +65,10 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Generate NATS URL
+*/}}
+{{- define "nkafka-helm.natsUrl" -}}
+{{- printf "%s" (tpl .Values.natsUrl .) -}}
+{{- end -}}

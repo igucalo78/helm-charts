@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: conf-4g-config
+  name: {{ include "nkafka-helm.fullname" . }}-4g-config
 data:
   4GConfig.toml: |-
     protobuf_file="messages_4g.pb"
@@ -21,3 +21,4 @@ data:
     subject="topic"
     ric_id_name="{{ .Values.configs.ueRicIdName }}"
     drax_id_name="{{ .Values.configs.ueDraxIdName}}"
+    orig_id_name=".UE"

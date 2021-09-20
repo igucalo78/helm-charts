@@ -10,149 +10,71 @@ data:
       topics = ["{{ tpl .Values.config.kafka.topic . }}"]
       type = "kafka"
 
-    [transforms.parseJsonCqi]
+    [transforms.parseMessages]
       type = "json_parser"
       inputs = ["inCqi"]
-      drop_field = false # optional, default
+      drop_field = false 
       drop_invalid = true
-      field = "message" # optional, default
-
-    [transforms.filterCqi]
+      field = "message" 
+    
+    [transforms.filterCqiMessages]
       # General
       type = "filter"
-      inputs = ["parseJsonCqi"]
+      inputs = ["parseMessages"]
       # Condition
-      condition."type.eq" = "CQI_REPORT"
-
-    [transforms.parseCqi]
-      inputs = ["filterCqi"]
+      condition."EnbStatsCqiReportValues.exists" = true
+    
+    [transforms.parseCqiReport]
+      inputs = ["filterCqiMessages"]
       type   = "json_parser"
-      field  = "cqiReport"
-      drop_field = false # optional, default
+      field  = "EnbStatsCqiReportValues"
+      drop_field = false 
       drop_invalid = true
+    
+    [transforms.luaCqi]
+      # General
+      type = "lua" # required
+      inputs = ["parseCqiReport"] # required
+      version = "2" # required
+    
+    # Hooks
+      hooks.process = """
+      function (event, emit)
+        m = {}
+        m.log = {
+              timestamp = "",
+              cellId = "",
+              ueId = "",
+              cqiMeasurement = {},
+              RankIndication = "",
+              TransmissionMode = "",
+              WidebandCqi = "",
+            }
+            
+        temp = m
+        temp.log.timestamp = event.log.timestamp
+        temp.log.ueId = event.log.ueRicId
+        temp.log.cellId = event.log.CELL
+        temp.log.RankIndication = event.log.EnbStatsCqiReportValues.Report.RankIndication
+        temp.log.TransmissionMode = event.log.EnbStatsCqiReportValues.Report.TransmissionMode
+        temp.log.WidebandCqi = event.log.EnbStatsCqiReportValues.Report.WidebandCqi
+        for f, v in pairs(event.log.EnbStatsCqiReportValues.Report.CqiList) do
+            temp.log.cqiMeasurement[f] = v
+        end
+        emit(temp)
+      end
+      """
 
-    [transforms.parseCqiList]
-      inputs = ["parseCqi"]
-      type   = "json_parser"
-      field  = "cqiList"
-      drop_field = false # optional, default
-      drop_invalid = true
-
-
-    [transforms.log_to_metric_cqi]
-      inputs = ["parseCqi"]
-      type = "log_to_metric"
-
-      [[transforms.log_to_metric_cqi.metrics]]
-        type = "gauge"
-        field = "widebandCqi"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-
-      [[transforms.log_to_metric_cqi.metrics]]
-        type = "gauge"
-        field = "cqiListSize"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-
-      [[transforms.log_to_metric_cqi.metrics]]
-        type = "set"
-        field = "cqiList"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-
-    [transforms.log_to_metric_cqi_list]
-      inputs = ["parseCqiList"]
-      type = "log_to_metric"
-
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "0"
-        name = "cqi_ch_0"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "1"
-        name = "cqi_ch_1"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "2"
-        name = "cqi_ch_2"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "3"
-        name = "cqi_ch_3"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "4"
-        name = "cqi_ch_4"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "5"
-        name = "cqi_ch_5"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "6"
-        name = "cqi_ch_6"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "7"
-        name = "cqi_ch_7"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "8"
-        name = "cqi_ch_8"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "9"
-        name = "cqi_ch_9"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "10"
-        name = "cqi_ch_10"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "11"
-        name = "cqi_ch_11"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-      [[transforms.log_to_metric_cqi_list.metrics]]
-        type = "gauge"
-        field = "12"
-        name = "cqi_ch_12"
-        tags.cellId = "{{`{{cellId}}`}}" # optional
-        tags.ueRicId = "{{`{{ueRicId}}`}}"
-
-
-    [sinks.out]
+    [sinks.outCqiReport]
       # General
       bucket = "vector-bucket"
       database = "{{ .Values.config.influx.database }}"
       endpoint = "http://{{ tpl .Values.config.influx.hostname . }}:{{ .Values.config.influx.port}}/"
-      inputs = ["log_to_metric_cqi","log_to_metric_cqi_list"]
+      inputs = ["luaCqi"]
       namespace = "{{ .Values.config.influx.namespace }}"
       type = "{{ .Values.config.influx.type }}"
       username = "{{ .Values.config.influx.username }}"
       password = "{{ .Values.config.influx.password }}"
+      tags = ["cellId", "ueId"] 
+
 

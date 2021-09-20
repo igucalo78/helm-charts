@@ -1,3 +1,4 @@
+{{ if .Values.persistence.enabled }}
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -16,3 +17,4 @@ spec:
   hostPath:
      path: "{{ .Values.persistence.hostPath }}"
      type: DirectoryOrCreate
+{{ end }}

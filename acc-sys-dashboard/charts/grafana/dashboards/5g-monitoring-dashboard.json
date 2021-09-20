@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1622552465735,
+  "id": 1,
+  "iteration": 1627293598804,
   "links": [],
   "panels": [
     {
@@ -71,7 +72,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -91,7 +92,7 @@
           "measurement": "uemeasurement.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"measurement.dlGtpThp\") *8 FROM \"uemeasurement.vector\" WHERE (\"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time($__interval), \"/^$UE$/\" fill(null)",
+          "query": "SELECT mean(\"measurement.dlGtpThp\") *8 FROM \"uemeasurement.vector\" WHERE (\"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"/^$UE$/\" fill(null)",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -242,7 +243,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -356,7 +357,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -505,7 +506,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -654,7 +655,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -803,7 +804,7 @@
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1s"
               ],
               "type": "time"
             },
@@ -909,7 +910,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -984,5 +985,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 2
+  "version": 1
 }
