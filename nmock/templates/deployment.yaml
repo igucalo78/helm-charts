@@ -46,16 +46,19 @@ spec:
               sudo service ssh start
               echo 'xapp:{{ .Values.sshPassword }}' | sudo chpasswd
               sudo chown -R xapp /home/xapp/
-              echo "export NMOCK_NATS=nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}" >> /home/xapp/environment
-              echo "export NMOCK_REDIS=redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}" >> /home/xapp/environment
-              echo "export RUST_LOG={{ .Values.config.logLevel }}" >> /home/xapp/environment
+              echo "export NMOCK_NATS=nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.4gnatsPort . }}" > /home/xapp/4g-environment
+              echo "export NMOCK_REDIS=redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.4gredisPort . }}" >> /home/xapp/4g-environment
+              echo "export RUST_LOG={{ .Values.config.logLevel }}" >> /home/xapp/4g-environment
+              echo "export NMOCK_NATS=nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.5gnatsPort . }}" > /home/xapp/5g-environment
+              echo "export NMOCK_REDIS=redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.5gredisPort . }}" >> /home/xapp/5g-environment
+              echo "export RUST_LOG={{ .Values.config.logLevel }}" >> /home/xapp/5g-environment
               while true; do sleep 30; done;
               EOF
           env:
             - name: NMOCK_NATS
-              value: "nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.natsPort . }}"
+              value: "nats://{{ tpl .Values.config.natsUrl .}}:{{ tpl .Values.config.4gnatsPort . }}"
             - name: NMOCK_REDIS
-              value: "redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.redisPort . }}"
+              value: "redis://{{ tpl .Values.config.redisUrl . }}:{{ tpl .Values.config.4gredisPort . }}"
             - name: RUST_LOG
               value: "{{ .Values.config.logLevel }}"
             {{- if .Values.extraEnvs }}
