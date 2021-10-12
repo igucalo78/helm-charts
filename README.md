@@ -21,10 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 # 3.0.1 - 12.10.2021.
 ### Fixed
 - drax [3.0.1]:
-  - Fixed 4g Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
+  - Fixed 4G Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
 - ric [3.0.1]:
-  - - Fixed 5G CU Jaeger DNS crash
-
+  - Fixed 5G CU Jaeger DNS crash
+  - Fixed 5G CU-UP slicing form in dRAX dashboard
+    
 # 3.0.0 - 20.09.2021.
 ### Added
 - drax [3.0.0]:
