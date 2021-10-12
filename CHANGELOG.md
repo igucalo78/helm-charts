@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2021-07-08
+### Added
+- ric [2.1.0]:
+  - Adding xApp Development Environment
+    - You can now deploy the xApp Development Environment via the dRAX Dashboard
+  - The xApp Services exposed
+    - The services of each xApp are now listed under the Services button in the xApp Overview list   
+  - 5G CU Version selection
+    - You can now choose the exact version of the Accelleran 5G CU you want to deploy
+    - By default, when deploying the 5G CU you will install the latest stable version for the particular dRAX version
+
+### Changed
+- ric [2.1.0]:
+  - Using 5G CU 1.0.0 version
+    - The default version of the 5G CU is now 1.0.0
+    - This contains pre-flight checks for the InstanceID  
+- drax [2.1.0]:
+  - Updating version to keep in sync with ric
+    
+
+## 2021-06-21
+### Fixed
+- ric [2.0.1]:
+  - State DB
+    - The persistence of the State DB Configuration is turned off to avoid misconfiguration when upgrading the RIC
+
+
 ## 17.12.2020.
 
 ### Added
