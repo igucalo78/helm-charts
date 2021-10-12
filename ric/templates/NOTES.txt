@@ -10,6 +10,7 @@ Release Notes:
 
 ### Fixed
   - Fixed 5G CU Jaeger DNS crash
+  - Fixed 5G CU-UP slicing form on dRAX Dashboard
 
 
 # RIC 3.0.0
