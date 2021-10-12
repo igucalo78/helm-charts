@@ -41,6 +41,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.0.1
+
+ 
+## 3.0.0
+### Added
+- drax [3.0.0]
+  - Adding 4G Radio controller auto-configuration
+    - The 4G Radio Controller is now autoconfigured during deployment, hence there is no more need to manually configure it via the dRAX Dashboard after installation.
+    - The configuration of the 4G Radio Controller can still be changed via the dRAX Dashboard after deployment if needed
+    - By default, the 4G Radio Controller is configured to enable the A3 handover, reporting is set to periodic, and data is published periodically to the dRAX Databus
+    - The Orchestrator URL which before had to be manually set via the Dashboard, is now set automatically, so you don't have to worry about this parameter.
+  - Added Redis check for 4G Radio Controller
+    - The 4GRC now check if Redis is up and running before starting
+  - Added option to delete existing 4G Radio Controller configuration
+    - Since the 4GRC configuration is now set automatically, you may want to delete the existing configuration and apply the deployment time one. We have added an option for the 4GRC to delete the existing configuration. It found in the values file of drax under: 4g-radio-controller.jobs.netconfConfig.deleteExistingConfig.
+    - If you don't enable this option, and have existing 4GRC configuration from a previous installation, the existing configuration will be taken.
+
+### Changed
+- drax [3.0.0]
+  - Updated 4G to build 5.2
+  - Updated message structure of 4G metrics
+  - Updating Redis to use official Redis Docker image, version 6.2.4
+  - Updating Nats to use official Redis Docker image, version 2.3.2
+
+### Fixed
+- drax [3.0.0]
+  - Fixed all image pull policies to IfNotPresent by default
+
+
 ## 2021-07-08
 ### Added
 - ric [2.1.0]:

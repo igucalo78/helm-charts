@@ -6,8 +6,12 @@
 
 Release Notes:
 
+# dRAX 3.0.1:
+### Fixed
+  - Fixed 4g Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
+
+# dRAX 3.0.0:
 ### Added
-- drax [3.0.0]
   - Adding 4G Radio controller auto-configuration
     - The 4G Radio Controller is now autoconfigured during deployment, hence there is no more need to manually configure it via the dRAX Dashboard after installation.
     - The configuration of the 4G Radio Controller can still be changed via the dRAX Dashboard after deployment if needed
@@ -20,14 +24,12 @@ Release Notes:
     - If you don't enable this option, and have existing 4GRC configuration from a previous installation, the existing configuration will be taken.
 
 ### Changed
-- drax [3.0.0]
   - Updated 4G to build 5.2
-  - Updated message structure of
+  - Updated message structure of 4G metrics
   - Updating Redis to use official Redis Docker image, version 6.2.4
   - Updating Nats to use official Redis Docker image, version 2.3.2
 
 ### Fixed
-- drax [3.0.0]
   - Fixed all image pull policies to IfNotPresent by default
 
 
