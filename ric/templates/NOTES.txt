@@ -11,6 +11,7 @@ Release Notes:
 ### Fixed
   - Fixed 5G CU Jaeger DNS crash
   - Fixed 5G CU-UP slicing form on dRAX Dashboard
+  - Fixed deployment of NKafka-4G and 4G State DB to depend on the global.enable4G field in values
 
 
 # RIC 3.0.0
