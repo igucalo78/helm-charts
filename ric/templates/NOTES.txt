@@ -6,22 +6,29 @@
 
 Release Notes:
 
+# RIC 3.0.1
+
+### Fixed
+  - Fixed 5G CU Jaeger DNS crash
+  - Fixed 5G CU-UP slicing form on dRAX Dashboard
+  - Fixed deployment of NKafka-4G and 4G State DB to depend on the global.enable4G field in values
+
+
+# RIC 3.0.0
+
 ### Added
-- ric [3.0.0]
   - Added Handover Parameters configuration aspect in the 5G CU-CP configuration page on the dashboard
   - Added Neighbor List configuration option in the 5G CU-CP configuration page on the dashboard
   - Adding NATS Monitoring Grafana Dashboard
   - Added Jaeger
 
 ### Changed
-- ric [3.0.0]
   - Updating 5G-Infrastructure to use official NATS and Redis Docker image, version 2.3.2 and 6.2.4 respectively
   - Updated the 5G System Dashboard in Grafana with more details
   - Exposing Prometheus on nodePort 30304
 
 
 ### Fixed
-- ric [3.0.0]
   - Fixed bug with InfluxDB not instantiating the 4G database on deployment
   - Fixed bug in Service Orchestrator when manually choosing the 5G CU NetConf node port
   - Fixed all image pull policies to IfNotPresent by default
