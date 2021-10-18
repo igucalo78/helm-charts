@@ -118,6 +118,7 @@ nkafka-4g:
 
 
 acc-sys-dashboard:
+  enabled: true
   grafana:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
@@ -206,6 +207,7 @@ loki-stack:
         retention_period: 672h
 
 dash-front-back-end:
+  enabled: true
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"

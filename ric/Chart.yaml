@@ -35,9 +35,11 @@ dependencies:
     version: 3.7.1
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
+    condition: acc-sys-dashboard.enabled
     version: 3.4.2
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
+    condition: dash-front-back-end.enabled
     version: 2.0.4
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack

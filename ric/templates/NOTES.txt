@@ -4,34 +4,41 @@
 # Accelleran dRAX RIC                         #
 ###############################################
 
-Release Notes:
+# Release Notes:
 
-# RIC 3.0.1
-
+## RIC 3.0.1
 ### Fixed
   - Fixed 5G CU Jaeger DNS crash
   - Fixed 5G CU-UP slicing form on dRAX Dashboard
   - Fixed deployment of NKafka-4G and 4G State DB to depend on the global.enable4G field in values
 
-
-# RIC 3.0.0
-
+## RIC 3.0.0
 ### Added
   - Added Handover Parameters configuration aspect in the 5G CU-CP configuration page on the dashboard
   - Added Neighbor List configuration option in the 5G CU-CP configuration page on the dashboard
   - Adding NATS Monitoring Grafana Dashboard
   - Added Jaeger
-
 ### Changed
   - Updating 5G-Infrastructure to use official NATS and Redis Docker image, version 2.3.2 and 6.2.4 respectively
   - Updated the 5G System Dashboard in Grafana with more details
   - Exposing Prometheus on nodePort 30304
-
-
 ### Fixed
   - Fixed bug with InfluxDB not instantiating the 4G database on deployment
   - Fixed bug in Service Orchestrator when manually choosing the 5G CU NetConf node port
   - Fixed all image pull policies to IfNotPresent by default
 
+
+# Services
+{{ if index .Values "acc-kafka" "enabled" }}## Kafka
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-kafka" "service" "nodePort" }} {{ end }}
+
+{{ if index .Values "acc-service-monitor" "enabled" }}## Service Monitor
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-service-monitor" "service" "nodePort" }} {{ end }}
+
+{{ if index .Values "dash-front-back-end" "enabled" }}## dRAX Dashboard
+{{ .Values.global.kubeIp }}:{{ index .Values "dash-front-back-end" "service" "nodePort" }} {{ end }}
+
+{{ if index .Values "acc-sys-dashboard" "enabled" }}## Grafana
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-sys-dashboard" "grafana" "service" "nodePort" }} {{ end }}
 
 ###############################################

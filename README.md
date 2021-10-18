@@ -4,8 +4,8 @@
 
 | Name  | Chart Version  | App Version  | Description   |
 |--- |--- |--- |---  |   
-| acc-helm/drax                             |  2.1.0             |  2.1.0                             |  Accelleran 4G dRAX |  
-| acc-helm/ric                              |  2.1.0             |  2.1.0                             |  Accelleran dRAX RIC | 
+| acc-helm/drax                             |  3.0.1             |  3.0.1                             |  Accelleran 4G dRAX |  
+| acc-helm/ric                              |  3.0.1             |  3.0.1                             |  Accelleran dRAX RIC | 
 | acc-helm/nmock                            |  1.0.0             |  1.0.0                             |  Accelleran 4G and 5G Simulator | 
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
@@ -18,13 +18,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-# 3.0.1 - 12.10.2021.
+# 3.0.1 - 18.10.2021.
 ### Fixed
 - drax [3.0.1]:
   - Fixed 4G Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
 - ric [3.0.1]:
   - Fixed 5G CU Jaeger DNS crash
   - Fixed 5G CU-UP slicing form in dRAX dashboard
+  - Fixed deployment of NKafka-4G and 4G State DB to depend on the global.enable4G field in values  
     
 # 3.0.0 - 20.09.2021.
 ### Added

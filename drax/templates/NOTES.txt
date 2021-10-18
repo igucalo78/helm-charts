@@ -4,13 +4,13 @@
 # Accelleran dRAX 4G                          #
 ###############################################
 
-Release Notes:
+# Release Notes:
 
-# dRAX 3.0.1:
+## dRAX 3.0.1:
 ### Fixed
   - Fixed 4g Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
 
-# dRAX 3.0.0:
+## dRAX 3.0.0:
 ### Added
   - Adding 4G Radio controller auto-configuration
     - The 4G Radio Controller is now autoconfigured during deployment, hence there is no more need to manually configure it via the dRAX Dashboard after installation.
@@ -32,5 +32,12 @@ Release Notes:
 ### Fixed
   - Fixed all image pull policies to IfNotPresent by default
 
+
+# Services:
+{{ if index .Values "acc-l2-update" "enabled" }}## E1000 Layer 2 Update Server
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-l2-update" "service" "nodePort" }} {{ end }}
+
+{{ if .Values.provisioner.enabled }}## 4G dRAX Provisioner
+{{ .Values.global.kubeIp }}:{{ .Values.provisioner.nginx.service.nodePort}}{{ end }}
 
 ###############################################
