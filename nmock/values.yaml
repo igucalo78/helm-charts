@@ -26,9 +26,11 @@ sshPassword: "password1!"
 config:
   logLevel: "debug"
   natsUrl: "10.55.1.2"
-  natsPort: "31000"
+  nats4gPort: "31000"
+  nats5gPort: "31100"
   redisUrl: "10.55.1.2"
-  redisPort: "32000"
+  redis4gPort: "32000"
+  redis5gPort: "32200"
 
 extraEnvs: []
 #  - name: ex1

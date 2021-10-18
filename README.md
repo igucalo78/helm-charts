@@ -3,34 +3,10 @@
 ## List of Helm Charts
 
 | Name  | Chart Version  | App Version  | Description   |
-|--- |--- |--- |---  |  
-| acc-helm/4g-radio-controller              |  1.5.2             |  1.3.2-72f9e01                     |  The accelleran ORAN RIC Controller |  
-| acc-helm/acc-fiveg-pmcounters             |  0.4.1             |  0.2.3                             |  A Helm chart for Accelleran dRAX xApp | 
-| acc-helm/acc-kafka                        |  0.3.1             |  2.7.0                             |  A Helm chart for Kubernetes | 
-| acc-helm/acc-kminion                      |  1.5.0             |  1.0                               |  A Helm chart for Kubernetes | 
-| acc-helm/acc-l2-update                    |  1.5.2             |  1.3.2-72f9e01                     |  A server containing the Layer 2 update file | 
-| acc-helm/acc-service-monitor              |  0.6.0             |  0.5.0                             |  The Accelleran dRAX Service Monitor | 
-| acc-helm/acc-service-orchestrator         |  0.7.0             |  0.7.0                             |  The dRAX Service Orchestrator | 
-| acc-helm/acc-state-db                     |  0.14.2            |  0.11.2                            |  A Helm chart for Kubernetes | 
-| acc-helm/acc-sys-dashboard                |  3.2.9             |  3.2.9                             |  Accelleran's System Overview Dashboard | 
-| acc-helm/acc-zookeeper                    |  0.1.0             |  3.6.2                             |  A Helm chart for Kubernetes | 
-| acc-helm/configurator                     |  0.3.0             |  0.2.0                             |  The configurator of Accelleran dRAX | 
-| acc-helm/dash-front-back-end              |  1.0.1             |  1.0.1                            |  Frontend and backend of the Accelleran Dashboard | 
-| acc-helm/drax                             |  2.1.0             |  2.1.0                             |  All in one Accelleran dRAX |  
-| acc-helm/influxdb                         |  5.0.0             |  1.8.3                             |  Scalable datastore for metrics, events, and rea... |  
-| acc-helm/kube-eagle                       |  1.1.5             |  1.1.0                             |  Prometheus exporter for Kubernetes pod & node r... | 
-| acc-helm/loki-stack                       |  0.43.0            |  v1.4.1                            |  Loki: like Prometheus, but for logs. | 
-| acc-helm/metrics-server                   |  2.9.0             |  0.3.6                             |  Metrics Server is a cluster-wide aggregator of ... | 
-| acc-helm/nats                             |  0.2.4             |  nats20190206                      |  Accelleran NATS | 
-| acc-helm/nkafka-4g                        |  2.3.1             |  alpha.8bb326c_proto.c5a3189b4     |  A Helm chart for Kubernetes |  
-| acc-helm/ntp-server                       |  0.2.0             |  0.1.0                             |  The NTP server for Accelleran cells |  
-| acc-helm/prometheus                       |  10.3.1            |  2.15.2                            |  Prometheus is a monitoring system and time seri... | 
-| acc-helm/provisioner                      |  0.11.1            |  0.7.0                             |  The Accelleran provisioner for bootstrap files | 
-| acc-helm/provisioner-dhcp                 |  0.2.0             |  0.1.4                             |  A DHCP service for Provisioner discovery | 
-| acc-helm/redis                            |  0.6.3             |  redis20190206                     |  Accelleran dRAX Redis | 
-| acc-helm/ric                              |  2.1.0             |  2.1.0                             |  A Helm chart for Kubernetes | 
-| acc-helm/vector                           |  0.6.0             |  0.2.0                             |  A Helm chart for Kubernetes | 
-| acc-helm/vectorfiveg                      |  0.5.2             |  0.2.0                             |  A Helm chart for Kubernetes | 
+|--- |--- |--- |---  |   
+| acc-helm/drax                             |  2.1.0             |  2.1.0                             |  Accelleran 4G dRAX |  
+| acc-helm/ric                              |  2.1.0             |  2.1.0                             |  Accelleran dRAX RIC | 
+| acc-helm/nmock                            |  1.0.0             |  1.0.0                             |  Accelleran 4G and 5G Simulator | 
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
 
@@ -41,12 +17,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 3.0.1
 
- 
-## 3.0.0
+# 3.0.1 - 12.10.2021.
+### Fixed
+- drax [3.0.1]:
+  - Fixed 4G Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
+- ric [3.0.1]:
+  - Fixed 5G CU Jaeger DNS crash
+  - Fixed 5G CU-UP slicing form in dRAX dashboard
+    
+# 3.0.0 - 20.09.2021.
 ### Added
-- drax [3.0.0]
+- drax [3.0.0]:
   - Adding 4G Radio controller auto-configuration
     - The 4G Radio Controller is now autoconfigured during deployment, hence there is no more need to manually configure it via the dRAX Dashboard after installation.
     - The configuration of the 4G Radio Controller can still be changed via the dRAX Dashboard after deployment if needed
@@ -57,42 +39,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added option to delete existing 4G Radio Controller configuration
     - Since the 4GRC configuration is now set automatically, you may want to delete the existing configuration and apply the deployment time one. We have added an option for the 4GRC to delete the existing configuration. It found in the values file of drax under: 4g-radio-controller.jobs.netconfConfig.deleteExistingConfig.
     - If you don't enable this option, and have existing 4GRC configuration from a previous installation, the existing configuration will be taken.
+- ric [3.0.0]:
+  - Added Handover Parameters configuration aspect in the 5G CU-CP configuration page on the dashboard
+  - Added Neighbor List configuration option in the 5G CU-CP configuration page on the dashboard
+  - Adding NATS Monitoring Grafana Dashboard
+  - Added Jaeger
+- nmock [1.0.0]
+  - Adding dRAX version 3 support with version 3 4G scenarios 
+  - Adding 5G simulated scenario for dRAX version 3
+  - Adding 5g-environment script to allow simulating data to 5G infrastructure
+    
 
 ### Changed
-- drax [3.0.0]
+- drax [3.0.0]:
   - Updated 4G to build 5.2
   - Updated message structure of 4G metrics
   - Updating Redis to use official Redis Docker image, version 6.2.4
   - Updating Nats to use official Redis Docker image, version 2.3.2
+- ric [3.0.0]:
+  - Updating 5G-Infrastructure to use official NATS and Redis Docker image, version 2.3.2 and 6.2.4 respectively
+  - Updated the 5G System Dashboard in Grafana with more details
+  - Exposing Prometheus on nodePort 30304
+
 
 ### Fixed
-- drax [3.0.0]
+- drax [3.0.0]:
   - Fixed all image pull policies to IfNotPresent by default
-
-
-## 2021-07-08
-### Added
-- ric [2.1.0]:
-  - Adding xApp Development Environment
-    - You can now deploy the xApp Development Environment via the dRAX Dashboard
-  - The xApp Services exposed
-    - The services of each xApp are now listed under the Services button in the xApp Overview list   
-  - 5G CU Version selection
-    - You can now choose the exact version of the Accelleran 5G CU you want to deploy
-    - By default, when deploying the 5G CU you will install the latest stable version for the particular dRAX version
-
-### Changed
-- ric [2.1.0]:
-  - Using 5G CU 1.0.0 version
-    - The default version of the 5G CU is now 1.0.0
-    - This contains pre-flight checks for the InstanceID  
-- drax [2.1.0]:
-  - Updating version to keep in sync with ric
-    
-
-## 2021-06-21
-### Fixed
-- ric [2.0.1]:
-  - State DB
-    - The persistence of the State DB Configuration is turned off to avoid misconfiguration when upgrading the RIC
-
+- ric [3.0.0]:
+  - Fixed bug with InfluxDB not instantiating the 4G database on deployment
+  - Fixed bug in Service Orchestrator when manually choosing the 5G CU NetConf node port
+  - Fixed all image pull policies to IfNotPresent by default
