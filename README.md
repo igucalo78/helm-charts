@@ -17,6 +17,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 4.0.0 - UNRELEASED
+### Added
+### Updated
+- ric [4.0.0-rc0]
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-f608a008
+  - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
+  - Changed NKafka-5G to 0.6.10_proto.f608a0084 to support new version of 5G CU
+- drax [4.0.0-rc0]
+  - Updated version to match ric
+### Fixed
 
 # 3.0.1 - 18.10.2021.
 ### Fixed

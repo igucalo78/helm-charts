@@ -4,36 +4,17 @@
 # Accelleran dRAX 4G                          #
 ###############################################
 
-# Release Notes:
+# Release Notes ###############################
 
-## dRAX 3.0.1:
-### Fixed
-  - Fixed 4g Radio Controller bug when no KUBE_IP or wrong KUBE_IP is given
-
-## dRAX 3.0.0:
+## dRAX 4.0.0:
 ### Added
-  - Adding 4G Radio controller auto-configuration
-    - The 4G Radio Controller is now autoconfigured during deployment, hence there is no more need to manually configure it via the dRAX Dashboard after installation.
-    - The configuration of the 4G Radio Controller can still be changed via the dRAX Dashboard after deployment if needed
-    - By default, the 4G Radio Controller is configured to enable the A3 handover, reporting is set to periodic, and data is published periodically to the dRAX Databus
-    - The Orchestrator URL which before had to be manually set via the Dashboard, is now set automatically, so you don't have to worry about this parameter.
-  - Added Redis check for 4G Radio Controller
-    - The 4GRC now check if Redis is up and running before starting
-  - Added option to delete existing 4G Radio Controller configuration
-    - Since the 4GRC configuration is now set automatically, you may want to delete the existing configuration and apply the deployment time one. We have added an option for the 4GRC to delete the existing configuration. It found in the values file of drax under: 4g-radio-controller.jobs.netconfConfig.deleteExistingConfig.
-    - If you don't enable this option, and have existing 4GRC configuration from a previous installation, the existing configuration will be taken.
-
 ### Changed
-  - Updated 4G to build 5.2
-  - Updated message structure of 4G metrics
-  - Updating Redis to use official Redis Docker image, version 6.2.4
-  - Updating Nats to use official Redis Docker image, version 2.3.2
-
+  - Updated version to sync with RIC change
 ### Fixed
-  - Fixed all image pull policies to IfNotPresent by default
 
 
-# Services:
+# Services ####################################
+
 {{ if index .Values "acc-l2-update" "enabled" }}## E1000 Layer 2 Update Server
 {{ .Values.global.kubeIp }}:{{ index .Values "acc-l2-update" "service" "nodePort" }} {{ end }}
 

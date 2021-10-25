@@ -1,24 +1,48 @@
-# Default values for acc-service-orchestrator.
+# Default values for five-g-appl.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
-version: "{{ .Chart.AppVersion }}"
+replicas: 1
 
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: accelleran/e2smkpmappl
   pullPolicy: IfNotPresent
-  #pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-kubeIp: "10.55.1.2"
+# Application Settings
+# cmd: "__APPNAME=amfController ./amfControllerAppl.exe"
+cmd: "./e2SmKpmAppl.exe"
 
-default5gVersion: "3.0.0-rc4"
+args: []
+#  - name: "--own"
+#    value: 127.0.0.1
+#  - name: "--ng"
+#    value: 127.0.0.5
+
+nats:
+  url: "10.55.1.2"
+  port: "31100"
+
+redisConfig:
+  hostname: "10.55.1.2"
+  port: "32200"
+
+bootstrapId: "e2-sm-kpm"
+bootstrapFile: /bootstrap.txt
+
+jaegerAgentHost: "ric-jaeger-agent"
+
+extraEnvs:
+  - name: __APPNAME
+    value: e2SmKpm
+#  - name: ex1
+#    value: ex1
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -44,11 +68,14 @@ securityContext:
   privileged: true
 
 service:
-  serviceName: acc-service-orchestrator
-  name: acc-ser-orc
+  enabled: false
+  name: "e2-sm-kpm"
   type: NodePort
+  protocol: SCTP
   port: 80
-  nodePort: 30502
+  # loadBalancerIP:
+  # nodePort:
+  # externalTrafficPolicy: "Local"
 
 ingress:
   enabled: false
