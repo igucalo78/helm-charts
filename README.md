@@ -26,11 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-2fc276e4
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
   - Changed NKafka-5G to 0.6.10_proto.2fc276e4d to support new version of 5G CU
+  - Changed Helm Repo URL for xApp Dev Env
 - drax [4.0.0-rc2]
   - Updated version to match ric
 ### Fixed
-- ric [4.0.0-rc3]
-  - Fixed xApp Dev Env version control in the dashboard
 
 
 # 3.0.1 - 18.10.2021.

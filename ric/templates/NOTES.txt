@@ -8,10 +8,12 @@
 
 ## RIC 4.0.0
 ### Added
+  - Added version control for xApp Dev Env
 ### Changed
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-f608a008
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-2fc276e4
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
-  - Changed NKafka-5G to 0.6.10_proto.f608a0084 to support new version of 5G CU
+  - Changed NKafka-5G to 0.6.10_proto.2fc276e4d to support new version of 5G CU
+  - Changed Helm Repo URL for xApp Dev Env
 ### Fixed
 
 # Services #####################################
