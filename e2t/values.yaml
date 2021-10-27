@@ -77,6 +77,8 @@ e2t-sctp:
 
   bootstrapId: "{{ .Values.global.bootstrapId }}"
 
+  appId: "e2-ap-1"
+
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
   sctpService:

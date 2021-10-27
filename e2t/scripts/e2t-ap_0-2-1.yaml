@@ -12,6 +12,7 @@ nats:
   url: "172.31.36.102"
   port: "31000"
 
+bootstrapId: "e2-t"
 
 jaegerAgentHost: "ric-jaeger-agent"
 

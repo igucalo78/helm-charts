@@ -11,7 +11,7 @@
   - Added developer mode for e2-sctp and e2-ap helm charts
   - Added hostPath mounting in developer mode
   - Adding CHANGELOG.md
-  - Adding __APPID as env var which takes the value of the bootstrapId
+  - Adding __APPID as env var
 
 # Services ####################################
 

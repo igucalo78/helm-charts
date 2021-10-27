@@ -33,8 +33,10 @@ redisConfig:
   hostname: "10.55.1.2"
   port: "32200"
 
-bootstrapId: "e2-ap-1"
+bootstrapId: "e2-t"
 bootstrapFile: /bootstrap.txt
+
+appId: "e2-ap-1"
 
 jaegerAgentHost: "ric-jaeger-agent"
 
