@@ -3,6 +3,11 @@
 
 # Accelleran dRAX E2 Termination - Release Notes
 
+## 27.10.2021. - 0.2.1
+### Fixed
+  - Fixed APPNAME to env from extraEnvs
+  - Fixed boostrapId to be same for logical block (sctp and aps)
+
 ## 27.10.2021. - 0.2.0
 ### Added
   - Added developer mode for e2-sctp and e2-ap helm charts

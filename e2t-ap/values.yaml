@@ -34,15 +34,15 @@ redisConfig:
   port: "32200"
 
 bootstrapId: "e2-t"
-bootstrapFile: /bootstrap.txt
+bootstrapFile: /home/accelleran/5G/bootstrap.txt
 
 appId: "e2-ap-1"
 
 jaegerAgentHost: "ric-jaeger-agent"
 
-extraEnvs:
-  - name: __APPNAME
-    value: e2Ap
+extraEnvs: []
+#  - name: __APPNAME
+#    value: e2Ap
 
 serviceAccount:
   # Specifies whether a service account should be created

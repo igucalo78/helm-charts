@@ -54,11 +54,13 @@ spec:
             - name: NATS_SERVICE_URL
               value: nats://{{ tpl .Values.nats.url . }}:{{ tpl .Values.nats.port . }}
             - name: ZLOG_CONF_PATH
-              value: /zlog.conf
+              value: /home/accelleran/5G/zlog.conf
             - name: BOOTSTRAP_FILENAME
               value: {{ .Values.bootstrapFile }}
             - name: JAEGER_AGENT_HOST
               value: {{ tpl .Values.jaegerAgentHost . }}
+            - name: __APPNAME
+              value: sctpE2ap
             {{- if .Values.extraEnvs }}
             {{ toYaml .Values.extraEnvs | nindent 12 }}
             {{- end }}
@@ -76,14 +78,14 @@ spec:
 #              port: http
           volumeMounts:
             - name: {{ include "five-g-appl.fullname" . }}-zlog-conf
-              mountPath: /zlog.conf
+              mountPath: /home/accelleran/5G/zlog.conf
               subPath: "zlog.conf"
             - name: {{ include "five-g-appl.fullname" . }}-bootstrap
               mountPath: {{ .Values.bootstrapFile }}
               subPath: "bootstrap.txt"
             {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
             - name: dev-work-dir
-              mountPath: /tmp/e2t/
+              mountPath: /home/accelleran/5G/dev/
             {{ end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
