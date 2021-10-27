@@ -8,6 +8,7 @@
   - Added developer mode for e2-sctp and e2-ap helm charts
   - Added hostPath mounting in developer mode
   - Adding CHANGELOG.md
+  - Adding __APPID as env var
 
 ## 25.10.2021. - 0.1.0
 ### Added

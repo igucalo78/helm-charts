@@ -33,7 +33,7 @@ redisConfig:
   hostname: "10.55.1.2"
   port: "32200"
 
-bootstrapId: "e2-ap"
+bootstrapId: "e2-ap-1"
 bootstrapFile: /bootstrap.txt
 
 jaegerAgentHost: "ric-jaeger-agent"
@@ -41,8 +41,6 @@ jaegerAgentHost: "ric-jaeger-agent"
 extraEnvs:
   - name: __APPNAME
     value: e2Ap
-#  - name: ex1
-#    value: ex1
 
 serviceAccount:
   # Specifies whether a service account should be created

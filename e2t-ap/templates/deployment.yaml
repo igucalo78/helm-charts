@@ -62,6 +62,8 @@ spec:
               value: {{ .Values.bootstrapFile }}
             - name: JAEGER_AGENT_HOST
               value: {{ tpl .Values.jaegerAgentHost . }}
+            - name: __APPID
+              value: {{ tpl .Values.bootstrapId . }}
             {{- if .Values.extraEnvs }}
             {{ toYaml .Values.extraEnvs | nindent 12 }}
             {{- end }}
