@@ -5,6 +5,8 @@ global:
   #
   numOfE2Nodes: 5
 
+  bootstrapId: "e2-t"
+
   # NATS URL and PORT
   #   Description: Used to configure the application to talk
   #                to NATS
@@ -73,7 +75,7 @@ e2t-sctp:
     url: "{{ .Values.global.natsUrl }}"
     port: "{{ .Values.global.natsPort }}"
 
-  bootstrapId: "e2-sctp"
+  bootstrapId: "{{ .Values.global.bootstrapId }}"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
@@ -105,7 +107,7 @@ e2t-ap:
     url: "{{ .Values.global.natsUrl }}"
     port: "{{ .Values.global.natsPort }}"
 
-  bootstrapId: "e2-ap-1"
+  bootstrapId: "{{ .Values.global.bootstrapId }}"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
