@@ -41,6 +41,7 @@ drax/name: e2t
 drax/component-name: {{ .Chart.Name }}
 drax/component-version: {{ .Chart.Version }}
 drax/instanceId: "{{ tpl .Values.bootstrapId . }}"
+drax/appId: "{{ tpl .Values.appId . }}"
 {{- end }}
 
 {{/*
