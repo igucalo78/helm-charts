@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "xapp_core.fullname" . }}-readme
+  labels:
+    {{- include "xapp_core.labels" . | nindent 4 }}
+data:
+  README.md: |-
+    # xApp Development Environment
+
+    ## Introduction
+
+    This is the xApp Development environment. You can use this xApp as a playground for testing, developing and debugging your xApp. The xApp Development Environment is a full fledged xApp, specially crated to contain the xApp Core template in Python, and with the environment prepared with all the pre-requirements. Once the xApp is developed, the code can be pushed to a remote location where the xApp can be productized.
+
+    Please find the xApp Development Guide on the following link:
+    [https://cutt.ly/drax-xapp-dev-guide](https://cutt.ly/drax-xapp-dev-guide)
+
+    ## Using SSH to access the xApp Development Environment
+
+    On the dRAX Dasboard, navigate to the "xApp Management" - "Overview" page. A list of xApps deployed are listed here. The xApp Development Environment will also be listed here.
+
+    Click on the "SHOW" button under the Services column. Here you can see the service of the xApp. One of them is the "dev-ssh" service.
+
+    The exposed port is the NodePort. You can use this port to ssh into the xApp Development Environment. You can do so using the following command from your local machine:
+
+    ```shell
+    ssh -p <dev-ssh-node-port> xapp@<kubernetes-ip>
+    ```
+
+    The default username in the xApp Development Environment is "xapp", while the password for that user is chosen on the deployment of the xApp Development Environment.
+
+    ## Starting the xApp in the xApp Development Environment
+
+    Once you ssh into the xApp Development Environment, you will find yourself in the home directory of the xapp user. Here, the xapp-core fodler will be located with the Xapp Core Python template. Inside that folder you can run:
+
+    ```shell
+    python3 xapp_main.py
+    ```
+
+    Which will run the xApp.
+
+    ## Changing xApp Configuration
+
+    The configuration of the xApp in the xApp Development Environment is located in the xApp Redis, which can be accessed and edited using the dRAx Dashboard. Nagivate to the "xApp Management" - "Overview" page, and click on the "Details" icon of the xApp Development Environment.
+
+    ## Develop the xApp
+
+    When you ssh into the xApp Development Environment, you will get a bash shell. There are preinstaled tools in the xApp Development Environment, such as:
+    - git
+    - vim
+    - nano
+
+    You can edit the xAp core files directly inside the xApp Development Environment, and rerun the xApp. This creates a fast and easy development environment.
+
+    ## Using local IDE's to edit xApp Core files in the xApp Development Environment using sshfs
+
+    If you wish to edit the xApp core files that are found in the xApp Development Environment, you ccan use the sshfs tool. This tool will mount the rmeote files from the xApp Development Environment onto your local machine. From that point on, you can edit the files in your own local IDE of your chosing. The changes automatically get forwarded to the xApp Development Environment.
+
+    You can install sshfs using the following command:
+
+    ```shell
+    sudo apt install -y sshfs
+    ```
+
+    Next create a folder where you will mount the remote files:
+
+    ```shell
+    mkdir /path/to/remote-xap-dev
+    ```
+
+    Finally us ethe sshfs command to mount the files:
+
+    ```shell
+    sshfs -p <dev-ssh-node-port> xapp@<kubernetes-ip>:/home/xapp/xapp-core /path/to/remote-xap-dev
+    ```
+
+    The xapp-core files will now be available in the "remote-xap-dev" folder you just created.
+
+    NOTE: You still have to ssh into the xApp Development Environment in order to run the actual xApp with the "python3 xapp_main.py" command.
+
+    ## Happy with the xApp? Whats next?
+
+    Once you are happy with the xApp you have created, you can move the xApp Core files to you local machine and follow the Accelleran xApp Guide or Accelleran xApp Training Videos to productize the xApp.
+
+    You can either copy them from the sshfs remote folder to a local foler on your local machine, use git to push to a remote repository both from your local machine in teh sshfs folder, or in the xApp Development Environment. remember, you have git installed in the xApp Development Environment, so all you have to do is set the upstream origin and push your code.
+
+    IMPORTANT NOTE: If you delete the xApp Development Environment, your files will be lost! Make sure to copy them somewhere safe.
+
+    ## Uninstalling the xApp Development Environment
+
+    Once you are done with testing, developing or debugging, you can delete the xApp Development Environment. Make sure to push your code or back it up in some other way. After deleting the xApp Development Environment your code will be lost inside the xApp Development Environment and cannot be restored!
+
+    You can uninstall the xApp Development Environment from the dRAX Dashbaord. Nagigate to the "xApp Management" - "Overview" page. Click the "Uninstall" button on your xApp Development Environment.
+
+
+
+
+
+

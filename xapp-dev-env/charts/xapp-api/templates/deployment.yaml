@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "acc-service-orchestrator.fullname" . }}
+  name: {{ include "xapp-api.fullname" . }}
   labels:
-    {{- include "acc-service-orchestrator.labels" . | nindent 4 }}
+    {{- include "xapp-api.labels" . | nindent 4 }}
 spec:
 {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
 {{- end }}
   selector:
     matchLabels:
-      {{- include "acc-service-orchestrator.selectorLabels" . | nindent 6 }}
+      {{- include "xapp-api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
     {{- with .Values.podAnnotations }}
@@ -18,32 +18,37 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        {{- include "acc-service-orchestrator.labels" . | nindent 8 }}
+        {{- include "xapp-api.labels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "acc-service-orchestrator.serviceAccountName" . }}
+      serviceAccountName: {{ include "xapp-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-check-redis
+          image: "{{ .Values.initImage.repository}}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.redis.url . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version	. }}"
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: KUBE_IP
-              value: "{{ tpl .Values.kubeIp . }}"
-            - name: DEFAULT_5G_VERSION
-              value: "{{ tpl .Values.default5gVersion . }}"
-            - name: DEFAULT_DEV_ENV_VERSION
-              value: "{{ tpl .Values.defaultDevEnvVersion . }}"
           ports:
-            - name: {{ .Values.service.name }}
-              containerPort: {{ .Values.service.port }}
+            - name: http
+              containerPort: 80
               protocol: TCP
+          volumeMounts:
+            - name: {{ include "xapp-api.fullname" . }}-settings
+              mountPath: /app/settings.py
+              subPath: "settings.py"
+            - name: {{ include "xapp-api.fullname" . }}-settings
+              mountPath: /etc/nginx/conf.d/flask-site-nginx.conf
+              subPath: "flask-site-nginx.conf"
           #livenessProbe:
           #  httpGet:
           #    path: /
@@ -71,3 +76,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: {{ include "xapp-api.fullname" . }}-settings
+          configMap:
+            name: {{ include "xapp-api.fullname" . }}-settings

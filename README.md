@@ -4,8 +4,8 @@
 
 | Name  | Chart Version  | App Version  | Description   |
 |--- |--- |--- |---  |   
-| acc-helm/drax                             |  3.0.1             |  3.0.1                             |  Accelleran 4G dRAX |  
-| acc-helm/ric                              |  3.0.1             |  3.0.1                             |  Accelleran dRAX RIC | 
+| acc-helm/drax                             |  4.0.0             |  4.0.0                             |  Accelleran 4G dRAX |  
+| acc-helm/ric                              |  4.0.0             |  4.0.0                             |  Accelleran dRAX RIC | 
 | acc-helm/nmock                            |  1.0.0             |  1.0.0                             |  Accelleran 4G and 5G Simulator | 
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
@@ -19,14 +19,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # 4.0.0 - UNRELEASED
 ### Added
+- ric [4.0.0-rc3]
+  - Added version control for xApp Dev env in Service Orchestrator
 ### Updated
-- ric [4.0.0-rc0]
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-f608a008
+- ric [4.0.0-rc2]
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-2fc276e4
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
-  - Changed NKafka-5G to 0.6.10_proto.f608a0084 to support new version of 5G CU
-- drax [4.0.0-rc0]
+  - Changed NKafka-5G to 0.6.10_proto.2fc276e4d to support new version of 5G CU
+- drax [4.0.0-rc2]
   - Updated version to match ric
 ### Fixed
+- ric [4.0.0-rc3]
+  - Fixed xApp Dev Env version control in the dashboard
+
 
 # 3.0.1 - 18.10.2021.
 ### Fixed

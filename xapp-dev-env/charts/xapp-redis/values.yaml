@@ -1,4 +1,4 @@
-# Default values for acc-service-orchestrator.
+# Default values for redis.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,33 +7,31 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: redis
   pullPolicy: IfNotPresent
-  #pullPolicy: IfNotPresent
 
-imagePullSecrets:
-  - name: accelleran-secret
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-kubeIp: "10.55.1.2"
-
-default5gVersion: "3.0.0-rc5"
-defaultDevEnvVersion: "1"
+# Backup the redis db when the pod is terminated
+# Enabled or disable this feature
+# Choose after how many days should the backed up DBs be deleted
+backup:
+  enabled: true
+  deleteAfterDay: 7
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name:
 
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext: 
+  fsGroup: 0
 
 securityContext: 
   # capabilities:
@@ -42,14 +40,12 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
-  privileged: true
 
 service:
-  serviceName: acc-service-orchestrator
-  name: acc-ser-orc
-  type: NodePort
-  port: 80
-  nodePort: 30502
+  type: ClusterIP
+  #nodePort: 31802
+  port: 6379
+  name: "redis"
 
 ingress:
   enabled: false
@@ -64,6 +60,39 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+persistence:
+  accessModes:
+    - ReadWriteMany
+  enabled: true
+  size: 1Gi
+  #storageClassName: acc-redis
+  type: pvc
+  ### TESTING
+  #hostPath: /opt/pods/acc-redis
+  ### Production
+  hostPath: /opt/pods
+
+# If you want the health check app, enabled this
+# WARNING: There is currently an error with the health check, do not enable this
+health:
+  enabled: false
+
+# If you enable the health, then you can enable livenessProbe and readinessProbe
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -75,13 +104,6 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

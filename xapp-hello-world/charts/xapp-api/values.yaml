@@ -1,4 +1,4 @@
-# Default values for acc-service-orchestrator.
+# Default values for xapp-api.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,23 +7,25 @@ replicaCount: 1
 version: "{{ .Chart.AppVersion }}"
 
 image:
-  repository: accelleran/acc-service-orchestrator 
+  repository: accelleran/accelleran-xapp-api
   pullPolicy: IfNotPresent
-  #pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
 
-kubeIp: "10.55.1.2"
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "latest"
 
-default5gVersion: "3.0.0-rc5"
-defaultDevEnvVersion: "1"
+redis:
+  url: '10.233.37.164'
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -42,14 +44,12 @@ securityContext:
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   runAsUser: 0
-  privileged: true
 
 service:
-  serviceName: acc-service-orchestrator
-  name: acc-ser-orc
   type: NodePort
+  # nodePort: 31801
   port: 80
-  nodePort: 30502
+  name: "xapp-api"
 
 ingress:
   enabled: false
