@@ -33,6 +33,15 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if .Values.developerMode.enabled }}
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              while true; do sleep 30; done;
+              EOF
+          {{ else }}
           command:
             - sh
             - "-c"
@@ -40,6 +49,7 @@ spec:
               /bin/sh <<'EOF'
               {{ .Values.cmd }} {{- if .Values.args }}{{ range .Values.args }} {{ .name }} {{ .value }}{{ end }}{{- end }}
               EOF
+          {{ end }}
           env: 
             - name: NATS_SERVICE_URL
               value: nats://{{ tpl .Values.nats.url . }}:{{ tpl .Values.nats.port . }}
@@ -71,6 +81,10 @@ spec:
             - name: {{ include "five-g-appl.fullname" . }}-bootstrap
               mountPath: {{ .Values.bootstrapFile }}
               subPath: "bootstrap.txt"
+            {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
+            - name: dev-work-dir
+              mountPath: /tmp/e2t/
+            {{ end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           lifecycle:
@@ -102,3 +116,9 @@ spec:
         - name: {{ include "five-g-appl.fullname" . }}-bootstrap
           configMap:
             name: {{ include "five-g-appl.fullname" . }}-bootstrap
+
+        {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
+        - name: dev-work-dir
+          hostPath:
+            path: {{ .Values.developerMode.hostPath }}
+        {{ end }}

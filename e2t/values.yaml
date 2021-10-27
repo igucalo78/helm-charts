@@ -84,6 +84,11 @@ e2t-sctp:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
+  ### TODO REMOVE
+  developerMode:
+    enabled: false
+    hostPath: ""
+
 e2t-ap:
   enabled: true
 
@@ -107,3 +112,8 @@ e2t-ap:
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
+
+  ### TODO REMOVE
+  developerMode:
+    enabled: false
+    hostPath: ""
