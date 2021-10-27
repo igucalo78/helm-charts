@@ -1,0 +1,17 @@
+numOfE2Nodes: "1"
+
+
+image:
+  tag: "master-8341e9f4"
+
+redisConfig:
+  hostname: "172.31.36.102"
+  port: "32200"
+
+nats:
+  url: "172.31.36.102"
+  port: "31000"
+
+
+jaegerAgentHost: "ric-jaeger-agent"
+
