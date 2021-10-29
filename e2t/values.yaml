@@ -5,6 +5,13 @@ global:
   #
   numOfE2Nodes: 5
 
+  # Bootstrap Instance ID
+  #   Description:  The Bootstrap Instance ID. Is used by the logical group:
+  #                 SCTP and all APs associated to that SCTP module.
+  #
+  #   Example:
+  # bootstrapId: "e2-t"
+  #
   bootstrapId: "e2-t"
 
   # NATS URL and PORT
@@ -76,8 +83,6 @@ e2t-sctp:
     port: "{{ .Values.global.natsPort }}"
 
   bootstrapId: "{{ .Values.global.bootstrapId }}"
-
-  appId: "e2-ap-1"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 

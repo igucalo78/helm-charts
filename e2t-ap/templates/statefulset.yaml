@@ -1,13 +1,14 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "five-g-appl.fullname" . }}
   labels:
     {{- include "five-g-appl.labels" . | nindent 4 }}
 spec:
-{{- if not .Values.autoscaling.enabled }}
+  serviceName: {{ include "five-g-appl.fullname" . }}-service
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ tpl .Values.numOfE2Nodes . }}
-{{- end }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "five-g-appl.selectorLabels" . | nindent 6 }}
@@ -50,7 +51,7 @@ spec:
             - "-c"
             - |
               /bin/sh <<'EOF'
-              {{ .Values.cmd }} {{- if .Values.args }}{{ range .Values.args }} {{ .name }} {{ .value }}{{ end }}{{- end }}
+              __APPID=e2-ap-${HOSTNAME##*-} {{ .Values.cmd }} {{- if .Values.args }}{{ range .Values.args }} {{ .name }} {{ .value }}{{ end }}{{- end }}
               EOF
           {{ end }}
           env:
@@ -64,8 +65,8 @@ spec:
               value: {{ tpl .Values.jaegerAgentHost . }}
             - name: __APPNAME
               value: e2Ap-{{ tpl .Values.appId . }}
-            - name: __APPID
-              value: {{ tpl .Values.appId . }}
+#            - name: __APPID
+#              value: {{ tpl .Values.appId . }}
             {{- if .Values.extraEnvs }}
             {{ toYaml .Values.extraEnvs | nindent 12 }}
             {{- end }}

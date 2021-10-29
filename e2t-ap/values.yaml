@@ -36,8 +36,6 @@ redisConfig:
 bootstrapId: "e2-t"
 bootstrapFile: /home/accelleran/5G/bootstrap.txt
 
-appId: "e2-ap-1"
-
 jaegerAgentHost: "ric-jaeger-agent"
 
 extraEnvs: []
