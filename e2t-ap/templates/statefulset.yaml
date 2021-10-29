@@ -40,9 +40,8 @@ spec:
             - "-c"
             - |
               /bin/bash <<'EOF'
-              sudo service ssh start
-              echo 'xapp:{{ .Values.developerMode.devPassword }}' | sudo chpasswd
-              git init /home/xapp/xapp-core
+              echo "export __APPID=e2-ap-${HOSTNAME##*-}" > /home/accelleran/5G/dev/environment.sh
+              chmod +x /home/accelleran/5G/dev/environment.sh
               while true; do sleep 30; done;
               EOF
           {{ else }}

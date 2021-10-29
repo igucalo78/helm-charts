@@ -10,6 +10,9 @@
 ### Added
   - Added StateFulSet type of resource for e2ap
   - Added __APPID setting from ordinal number of statefulset in e2ap
+  - Adding environment.sh to set __APPID in devMode in e2ap
+### Fixed
+  - Fixed devMode commands in e2ap
 ### Removed
   - Removed deployment type of resource from e2ap
   - Removed __APPID of e2ap from values
@@ -18,5 +21,9 @@
 
 {{ if index .Values "e2t-sctp" "enabled" }}## E2 Termination SCTP
 Node Port: {{ index .Values "e2t-sctp" "sctpService" "nodePort" }} {{ end }}
+
+# Info #######################################
+
+Number of supported E2 nodes: {{ .Values.global.numOfE2Nodes }}
 
 ###############################################

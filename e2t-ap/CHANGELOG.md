@@ -4,6 +4,9 @@
 ### Added
   - Added StateFulSet type of resource
   - Added __APPID setting from ordinal number of statefulset
+  - Adding environment.sh to set __APPID in devMode
+### Fixed
+  - Fixed devMode commands 
 ### Removed
   - Removed deployment type of resource
   - Removed __APPID from values
