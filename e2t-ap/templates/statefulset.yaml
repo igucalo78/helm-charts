@@ -65,8 +65,6 @@ spec:
               value: {{ tpl .Values.jaegerAgentHost . }}
             - name: __APPNAME
               value: e2Ap-{{ tpl .Values.appId . }}
-#            - name: __APPID
-#              value: {{ tpl .Values.appId . }}
             {{- if .Values.extraEnvs }}
             {{ toYaml .Values.extraEnvs | nindent 12 }}
             {{- end }}
