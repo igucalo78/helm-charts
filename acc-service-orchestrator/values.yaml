@@ -18,7 +18,7 @@ fullnameOverride: ""
 
 kubeIp: "10.55.1.2"
 
-default5gVersion: "3.0.0-rc5"
+default5gVersion: "3.0.0-rc6"
 defaultDevEnvVersion: "1"
 
 serviceAccount:
