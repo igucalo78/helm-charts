@@ -9,12 +9,23 @@
 ## RIC 4.0.0
 ### Added
   - Added version control for xApp Dev Env
+  - 5G CU: Intra gNB Intra-Frequency Handover: Completion of inter DU handover - implementation of full user plane handling: nrUpp switch to target ul/dl tnl info
+  - 5G CU: DNS support: Support in CU-CP and CU-UP, allowing addresses to be configured as Fully Qualified Domain Names: REDIS, NATS, NG link addresses and E1 link address towards CU-CP.
+  - 5G CU: E2KPI Service Model: "Support E2SmKpm v1.0 basic scenario's: subscriptions and indications"
 ### Changed
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-ae07c684
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-9561cc98
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
-  - Changed NKafka-5G to 0.6.10_proto.ae07c6842 to support new version of 5G CU
   - Changed Helm Repo URL for xApp Dev Env
 ### Fixed
+  - 5G CU: CU-CP controller:   UE connection not cleared in AMF at NgErrorIndication cause=semantic_error
+  - 5G CU: CU-CP controller:   Unnecessary error trace at valid race condition - activation attempt of cell and sctp association failure towards the cells DU
+  - 5G CU: CU-CP controller:	RRC Setup Request lost in CU-UP when all dsCtrls busy, no RRC Reject sent to UE
+  - 5G CU: CU-CP controller:	FQDN resolution failure of all AMF addresses should result in retry
+  - 5G CU: CU-CP controller:	regular expression issue in fqdn pattern
+  - 5G CU: CU-CP controller:	ErrorIndication in response to NgUeCtxtReleaseRequest should trigger UE RESET procedure
+  - 5G CU: CU-CP controller:	AvailablePlmnID list not included in F1 GnbCuConfigUpdate when one or more servedPlmns are not supported
+# Limitations
+  - 5G CU: Errors detected during execution of UE control procedure will trigger UE release - no support for rollback to previous configuration
 
 # Services #####################################
 {{ if index .Values "acc-kafka" "enabled" }}## Kafka
