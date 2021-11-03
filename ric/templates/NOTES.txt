@@ -10,9 +10,9 @@
 ### Added
   - Added version control for xApp Dev Env
 ### Changed
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-2fc276e4
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-ae07c684
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
-  - Changed NKafka-5G to 0.6.10_proto.2fc276e4d to support new version of 5G CU
+  - Changed NKafka-5G to 0.6.10_proto.ae07c6842 to support new version of 5G CU
   - Changed Helm Repo URL for xApp Dev Env
 ### Fixed
 
