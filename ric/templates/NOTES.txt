@@ -13,7 +13,7 @@
   - 5G CU: DNS support: Support in CU-CP and CU-UP, allowing addresses to be configured as Fully Qualified Domain Names: REDIS, NATS, NG link addresses and E1 link address towards CU-CP.
   - 5G CU: E2KPI Service Model: "Support E2SmKpm v1.0 basic scenario's: subscriptions and indications"
 ### Changed
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-9561cc98
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.2-chimay-f87340a
   - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
   - Changed Helm Repo URL for xApp Dev Env
 ### Fixed
