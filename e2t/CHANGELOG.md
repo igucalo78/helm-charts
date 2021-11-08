@@ -3,13 +3,13 @@
 ## 29.10.2021. - 1.0.0
 ### Added
   - Added StateFulSet type of resource for e2ap
-  - Added __APPID setting from ordinal number of statefulset in e2ap 
+  - Added __APPID setting from ordinal number of statefulset in e2ap
   - Adding environment.sh to set __APPID in devMode in e2ap
 ### Fixed
   - Fixed devMode commands in e2ap
 ### Removed
   - Removed deployment type of resource from e2ap
-  - Removed __APPID of e2ap from values 
+  - Removed __APPID of e2ap from values
 
 ## 27.10.2021. - 0.2.1
 ### Fixed

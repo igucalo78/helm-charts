@@ -50,6 +50,7 @@ spec:
             - "-c"
             - |
               /bin/sh <<'EOF'
+              echo e2-ap-${HOSTNAME##*-}
               __APPID=e2-ap-${HOSTNAME##*-} {{ .Values.cmd }} {{- if .Values.args }}{{ range .Values.args }} {{ .name }} {{ .value }}{{ end }}{{- end }}
               EOF
           {{ end }}
