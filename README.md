@@ -4,8 +4,8 @@
 
 | Name  | Chart Version  | App Version  | Description   |
 |--- |--- |--- |---  |   
-| acc-helm/drax                             |  3.0.1             |  3.0.1                             |  Accelleran 4G dRAX |  
-| acc-helm/ric                              |  3.0.1             |  3.0.1                             |  Accelleran dRAX RIC | 
+| acc-helm/drax                             |  4.0.0             |  4.0.0                             |  Accelleran 4G dRAX |  
+| acc-helm/ric                              |  4.0.0             |  4.0.0                             |  Accelleran dRAX RIC | 
 | acc-helm/nmock                            |  1.0.0             |  1.0.0                             |  Accelleran 4G and 5G Simulator | 
 
 NOTE: Please visit the subfolders in this repo to view the README of specific Helm Charts.
@@ -16,6 +16,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+# 4.0.0 - UNRELEASED
+### Added
+- ric [4.0.0]
+  - Added version control for xApp Dev env in Service Orchestrator
+  - 5G CU: Intra gNB Intra-Frequency Handover: Completion of inter DU handover - implementation of full user plane handling: nrUpp switch to target ul/dl tnl info
+  - 5G CU: DNS support: Support in CU-CP and CU-UP, allowing addresses to be configured as Fully Qualified Domain Names: REDIS, NATS, NG link addresses and E1 link address towards CU-CP.
+  - 5G CU: E2KPI Service Model: "Support E2SmKpm v1.0 basic scenario's: subscriptions and indications"
+### Updated
+- ric [4.0.0]
+  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-8b8d7f05
+  - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
+  - Changed NKafka-5G to 0.6.10_proto.8b8d7f056 to support new version of 5G CU
+  - Changed Helm Repo URL for xApp Dev Env
+- drax [4.0.0]
+  - Updated version to match ric
+### Fixed
+- ric [4.0.0]
+  - 5G CU: CU-CP controller:   UE connection not cleared in AMF at NgErrorIndication cause=semantic_error
+  - 5G CU: CU-CP controller:   Unnecessary error trace at valid race condition - activation attempt of cell and sctp association failure towards the cells DU
+  - 5G CU: CU-CP controller:	RRC Setup Request lost in CU-UP when all dsCtrls busy, no RRC Reject sent to UE
+  - 5G CU: CU-CP controller:	FQDN resolution failure of all AMF addresses should result in retry
+  - 5G CU: CU-CP controller:	regular expression issue in fqdn pattern
+  - 5G CU: CU-CP controller:	ErrorIndication in response to NgUeCtxtReleaseRequest should trigger UE RESET procedure
+  - 5G CU: CU-CP controller:	AvailablePlmnID list not included in F1 GnbCuConfigUpdate when one or more servedPlmns are not supported
+# Limitations
+  - 5G CU: Errors detected during execution of UE control procedure will trigger UE release - no support for rollback to previous configuration
+
 
 
 # 3.0.1 - 18.10.2021.

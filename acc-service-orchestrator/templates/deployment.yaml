@@ -38,6 +38,8 @@ spec:
               value: "{{ tpl .Values.kubeIp . }}"
             - name: DEFAULT_5G_VERSION
               value: "{{ tpl .Values.default5gVersion . }}"
+            - name: DEFAULT_DEV_ENV_VERSION
+              value: "{{ tpl .Values.defaultDevEnvVersion . }}"
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
