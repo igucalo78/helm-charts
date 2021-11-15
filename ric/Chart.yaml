@@ -40,7 +40,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled
-    version: 3.0.3
+    version: 3.0.4
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.43.0
