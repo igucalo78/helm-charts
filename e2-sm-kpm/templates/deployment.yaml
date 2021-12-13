@@ -39,9 +39,6 @@ spec:
             - "-c"
             - |
               /bin/bash <<'EOF'
-              sudo service ssh start
-              echo 'xapp:{{ .Values.developerMode.devPassword }}' | sudo chpasswd
-              git init /home/xapp/xapp-core
               while true; do sleep 30; done;
               EOF
           {{ else }}
@@ -86,7 +83,7 @@ spec:
               subPath: "bootstrap.txt"
             {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
             - name: dev-work-dir
-              mountPath: /tmp/e2t/
+              mountPath: /home/accelleran/5G/dev/
             {{ end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
