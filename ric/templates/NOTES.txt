@@ -6,6 +6,10 @@
 
 # Release Notes ###############################
 
+## RIC 4.1.0
+### Changed:
+  - Changed xApp Dev Env to new version 2 with xApp Library update
+
 ## RIC 4.0.1
 ### Fixed:
   - Fixed Service Orchestrator to issue Helm repo update before deploying xApp from remote repo
