@@ -6,12 +6,9 @@
 
 # Release Notes ###############################
 
-## dRAX 4.0.1:
-### Fixed
-  - The UeContextReleaseCommand for a non-existence is responded to with an ErrorIndication, even it the context has recently been released.
-  - The eNB cycles through a large number of ENB_S1AP_UE_IDs before reusing a recently freed one.
-  - The start CRNTI has been reduced from 64 to 61 to avoid the 65th attach crashing the system or causing high BLER.
-  - The sector based AdminState is used  for allowing sectors to be configured but not used. This means that for the single sector dRAX, the sector AdminState should always be set to unlocked. The eNB AdminState behaves the same as before and should be used for taking the cell on and off air. I would recommend only configuring the first sector in the cell list and have no more entries in that list, as you were doing before.
+## dRAX 4.1.0:
+### Changed
+  - Updated version to sync with RIC change
 
 # Services ####################################
 
