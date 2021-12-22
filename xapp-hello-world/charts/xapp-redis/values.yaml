@@ -45,7 +45,7 @@ service:
   type: ClusterIP
   #nodePort: 31802
   port: 6379
-  name: "redis"
+  name: "xapp-redis"
 
 ingress:
   enabled: false

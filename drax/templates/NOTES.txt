@@ -6,7 +6,7 @@
 
 # Release Notes ###############################
 
-## dRAX 4.0.0:
+## dRAX 4.1.0:
 ### Changed
   - Updated version to sync with RIC change
 

@@ -19,7 +19,7 @@ fullnameOverride: ""
 kubeIp: "10.55.1.2"
 
 default5gVersion: "3"
-defaultDevEnvVersion: "1"
+defaultDevEnvVersion: "2"
 
 serviceAccount:
   # Specifies whether a service account should be created

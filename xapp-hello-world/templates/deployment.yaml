@@ -21,32 +21,33 @@ spec:
       serviceAccountName: {{ include "xapp_core.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if or (.Values.xappEnpoints) (.Values.developerMode.enabled) }}
       initContainers:
+        {{ if .Values.xappEnpoints }}
+        {{ if .Values.xappEnpoints.REDIS_URL }}
         - name: {{ .Chart.Name }}-check-redis
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'until [ "$(redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
+          command: ['sh', '-c', 'until [ "$(redis-cli -u {{ tpl .Values.xappEnpoints.REDIS_URL . }} ping)" == "PONG" ]; do echo $(date) [CHECK-SERVICES] Waiting for REDIS; sleep 2; done; echo Redis online']
+        {{ end }}
+        {{ end }}
+        {{ if .Values.xappEnpoints }}
         {{ if .Values.xappFrameworkConfig.flushOnDeployment }}
         - name: {{ .Chart.Name }}-flush-redis
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'redis-cli -h {{ tpl .Values.xappFrameworkConfig.redisUrl . }} FLUSHALL']
+          command: ['sh', '-c', 'redis-cli -u {{ tpl .Values.xappEnpoints.REDIS_URL . }} FLUSHALL']
         {{ end }}
+        {{ end }}
+        {{ if .Values.xappEnpoints }}
+        {{ if .Values.xappEnpoints.KAFKA_URL }}
         - name: {{ .Chart.Name }}-check-kafka
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
-          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.initConfig.kafkaUrl . }}\"" > kafka_url.py && python3 kafka-test.py']
-        - name: {{ .Chart.Name }}-init-xapp
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash", "-c"]
-          args: ["python3 init_xapp.py"]
-          volumeMounts:
-            - name: {{ include "xapp_core.fullname" . }}-config
-              mountPath: /home/xapp/xapp-core/xapp_configuration.json
-              subPath: "xapp_configuration.json"
+          command: ['sh', '-c', 'echo "KAFKA_URL=\"{{ tpl .Values.xappEnpoints.KAFKA_URL . | trimPrefix "kafka://" }}\"" > kafka_url.py && python3 kafka-test.py']
+        {{ end }}
+        {{ end }}
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -61,7 +62,7 @@ spec:
               /bin/bash <<'EOF'
               sudo service ssh start
               echo 'xapp:{{ .Values.developerMode.devPassword }}' | sudo chpasswd
-              git init /home/xapp/xapp-core
+              git init /home/xapp/core/
               while true; do sleep 30; done;
               EOF
           {{ else }}
@@ -71,11 +72,14 @@ spec:
           volumeMounts:
             {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
             - name: dev-work-dir
-              mountPath: /home/xapp/xapp-core/
+              mountPath: /home/xapp/dev/
             {{ end }}
-            - name: {{ include "xapp_core.fullname" . }}-config
-              mountPath: /home/xapp/xapp-core/xapp_configuration.json
-              subPath: "xapp_configuration.json"
+            - name: {{ include "xapp_core.fullname" . }}-xapp-config
+              mountPath: /home/xapp/config/xapp_config.json
+              subPath: "xapp_config.json"
+            - name: {{ include "xapp_core.fullname" . }}-xapp-endpoints
+              mountPath: /home/xapp/config/xapp_endpoints.json
+              subPath: "xapp_endpoints.json"
           ports:
             - containerPort: {{ .Values.restService.port }}
             {{ if .Values.developerMode.enabled }}
@@ -109,9 +113,13 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: {{ include "xapp_core.fullname" . }}-config
+        - name: {{ include "xapp_core.fullname" . }}-xapp-config
           configMap:
-            name: {{ include "xapp_core.fullname" . }}-config
+            name: {{ include "xapp_core.fullname" . }}-xapp-config
+
+        - name: {{ include "xapp_core.fullname" . }}-xapp-endpoints
+          configMap:
+            name: {{ include "xapp_core.fullname" . }}-xapp-endpoints
 
         {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
         - name: dev-work-dir
