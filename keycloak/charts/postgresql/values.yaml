@@ -33,6 +33,15 @@ image:
   ##
   debug: false
 
+postDeleteJob:
+  image: accelleran/acc-generic-img:latest
+  pullPolicy: IfNotPresent
+
+draxNodeSelectorEnabled: "false"
+
+draxNodeSelector:
+  draxName: "main"
+
 ## String to partially override common.names.fullname template (will maintain the release name)
 ##
 # nameOverride:
