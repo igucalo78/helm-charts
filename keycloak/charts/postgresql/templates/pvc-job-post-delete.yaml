@@ -28,7 +28,7 @@ spec:
         - "delete"
         - "pvc"
         - "-l"
-        - "app.kubernetes.io/name={{ template "postgresql.primary.fullname" . }}"
+        - "app.kubernetes.io/instance={{ .Release.Name }}"
       serviceAccountName: {{ template "postgresql.primary.fullname" . }}-pvc-deleter-sa
       securityContext:
         runAsUser: 0
