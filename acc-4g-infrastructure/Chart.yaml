@@ -1,6 +1,6 @@
 apiVersion: v2
-name: drax
-description: All in one Accelleran dRAX
+name: acc-4g-infrastructure
+description: Accelleran dRAX 4G Infrastructure
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 4.1.0
+version: 5.0.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 4.1.0
+appVersion: 5.0.0
 
 # Dependencies
 dependencies:
