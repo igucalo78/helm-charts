@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 5.0.0-rc2
+version: 5.0.0-rc3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 5.0.0-rc2
+appVersion: 5.0.0-rc3
 
 # Dependencies
 dependencies:
@@ -36,7 +36,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
-    version: 3.4.3
+    version: 3.4.4
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled

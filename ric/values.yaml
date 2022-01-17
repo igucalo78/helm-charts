@@ -501,7 +501,8 @@ acc-5g-infrastructure:
             - 10.55.1.20-10.55.1.60
 
   jaeger:
-    enabled: true
+    # For tracing purposes
+    enabled: false
 
 nkafka-5g:
   accelleranLicense:
