@@ -11,6 +11,7 @@
 
 ### Changed
   - Updated 5G Health dashboard to align with 5G CU version 4.0.0
+  - Updated to use 5G CU version 4 as default
 
 ### Fixed
   - Fixed 5G Health dashboard to properly filter pods
