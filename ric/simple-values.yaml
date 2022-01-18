@@ -1,0 +1,32 @@
+global:
+  kubeIp: "172.31.36.102"
+  enable4G: true
+  enable5G: true
+dash-front-back-end:
+  config:
+    grafanaURL: "52.47.112.227"
+    nodeApiURL: "52.47.112.227"
+    apiUrl: "52.47.112.227"
+acc-5g-infrastructure:
+  metallb:
+    configInline:
+      address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+            - 10.55.1.20-10.55.1.60
+  jaeger:
+    enabled: true
+nkafka-5g:
+  configs:
+    logLevel: debug
+
+acc-sys-dashboard:
+  metrics-server:
+    enabled: false
+  prometheus:
+    enabled: false
+  kube-eagle:
+    enabled: false
+  grafana:
+    enabled: true

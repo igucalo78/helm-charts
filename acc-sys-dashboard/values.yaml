@@ -1,1 +1,8 @@
-
+metrics-server:
+  enabled: false
+prometheus:
+  enabled: false
+kube-eagle:
+  enabled: false
+grafana:
+  enabled: true

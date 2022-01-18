@@ -120,6 +120,7 @@ nkafka-4g:
 acc-sys-dashboard:
   enabled: true
   grafana:
+    enabled: false
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
@@ -135,6 +136,7 @@ acc-sys-dashboard:
       influxdbUrl: http://{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086
 
   prometheus:
+    enabled: false
     alertmanager:
       draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
       draxNodeSelector:
@@ -178,16 +180,16 @@ acc-sys-dashboard:
             - "ric-nats-5g:7777"
 
   kube-eagle:
+    enabled: false
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
 
   metrics-server:
+    enabled: false
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
-
-
 
 loki-stack:
   fluent-bit:
