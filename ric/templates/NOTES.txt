@@ -8,7 +8,7 @@
 
 ## RIC 5.0.0
 ### Added
-  - Adding Accelleran 4G Infrastructure as sub helm chart, enabled with the global.enable4G value
+  - Adding Accelleran 4G Infrastructure as sub helm chart, enabled with the global.enable4G value (previously known as drax helm chart)
 
 ### Changed
   - Updated 5G Health dashboard to align with 5G CU version 4.0.0
@@ -16,6 +16,7 @@
 
 ### Fixed
   - Fixed 5G Health dashboard to properly filter pods
+  - Fixed explanation of Disk Space in Health Dashboard in Grafana, it refers to the capacity not current usage
 
 # Limitations
 
