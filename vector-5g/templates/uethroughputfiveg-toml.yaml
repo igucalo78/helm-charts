@@ -49,7 +49,7 @@ data:
               ueId = "",
               measurement = {}
              }
-        if event.log.PmReportingCountersListData.items ~= nil and event.log.PmReportingCountersListData.nbrOfItems>0 then
+        if event.log.PmReportingCountersListData.items ~= nil
           for k, v in pairs(event.log.PmReportingCountersListData.items) do
             temp = m
             if v.CounterId == "UL_GTP_THP_SAMPLES" then
