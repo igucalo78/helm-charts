@@ -41,7 +41,7 @@ spec:
             - sh
             - "-c"
             - |
-              /bin/bash <<'EOF'
+              /bin/sh <<'EOF'
               echo "vector -c uemeasurementsfiveg.toml -c uethroughputfiveg.toml" > /influx/manual-start.sh
               chmod +x /influx/manual-start.sh
               while true; do sleep 30; done;
