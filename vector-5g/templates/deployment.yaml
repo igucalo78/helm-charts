@@ -36,7 +36,19 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if .Values.developerMode.enabled }}
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              echo "vector -c uemeasurementsfiveg.toml -c uethroughputfiveg.toml" > /influx/manual-start.sh
+              chmod +x /influx/manual-start.sh
+              while true; do sleep 30; done;
+              EOF
+          {{ else }}
           command: ["vector", "-c", "uemeasurementsfiveg.toml", "-c", "uethroughputfiveg.toml" ]
+          {{ end }}
           volumeMounts:
             - name: uemeasurementsfiveg-toml
               mountPath: /influx/uemeasurementsfiveg.toml

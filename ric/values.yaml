@@ -399,6 +399,9 @@ vectorfiveg:
     kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
     influxdbService: "{{ .Release.Name }}-influxdb-api.{{ .Release.Namespace }}:8086"
 
+  developerMode:
+    enabled: false
+
 acc-fiveg-pmcounters:
   enabled: true
 
