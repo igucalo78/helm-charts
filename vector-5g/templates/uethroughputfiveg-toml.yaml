@@ -21,12 +21,12 @@ data:
       # General
       type = "filter"
       inputs = ["parseJsonUeThroughput"]
-      condition."PmReportingCountersListData.exists" = true
+      condition."PmReportingCuupCounterData.exists" = true
 
     [transforms.parseUeThroughput]
       inputs = ["filterUeThroughput"]
       type   = "json_parser"
-      field  = "PmReportingCountersListData"
+      field  = "PmReportingCuupCounterData"
       drop_field = false # optional, default
       drop_invalid = true
 
@@ -49,25 +49,23 @@ data:
               ueId = "",
               measurement = {}
              }
-        if event.log.PmReportingCountersListData.items ~= nil
-          for k, v in pairs(event.log.PmReportingCountersListData.items) do
-            temp = m
-            if v.CounterId == "UL_GTP_THP_SAMPLES" then
-              temp.log.measurement.ulGtpThpSamples = event.log.PmReportingCountersListData.items[k].ValueList.items["0"]
+        if event.log.PmReportingCuupCounterData.CounterList ~= nil then      
+            if event.log.PmReportingCuupCounterData.CounterList.items ~= nil then
+              for k, v in pairs(event.log.PmReportingCuupCounterData.CounterList.items) do
+                temp = m
+                temp.log.measurement.dlGtpThp = 0
+                temp.log.measurement.ulGtpThp = 0
+                if v.CounterId == "DL_GTP_THP" then
+                  temp.log.measurement.dlGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val
+                end
+                if v.CounterId == "UL_GTP_THP" then
+                  temp.log.measurement.ulGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val
+                end
+                temp.log.ueId = event.log.PmReportingCuupCounterData.CounterList.items[k].InstanceId
+                temp.log.cuupId = event.log.topic:match("[^.]*")
+                emit(temp)
+              end
             end
-            if v.CounterId == "DL_GTP_THP_SAMPLES" then
-              temp.log.measurement.dlGtpThpSamples = event.log.PmReportingCountersListData.items[k].ValueList.items["0"]
-            end
-            if v.CounterId == "DL_GTP_THP" then
-              temp.log.measurement.dlGtpThp = event.log.PmReportingCountersListData.items[k].ValueList.items["0"]
-            end
-            if v.CounterId == "UL_GTP_THP" then
-              temp.log.measurement.ulGtpThp = event.log.PmReportingCountersListData.items[k].ValueList.items["0"]
-            end
-            temp.log.ueId = event.log.PmReportingCountersListData.items[k].InstanceId
-            temp.log.cuupId = event.log.topic:match("[^.]*")
-          end
-          emit(temp)
         end
       end
       """
@@ -83,6 +81,5 @@ data:
       type = "{{ .Values.config.influx.type }}"
       username = "{{ .Values.config.influx.username }}"
       password = "{{ .Values.config.influx.password }}"
-
 
 
