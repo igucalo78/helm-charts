@@ -157,6 +157,7 @@ acc-sys-dashboard:
 
     extraScrapeConfigs: |
       - job_name: 5gPmCountersXapp
+        scrape_interval: 2s
         static_configs:
           - targets:
             - "{{ .Values.global.kubeIp }}:30515"
@@ -282,7 +283,7 @@ acc-service-orchestrator:
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
 
-  kubeIp: '{{ .Values.global.kubeIp }}'
+  kubeIp: "{{ .Values.global.kubeIp }}"
 
 acc-state-db:
   # Enable/disable installation of the State DB
@@ -423,23 +424,6 @@ acc-fiveg-pmcounters:
     - name: 'KAFKA_PORT'
       type: string
       value: '31090'
-
-  xappConfig:
-    - name: 'LOG_LEVEL'
-      type: int
-      value: 20
-    - name: 'PM_COUNTER_TOPIC'
-      type: string
-      value: 'accelleran.drax.5g.ric.raw.pm_counters'
-    - name: 'PROCESSED_PM_COUNTER_TOPIC'
-      type: string
-      value: 'accelleran.drax.5g.ric.processed.pm_counters'
-    - name: 'split_message'
-      type: string
-      value: 'True'
-    - name: 'publish_original_message'
-      type: string
-      value: 'True'
 
 acc-5g-infrastructure:
   nats:

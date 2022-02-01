@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 5.0.0-rc12
+version: 5.0.0-rc13
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 5.0.0-rc12
+appVersion: 5.0.0-rc13
 
 # Dependencies
 dependencies:
@@ -36,11 +36,11 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
-    version: 3.4.5
+    version: 3.4.6
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled
-    version: 4.0.0-rc8
+    version: 4.0.0-rc9
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.43.0
@@ -67,11 +67,11 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: vectorfiveg
     condition: vectorfiveg.enabled
-    version: 0.6.0-rc2
+    version: 0.6.0-rc3
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
-    version: 0.4.1
+    version: 0.5.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-5g-infrastructure
     condition: global.enable5G
@@ -85,8 +85,3 @@ dependencies:
     condition: global.enable4G
     version: 5.0.0
     repository: https://accelleran.github.io/helm-charts/
-
-
-
-
-
