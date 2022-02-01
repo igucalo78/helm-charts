@@ -53,13 +53,13 @@ data:
             if event.log.PmReportingCuupCounterData.CounterList.items ~= nil then
               for k, v in pairs(event.log.PmReportingCuupCounterData.CounterList.items) do
                 temp = m
-                temp.log.measurement.dlGtpThp = 0
-                temp.log.measurement.ulGtpThp = 0
+                temp.log.measurement.dlGtpThp = 0.0
+                temp.log.measurement.ulGtpThp = 0.0
                 if v.CounterId == "DL_GTP_THP" then
-                  temp.log.measurement.dlGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val
+                  temp.log.measurement.dlGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
                 end
                 if v.CounterId == "UL_GTP_THP" then
-                  temp.log.measurement.ulGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val
+                  temp.log.measurement.ulGtpThp = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
                 end
                 temp.log.ueId = event.log.PmReportingCuupCounterData.CounterList.items[k].InstanceId
                 temp.log.cuupId = event.log.topic:match("[^.]*")
