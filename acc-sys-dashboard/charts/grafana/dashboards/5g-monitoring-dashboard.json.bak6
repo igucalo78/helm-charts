@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1643796922144,
+  "iteration": 1643635360929,
   "links": [],
   "panels": [
     {
@@ -100,7 +100,7 @@
             [
               {
                 "params": [
-                  "measurement.dlGtpThroughput"
+                  "measurement.dlGtpThp"
                 ],
                 "type": "field"
               },
@@ -532,7 +532,7 @@
             [
               {
                 "params": [
-                  "measurement.ulGtpThroughput"
+                  "measurement.ulGtpThp"
                 ],
                 "type": "field"
               },
@@ -915,7 +915,6 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB-5G",
-        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -942,7 +941,6 @@
           "value": "$__all"
         },
         "datasource": "InfluxDB-5G",
-        "definition": "",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -985,5 +983,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 4
+  "version": 1
 }
