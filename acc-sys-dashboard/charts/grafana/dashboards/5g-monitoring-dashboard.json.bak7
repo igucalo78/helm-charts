@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1643902880380,
+  "iteration": 1643796922144,
   "links": [],
   "panels": [
     {
@@ -129,7 +129,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "DL Throughput per UE (NG-U interface)",
+      "title": "DL Throughput per UE",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -561,7 +561,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "UL Throughput per UE (NG-U interface)",
+      "title": "UL Throughput per UE",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -985,5 +985,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 5
+  "version": 4
 }
