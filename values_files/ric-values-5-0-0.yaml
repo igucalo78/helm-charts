@@ -24,7 +24,7 @@ nkafka-5g:
 acc-4g-infrastructure:
   provisioner-dhcp:
     configuration:
-      interface: eth0
+      interface: eno1
   configurator:
     enabled: false
 
