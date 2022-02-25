@@ -280,7 +280,7 @@ acc-service-orchestrator:
   kubeIp: "{{ .Values.global.kubeIp }}"
 
   # TEMPORARY FOR RC, REMOVE FOR PROPER RELEASE
-  default5gVersion: "4.0.0-rc14"
+  default5gVersion: "4.0.0-rc15"
 
 acc-state-db:
   # Enable/disable installation of the State DB
