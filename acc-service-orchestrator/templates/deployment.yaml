@@ -57,6 +57,10 @@ spec:
           volumeMounts:
             - name: dockersock
               mountPath: "/var/run/docker.sock"
+              subPath: "docker.sock"
+            - name: dockerbin
+              mountPath: "/usr/bin/docker"
+              subPath: "docker"
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
         {{ if .Values.nodeSelector }}
@@ -78,3 +82,6 @@ spec:
         - name: dockersock
           hostPath:
             path: /var/run/docker.sock
+        - name: dockerbin
+          hostPath:
+            path: /usr/bin/docker
