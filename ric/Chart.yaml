@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 5.0.0-rc19
+version: 5.0.0-rc20
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 5.0.0-rc19
+appVersion: 5.0.0-rc20
 
 # Dependencies
 dependencies:
@@ -79,7 +79,7 @@ dependencies:
     repository: https://accelleran.github.io/5g-helm-charts
   - name: nkafka-5g
     condition: global.enable5G
-    version: 4.0.0-rc3
+    version: 4.0.0-rc4
     repository: https://accelleran.github.io/5g-helm-charts
   - name: acc-4g-infrastructure
     condition: global.enable4G
