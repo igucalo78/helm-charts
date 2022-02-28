@@ -55,8 +55,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: dockersock
-              mountPath: "/var/run/docker.sock"
             - name: dockerbin
               mountPath: "/usr/bin/docker"
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
@@ -77,9 +75,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        - name: dockersock
-          hostPath:
-            path: /var/run/docker.sock
         - name: dockerbin
           hostPath:
             path: /usr/bin/docker
