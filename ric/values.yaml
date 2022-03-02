@@ -486,7 +486,7 @@ acc-5g-infrastructure:
 
   jaeger:
     # For tracing purposes
-    enabled: false
+    enabled: true
 
 nkafka-5g:
   accelleranLicense:
