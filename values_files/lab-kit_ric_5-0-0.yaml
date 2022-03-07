@@ -1,0 +1,66 @@
+global:
+  # Set the Kubernetes Advertise IP
+  kubeIp: "10.55.1.2"
+
+  # Enable or disable 4G and/or 5G components
+  enable4G: true
+  enable5G: true
+
+# ONLY IF ACCESS FROM PUBLIC IP IS NEEDED!
+# Set the following three fields to the public IP where the Kubernetes API is reachable
+#dash-front-back-end:
+#  config:
+#    grafanaURL: ""
+#    nodeApiURL: ""
+#    apiUrl: ""
+
+# ONLY IF enable5g FROM global IS SET TO TRUE!
+# Set the IP pool which is used for 5G specific interfaces such as E1, F1 and GTP
+acc-5g-infrastructure:
+  metallb:
+    configInline:
+      address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+            - 10.55.1.20-10.55.1.60
+
+  # Enable or disable Jaeger for tracing
+  jaeger:
+    enabled: true
+
+# ONLY IF enable5g FROM global IS SET TO TRUE!
+nkafka-5g:
+  configs:
+    # Set the log level, debug for more output in case of developing or testing
+    logLevel: debug
+
+# ONLY IF enable4g FROM global IS SET TO TRUE!
+acc-4g-infrastructure:
+  # Enable or disable the provisioner-dhcp component
+  provisioner-dhcp:
+    enabled: true
+    configuration:
+      # Specify the interface on the Kubernetes Node which is used for the Kubernetes API (usually the interface where the kubeIP from global is set
+      interface: eno1
+  # Enable of disable the provisioner
+  provisioner:
+    enabled: true
+  # Enable or disable auto-provisioning of 4G E100 small cells on deployment
+  configurator:
+    enabled: true
+    provisioner:
+      enabled: true
+      # Fill in with serial:instanceID of all the 4G E1000 small cells
+      cells:
+        E1010-GC01-ACC171109000105: Warehouse
+        E1010-GC01-ACC171109000088: Production2
+        E1011-GC01-ACC170620000069: Marnixplaats
+        E1010-GC01-ACC171109000029: Production1
+  4g-radio-controller:
+    jobs:
+      netconfConfig:
+        # Enable or disable autoconfiguration of the 4GRC
+        enabled: true
+        # If you wish to clear any existing 4GRC configuration in Redis from a previous installation, set this to true
+        deleteExistingConfig: false
