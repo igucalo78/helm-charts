@@ -18,7 +18,7 @@ fullnameOverride: ""
 
 kubeIp: "10.55.1.2"
 
-default5gVersion: "4.0.0-rc14"
+default5gVersion: "4"
 defaultDevEnvVersion: "2"
 
 serviceAccount:
@@ -96,3 +96,7 @@ draxNodeSelector:
 tolerations: []
 
 affinity: {}
+
+developerMode:
+  enabled: false
+  hostPath: ""
