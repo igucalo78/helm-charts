@@ -1,0 +1,11 @@
+# If you want to test the 4G software new build, manually specify the tag of the build in teh following three fields
+acc-4g-infrastructure:
+  acc-l2-update:
+    # Set manually the build version of 4G
+    version: ""
+  4g-radio-controller:
+    # Set manually the build version of 4G
+    version: ""
+    config:
+      # Set manually the build version of 4G
+      l3Version: ""
