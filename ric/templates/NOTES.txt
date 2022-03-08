@@ -6,34 +6,23 @@
 
 # Release Notes ###############################
 
-## RIC 4.1.0
-### Changed:
-  - Changed xApp Dev Env to new version 2 with xApp Library update
-
-## RIC 4.0.1
-### Fixed:
-  - Fixed Service Orchestrator to issue Helm repo update before deploying xApp from remote repo
-
-## RIC 4.0.0
+## RIC 5.0.0
 ### Added
-  - Added version control for xApp Dev Env
-  - 5G CU: Intra gNB Intra-Frequency Handover: Completion of inter DU handover - implementation of full user plane handling: nrUpp switch to target ul/dl tnl info
-  - 5G CU: DNS support: Support in CU-CP and CU-UP, allowing addresses to be configured as Fully Qualified Domain Names: REDIS, NATS, NG link addresses and E1 link address towards CU-CP.
-  - 5G CU: E2KPI Service Model: "Support E2SmKpm v1.0 basic scenario's: subscriptions and indications"
+  - Adding Accelleran 4G Infrastructure as sub helm chart, enabled with the global.enable4G value (previously known as drax helm chart)
+
 ### Changed
-  - Changed default 5G CU version to 3.0.0, corresponding to release-2.3-duvel-8b8d7f05
-  - Changed dRAX Dashboard to support MOCN for 5G CU-CP configuration and setting of default AMF per operator
-  - Changed Helm Repo URL for xApp Dev Env
+  - Updated 5G Health dashboard to align with 5G CU version 4.0.0
+  - Updated to use 5G CU version 4 as default
+  - Updated Dashboard parsing of new 5G Beacon message format
+  - Updated 5G PM counters parse chain for new format
+
 ### Fixed
-  - 5G CU: CU-CP controller:   UE connection not cleared in AMF at NgErrorIndication cause=semantic_error
-  - 5G CU: CU-CP controller:   Unnecessary error trace at valid race condition - activation attempt of cell and sctp association failure towards the cells DU
-  - 5G CU: CU-CP controller:	RRC Setup Request lost in CU-UP when all dsCtrls busy, no RRC Reject sent to UE
-  - 5G CU: CU-CP controller:	FQDN resolution failure of all AMF addresses should result in retry
-  - 5G CU: CU-CP controller:	regular expression issue in fqdn pattern
-  - 5G CU: CU-CP controller:	ErrorIndication in response to NgUeCtxtReleaseRequest should trigger UE RESET procedure
-  - 5G CU: CU-CP controller:	AvailablePlmnID list not included in F1 GnbCuConfigUpdate when one or more servedPlmns are not supported
+  - Fixed 5G Health dashboard to properly filter pods
+  - Fixed explanation of Disk Space in Health Dashboard in Grafana, it refers to the capacity not current usage
+  - Fixed bug when enable4g was set to false, it would disable 5G components on the dashboard as well
+
 # Limitations
-  - 5G CU: Errors detected during execution of UE control procedure will trigger UE release - no support for rollback to previous configuration
+
 
 # Services #####################################
 {{ if index .Values "acc-kafka" "enabled" }}## Kafka
@@ -47,5 +36,12 @@
 
 {{ if index .Values "acc-sys-dashboard" "enabled" }}## Grafana
 {{ .Values.global.kubeIp }}:{{ index .Values "acc-sys-dashboard" "grafana" "service" "nodePort" }} {{ end }}
+
+{{ if .Values.global.enable4G }}### Accelleran 4G Infrastcuture ###
+{{ if index .Values "acc-4g-infrastructure" "acc-l2-update" "enabled" }}## E1000 Layer 2 Update Server
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-4g-infrastructure" "acc-l2-update" "service" "nodePort" }} {{ end }}
+
+{{ if index .Values "acc-4g-infrastructure" "provisioner" "enabled" }}## 4G dRAX Provisioner
+{{ .Values.global.kubeIp }}:{{ index .Values "acc-4g-infrastructure" "provisioner" "nginx" "service" "nodePort" }}{{ end }}{{ end }}
 
 ###############################################

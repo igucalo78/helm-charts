@@ -29,6 +29,8 @@ data:
       name: Prometheus
       type: prometheus
       url: {{ tpl .Values.datasources.prometheusUrl . }}
+      jsonData:
+        timeInterval: 2s
     - access: proxy
       isDefault: false
       name: Loki

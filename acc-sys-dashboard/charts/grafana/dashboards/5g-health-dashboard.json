@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1630327128992,
+  "iteration": 1642427500204,
   "links": [],
   "panels": [
     {
@@ -329,6 +329,7 @@
       },
       "styles": [
         {
+          "$$hashKey": "object:538",
           "alias": "",
           "align": "right",
           "colorMode": null,
@@ -344,6 +345,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:539",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -361,6 +363,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:540",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -378,6 +381,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:541",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -395,6 +399,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:542",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -412,6 +417,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:543",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -429,6 +435,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:544",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -446,6 +453,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:545",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -463,6 +471,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:546",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -480,6 +489,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:547",
           "alias": "Package",
           "align": "auto",
           "colorMode": null,
@@ -497,6 +507,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:548",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -514,6 +525,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:549",
           "alias": "Pod",
           "align": "auto",
           "colorMode": null,
@@ -531,6 +543,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:550",
           "alias": "Status",
           "align": "auto",
           "colorMode": null,
@@ -550,20 +563,24 @@
           "unit": "short",
           "valueMaps": [
             {
+              "$$hashKey": "object:699",
               "text": "Crash",
               "value": "null"
             },
             {
+              "$$hashKey": "object:700",
               "text": "Crash",
               "value": "Null"
             },
             {
+              "$$hashKey": "object:701",
               "text": "Crash",
               "value": "None"
             }
           ]
         },
         {
+          "$$hashKey": "object:551",
           "alias": "Namespace",
           "align": "auto",
           "colorMode": null,
@@ -581,6 +598,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:552",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -598,6 +616,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:553",
           "alias": "Node",
           "align": "auto",
           "colorMode": null,
@@ -615,6 +634,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:554",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -632,6 +652,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:555",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -649,6 +670,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:556",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -666,6 +688,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:557",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -683,6 +706,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:558",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -700,6 +724,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:559",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -717,6 +742,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:560",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -734,6 +760,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:561",
           "alias": "",
           "align": "auto",
           "colorMode": null,
@@ -753,16 +780,12 @@
       ],
       "targets": [
         {
-          "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\"} == 1",
+          "expr": "kube_pod_status_phase{phase!=\"Running\",phase!=\"Succeeded\",pod=~\".*5g.*\"} == 1",
           "format": "table",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
-        },
-        {
-          "expr": "kube_pod_container_status_waiting == 1",
-          "format": "table",
-          "instant": true,
-          "refId": "B"
         }
       ],
       "timeFrom": null,
@@ -1022,6 +1045,8 @@
         {
           "expr": "sum(kube_pod_container_status_waiting{pod=~\"$Pod\"})",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1168,7 +1193,7 @@
       "pluginVersion": "7.3.7",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_status_running{pod=~\".*cu-up.*\",container=\"cu-up\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*cu-up.*\", container=\"e1-sctp-up\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1509,6 +1534,70 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Number of supported AMFs",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 15,
+        "y": 12
+      },
+      "id": 114,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "first"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*cu-up.*\",container=~\"cu-up-+[0-9]*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Number of supported UP Stacks",
       "type": "stat"
     },
     {
@@ -2809,12 +2898,12 @@
               "value": "0"
             },
             {
-              "from": "",
+              "from": "1",
               "id": 2,
               "operator": "",
               "text": "ON",
               "to": "",
-              "type": 1,
+              "type": 2,
               "value": "1"
             }
           ],
@@ -2861,7 +2950,7 @@
       "pluginVersion": "7.3.7",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_status_running{pod=~\".*cu-up.*\",container=\"cu-up\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
+          "expr": "sum(kube_pod_container_status_running{pod=~\".*cu-up.*\", container=~\"cu-up-+[0-9]*\"}) or kube_pod_container_status_running{pod=~\"kube-apiserver-.*\"}-1",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -3123,7 +3212,7 @@
       "type": "stat"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "datasource": null,
       "gridPos": {
         "h": 1,
@@ -3132,211 +3221,210 @@
         "y": 27
       },
       "id": 63,
-      "panels": [
-        {
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {},
-              "decimals": 1,
-              "mappings": [],
-              "max": 1,
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "yellow",
-                    "value": 0.7
-                  },
-                  {
-                    "color": "red",
-                    "value": 0.9
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 9,
-            "x": 0,
-            "y": 11
-          },
-          "id": 40,
-          "interval": "",
-          "options": {
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true
-          },
-          "pluginVersion": "7.3.7",
-          "targets": [
-            {
-              "expr": "sum(eagle_node_resource_usage_memory_bytes)/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
-              "instant": false,
-              "legendFormat": "Total RAM Usage",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
-              "instant": false,
-              "legendFormat": "Node RAM Usage",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
-              "instant": false,
-              "legendFormat": "Pod RAM Usage",
-              "refId": "C"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
-              "instant": false,
-              "legendFormat": "Container RAM Usage",
-              "refId": "D"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "RAM Usage",
-          "type": "gauge"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 15,
-            "x": 9,
-            "y": 11
-          },
-          "hiddenSeries": false,
-          "id": 39,
-          "interval": "",
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.3.7",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
-              "legendFormat": "Allocatable RAM",
-              "refId": "B"
-            },
-            {
-              "expr": "sum(eagle_node_resource_usage_memory_bytes{node=~\"$Node\"})",
-              "legendFormat": "Total RAM Usage",
-              "refId": "A"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})",
-              "legendFormat": "Node RAM Usage",
-              "refId": "C"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})",
-              "legendFormat": "Pod RAM Usage",
-              "refId": "D"
-            },
-            {
-              "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})",
-              "legendFormat": "Container RAM Usage",
-              "refId": "E"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "RAM Usage History",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        }
-      ],
+      "panels": [],
       "title": "RAM Information",
       "type": "row"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "decimals": 1,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 28
+      },
+      "id": 40,
+      "interval": "",
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.7",
+      "targets": [
+        {
+          "expr": "sum(eagle_node_resource_usage_memory_bytes)/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+          "instant": false,
+          "legendFormat": "Total RAM Usage",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+          "instant": false,
+          "legendFormat": "Node RAM Usage",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+          "instant": false,
+          "legendFormat": "Pod RAM Usage",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})/sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+          "instant": false,
+          "legendFormat": "Container RAM Usage",
+          "refId": "D"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RAM Usage",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 28
+      },
+      "hiddenSeries": false,
+      "id": 39,
+      "interval": "",
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.7",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(eagle_node_resource_allocatable_memory_bytes{node=~\"$Node\"})",
+          "legendFormat": "Allocatable RAM",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(eagle_node_resource_usage_memory_bytes{node=~\"$Node\"})",
+          "legendFormat": "Total RAM Usage",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\"})",
+          "legendFormat": "Node RAM Usage",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\"})",
+          "legendFormat": "Pod RAM Usage",
+          "refId": "D"
+        },
+        {
+          "expr": "sum(eagle_pod_container_resource_usage_memory_bytes{node=~\"$Node\", pod=~\"$Pod\", container=~\"$Container\"})",
+          "legendFormat": "Container RAM Usage",
+          "refId": "E"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "RAM Usage History",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "collapsed": true,
@@ -3345,7 +3433,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 35
       },
       "id": 31,
       "panels": [
@@ -3601,7 +3689,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 36
       },
       "id": 15,
       "panels": [
@@ -3846,7 +3934,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 37
       },
       "id": 7,
       "panels": [],
@@ -3892,9 +3980,10 @@
         "useTags": false
       },
       {
-        "allValue": ".*",
+        "allValue": ".*5g.*",
         "current": {
           "selected": true,
+          "tags": [],
           "text": [
             "All"
           ],
@@ -3903,7 +3992,7 @@
           ]
         },
         "datasource": "Prometheus",
-        "definition": "label_values(kube_pod_info{node=~\"^$Node$\", pod=~\".*acc-fiveg.*\"}, pod)",
+        "definition": "label_values(kube_pod_info{node=~\"^$Node$\", pod=~\".*5g.*\"}, pod)",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -3911,7 +4000,7 @@
         "multi": true,
         "name": "Pod",
         "options": [],
-        "query": "label_values(kube_pod_info{node=~\"^$Node$\", pod=~\".*acc-fiveg.*\"}, pod)",
+        "query": "label_values(kube_pod_info{node=~\"^$Node$\", pod=~\".*5g.*\"}, pod)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -4008,5 +4097,5 @@
   "timezone": "",
   "title": "Accelleran dRAX 5G System Dashboard",
   "uid": "786sGw2Mk",
-  "version": 8
+  "version": 9
 }

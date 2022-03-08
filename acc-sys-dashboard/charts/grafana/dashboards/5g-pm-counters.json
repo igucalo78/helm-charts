@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1620379960602,
+  "id": 1,
+  "iteration": 1643628655714,
   "links": [],
   "panels": [
     {
@@ -70,7 +70,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval]) * 100 / increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_SUCC_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"} [$__rate_interval]) * 100 / increase(RRC_CONNECTION_EST_ATTEMPT_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
           "instant": false,
           "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
@@ -174,8 +174,9 @@
       "pluginVersion": "7.3.7",
       "targets": [
         {
-          "expr": "round(sum(increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
+          "expr": "round(sum(increase(RRC_CONNECTION_EST_ATTEMPT_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
           "instant": true,
+          "interval": "",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -237,7 +238,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_EST_ATTEMPT_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_EST_ATTEMPT_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
           "instant": false,
           "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
@@ -370,6 +371,7 @@
         {
           "expr": "round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_EMERGENCY_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
           "instant": true,
+          "interval": "",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -568,6 +570,7 @@
         {
           "expr": " round(sum(increase(RRC_CONN_EST_ATT_CAUSE_TYPE_MO_VIDEO_CALL_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
           "instant": true,
+          "interval": "",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -1084,8 +1087,9 @@
       "pluginVersion": "7.3.7",
       "targets": [
         {
-          "expr": " round(sum(increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
+          "expr": " round(sum(increase(RRC_CONNECTION_SUCC_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
           "instant": true,
+          "interval": "",
           "legendFormat": "{{instanceId}}",
           "refId": "A"
         }
@@ -1147,7 +1151,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "increase(RRC_CONNECTION_SUCC_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
+          "expr": "increase(RRC_CONNECTION_SUCC_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
           "instant": false,
           "interval": "$MinStep",
           "legendFormat": "{{instanceId}}",
@@ -1943,441 +1947,18 @@
     },
     {
       "cacheTimeout": null,
-      "datasource": "Prometheus",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
+          "custom": {}
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 2,
         "w": 4,
         "x": 0,
         "y": 27
-      },
-      "id": 3,
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "round(sum(increase(RRC_CONNECTION_FAIL_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
-          "instant": true,
-          "legendFormat": "{{instanceId}}",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "RRC CONNECTION FAILURES",
-      "type": "stat"
-    },
-    {
-      "aliasColors": {
-        "RRC_CONNECTION_FAIL_ID{gnbId=\"GNB_1\",instance=\"10.55.1.2:30515\",instanceId=\"100\",instanceType=\"CELL_TYPE\",job=\"prometheus\"}": "red",
-        "RRC_CONNECTION_FAIL_ID{gnbId=\"GNB_1\",instance=\"10.55.1.2:30515\",instanceId=\"101\",instanceType=\"CELL_TYPE\",job=\"prometheus\"}": "red"
-      },
-      "bars": false,
-      "cacheTimeout": null,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 5,
-        "w": 20,
-        "x": 4,
-        "y": 27
-      },
-      "hiddenSeries": false,
-      "id": 5,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.7",
-      "pointradius": 2,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "increase(RRC_CONNECTION_FAIL_ID_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__rate_interval])",
-          "instant": false,
-          "interval": "$MinStep",
-          "legendFormat": "{{instanceId}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "increase(RRC CONNECTION FAILURES)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "transparent": true,
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 0,
-        "y": 32
-      },
-      "id": 54,
-      "links": [],
-      "options": {
-        "content": "",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.7",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "transparent": true,
-      "type": "text"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 4,
-        "y": 32
-      },
-      "id": 57,
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_NETWORK_REJECT_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
-          "instant": true,
-          "legendFormat": "{{instanceId}}",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "NETWORK_REJECT",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 7,
-        "y": 32
-      },
-      "id": 58,
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_NO_REPLY_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
-          "instant": true,
-          "legendFormat": "{{instanceId}}",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "NO_REPLY",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [
-            {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
-            }
-          ],
-          "nullValueMode": "connected",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 10,
-        "y": 32
-      },
-      "id": 59,
-      "links": [],
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "expr": "round(sum(increase(RRC_CONNECTION_FAIL_CAUSE_TYPE_OTHER_total {instanceId=~\"$InstanceID\",instanceType=~\"$instanceType\"}[$__range])))\n",
-          "instant": true,
-          "legendFormat": "{{instanceId}}",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "OTHER",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 0,
-        "y": 34
-      },
-      "id": 55,
-      "links": [],
-      "options": {
-        "content": "<h4 style=\"text-align:center\">RRC_CONNECTION_FAIL <h4>\n<h4 style=\"text-align:center\"> cause sub-counters <h4>\n",
-        "mode": "html"
-      },
-      "pluginVersion": "7.3.7",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "",
-      "transparent": true,
-      "type": "text"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 0,
-        "y": 36
       },
       "id": 56,
       "links": [],
@@ -2407,7 +1988,7 @@
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceId)",
+        "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_total,instanceId)",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -2415,7 +1996,7 @@
         "multi": false,
         "name": "InstanceID",
         "options": [],
-        "query": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceId)",
+        "query": "label_values(RRC_CONNECTION_EST_ATTEMPT_total,instanceId)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2434,7 +2015,7 @@
           "value": "$__all"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceType)",
+        "definition": "label_values(RRC_CONNECTION_EST_ATTEMPT_total,instanceType)",
         "error": null,
         "hide": 0,
         "includeAll": true,
@@ -2442,7 +2023,7 @@
         "multi": false,
         "name": "instanceType",
         "options": [],
-        "query": "label_values(RRC_CONNECTION_EST_ATTEMPT_ID_total,instanceType)",
+        "query": "label_values(RRC_CONNECTION_EST_ATTEMPT_total,instanceType)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -2521,5 +2102,5 @@
   "timezone": "",
   "title": "5G PM Counters",
   "uid": "sH2tHMJMk",
-  "version": 1
+  "version": 2
 }
