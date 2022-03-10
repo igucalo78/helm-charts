@@ -96,3 +96,7 @@ draxNodeSelector:
 tolerations: []
 
 affinity: {}
+
+developerMode:
+  enabled: false
+  hostPath: ""

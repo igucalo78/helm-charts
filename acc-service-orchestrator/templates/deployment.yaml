@@ -33,6 +33,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ tpl .Values.version	. }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if .Values.developerMode.enabled }}
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              echo "Running in Developer Mode!"
+              echo "To start the Service Orchestrator, run the following command: /usr/bin/supervisord" > README.txt
+              echo "/usr/bin/supervisord" > start-service-orchestrator.sh
+              while true; do sleep 30; done;
+              EOF
+          {{ else }}
+          command: ["/usr/bin/supervisord"]
+          {{ end }}
           env:
             - name: KUBE_IP
               value: "{{ tpl .Values.kubeIp . }}"
@@ -52,6 +66,11 @@ spec:
           #  httpGet:
           #    path: /
           #    port: http
+          {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
+          volumeMounts:
+            - name: dev-work-dir
+              mountPath: /app/dev/
+          {{ end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
@@ -71,3 +90,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
+      volumes:
+        - name: dev-work-dir
+          hostPath:
+            path: {{ .Values.developerMode.hostPath }}
+      {{ end }}
