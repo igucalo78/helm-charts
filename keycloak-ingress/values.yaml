@@ -1,3 +1,5 @@
+namespace: "default"
+
 
 keycloak:
   # Optionally override the fully qualified name
@@ -107,8 +109,6 @@ keycloak:
   extraEnv: |
     - name: PROXY_ADDRESS_FORWARDING
       value: "false"
-    - name: KEYCLOAK_FRONTEND_URL
-      value: http://3.71.38.71:31764/auth/
     - name: KEYCLOAK_USER
       value: admin
     - name: KEYCLOAK_PASSWORD
@@ -216,7 +216,6 @@ keycloak:
     #
     # echo 'Hello from my custom startup script!'
   
-  root: "3.71.38.71:32323"
   # Add additional volumes, e. g. for custom themes
   extraVolumes: |
     - name: {{ include "keycloak.fullname" . }}-realm
@@ -524,27 +523,36 @@ keycloak:
   
   
 oauth2-proxy:
-  root: "3.71.38.71:31764"
-  
+  # namespace: "default"
+  fullnameOverride: ""
+  #extraVolumes:
+  #  - name: oauth2-proxy-config
+  #    configMap:
+  #      name: oauth2-proxy-config
+  #extraVolumeMounts:
+  #  - name: oauth2-proxy-config
+  #    mountPath: "/etc/oauth2_proxy/oauth2_proxy.cfg"
+  #    subPath: "oauth2_proxy.cfg"
   extraArgs:
-    provider: "oidc"
-    silence-ping-logging: "true"
-    set-xauthrequest: true
-    provider-display-name: keycloak
-    oidc-issuer-url: "http://3.71.38.71:31764/auth/realms/RIC"
+    # config: "/etc/oauth2_proxy/oauth2_proxy.cfg"
+    # provider: "oidc"
+    # silence-ping-logging: "true"
+    # set-xauthrequest: true
+    # provider-display-name: keycloak
+    # oidc-issuer-url: "http://ingress-keycloak-http.default.svc.cluster.local/auth/realms/RIC"
     client-id: nginx
     client-secret: d8346ae6-2b13-45a0-bac5-7177c43614ad
-    login-url: "http://3.71.38.71:31764/auth/realms/RIC/protocol/openid-connect/auth"
-    profile-url: "http://3.71.38.71:31764/auth/realms/RIC/protocol/openid-connect/userinfo"
-    redeem-url: "http://3.71.38.71:31764/auth/realms/RIC/protocol/openid-connect/token"
-    validate-url: "http://3.71.38.71:31764/auth/realms/RIC/protocol/openid-connect/userinfo"
-    redirect-url: "http://3.71.38.71:32323/oauth2/callback"
+    # login-url:    "/auth/realms/RIC/protocol/openid-connect/auth"
+    # profile-url:  "/auth/realms/RIC/protocol/openid-connect/userinfo"
+    # redeem-url: "http://ingress-keycloak-http.default.svc.cluster.local/auth/realms/RIC/protocol/openid-connect/token"
+    # validate-url: "/auth/realms/RIC/protocol/openid-connect/userinfo"
+    # redirect-url: "/oauth2/callback"
     keycloak-group: basic_user # Change XXX by your group that shall have access to it
-    insecure-oidc-allow-unverified-email: "true"
-    insecure-oidc-skip-issuer-verification: "true"
-    ssl-insecure-skip-verify: "true"
-    ssl-upstream-insecure-skip-verify: "true"
-    cookie-secure: "false"
+    # insecure-oidc-allow-unverified-email: "true"
+    # insecure-oidc-skip-issuer-verification: "true"
+    # ssl-insecure-skip-verify: "true"
+    # ssl-upstream-insecure-skip-verify: "true"
+    # cookie-secure: "false"
   ingress:
     enabled: true
     hosts:
@@ -552,7 +560,7 @@ oauth2-proxy:
     path: /oauth2
     backend:
       service:
-        name: oauth2-proxy
+        name: oauth2-proxy-ingress
         port:
           name: 80
     annotations:
@@ -573,6 +581,9 @@ oauth2-proxy:
     requests:
       cpu: 100m
       memory: 25Mi
+  config:
+    existingConfig: "oauth2-proxy-config"
+
   
 ingress-nginx:
   controller:
