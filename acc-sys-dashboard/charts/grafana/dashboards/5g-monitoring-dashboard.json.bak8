@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1648626179933,
+  "iteration": 1643902880380,
   "links": [],
   "panels": [
     {
@@ -317,7 +317,7 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 12,
@@ -377,8 +377,6 @@
           "measurement": "uemeasurement.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"measurement.ssbRsrp\") -157) FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/ AND \"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"nrCellId\" fill(null)",
-          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -432,12 +430,12 @@
       "yaxes": [
         {
           "$$hashKey": "object:730",
-          "decimals": null,
-          "format": "dBm",
+          "decimals": 0,
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "-20",
-          "min": "-160",
+          "max": null,
+          "min": "0",
           "show": true
         },
         {
@@ -617,7 +615,7 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
@@ -677,8 +675,6 @@
           "measurement": "uemeasurement.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"measurement.ssbRsrq\")/2-43) FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/ AND \"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"nrCellId\" fill(null)",
-          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -732,12 +728,12 @@
       "yaxes": [
         {
           "$$hashKey": "object:861",
-          "decimals": 1,
-          "format": "dB",
+          "decimals": 0,
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "30",
-          "min": "-50",
+          "max": null,
+          "min": "0",
           "show": true
         },
         {
@@ -768,7 +764,7 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
@@ -828,8 +824,6 @@
           "measurement": "uemeasurement.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"measurement.ssbSinr\")/2-23 )FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/ AND \"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"nrCellId\" fill(null)",
-          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -884,11 +878,11 @@
         {
           "$$hashKey": "object:992",
           "decimals": 0,
-          "format": "dB",
+          "format": "short",
           "label": null,
           "logBase": 1,
-          "max": "50",
-          "min": "-30",
+          "max": null,
+          "min": "0",
           "show": true
         },
         {
@@ -905,399 +899,6 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "datasource": "InfluxDB-5G",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "center",
-            "displayMode": "color-background",
-            "filterable": true
-          },
-          "links": [],
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "UE ID"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 95
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "auto"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "NR Cell ID"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 98
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "fixed"
-                }
-              },
-              {
-                "id": "custom.displayMode",
-                "value": "auto"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "SSB RSRQ"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 170
-              },
-              {
-                "id": "unit",
-                "value": "dB"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": -50
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": -15
-                    },
-                    {
-                      "color": "green",
-                      "value": -10
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "SSB RSRP"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dbm"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": -160
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": -100
-                    },
-                    {
-                      "color": "green",
-                      "value": -85
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "SSB SINR"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "blue",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": -30
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 10
-                    },
-                    {
-                      "color": "green",
-                      "value": 15
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "unit",
-                "value": "dB"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Timestamp (last received measurement)"
-            },
-            "properties": [
-              {
-                "id": "custom.displayMode",
-                "value": "auto"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 12,
-        "y": 32
-      },
-      "id": 9,
-      "options": {
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "SSB RSRP"
-          }
-        ]
-      },
-      "pluginVersion": "7.3.7",
-      "targets": [
-        {
-          "alias": "nrCellId: $tag_nrCellId",
-          "groupBy": [
-            {
-              "params": [
-                "ueId"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "nrCellId"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "uemeasurement.vector",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbRsrp\") -157)  FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "measurement.ssbRsrp"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "nrCellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
-        },
-        {
-          "alias": "nrCellId: $tag_nrCellId",
-          "groupBy": [
-            {
-              "params": [
-                "ueId"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "nrCellId"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "uemeasurement.vector",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbRsrq\")/2-43)  FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "measurement.ssbRsrq"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "nrCellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
-        },
-        {
-          "alias": "nrCellId: $tag_nrCellId",
-          "groupBy": [
-            {
-              "params": [
-                "ueId"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "nrCellId"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "uemeasurement.vector",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbSinr\")/2-23) FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
-          "rawQuery": true,
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "measurement.ssbSinr"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "nrCellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "UE Radio Overview",
-      "transformations": [
-        {
-          "id": "seriesToColumns",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "nrCellId 2": true,
-              "nrCellId 3": true,
-              "ueId 2": true,
-              "ueId 3": true
-            },
-            "indexByName": {
-              "Time": 0,
-              "last 1": 7,
-              "last 2": 8,
-              "last 3": 9,
-              "nrCellId 1": 2,
-              "nrCellId 2": 4,
-              "nrCellId 3": 6,
-              "ueId 1": 1,
-              "ueId 2": 3,
-              "ueId 3": 5
-            },
-            "renameByName": {
-              "Time": "Timestamp (last received measurement)",
-              "last 1": "SSB RSRP",
-              "last 2": "SSB RSRQ",
-              "last 3": "SSB SINR",
-              "nrCellId 1": "NR Cell ID",
-              "ueId 1": "UE ID"
-            }
-          }
-        }
-      ],
-      "transparent": true,
-      "type": "table"
     }
   ],
   "refresh": "5s",
@@ -1384,5 +985,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 9
+  "version": 5
 }
