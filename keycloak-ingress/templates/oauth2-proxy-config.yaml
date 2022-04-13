@@ -11,12 +11,12 @@ data:
     silence_ping_logging = "true"
     set_xauthrequest = "true"
     provider_display_name = "keycloak"
-    oidc_issuer_url = {{ printf "http://%s-keycloak-http.%s.svc.cluster.local/auth/realms/RIC" (include "keycloak.fullname" .) (.Values.namespace) | quote }}
+    oidc_issuer_url = {{ printf "http://%s-keycloak-http.%s.svc.cluster.local/auth/realms/RIC" (.Release.Name) (.Values.namespace) | quote }}
     client_id = "nginx"
     client_secret = "d8346ae6-2b13-45a0-bac5-7177c43614ad"
     login_url =  "/auth/realms/RIC/protocol/openid-connect/auth"
     profile_url =  "/auth/realms/RIC/protocol/openid-connect/userinfo"
-    redeem_url = {{ printf "http://%s-keycloak-http.%s.svc.cluster.local/auth/realms/RIC/protocol/openid-connect/token" (include "keycloak.fullname" .) (.Values.namespace) | quote }}
+    redeem_url = {{ printf "http://%s-keycloak-http.%s.svc.cluster.local/auth/realms/RIC/protocol/openid-connect/token" (.Release.Name) (.Values.namespace) | quote }}
     validate_url = "/auth/realms/RIC/protocol/openid-connect/userinfo"
     redirect_url = "/oauth2/callback"
     insecure_oidc_allow_unverified_email = "true"
