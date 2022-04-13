@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1648626179933,
+  "iteration": 1649854259393,
   "links": [],
   "panels": [
     {
@@ -1139,7 +1139,7 @@
           "measurement": "uemeasurement.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbRsrp\") -157)  FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
+          "query": "SELECT \"measurement.ssbRsrp\" -157 as \"SSB RSRP\",\"measurement.ssbRsrq\"/2-43  as \"SSB RSRQ\", \"measurement.ssbSinr\"/2-23 as \"SSB SINR\"  FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\" ORDER BY time DESC  LIMIT 1\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -1164,96 +1164,6 @@
               "value": "/^$Cell$/"
             }
           ]
-        },
-        {
-          "alias": "nrCellId: $tag_nrCellId",
-          "groupBy": [
-            {
-              "params": [
-                "ueId"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "nrCellId"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "uemeasurement.vector",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbRsrq\")/2-43)  FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "measurement.ssbRsrq"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "nrCellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
-        },
-        {
-          "alias": "nrCellId: $tag_nrCellId",
-          "groupBy": [
-            {
-              "params": [
-                "ueId"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "nrCellId"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "uemeasurement.vector",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT (last(\"measurement.ssbSinr\")/2-23) FROM \"uemeasurement.vector\" WHERE (\"nrCellId\" =~ /^$Cell$/) AND $timeFilter GROUP BY \"ueId\", \"nrCellId\"",
-          "rawQuery": true,
-          "refId": "C",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "measurement.ssbSinr"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "nrCellId",
-              "operator": "=~",
-              "value": "/^$Cell$/"
-            }
-          ]
         }
       ],
       "timeFrom": null,
@@ -1261,37 +1171,17 @@
       "title": "UE Radio Overview",
       "transformations": [
         {
-          "id": "seriesToColumns",
-          "options": {}
-        },
-        {
           "id": "organize",
           "options": {
-            "excludeByName": {
-              "nrCellId 2": true,
-              "nrCellId 3": true,
-              "ueId 2": true,
-              "ueId 3": true
-            },
-            "indexByName": {
-              "Time": 0,
-              "last 1": 7,
-              "last 2": 8,
-              "last 3": 9,
-              "nrCellId 1": 2,
-              "nrCellId 2": 4,
-              "nrCellId 3": 6,
-              "ueId 1": 1,
-              "ueId 2": 3,
-              "ueId 3": 5
-            },
+            "excludeByName": {},
+            "indexByName": {},
             "renameByName": {
+              "SSB RSRP": "SSB RSRP",
+              "SSB RSRQ": "SSB RSRQ",
+              "SSB SINR": "SSB SINR",
               "Time": "Timestamp (last received measurement)",
-              "last 1": "SSB RSRP",
-              "last 2": "SSB RSRQ",
-              "last 3": "SSB SINR",
-              "nrCellId 1": "NR Cell ID",
-              "ueId 1": "UE ID"
+              "nrCellId": "NR Cell ID",
+              "ueId": "UE ID"
             }
           }
         }
@@ -1384,5 +1274,5 @@
   "timezone": "",
   "title": "5G UE Monitoring",
   "uid": "8hxSNS5Gk",
-  "version": 9
+  "version": 10
 }
