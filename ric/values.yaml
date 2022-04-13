@@ -285,9 +285,6 @@ acc-service-orchestrator:
 
   kubeIp: "{{ .Values.global.kubeIp }}"
 
-  # TEMPORARY FOR RC, REMOVE FOR PROPER RELEASE
-  default5gVersion: "4.0.0-rc13"
-
 acc-state-db:
   # Enable/disable installation of the State DB
   enabled: true
@@ -492,7 +489,7 @@ acc-5g-infrastructure:
 
   jaeger:
     # For tracing purposes
-    enabled: false
+    enabled: true
 
 nkafka-5g:
   accelleranLicense:
@@ -715,3 +712,14 @@ acc-4g-infrastructure:
 
     image:
       pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  namespace: "default"
+
+  ingress-nginx:
+    controller:
+      service:
+        type: "NodePort"
+        nodePorts:
+          http: 80
