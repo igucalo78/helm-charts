@@ -716,10 +716,3 @@ acc-4g-infrastructure:
 ingress:
   enabled: true
   namespace: "default"
-
-  ingress-nginx:
-    controller:
-      service:
-        type: "NodePort"
-        nodePorts:
-          http: 80

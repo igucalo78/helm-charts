@@ -44,4 +44,7 @@
 {{ if index .Values "acc-4g-infrastructure" "provisioner" "enabled" }}## 4G dRAX Provisioner
 {{ .Values.global.kubeIp }}:{{ index .Values "acc-4g-infrastructure" "provisioner" "nginx" "service" "nodePort" }}{{ end }}{{ end }}
 
+{{ if index .Values "ingress" "ingress-nginx" "controller" "service" "nodePorts" "http" }}## Ingress URL
+{{ .Values.global.kubeIp }}:{{ index .Values "ingress" "ingress-nginx" "controller" "service" "nodePorts" "http" }}{{ end }}
+
 ###############################################
