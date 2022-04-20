@@ -713,6 +713,6 @@ acc-4g-infrastructure:
     image:
       pullPolicy: IfNotPresent
 
-ingress:
+keycloak-ingress:
   enabled: true
   namespace: "default"
