@@ -6,6 +6,8 @@ metadata:
     nginx.ingress.kubernetes.io/auth-signin: "http://$http_host/oauth2/start?rd=$escaped_request_uri"
 
   name: dashboard-ingress
+  labels:
+    {{- include "keycloak-ingress.labels" . | nindent 4 }}
 spec:
   ingressClassName: nginx
   rules:

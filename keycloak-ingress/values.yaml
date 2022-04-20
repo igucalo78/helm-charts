@@ -218,13 +218,13 @@ keycloak:
   
   # Add additional volumes, e. g. for custom themes
   extraVolumes: |
-    - name: {{ include "keycloak.fullname" . }}-realm
+    - name: {{ .Release.Name }}-keycloak-realm
       configMap:
-        name: {{ include "keycloak.fullname" . }}-realm
+        name: {{ .Release.Name }}-keycloak-realm
   
   # Add additional volumes mounts, e. g. for custom themes
   extraVolumeMounts: |
-    - name: {{ include "keycloak.fullname" . }}-realm
+    - name: {{ .Release.Name }}-keycloak-realm
       mountPath: "/config"
       readOnly: true
   
