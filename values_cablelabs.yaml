@@ -1,0 +1,27 @@
+
+rbac:
+  pspEnabled: false
+  namespaced: true
+persistence:
+  dynamicProvisioningEnabled: true
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ocs-external-storagecluster-cephfs
+  hostPath: null
+initChownData:
+  enabled: false
+
+
+acc-sys-dashboard:
+  grafana:
+    rbac:
+      pspEnabled: false
+      namespaced: true
+  persistence:
+      dynamicProvisioningEnabled: true
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: ocs-external-storagecluster-cephfs
+      hostPath: null
+  initChownData:
+    enabled: false
