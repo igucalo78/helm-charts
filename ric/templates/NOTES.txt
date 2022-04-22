@@ -48,6 +48,6 @@
 {{ .Values.global.kubeIp }}:{{ index .Values "keycloak-ingress" "ingress-nginx" "controller" "service" "nodePorts" "http" }}{{ end }}
 
 To get the Keycloak Admin password, run:
-echo $(kubectl get secret keycloak-secret -o jsonpath="{.data.KEYCLOAK_PASSWORD}" | base64 --decode)
+echo $(kubectl get secret {{ .Release.Name }}-keycloak-secret -o jsonpath="{.data.KEYCLOAK_PASSWORD}" | base64 --decode)
 
 ###############################################
