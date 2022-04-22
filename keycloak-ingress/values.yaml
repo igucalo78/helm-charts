@@ -125,7 +125,7 @@ keycloak:
   # Additional environment variables for Keycloak mapped from Secret or ConfigMap
   extraEnvFrom: |
     - secretRef:
-        name: "keycloak-secret"
+        name: "{{ .Release.Name }}-keycloak-secret"
   
   #  Pod priority class name
   priorityClassName: ""

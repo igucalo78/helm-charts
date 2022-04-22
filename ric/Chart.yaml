@@ -87,5 +87,5 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: keycloak-ingress
     condition: ingress.enabled
-    version: 0.1.0-rc3
+    version: 0.1.0-rc.4
     repository: https://accelleran.github.io/helm-charts/
