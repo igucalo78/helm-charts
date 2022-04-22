@@ -111,8 +111,6 @@ keycloak:
       value: "false"
     - name: KEYCLOAK_USER
       value: admin
-    - name: KEYCLOAK_PASSWORD
-      value: admin
     - name: KEYCLOAK_IMPORT
       value: /config/realm-config.json
     # - name: KEYCLOAK_LOGLEVEL
@@ -125,7 +123,9 @@ keycloak:
     #   value: "2"
   
   # Additional environment variables for Keycloak mapped from Secret or ConfigMap
-  extraEnvFrom: ""
+  extraEnvFrom: |
+    - secretRef:
+        name: "keycloak-secret"
   
   #  Pod priority class name
   priorityClassName: ""

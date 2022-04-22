@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: keycloak-http
+                name: {{ .Release.Name }}-keycloak-http
                 port:
                   number: 80
