@@ -473,6 +473,7 @@ data:
         "enabled" : true,
         "totp" : false,
         "emailVerified" : false,
+        "email" : "user@user.com",
         "credentials" : [ {
           "id" : "84bd52cf-19de-40a6-ad5d-8e82fc73fe88",
           "type" : "password",
