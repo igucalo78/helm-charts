@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
-  "iteration": 1648478979403,
+  "id": 1,
+  "iteration": 1628001535386,
   "links": [],
   "panels": [
     {
@@ -303,7 +303,7 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 2,
       "gridPos": {
         "h": 8,
@@ -357,8 +357,8 @@
           "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"UeMeasurement.rsrp\")-140) FROM \"df.vector\" WHERE (\"cellId\" =~ /^$eNB$/ AND \"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"cellId\"",
-          "rawQuery": true,
+          "query": "SELECT mean(\"value\") FROM \"df.rsrp\" WHERE (\"cellId\" =~ /^$eNB$/ AND \"ueRicId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"cellId\"",
+          "rawQuery": false,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -412,11 +412,11 @@
       "yaxes": [
         {
           "$$hashKey": "object:355",
-          "format": "dBm",
+          "format": "short",
           "label": "avg(RSRP)",
           "logBase": 1,
-          "max": "-30",
-          "min": "-160",
+          "max": null,
+          "min": "0",
           "show": true
         },
         {
@@ -592,7 +592,7 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 2,
       "gridPos": {
         "h": 12,
@@ -646,8 +646,6 @@
           "measurement": "df.vector",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT (mean(\"UeMeasurement.rsrq\")/2-20) FROM \"df.vector\" WHERE (\"cellId\" =~ /^$eNB$/ AND \"ueId\" =~ /^$UE$/) AND $timeFilter GROUP BY time(1s), \"cellId\"",
-          "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
           "select": [
@@ -701,12 +699,11 @@
       "yaxes": [
         {
           "$$hashKey": "object:717",
-          "decimals": 0,
-          "format": "dB",
+          "format": "short",
           "label": "avg(RSRQ)",
           "logBase": 1,
-          "max": "0",
-          "min": "-30",
+          "max": null,
+          "min": "0",
           "show": true
         },
         {
