@@ -1,4 +1,3 @@
-
 rbac:
   pspEnabled: false
   namespaced: true
@@ -11,17 +10,167 @@ persistence:
 initChownData:
   enabled: false
 
+acc-5g-infrastructure:
+  redis:
+    persistence:
+      dynamicProvisioningEnabled: true
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000   
+
+acc-fiveg-pmcounters:
+  initImage:
+    tag: 0.7.0-rc0
+
+acc-kminion:
+  initImage:
+    tag: 0.7.0-rc0 
+  initConfig:
+    securityContext:  
+      runAsUser: 101
+
+acc-kafka:
+  zookeeper:
+    securityContext:
+      runAsNonRoot: true
+      fsGroup: 1000
+      runAsUser: 1000
+  initImage:
+    tag: 0.7.0-rc0
+  image:  
+    tag: 2.7.0-rc0
+  runAsNonRoot: true
+
 
 acc-sys-dashboard:
   grafana:
     rbac:
       pspEnabled: false
       namespaced: true
-  persistence:
+    persistence:
       dynamicProvisioningEnabled: true
       accessModes:
         - ReadWriteOnce
       storageClassName: ocs-external-storagecluster-cephfs
       hostPath: null
-  initChownData:
-    enabled: false
+    initChownData:
+      enabled: false
+  prometheus:
+    rbac:
+      namespaced: true
+    alertmanager:
+      persistentVolume:
+        storageClass: ocs-external-storagecluster-cephfs
+      persistence:
+        dynamicProvisioningEnabled: true
+        accessModes:
+          - ReadWriteOnce
+        hostPath: null
+    server:
+      persistentVolume:
+        storageClass: ocs-external-storagecluster-cephfs
+      persistence:
+        dynamicProvisioningEnabled: true
+        accessModes:
+          - ReadWriteOnce
+        hostPath: null
+      securityContext:
+        runAsNonRoot: true
+        fsGroup: 1000
+        runAsUser: 1000
+  kube-eagle:
+    serviceAccountName: accserviceaccountadmin
+    rbac:
+      create: false
+    
+influxdb: 
+  persistence:
+        dynamicProvisioningEnabled: true
+        accessModes:
+          - ReadWriteOnce
+        storageClass: ocs-external-storagecluster-cephfs
+        hostPath: null
+
+loki-stack: 
+  fluent-bit:
+    rbac:
+      pspEnabled: false
+      namespaced: true
+  loki:
+    rbac: 
+      pspEnabled: false
+    securityContext:
+      runAsUser: 101
+      runAsNonRoot: true
+    persistence:
+      dynamicProvisioningEnabled: true
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: ocs-external-storagecluster-cephfs
+      hostPath: null
+
+vector: 
+  initImage:
+    tag: 0.7.0-rc0
+  podSecurityContext:
+    runAsUser: 101
+    runAsNonRoot: true
+  securityContext:
+    runAsUser: 101
+    runAsNonRoot: true
+
+vectorfiveg: 
+  initImage:
+    tag: 0.7.0-rc0
+  podSecurityContext:
+    runAsUser: 101
+    runAsNonRoot: true
+  securityContext:
+    runAsUser: 101
+    runAsNonRoot: true
+
+acc-service-monitor:
+  version: 0.6.0-rc1
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+  service:
+    port: 8080
+
+acc-service-orchestrator:
+  version: 2.3.0-rc.4
+  serviceAccount: 
+    create: false
+  serviceAccountName: accserviceaccountadmin
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+    privileged: false
+
+nkafka-5g:
+  initImage:
+    tag: 0.7.0-rc0
+  podSecurityContext:
+    runAsUser: 101
+    runAsNonRoot: true
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+
+dash-front-back-end: 
+  version: 4.1.1-rc1
+  initImage:
+    tag: 0.7.0-rc0
+  podSecurityContext: 
+    runAsNonRoot: true
+    runAsUser: 101
+  securityContext: 
+    runAsNonRoot: true
+    runAsUser: 101
+
+metrics-server:
+  enabled: false
+  
+
+
+

@@ -22,6 +22,10 @@ appVersion: 6.0.0-rc.0
 
 # Dependencies
 dependencies:
+  - name: metrics-server
+    condition: metrics-server.enabled
+    version: 2.11.2
+    repository: https://accelleran.github.io/helm-charts/
   - name: acc-kafka
     condition: acc-kafka.enabled
     version: 0.3.1

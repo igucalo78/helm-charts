@@ -1,3 +1,4 @@
+{{- if not .Values.alertmanager.persistence.dynamicProvisioningEnabled}}
 {{- if not .Values.alertmanager.statefulSet.enabled -}}
 {{- if and .Values.alertmanager.enabled .Values.alertmanager.persistentVolume.enabled -}}
 {{- if not .Values.alertmanager.persistentVolume.existingClaim -}}
@@ -17,6 +18,7 @@ spec:
     {{- end }}
   hostPath:
      path: "{{ .Values.alertmanager.persistentVolume.hostPath }}/{{ template "prometheus.alertmanager.fullname" . }}"
+{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
