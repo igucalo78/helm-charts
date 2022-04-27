@@ -1,4 +1,5 @@
 {{- if .Values.server.enabled -}}
+{{- if not .Values.server.persistence.dynamicProvisioningEnabled}}
 {{- if not .Values.server.statefulSet.enabled -}}
 {{- if .Values.server.persistentVolume.enabled -}}
 {{- if not .Values.server.persistentVolume.existingClaim -}}
@@ -18,6 +19,7 @@ spec:
     {{- end }}
   hostPath:
      path: "{{ .Values.server.persistentVolume.hostPath }}/{{ template "prometheus.server.fullname" . }}"
+{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
