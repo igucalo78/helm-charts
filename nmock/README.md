@@ -11,7 +11,7 @@ Since messages on NATS, and the configuration in Redis can differ from version t
 - /home/xapp/drax-version-5: These scenarios only work on dRAX version 5!
 
 # Documentation of scenarios
-The explanation of teh scenarios can be found in:
+The explanation of the scenarios can be found in:
 ```
 /home/xapp/explanation_of_scenarios.txt
 ```
@@ -28,7 +28,7 @@ config:
   redis4gPort: "32000"
   redis5gPort: "32200"
 ```
-NOTE: It is enough to just create a custom-values.yaml file with only the above contents. The rest will be taken from teh default values of the Helm chart.
+**NOTE:** It is enough to just create a custom-values.yaml file with only the above contents. The rest will be taken from teh default values of the Helm chart.
 
 # Install NMock
 NMock is available in the official Accelleran Helm repository. Once you prepare the values.yaml file (as described above), you can run the following command:
@@ -36,7 +36,7 @@ NMock is available in the official Accelleran Helm repository. Once you prepare 
 helm install nmock acc-helm/nmock --values custom-values.yaml
 ```
 
-NOTE: Don't forget to update the Helm repository:
+**NOTE:** Don't forget to update the Helm repository:
 
 ```
 helm repo update
