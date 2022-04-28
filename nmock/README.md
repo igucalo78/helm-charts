@@ -28,6 +28,7 @@ config:
   redis4gPort: "32000"
   redis5gPort: "32200"
 ```
+NOTE: It is enough to just create a custom-values.yaml file with only the above contents. The rest will be taken from teh default values of the Helm chart.
 
 # Install NMock
 NMock is available in the official Accelleran Helm repository. Once you prepare the values.yaml file (as described above), you can run the following command:
