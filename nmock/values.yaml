@@ -16,6 +16,7 @@ initImage:
   tag: "latest"
 
 initConfig:
+  enabled: false
   natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 imagePullSecrets:

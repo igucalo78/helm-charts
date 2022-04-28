@@ -27,11 +27,15 @@ spec:
       serviceAccountName: {{ include "nmock.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if .Values.initConfig.enabled }}
       initContainers:
+        {{ if .Values.initConfig.enabled }}
         - name: {{ .Chart.Name }}-check-nats
           image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: [ 'sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.initConfig.natsUrl . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.initConfig.natsUrl . }}; sleep 2; done' ]
+        {{ end }}
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
