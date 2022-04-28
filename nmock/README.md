@@ -103,9 +103,11 @@ Place the scenario in the ```/scenarios``` folder, and then in the correct versi
 helm package nmock
 ```
 A new .tgz file will be created with a suffix of the version (not appVersion) specified in the Chart.yaml. hence it is very important to bump the version filed in Chart.yaml along with the appVersion.
+
 12. Regenerate the index.yaml for the Helm Chart repository:
 ```
 helm repo index . --url  https://accelleran.github.io/helm-charts/
 ```
-NOTE: This command is specific for our Accelleran Helm Chart GitHub and Helm repo.
+**NOTE:** This command is specific for our Accelleran Helm Chart GitHub and Helm repo.
+
 13. Add, commit and push the changes to the Accelleran helm chart GitHub repository. This will in turn expose the new version of NMock via the official helm chart repository.
