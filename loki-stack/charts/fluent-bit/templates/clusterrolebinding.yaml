@@ -1,5 +1,5 @@
-{{- if .Values.rbac.create }}
-kind: RoleBinding
+{{- if and .Values.rbac.create (not .Values.rbac.namespaced) }}
+kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ template "fluent-bit-loki.fullname" . }}-clusterrolebinding
@@ -13,7 +13,7 @@ subjects:
     name: {{ template "fluent-bit-loki.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: {{ template "fluent-bit-loki.fullname" . }}-clusterrole
   apiGroup: rbac.authorization.k8s.io
 {{- end }}

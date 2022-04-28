@@ -16,11 +16,43 @@ rules:
     resourceNames:
     - {{ template "prometheus.kubeStateMetrics.fullname" . }}
 {{- end }}
+{{- if not .Values.rbac.namespaced }} 
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+      - persistentvolumes
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - validatingwebhookconfigurations
+      - mutatingwebhookconfigurations
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - certificates.k8s.io
+    resources:
+      - certificatesigningrequests
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+    - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - list
+      - watch
+{{- end }}   
   - apiGroups:
       - ""
     resources:
       - namespaces
-      - nodes
       - persistentvolumeclaims
       - pods
       - services
@@ -28,7 +60,6 @@ rules:
       - replicationcontrollers
       - limitranges
       - persistentvolumeclaims
-      - persistentvolumes
       - endpoints
       - secrets
       - configmaps
@@ -79,32 +110,9 @@ rules:
       - list
       - watch
   - apiGroups:
-    - storage.k8s.io
-    resources:
-      - storageclasses
-      - volumeattachments
-    verbs:
-      - list
-      - watch
-  - apiGroups:
-      - certificates.k8s.io
-    resources:
-      - certificatesigningrequests
-    verbs:
-      - list
-      - watch
-  - apiGroups:
       - networking.k8s.io
     resources:
       - networkpolicies
-    verbs:
-      - list
-      - watch
-  - apiGroups:
-      - admissionregistration.k8s.io
-    resources:
-      - validatingwebhookconfigurations
-      - mutatingwebhookconfigurations
     verbs:
       - list
       - watch
