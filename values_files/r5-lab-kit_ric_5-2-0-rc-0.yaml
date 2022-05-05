@@ -1,0 +1,36 @@
+global:
+  kubeIp: "10.55.1.2"
+  enable4G: true
+  enable5G: true
+dash-front-back-end:
+  config:
+    grafanaURL: "10.55.1.2"
+    nodeApiURL: "10.55.1.2"
+    apiUrl: "10.55.1.2"
+acc-5g-infrastructure:
+  metallb:
+    configInline:
+      address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+            - 10.55.1.20-10.55.1.60
+  jaeger:
+    enabled: true
+nkafka-5g:
+  configs:
+    logLevel: debug
+
+acc-4g-infrastructure:
+  provisioner-dhcp:
+    configuration:
+      interface: eno1
+  configurator:
+    enabled: false
+  4g-radio-controller:
+    version: "master-candidate_31a65f5c"
+    config:
+      l3Version: "master-candidate_31a65f5c"
+
+  acc-l2-update:
+    version: "master-candidate_31a65f5c"
