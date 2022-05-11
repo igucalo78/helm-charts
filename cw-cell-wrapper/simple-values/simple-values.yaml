@@ -26,6 +26,10 @@ global:
   redisHostname: "10.55.1.2"
   redisPort: "32220"
 
+netconf:
+  image:
+    tag: "R3.1.1_floreffe"
+
 redis:
   enabled: true
 
