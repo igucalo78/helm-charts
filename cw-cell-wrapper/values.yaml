@@ -81,7 +81,7 @@ cw-phy-cell:
     url: "{{ .Values.global.natsUrl }}"
     port: "{{ .Values.global.natsPort }}"
 
-  bootstrapId: "{{ .Values.global.bootstrapId }}"
+  bootstrapId: "{{ .Values.global.instanceId }}"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
@@ -109,7 +109,7 @@ cw-auto-repairer:
     url: "{{ .Values.global.natsUrl }}"
     port: "{{ .Values.global.natsPort }}"
 
-  bootstrapId: "{{ .Values.global.bootstrapId }}"
+  bootstrapId: "{{ .Values.global.instanceId }}"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
@@ -137,7 +137,7 @@ cw-mon-ctrl:
     url: "{{ .Values.global.natsUrl }}"
     port: "{{ .Values.global.natsPort }}"
 
-  bootstrapId: "{{ .Values.global.bootstrapId }}"
+  bootstrapId: "{{ .Values.global.instanceId }}"
 
   jaegerAgentHost: "{{ .Values.global.jaegerAgentHost }}"
 
