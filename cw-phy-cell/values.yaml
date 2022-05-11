@@ -44,7 +44,8 @@ redisConfig:
   port: "32200"
 
 bootstrapId: "granny"
-bootstrapFile: /bootstrap.txt
+bootstrapFile: /home/accelleran/5G/bootstrap.txt
+zlogFile: /home/accelleran/5G/zlog.conf
 
 jaegerAgentHost: "ric-jaeger-agent"
 

@@ -80,7 +80,7 @@ spec:
             - name: NATS_SERVICE_URL
               value: nats://{{ tpl .Values.nats.url . }}:{{ tpl .Values.nats.port . }}
             - name: ZLOG_CONF_PATH
-              value: /zlog.conf
+              value: {{ .Values.zlogFile }}
             - name: BOOTSTRAP_FILENAME
               value: {{ .Values.bootstrapFile }}
             - name: JAEGER_AGENT_HOST
@@ -104,7 +104,7 @@ spec:
 #              port: http
           volumeMounts:
             - name: {{ include "cw-phy-cell.fullname" . }}-zlog-conf
-              mountPath: /zlog.conf
+              mountPath: {{ .Values.zlogFile }}
               subPath: "zlog.conf"
             - name: {{ include "cw-phy-cell.fullname" . }}-bootstrap
               mountPath: {{ .Values.bootstrapFile }}
