@@ -24,6 +24,7 @@ initImage:
 initConfig:
   redisCheckEnabled: true
   natsCheckEnabled: true
+  sshSecretCheckEnabled: true
 
 # Application Settings
 # cmd: "__APPNAME=amfController ./amfControllerAppl.exe"
@@ -46,6 +47,10 @@ redisConfig:
 bootstrapId: "granny"
 bootstrapFile: /home/accelleran/5G/bootstrap.txt
 zlogFile: /home/accelleran/5G/zlog.conf
+
+cwSsh:
+  publicKeySecretName: "cw-public"
+  privateKeySecretName: "cw-private"
 
 jaegerAgentHost: "ric-jaeger-agent"
 

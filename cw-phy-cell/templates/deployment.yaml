@@ -52,6 +52,12 @@ spec:
           imagePullPolicy: {{ .Values.initImage.pullPolicy }}
           command: ['sh', '-c', 'until nc -z -v -w1 {{ tpl .Values.nats.url . }} {{ tpl .Values.nats.port . }}; do echo $(date) [CHECK-SERVICES] Waiting for NATS at {{ tpl .Values.nats.url . }} {{ tpl .Values.nats.port . }}; sleep 2; done']
         {{ end }}
+        {{ if .Values.initConfig.sshSecretCheckEnabled }}
+        - name: {{ .Chart.Name }}-check-ssh-secrets
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          command: ['sh', '-c', 'until kubectl get secret {{ tpl .Values.cwSsh.publicKeySecretName . }}; do echo $(date) [CHECK-SSH-SECRETS] Public SSH key not found; sleep 2; done && until kubectl get secret {{ tpl .Values.cwSsh.privateKeySecretName . }}; do echo $(date) [CHECK-SSH-SECRETS] Private SSH key not found; sleep 2; done']
+        {{ end }}
       {{ end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -109,6 +115,14 @@ spec:
             - name: {{ include "cw-phy-cell.fullname" . }}-bootstrap
               mountPath: {{ .Values.bootstrapFile }}
               subPath: "bootstrap.txt"
+            - name: {{ include "cw-phy-cell.fullname" . }}-ssh-private
+              mountPath: "/home/accelleran/5G/ssh/private"
+              subPath: "private"
+              readOnly: true
+            - name: {{ include "cw-phy-cell.fullname" . }}-ssh-public
+              mountPath: "/home/accelleran/5G/ssh/public"
+              subPath: "public"
+              readOnly: true
             {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
             - name: dev-work-dir
               mountPath: /home/accelleran/5G/dev/
@@ -150,3 +164,11 @@ spec:
           hostPath:
             path: {{ .Values.developerMode.hostPath }}
         {{ end }}
+
+        - name: {{ include "cw-phy-cell.fullname" . }}-ssh-public
+          secret:
+            secretName: {{ tpl .Values.cwSsh.publicKeySecretName . }}
+
+        - name: {{ include "cw-phy-cell.fullname" . }}-ssh-private
+          secret:
+            secretName: {{ tpl .Values.cwSsh.privateKeySecretName . }}

@@ -70,6 +70,10 @@ global:
 cw-phy-cell:
   enabled: true
 
+  cwSsh:
+    publicKeySecretName: "cw-public"
+    privateKeySecretName: "cw-private"
+
   image:
     tag: "{{ .Values.global.tag }}"
 
