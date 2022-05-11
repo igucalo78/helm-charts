@@ -15,6 +15,16 @@ imagePullSecrets:
 nameOverride: ""
 fullnameOverride: ""
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+initConfig:
+  redisCheckEnabled: true
+  natsCheckEnabled: true
+
 # Application Settings
 # cmd: "__APPNAME=amfController ./amfControllerAppl.exe"
 cmd: "./physicalCellAppl.exe"
