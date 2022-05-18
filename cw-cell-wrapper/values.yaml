@@ -161,6 +161,9 @@ netconf:
   #
   enabled: true
 
+  image:
+    repository: accelleran/cw-netconf
+
 
   # Special dRAX NodeSelector
   #   Description:  Besides the default NodeSelector field for each component,
