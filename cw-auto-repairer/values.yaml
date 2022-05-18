@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: test-cw-auto-repairer
+  repository: accelleran/cw-auto-repairer
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
