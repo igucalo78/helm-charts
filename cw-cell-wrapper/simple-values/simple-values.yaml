@@ -5,7 +5,7 @@ global:
   #   Value type: string
   #
   natsUrl: "10.55.1.2"
-  natsPort: "31110"
+  natsPort: "31100"
 
 
   # Version of the 5G applications
@@ -76,7 +76,7 @@ redis:
     draxName: "{{ .Values.global.draxName }}"
 
 nats:
-  enabled: true
+  enabled: false
 
   nameOverride: "nats-cw"
 
