@@ -1,4 +1,4 @@
-{{- if not .Values.persistence.dynamicProvisioningEnabled}}
+{{- if eq (tpl .Values.persistence.dynamicProvisioningEnabled .) "false" -}}
 kind: PersistentVolume
 apiVersion: v1
 metadata:

@@ -1,4 +1,4 @@
-{{- if not .Values.alertmanager.persistence.dynamicProvisioningEnabled}}
+{{- if eq (tpl .Values.alertmanager.persistence.dynamicProvisioningEnabled .) "false"}}
 {{- if not .Values.alertmanager.statefulSet.enabled -}}
 {{- if and .Values.alertmanager.enabled .Values.alertmanager.persistentVolume.enabled -}}
 {{- if not .Values.alertmanager.persistentVolume.existingClaim -}}
