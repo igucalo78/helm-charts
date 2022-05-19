@@ -18,6 +18,13 @@ fullnameOverride: ""
 # Namespaces to monitor, comma "," seperated
 monitoredNamespaces: "{{ .Release.Namespace }}"
 
+
+# Specifies Resource Kind Role/CluesteRole and RoleBinding/ClusterRoleBinding
+# use Role/RoleBinding in namespaced environment 
+# use ClusterRole/ClusterRoleBinding in non-namespaced environment
+roleKind: Role
+roleBindingKind: RoleBinding
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
