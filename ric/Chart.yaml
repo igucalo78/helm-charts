@@ -67,7 +67,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: vectorfiveg
     condition: vectorfiveg.enabled
-    version: 0.6.0
+    version: 0.6.1
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
