@@ -13,7 +13,7 @@ global:
   #                in DockerHub.
   #   Value type: string
   #
-  tag: "0.1.0-rc.0"
+  tag: "beta-9204ffa"
 
 
   # Redis settings
