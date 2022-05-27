@@ -1,6 +1,6 @@
 {{- if and .Values.pushgateway.enabled .Values.rbac.create -}}
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}Role
 metadata:
   labels:
     {{- include "prometheus.pushgateway.labels" . | nindent 4 }}
