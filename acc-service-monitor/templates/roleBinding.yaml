@@ -1,6 +1,6 @@
 {{- if .Values.serviceAccount.create -}}
 apiVersion: rbac.authorization.k8s.io/v1
-kind: {{ .Values.roleBindingKind }}
+kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}RoleBinding
 metadata:
   name: {{ .Values.clusterRoleSettings.clusterRoleBindingName }}
   namespace: {{ .Release.Namespace }}
