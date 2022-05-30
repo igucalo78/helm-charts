@@ -41,6 +41,7 @@ env:
 
 
 jmxExporter:
+  enabled: true
   securityContext: {}
   image:
     repository: sscaling/jmx-prometheus-exporter
