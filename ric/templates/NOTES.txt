@@ -44,10 +44,11 @@
 {{ if index .Values "acc-4g-infrastructure" "provisioner" "enabled" }}## 4G dRAX Provisioner
 {{ .Values.global.kubeIp }}:{{ index .Values "acc-4g-infrastructure" "provisioner" "nginx" "service" "nodePort" }}{{ end }}{{- end -}}
 
+{{ if index .Values "keycloak-ingress" "enabled" }}
 {{ if index .Values "keycloak-ingress" "ingress-nginx" "controller" "service" "nodePorts" "http" }}## Ingress URL
 {{ .Values.global.kubeIp }}:{{ index .Values "keycloak-ingress" "ingress-nginx" "controller" "service" "nodePorts" "http" }}{{ end }}
 
 To get the Keycloak Admin password, run:
-echo $(kubectl get secret {{ .Release.Name }}-keycloak-secret -o jsonpath="{.data.KEYCLOAK_PASSWORD}" | base64 --decode)
+echo $(kubectl get secret {{ .Release.Name }}-keycloak-secret -o jsonpath="{.data.KEYCLOAK_PASSWORD}" | base64 --decode){{ end }}
 
 ###############################################
