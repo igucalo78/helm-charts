@@ -22,7 +22,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{ if .Values.jobs.deleteExistingData }}
-      initContainer:
+      initContainers:
         - name: {{ .Chart.Name }}-clean-redis
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
