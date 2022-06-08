@@ -13,7 +13,7 @@ global:
   #                in DockerHub.
   #   Value type: string
   #
-  tag: "beta-f6c302d"
+#  tag: "beta-85252dc"
 
 
   # Redis settings
@@ -26,67 +26,8 @@ global:
   redisHostname: "10.55.1.2"
   redisPort: "32220"
 
-netconf:
-  configOnBoot:
-    enabled: true
-    deleteExistingConfig: false
-    configId: "cw"
-    cwConfig:
-      monitorControlConfiguration:
-        monitorRate:
-          seconds: 20
-          miliSeconds: 0
-      autoRepairerConfiguration:
-        numberOfContainersCounterThreshold: 2
-        l1RruTrafficCounterThreshold: 3
-        saveLogRequestStatus: true
-      physicalCellConfiguration:
-        publicKey: "/home/accelleran/5G/ssh/public"
-        privateKey: "/home/accelleran/5G/ssh/private"
-      distributedUnit:
-        name: du-1
-        type: phluido
-        logSourcePath: /run/logs-du/du
-        logDestinationPath: /home/ad/granny/logs-du-backup
-        connectionDetails:
-          host: 10.22.11.147
-          port: 22
-          username: ad
-        dockerComposeDetails:
-          filePath: /home/ad/granny/config/du/benetel650/docker-compose.yml
-          serviceName: du
-          containerName: gnb_du_main_phluido
-        layer1:
-          name: l1-1
-          type: phluido
-          logSourcePath: /run/logs-du/l1
-          logDestinationPath: /home/ad/granny/logs-du-backup
-          dockerComposeDetails:
-            filePath: /home/ad/granny/config/du/benetel650/docker-compose.yml
-            serviceName: phluido_l1
-            containerName: phluido_l1
-        radioUnit:
-          name: ru-1
-          type: benetel650
-          connectionDetails:
-            host: 10.10.0.100
-            port: 22
-            username: root
-
 redis:
   enabled: true
-
-  nameOverride: "redis-cw"
-
-  # Custom labels for the deployment
-  customLabels:
-    drax/technology: 5g
-
-  # The External IP of where NATS is installed
-  natsIp: "{{ .Values.global.natsUrl }}"
-
-  # The port NATS is using, check in the above settings of NATS
-  natsPort: "{{ .Values.global.natsPort }}"
 
   # Backup the redis db when the pod is terminated
   backup:
@@ -95,43 +36,10 @@ redis:
     # Choose after how many days should the backed up DBs be deleted
     deleteAfterDay: 7
 
-  service:
-    type: NodePort
-    port: 6379
-    nodePort: 32220
-    name: "redisport"
-    serviceName: '{{ include "redis.fullname" . }}'
-
-  persistence:
-    accessModes:
-      - ReadWriteMany
-    enabled: true
-    size: 10Gi
-    storageClassName: acc-redis-cw
-    type: pvc
-    ### TESTING
-    #hostPath: /opt/pods/acc-redis
-    ### Production
-    hostPath: /opt/pods/redis-storage-cw
-
-  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
-  draxNodeSelector:
-    draxName: "{{ .Values.global.draxName }}"
+  # Enabled or disable different jobs
+  jobs:
+    # If the data in Redis should be deleted on Redis startup, enable this job
+    deleteExistingData: false
 
 nats:
   enabled: false
-
-  nameOverride: "nats-cw"
-
-  commonLabels:
-    drax/technology: 5g
-
-  service:
-    serviceName: '{{ include "nats.fullname" . }}'
-    type: NodePort
-    client:
-      nodePort: 31110
-
-  draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
-  draxNodeSelector:
-    draxName: "{{ .Values.global.draxName }}"

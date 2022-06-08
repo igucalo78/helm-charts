@@ -286,6 +286,11 @@ redis:
     # Choose after how many days should the backed up DBs be deleted
     deleteAfterDay: 7
 
+  # Enabled or disable different jobs
+  jobs:
+    # If the data in Redis should be deleted on Redis startup, enable this job
+    deleteExistingData: false
+
   service:
     type: NodePort
     port: 6379

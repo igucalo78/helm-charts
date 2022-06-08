@@ -21,6 +21,27 @@ spec:
       serviceAccountName: {{ include "redis.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if .Values.jobs.deleteExistingData }}
+      initContainer:
+        - name: {{ .Chart.Name }}-clean-redis
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+          imagePullPolicy: {{ .Values.initImage.pullPolicy }}
+          volumeMounts:
+            {{- if .Values.persistence.enabled }}
+            - name: acc-redis
+              mountPath: /data
+            {{- end }}
+          command:
+            - sh
+            - -c
+            - |
+              /bin/sh <<'EOF'
+              rm /data/dump.rdb
+              rm /data/appendonly.aof
+              echo "Deleted Redis DB on $(date)" >> /data/clean-redis.log
+      {{ end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

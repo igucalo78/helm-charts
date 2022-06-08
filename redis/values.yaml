@@ -13,6 +13,11 @@ image:
   repository: redis
   pullPolicy: IfNotPresent
 
+initImage:
+  repository: accelleran/acc-generic-img
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -26,6 +31,9 @@ natsPort: "31000"
 backup:
   enabled: true
   deleteAfterDay: 7
+
+jobs:
+  deleteExistingData: false
 
 serviceAccount:
   # Specifies whether a service account should be created
