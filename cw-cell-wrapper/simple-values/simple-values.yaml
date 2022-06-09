@@ -4,17 +4,8 @@ global:
   #                to NATS
   #   Value type: string
   #
-  natsUrl: "10.55.1.2"
+  natsUrl: ""
   natsPort: "31100"
-
-
-  # Version of the 5G applications
-  #   Description: This is the version of the 5G applications
-  #                in DockerHub.
-  #   Value type: string
-  #
-#  tag: "beta-52b5acc"
-
 
   # Redis settings
   #   Description: Certain application need to be able to reach
@@ -23,12 +14,10 @@ global:
   #   Value type: string
   #   Example:
   #
-  redisHostname: "10.55.1.2"
+  redisHostname: ""
   redisPort: "32220"
 
 redis:
-  enabled: true
-
   # Backup the redis db when the pod is terminated
   backup:
     # Enabled or disable this feature
@@ -42,8 +31,10 @@ redis:
     deleteExistingData: false
 
 nats:
+  # Enable or disable deploying a separate NATS just for the Cell Wrapper
   enabled: false
 
 #netconf:
 #  netconfService:
+#    # The Node port on which NetConf will be exposed on the host machine
 #    nodePort: 31832

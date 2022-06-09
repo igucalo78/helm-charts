@@ -48,9 +48,9 @@ kubectl create secret generic cw-private --from-file=private=id_rsa
 kubectl create secret generic cw-public --from-file=public=id_rsa.pub
 ```
 
-**NOTE:** This creates two secrets name cw-private and cw-public, which contain two files: private and public. Its important to have these file names as the CW application expects them. Therefore we use the above syntax to specify the names inside the secret, and then specify the file from which you want to load the secrets, which can be generic.
+**NOTE:** This creates two secrets name cw-private and cw-public, which contain two files: private and public. It's important to have these file names as the CW application expects them. Therefore we use the above syntax to specify the names inside the secret, and then specify the file from which you want to load the secrets, which can be generic.
 
-# Quick Guide
+# Quick Install Guide
 ## Prepare my-values.yaml file
 You can fetch the simple values.yaml file template of the CW Helm Chart from the following link:
 
@@ -58,19 +58,19 @@ You can fetch the simple values.yaml file template of the CW Helm Chart from the
 
 Here are the filed to edit per deployment:
 
-| Syntax                          | Type     | Description                                                                                                                                                                                                                   |
-|---------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| global.natsUrl                  | Required | A string indicating the IP where the NATS server is located                                                                                                                                                                   |
-| global.natsPort                 | Required | A string indicating the PORT where the NATS server is located                                                                                                                                                                 |
-| global.redisHostname            | Required | A string indicating the IP where the Redis server is located                                                                                                                                                                  |
-| global.redisPort                | Required | A string indicating the PORT where the Redis server is located (this is basically the redis.service.nodePort field which is by default (32220)                                                                                |
-| redis.service.nodePort          | Optional | An int indicating the Node Port where Redis will be exposed (default 32220)                                                                                                                                                   |
-| redis.backup.enabled            | Optional | A bool indicating whether to backup the Redis database when the cell-wrapper is deleted (default true)                                                                                                                        |
-| redis.backup.deleteAfterDay     | Optional | An int indicating for how many days should the Redis backup be kept (default 7)                                                                                                                                               |
-| redis.jobs.deleteExistingData   | Optional | A bool indicating whether to delete all the existing data in the persisted Redis database before starting the Redis server                                                                                                    |
-| nats.enabled                    | Optional | A bool indicating whether to deploy a NATS server just for the CW (default false)                                                                                                                                             |
-| nats.service.client.nodePort    | Optional | An int indicating the port where the NAST server will be exposed (default 31110, if nats.enabled is set to true, you have to specify this port in global.natsPort)                                                            |
-| netconf.netconfService.nodePort | Optional | An in indicating the port where the NetConf server will be exposed (default commented out, which means the port will be asigned randomly on each deployment. If set, then the NetConf port will persist on each redeployment) |
+| Name                          | Type     | Description                                                                                                                                                                                                                       | Default value |
+|---------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| global.natsUrl                  | Required | A string indicating the IP where the NATS server is located                                                                                                                                                                       | ""          |
+| global.natsPort                 | Required | A string indicating the PORT where the NATS server is located                                                                                                                                                                     | "31100"     |
+| global.redisHostname            | Required | A string indicating the IP where the Redis server is located                                                                                                                                                                      | ""          |
+| global.redisPort                | Required | A string indicating the PORT where the Redis server is located (this is basically the redis.service.nodePort field which is by default (32220)                                                                                    | "32220"     |
+| redis.service.nodePort          | Optional | An int indicating the Node Port where Redis will be exposed (default 32220)                                                                                                                                                       | 32220 |
+| redis.backup.enabled            | Optional | A bool indicating whether to backup the Redis database when the cell-wrapper is deleted (default true)                                                                                                                            | true |
+| redis.backup.deleteAfterDay     | Optional | An int indicating for how many days should the Redis backup be kept (default 7)                                                                                                                                                   | 7 |
+| redis.jobs.deleteExistingData   | Optional | A bool indicating whether to delete all the existing data in the persisted Redis database before starting the Redis server                                                                                                        | false |
+| nats.enabled                    | Optional | A bool indicating whether to deploy a NATS server just for the CW (default false)                                                                                                                                                 | false |
+| nats.service.client.nodePort    | Optional | An int indicating the port where the NAST server will be exposed (default 31110, if nats.enabled is set to true, you have to specify this port in global.natsPort)                                                                | 31110 |
+| netconf.netconfService.nodePort | Optional | An in indicating the port where the NetConf server will be exposed (default commented out, which means the port will be asigned randomly on each deployment. If set, then the NetConf port will persist on each redeployment)     | 31832 |
 
 Create a YAML file with the above details filled in and save it as my-values.yaml (can be any generic name, just make sure you use it in the helm install command below). For example:
 
@@ -98,7 +98,7 @@ netconf:
     nodePort: 31832
 ```
 
-**NOTE:** As the CW is deployed along with the Accelleran 5G CU normally, we can use the NATS server of the 5G CU instead of deploying a separate NATS. Hence, we for example specify the 31100 port which is the default NATS port for the 5G CU deployment. Otherwise, we can deploy a separate instance of NATS using the CW Helm chart.
+**NOTE 1:** As the CW is deployed along with the Accelleran 5G CU normally, we can use the NATS server of the 5G CU instead of deploying a separate NATS. Hence, we for example specify the 31100 port which is the default NATS port for the 5G CU deployment. Otherwise, we can deploy a separate instance of NATS using the CW Helm chart.
 
 ## Install the CW
 To install the CW, use the Helm install command and provide the custom values file created in the previous step (don't forget to update the helm repo to fetch the latest stable helm chart):
@@ -116,21 +116,125 @@ helm search repo acc-helm -l
 
 **NOTE 2:** If you also want to see the release candidate version, add the ```--devel``` parameter at the end of the helm search command.
 
+# Install CW and configure it on deployment
+The CW Helm Chart also has the posibility to not only deploy the CW, but to also configure it. It does so by sending the NetConf config RPC during the deployment. 
+
+## Prepare netconf config values file
+To do this, besides the above-mentioned my-values.yaml file, prepare a separate (it can also be all in a single file, we separate it for organisational purposes) netconf-values.yaml file. An example of this file can be found [here](https://raw.githubusercontent.com/accelleran/helm-charts/master/cw-cell-wrapper/netconf-on-boot-values.yaml). This file should look like this:
+
+```yaml
+netconf:
+  configOnBoot:
+    enabled: true
+    deleteExistingConfig: false
+    host: 'localhost'
+    config: |
+      <configuration xmlns="http://accelleran.com/ns/yang/accelleran-granny" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
+        <admin-state>locked</admin-state>
+        
+        <monitor-control-configuration xc:operation="create">
+            <monitor-rate xc:operation="create">
+                <seconds>10</seconds>
+                <milli-seconds>0</milli-seconds>
+            </monitor-rate>
+        </monitor-control-configuration>
+
+        <auto-repairer-configuration xc:operation="create">
+            <number-of-containers-counter-threshold>2</number-of-containers-counter-threshold>
+            <l1-rru-traffic-counter-threshold>3</l1-rru-traffic-counter-threshold>
+            <save-log-request-status>true</save-log-request-status>
+        </auto-repairer-configuration>
+        
+        <physical-cell-configuration xc:operation="create">
+            <ssh-key-pair xc:operation="create">
+                <public-key>/tmp/granny_key.pub</public-key>
+                <private-key>/tmp/granny_key</private-key>
+            </ssh-key-pair>
+
+            <distributed-unit xc:operation="create">
+                <name>du-1</name>
+                <type>phluido</type>
+                
+                <enable-log-saving>true</enable-log-saving>
+                <log-source-path>/run/logs-du/du</log-source-path>
+                <log-destination-path>/tmp/logs-du-backup</log-destination-path>
+                <duplicated-log-file>/tmp/logs-du/du.0 </duplicated-log-file>
+
+                <connection-details xc:operation="create">
+                    <host>localhost</host>
+                    <port>22</port>
+                    <username>root</username>
+                </connection-details>
+
+                <docker-compose-details xc:operation="create">
+                    <file-path>/home/ad/granny/config/du/benetel650/docker-compose.yml</file-path>
+                    <service-name>du</service-name>
+                    <container-name>gnb_du_main_phluido</container-name>
+                </docker-compose-details>
+
+                <layer-1 xc:operation="create">
+                    <name>l1-1</name>
+                    <type>phluido</type>
+
+                    <log-source-path>/run/logs-du/l1</log-source-path>
+                    <log-destination-path>/tmp/logs-l1-backup</log-destination-path>
+
+                    <docker-compose-details xc:operation="create">
+                        <file-path>/home/ad/granny/config/du/benetel650/docker-compose.yml</file-path>
+                        <service-name>phluido_l1</service-name>
+                        <container-name>phluido_l1</container-name>
+                    </docker-compose-details>
+
+                    <radio-unit xc:operation="create">
+                        <name>ru-1</name>
+                        <type>benetel650</type>
+                        <enable-ssh>false</enable-ssh>
+
+
+                        <connection-details xc:operation="create">
+                            <host>localhost</host>
+                            <port>22</port>
+                            <username>root</username>
+                        </connection-details>
+
+                    </radio-unit>
+                </layer-1>
+            </distributed-unit>
+        </physical-cell-configuration>
+      </configuration>
+```
+
+The fields are:
+
+| Name                                      | Type                                          | Description                                                                                                                                           | Default value |
+|-------------------------------------------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| netconf.configOnBoot.enabled              | Optional    | A bool to enable or disable setting the configuration on deployment (note it is up to the user to know if there is an existing configuration already) | false         |
+| netconf.configOnBoot.deleteExistingConfig | Optional | A bool to indicate whether to first delete the existing configruation before applying the new one                                                     | false         |
+| netconf.configOnBoot.host                 | Required if netconf.configOnBoot.enabled=true | The hostname where NetConf is located. Because this job runs inside the NetConf server pod, ths should always be localhost.                           | 'localhost'   |
+| netconf.configOnBoot.config               | Required if netconf.configOnBoot.enabled=true | The configuration RPC XML set as a multiline string in YAML. Look at the example netconf values file.                                                 | ""            |
+
+## Install and configure CW
+Now use the helm install command and specify two values files, one for the my-values.yaml and one for the netconf config:
+
+```shell
+helm install cell-wrapper acc-helm/cw-cell-wrapper --values my-values.yaml --values netconf-values.yaml
+```
+
 # Full description of the values.yaml
 The values.yaml file contains all the on-deployment time configurable parameters. Here we describe them.
 
-| Syntax                          | Type     | Description                                                                                                                                                                                                                   |
-|---------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| global.natsUrl                  | Required | A string indicating the IP where the NATS server is located                                                                                                                                                                   |
-| global.natsPort                 | Required | A string indicating the PORT where the NATS server is located                                                                                                                                                                 |
-| global.redisHostname            | Required | A string indicating the IP where the Redis server is located                                                                                                                                                                  |
-| global.redisPort                | Required | A string indicating the PORT where the Redis server is located (this is basically the redis.service.nodePort field which is by default (32220)                                                                                |
-| redis.service.nodePort          | Optional | An int indicating the Node Port where Redis will be exposed (default 32220)                                                                                                                                                   |
-| redis.backup.enabled            | Optional | A bool indicating whether to backup the Redis database when the cell-wrapper is deleted (default true)                                                                                                                        |
-| redis.backup.deleteAfterDay     | Optional | An int indicating for how many days should the Redis backup be kept (default 7)                                                                                                                                               |
-| redis.jobs.deleteExistingData   | Optional | A bool indicating whether to delete all the existing data in the persisted Redis database before starting the Redis server                                                                                                    |
-| nats.enabled                    | Optional | A bool indicating whether to deploy a NATS server just for the CW (default false)                                                                                                                                             |
-| nats.service.client.nodePort    | Optional | An int indicating the port where the NAST server will be exposed (default 31110, if nats.enabled is set to true, you have to specify this port in global.natsPort)                                                            |
-| netconf.netconfService.nodePort | Optional | An in indicating the port where the NetConf server will be exposed (default commented out, which means the port will be asigned randomly on each deployment. If set, then the NetConf port will persist on each redeployment) |
+| Name                          | Type     | Description                                                                                                                                                                                                                       | Default value |
+|---------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| global.natsUrl                  | Required | A string indicating the IP where the NATS server is located                                                                                                                                                                       | ""          |
+| global.natsPort                 | Required | A string indicating the PORT where the NATS server is located                                                                                                                                                                     | "31100"     |
+| global.redisHostname            | Required | A string indicating the IP where the Redis server is located                                                                                                                                                                      | ""          |
+| global.redisPort                | Required | A string indicating the PORT where the Redis server is located (this is basically the redis.service.nodePort field which is by default (32220)                                                                                    | "32220"     |
+| redis.service.nodePort          | Optional | An int indicating the Node Port where Redis will be exposed (default 32220)                                                                                                                                                       | 32220 |
+| redis.backup.enabled            | Optional | A bool indicating whether to backup the Redis database when the cell-wrapper is deleted (default true)                                                                                                                            | true |
+| redis.backup.deleteAfterDay     | Optional | An int indicating for how many days should the Redis backup be kept (default 7)                                                                                                                                                   | 7 |
+| redis.jobs.deleteExistingData   | Optional | A bool indicating whether to delete all the existing data in the persisted Redis database before starting the Redis server                                                                                                        | false |
+| nats.enabled                    | Optional | A bool indicating whether to deploy a NATS server just for the CW (default false)                                                                                                                                                 | false |
+| nats.service.client.nodePort    | Optional | An int indicating the port where the NAST server will be exposed (default 31110, if nats.enabled is set to true, you have to specify this port in global.natsPort)                                                                | 31110 |
+| netconf.netconfService.nodePort | Optional | An in indicating the port where the NetConf server will be exposed (default commented out, which means the port will be asigned randomly on each deployment. If set, then the NetConf port will persist on each redeployment)     | 31832 |
 
 TBD

@@ -1,8 +1,15 @@
 netconf:
   configOnBoot:
+    # enable or disable configuration on deployment
     enabled: true
+
+    # If you want to delete any existing configuration in Redis, set this to true
     deleteExistingConfig: false
+
+    # The hostname where NetConf is located, this should always be 'localhost'
     host: 'localhost'
+
+    # The configuration RPC XML. Should be written as a multiline YAML string
     config: |
       <configuration xmlns="http://accelleran.com/ns/yang/accelleran-granny" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
         <admin-state>locked</admin-state>
