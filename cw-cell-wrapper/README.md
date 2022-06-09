@@ -101,11 +101,20 @@ netconf:
 **NOTE:** As the CW is deployed along with the Accelleran 5G CU normally, we can use the NATS server of the 5G CU instead of deploying a separate NATS. Hence, we for example specify the 31100 port which is the default NATS port for the 5G CU deployment. Otherwise, we can deploy a separate instance of NATS using the CW Helm chart.
 
 ## Install the CW
-To install the CW, use the Helm install command and provide the custom values file created in teh previous step:
+To install the CW, use the Helm install command and provide the custom values file created in the previous step (don't forget to update the helm repo to fetch the latest stable helm chart):
 
 ```shell
+helm repo update
 helm install cell-wrapper acc-helm/cw-cell-wrapper --values my-values.yaml
 ```
+
+**NOTE 1:** Of course, there can be multiple versions of the Helm chart. you can specify the version of the Helm Chart using the --version parameter in the helm install command. Just make sure that the values file is compatible with the version of the helm chart. You can check the different version of the helm chart using:
+```shell
+helm repo update
+helm search repo acc-helm -l
+```
+
+**NOTE 2:** If you also want to see the release candidate version, add the ```--devel``` parameter at the end of the helm search command.
 
 # Full description of the values.yaml
 The values.yaml file contains all the on-deployment time configurable parameters. Here we describe them.
