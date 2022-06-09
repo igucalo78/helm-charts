@@ -36,9 +36,9 @@ netconf:
                 <duplicated-log-file>/tmp/logs-du/du.0 </duplicated-log-file>
 
                 <connection-details xc:operation="create">
-                    <host>10.22.11.147</host>
+                    <host>localhost</host>
                     <port>22</port>
-                    <username>ad</username>
+                    <username>root</username>
                 </connection-details>
 
                 <docker-compose-details xc:operation="create">
@@ -67,7 +67,7 @@ netconf:
 
 
                         <connection-details xc:operation="create">
-                            <host>10.10.0.100</host>
+                            <host>localhost</host>
                             <port>22</port>
                             <username>root</username>
                         </connection-details>
