@@ -168,7 +168,9 @@ spec:
         - name: {{ include "cw-phy-cell.fullname" . }}-ssh-public
           secret:
             secretName: {{ tpl .Values.cwSsh.publicKeySecretName . }}
+            defaultMode: 256
 
         - name: {{ include "cw-phy-cell.fullname" . }}-ssh-private
           secret:
             secretName: {{ tpl .Values.cwSsh.privateKeySecretName . }}
+            defaultMode: 256

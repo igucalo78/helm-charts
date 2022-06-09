@@ -43,3 +43,7 @@ redis:
 
 nats:
   enabled: false
+
+#netconf:
+#  netconfService:
+#    nodePort: 31832
