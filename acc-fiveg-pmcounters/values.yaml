@@ -34,7 +34,7 @@ image:
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
-  tag: "0.6.0"
+  tag: "0.7.1"
 
 initConfig:
   kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
@@ -78,16 +78,12 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext: {}
-  # fsGroup: 2000
+# podSecurityContext: 
+#   fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# securityContext: 
+#   runAsNonRoot: true
+#   runAsUser: 1000
 
 service:
   enabled: true

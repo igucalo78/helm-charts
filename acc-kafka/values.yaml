@@ -8,13 +8,13 @@ image:
   repository: accelleran/acc-kafka
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "2.7.0"
+  tag: "2.7.1"
 
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.4.1"
+  tag: "0.7.1"
 
 imagePullSecrets:
   - name: accelleran-secret

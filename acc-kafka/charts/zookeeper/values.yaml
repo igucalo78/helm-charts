@@ -91,8 +91,9 @@ podLabels: {}  # Key/value pairs that are attached to zookeeper pods.
   # service: "zookeeper"
 
 securityContext:
-  fsGroup: 0
-  runAsUser: 0
+  runAsNonRoot: true
+  fsGroup: 1000
+  runAsUser: 1000
 
 ## Useful, if you want to use an alternate image.
 command:

@@ -21,7 +21,7 @@ image:
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
-  tag: "0.6.0"
+  tag: "0.7.1"
 imagePullSecrets:
   - name: accelleran-secret
 ingress:
@@ -41,11 +41,14 @@ nodeSelector: {}
 draxNodeSelectorEnabled: "false"
 draxNodeSelector:
   draxName: "main"
-podSecurityContext: {}
 replicaCount: 1
 resources: {}
+podSecurityContext:
+  runAsUser: 101
+  runAsNonRoot: true
 securityContext:
-  runAsUser: 0
+  runAsUser: 101
+  runAsNonRoot: true
 service:
   enabled: false
   port: 80

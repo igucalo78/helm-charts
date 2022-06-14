@@ -14,7 +14,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}Role
   name: {{ include "kafka-minion.fullname" . }}
 subjects:
 - kind: ServiceAccount

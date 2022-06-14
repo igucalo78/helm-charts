@@ -13,7 +13,7 @@ image:
 initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
-  tag: "0.6.0"
+  tag: "0.7.1"
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -47,16 +47,11 @@ serviceAccount:
   name:
 
 podSecurityContext:
-  {}
-  # fsGroup: 2000
-
+  runAsUser: 101
+  runAsNonRoot: true
 securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  runAsUser: 0
+  runAsUser: 101
+  runAsNonRoot: true
 
 service:
   enabled: false
