@@ -23,7 +23,7 @@ subjects:
   namespace: {{ template "grafana.namespace" . }}
 {{- if .Values.rbac.namespaced }}
 roleRef:
-  kind: Role
+  kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}Role
   name: {{ template "grafana.fullname" . }}
   apiGroup: rbac.authorization.k8s.io
 {{- end }}
