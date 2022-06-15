@@ -1,6 +1,9 @@
 loki:
   enabled: true
 
+  persistence:
+    dynamicProvisioningEnabled: "false"
+
   draxNodeSelectorEnabled: "false"
 
   draxNodeSelector:

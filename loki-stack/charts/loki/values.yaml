@@ -123,6 +123,8 @@ draxNodeSelector:
 ## - keep storageClassName same with below setting
 persistence:
   enabled: true
+  dynamicProvisioningEnabled: "false"
+
   type: pvc
   accessModes:
   - ReadWriteOnce
@@ -148,7 +150,8 @@ podManagementPolicy: OrderedReady
 
 rbac:
   create: true
-  pspEnabled: true
+  pspEnabled: false
+  namespaced: "false"
 
 readinessProbe:
   httpGet:
