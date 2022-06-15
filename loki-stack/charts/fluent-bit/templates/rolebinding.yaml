@@ -1,6 +1,6 @@
 {{- if .Values.rbac.create }}
 apiVersion: rbac.authorization.k8s.io/v1
-kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}RoleBinding
+kind: RoleBinding
 metadata:
   name: {{ template "fluent-bit-loki.fullname" . }}
   namespace: {{ .Release.Namespace }}

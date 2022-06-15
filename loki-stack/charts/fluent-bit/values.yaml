@@ -70,7 +70,8 @@ podAnnotations:
 
 rbac:
   create: true
-  pspEnabled: true
+  pspEnabled: false
+  namespaced: "false"
 
 resources:
   limits:
