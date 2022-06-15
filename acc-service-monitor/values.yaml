@@ -6,6 +6,9 @@ replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
 
+rbac:
+  namespaced: "false"
+
 image:
   repository: accelleran/acc-service-monitor
   pullPolicy: IfNotPresent
@@ -18,13 +21,6 @@ fullnameOverride: ""
 # Namespaces to monitor, comma "," seperated
 monitoredNamespaces: "{{ .Release.Namespace }}"
 
-
-# Specifies Resource Kind Role/CluesteRole and RoleBinding/ClusterRoleBinding
-# use Role/RoleBinding in namespaced environment 
-# use ClusterRole/ClusterRoleBinding in non-namespaced environment
-roleKind: Role
-roleBindingKind: RoleBinding
-
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -36,20 +32,13 @@ clusterRoleSettings:
   clusterRoleName: arm-acc-service-monitor-clusterrole
   clusterRoleBindingName: arm-acc-service-monitor-clusterrolebinding
 
-podSecurityContext: {}
-  # fsGroup: 2000
-
 securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  runAsUser: 0
+  runAsNonRoot: true
+  runAsUser: 101
 
 service:
   type: NodePort
-  port: 80
+  port: 8080
   nodePort: 30500
   name: "acc-ser-mon"
   serviceName: acc-service-monitor
