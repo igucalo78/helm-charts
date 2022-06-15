@@ -11,6 +11,6 @@ subjects:
     namespace: {{ .Release.Namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}Role
   name: {{ template "prometheus.alertmanager.fullname" . }}
 {{- end }}

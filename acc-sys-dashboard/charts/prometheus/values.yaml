@@ -25,6 +25,8 @@ alertmanager:
   draxNodeSelectorEnabled: "false"
   draxNodeSelector:
     draxName: "main"
+  persistence: 
+    dynamicProvisioningEnabled: "false"
   persistentVolume:
     accessModes:
     - ReadWriteMany
@@ -49,7 +51,6 @@ alertmanager:
   resources: {}
   securityContext:
     fsGroup: 65534
-#    runAsGroup: 65534
     runAsNonRoot: true
     runAsUser: 65534
   service:
@@ -229,6 +230,7 @@ pushgateway:
   tolerations: []
 rbac:
   create: true
+  namespaced: "false"
 server:
   strategyType: Recreate
   affinity: {}
@@ -273,9 +275,11 @@ server:
   draxNodeSelectorEnabled: "false"
   draxNodeSelector:
     draxName: "main"
+  persistence: 
+    dynamicProvisioningEnabled: "false"
   persistentVolume:
     accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
     annotations: {}
     enabled: true
     existingClaim: ""
@@ -304,7 +308,7 @@ server:
   retention: 15d
   securityContext:
     fsGroup: 0
-#    runAsGroup: 65534
+    #runAsGroup: 65534
     runAsNonRoot: false
     runAsUser: 0
   service:

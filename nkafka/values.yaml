@@ -19,7 +19,7 @@ initImage:
   repository: accelleran/acc-generic-img
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: 0.7.1
 
 initConfig:
   natsCheckEnabled: true
@@ -57,16 +57,12 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext: {}
-  # fsGroup: 2000
-
+podSecurityContext:
+  runAsUser: 101
+  runAsNonRoot: true
 securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  runAsUser: 0
+  runAsNonRoot: true
+  runAsUser: 101
 
 service:
   enabled: false
