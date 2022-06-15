@@ -9,7 +9,7 @@ subjects:
   name: {{ include "acc-service-monitor.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:  
-  kind: {{ .Values.roleKind }}
+  kind: {{if eq (tpl .Values.rbac.namespaced .) "false"}}Cluster{{end}}Role
   name: {{ .Values.clusterRoleSettings.clusterRoleName }}
   apiGroup: rbac.authorization.k8s.io
 {{- end -}}
