@@ -9,7 +9,6 @@ version: "{{ .Chart.AppVersion }}"
 image:
   repository: accelleran/acc-service-orchestrator
   pullPolicy: IfNotPresent
-  #pullPolicy: IfNotPresent
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -32,16 +31,10 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
-
 securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
+  #runAsNonRoot: true
+  #runAsUser: 101
+  #privileged: false
   runAsUser: 0
   privileged: true
 
@@ -49,7 +42,7 @@ service:
   serviceName: acc-service-orchestrator
   name: acc-ser-orc
   type: NodePort
-  port: 80
+  port: 8080
   nodePort: 30502
 
 ingress:
