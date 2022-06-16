@@ -14,11 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 5.0.0
+version: 5.1.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 5.0.0
+appVersion: 5.1.0
 
 # Dependencies
 dependencies:
@@ -40,11 +40,11 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
-    version: 3.4.8
+    version: 3.4.10
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled
-    version: 4.0.0
+    version: 4.1.0
     repository: https://accelleran.github.io/helm-charts/
   - name: loki-stack
     version: 0.43.0
@@ -55,7 +55,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-service-orchestrator
     condition: acc-service-orchestrator.enabled
-    version: 2.1.1
+    version: 2.2.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-state-db
     condition: global.enable4G
@@ -83,9 +83,13 @@ dependencies:
     repository: https://accelleran.github.io/5g-helm-charts
   - name: nkafka-5g
     condition: global.enable5G
-    version: 4.0.0
+    version: 4.0.1
     repository: https://accelleran.github.io/5g-helm-charts
   - name: acc-4g-infrastructure
     condition: global.enable4G
     version: 5.0.0
+    repository: https://accelleran.github.io/helm-charts/
+  - name: keycloak-ingress
+    condition: ingress.enabled
+    version: 0.1.0
     repository: https://accelleran.github.io/helm-charts/

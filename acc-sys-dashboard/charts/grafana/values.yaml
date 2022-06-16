@@ -125,8 +125,6 @@ persistence:
   storageClassName: grafana
   type: pvc
   hostPath: /opt/pods/
-plugins:
-  - cloudspout-button-panel
 podDisruptionBudget: {}
 podPortName: grafana
 rbac:
