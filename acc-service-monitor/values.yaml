@@ -4,11 +4,10 @@
 
 replicaCount: 1
 
-version: "{{ .Chart.AppVersion }}"
-
 image:
   repository: accelleran/acc-service-monitor
   pullPolicy: IfNotPresent
+  tag: ""
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -82,3 +81,6 @@ draxNodeSelector:
 tolerations: []
 
 affinity: {}
+
+developerMode:
+  enabled: false

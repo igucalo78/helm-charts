@@ -25,7 +25,18 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+          {{ if .Values.developerMode.enabled }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . | default .Chart.AppVersion }}-dev"
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              while true; do sleep 30; done;
+              EOF
+          {{ else }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . | default .Chart.AppVersion }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: MONITORED_NAMESPACES
