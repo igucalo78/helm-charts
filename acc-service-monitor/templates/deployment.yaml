@@ -32,7 +32,7 @@ spec:
             - "-c"
             - |
               /bin/bash <<'EOF'
-              sed -i 's/app.run()/app.run(host=os.environ.get('POD_IP'), port={{ .Values.service.port }}, debug=True)/g' /app/main.py
+              sed -i 's/app.run()/app.run(host=os.environ.get("POD_IP"), port={{ .Values.service.port }}, debug=True)/g' /app/main.py
               while true; do sleep 30; done;
               EOF
           {{ else }}
