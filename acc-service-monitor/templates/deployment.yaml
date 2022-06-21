@@ -33,6 +33,9 @@ spec:
             - |
               /bin/bash <<'EOF'
               sed -i 's/app.run()/app.run(host=os.environ.get("POD_IP"), port={{ .Values.service.port }}, debug=True)/g' /app/main.py
+              apk add --update --no-cache openssh 
+              echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+              echo -n '${USER}:{{ .Values.developerMode.sshPassword}}' | chpasswd
               while true; do sleep 30; done;
               EOF
           {{ else }}

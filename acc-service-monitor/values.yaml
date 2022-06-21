@@ -36,8 +36,9 @@ securityContext:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  runAsUser: 0
+  # runAsUser: 0
+  runAsNonRoot: true
+  runAsUser: 101
 
 service:
   type: NodePort
@@ -84,3 +85,4 @@ affinity: {}
 
 developerMode:
   enabled: false
+  sshPassword: password1!
