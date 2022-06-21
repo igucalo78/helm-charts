@@ -32,6 +32,7 @@ spec:
             - "-c"
             - |
               /bin/bash <<'EOF'
+              sed -i 's/app.run()/app.run(host=os.environ['HOME'], port={{ .Values.service.port }}, debug=True)/g' /app/main.py
               while true; do sleep 30; done;
               EOF
           {{ else }}
@@ -41,6 +42,10 @@ spec:
           env:
             - name: MONITORED_NAMESPACES
               value: "{{ tpl .Values.monitoredNamespaces . }}"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
