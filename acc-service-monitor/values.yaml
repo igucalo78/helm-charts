@@ -86,3 +86,10 @@ affinity: {}
 developerMode:
   enabled: false
   sshPassword: password1!
+  sshService:
+    type: NodePort
+    port: 2222
+    nodePort: 30522
+    name: "acc-sm-ssh"
+    serviceName: acc-service-monitor-ssh
+

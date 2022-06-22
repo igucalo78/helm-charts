@@ -34,7 +34,8 @@ spec:
               /bin/bash <<'EOF'
               sed -i 's/app.run()/app.run(host=os.environ.get("POD_IP"), port={{ .Values.service.port }}, debug=True)/g' /app/main.py
               echo 'PasswordAuthentication yes' | sudo tee -a /etc/ssh/sshd_config
-              echo -n '${USER}:{{ .Values.developerMode.sshPassword}}' | sudo chpasswd
+              echo 'Port {{ .Values.developerMode.sshService.port }}' | sudo tee -a /etc/ssh/sshd_config
+              echo -n 'uwsgi:{{ .Values.developerMode.sshPassword}}' | sudo chpasswd
               sudo ssh-keygen -A
               sudo /usr/sbin/sshd
               while true; do sleep 30; done;

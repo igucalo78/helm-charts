@@ -1,0 +1,17 @@
+{{ if .Values.developerMode.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.developerMode.sshService.serviceName }}
+  labels:
+    {{- include "acc-service-monitor.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.developerMode.sshService.type }}
+  ports:
+    - port: {{ .Values.developerMode.sshService.port }}
+      nodePort: {{ .Values.developerMode.sshService.nodePort }}
+      protocol: TCP
+      name: {{ .Values.developerMode.sshService.name }}
+  selector:
+    {{- include "acc-service-monitor.selectorLabels" . | nindent 4 }}
+{{ end }}
