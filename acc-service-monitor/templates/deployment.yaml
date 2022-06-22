@@ -49,6 +49,8 @@ spec:
               
               sudo ssh-keygen -A
               sudo /usr/sbin/sshd
+
+              echo "To run with sudo privilages but keep envrionmental variables, run command with sudo -E python3 main.py" > HOW_TO_RUN_SUDO.txt
               
               while true; do sleep 30; done;
               EOF
