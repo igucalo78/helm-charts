@@ -45,7 +45,7 @@ spec:
               echo 'PermitUserEnvironment yes' | sudo tee -a /etc/ssh/sshd_config
               echo 'Port {{ .Values.developerMode.sshService.port }}' | sudo tee -a /etc/ssh/sshd_config
               
-              echo -n 'uwsgi:{{ .Values.developerMode.sshPassword}}' | sudo chpasswd
+              echo -n 'dev:{{ .Values.developerMode.sshPassword}}' | sudo chpasswd
               
               sudo ssh-keygen -A
               sudo /usr/sbin/sshd
