@@ -50,7 +50,7 @@ spec:
               sudo ssh-keygen -A
               sudo /usr/sbin/sshd
 
-              echo "To run with sudo privilages but keep envrionmental variables, run command with sudo -E python3 main.py" > HOW_TO_RUN_SUDO.txt
+              echo "To run with sudo privileges but keep environment variables, run command with sudo -E python3 main.py. Note this is necessary when running in unprivileged mode (for example using ports lower than 1024)." > HOW_TO_RUN_SUDO.txt
               
               while true; do sleep 30; done;
               EOF
