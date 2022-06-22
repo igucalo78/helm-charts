@@ -85,6 +85,9 @@ affinity: {}
 
 developerMode:
   enabled: false
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
   sshPassword: password1!
   sshService:
     type: NodePort
