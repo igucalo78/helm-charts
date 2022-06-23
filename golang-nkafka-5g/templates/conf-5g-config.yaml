@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
+data:
+  5G.conf: |-
+    #
+    # Example configuration file for the nats-kafka bridge.
+    #
+
+    # The interval to wait to reconnect
+    reconnectinterval: 5000,
+
+    # The global connection timeout
+    connecttimeout: 5000,
+
+    # Logging options
+    logging: {
+      time: true,
+      debug: trace,
+      trace: trace,
+      colors: true,
+      pid: false,
+    }
+
+    monitoring: {
+      httpport: 9222,
+
+    #  Uncomment this block to enable TLS for the monitoring port.
+    #  httpsport: 9222,
+    #  tls: {
+    #      cert: /a/server-cert.pem,
+    #      key: /a/server-key.pem,
+    #  }
+    }
+
+    # Setup the global connection parameters to NATS
+    nats: {
+      Servers: ["{{ tpl .Values.natsUrl . }}"],
+      ConnectTimeout: {{ .Values.natsConnectionParameters.connectTimeout }},
+      MaxReconnects: {{ .Values.natsConnectionParameters.maxReconnects }},
+      ReconnectWait: {{ .Values.natsConnectionParameters.reconnectWait }},
+      ProtoBufDescriptorsFile: "{{ .Values.protoBuf.descriptorsFilename }}",
+      ProtoBufByteOffset: {{ .Values.protoBuf.byteOffset }},
+      JSONOutputPrefixBytes: {{ .Values.json.outputPrefixBytes }},
+      JSONOutputPrefixBytesLabel: "{{ .Values.json.outputPrefixBytesLabel }}",
+    }
+
+    include ../config/connections.conf
