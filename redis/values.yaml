@@ -71,6 +71,7 @@ persistence:
   accessModes:
     - ReadWriteMany
   enabled: true
+  dynamicProvisioningEnabled: "false"
   size: 10Gi
   storageClassName: acc-redis
   type: pvc
