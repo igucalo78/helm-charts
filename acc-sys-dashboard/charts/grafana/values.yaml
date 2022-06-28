@@ -118,6 +118,7 @@ draxNodeSelector:
   draxName: "main"
 notifiers: {}
 persistence:
+  dynamicProvisioningEnabled: "false"
   accessModes:
     - ReadWriteMany
   enabled: true
@@ -131,7 +132,7 @@ rbac:
   create: true
   extraClusterRoleRules: []
   extraRoleRules: []
-  namespaced: false
+  namespaced: "false"
   pspEnabled: true
   pspUseAppArmor: true
 readinessProbe:
