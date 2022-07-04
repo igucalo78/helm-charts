@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cw-cell-wrapper
+name: cw-ctrl
 description: A Helm chart for Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -15,38 +15,10 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0-rc.8
+version: 0.1.0-rc.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "beta-5b4b0df"
-
-# Dependencies
-dependencies:
-  - name: netconf
-    condition: netconf.enabled
-    version: 2.3.0-rc.2
-    repository: https://accelleran.github.io/5g-helm-charts/
-  - name: redis
-    condition: redis.enabled
-    version: 0.8.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: cw-phy-cell
-    condition: cw-phy-cell.enabled
-    version: 0.1.0-rc.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: cw-auto-repairer
-    condition: cw-auto-repairer.enabled
-    version: 0.1.0-rc.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: cw-ctrl
-    condition: cw-ctrl.enabled
-    version: 0.1.0-rc.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: nats
-    condition: nats.enabled
-    version: 0.8.4
-    repository: https://accelleran.github.io/helm-charts/
-    
+appVersion: "0.1.0-rc.0"

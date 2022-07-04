@@ -127,7 +127,7 @@ cw-auto-repairer:
     hostPath: ""
 
 
-cw-mon-ctrl:
+cw-ctrl:
   enabled: true
 
   image:
