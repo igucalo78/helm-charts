@@ -24,16 +24,52 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
+            {{ if .Values.developerMode.enabled }}
+            {{- toYaml .Values.developerMode.securityContext | nindent 12 }}
+            {{ else }}
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.version . }}"
+            {{ end }}
+          {{ if .Values.developerMode.enabled }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . | default .Chart.AppVersion }}-dev"
+          command:
+            - sh
+            - "-c"
+            - |
+              /bin/bash <<'EOF'
+              mkdir .ssh
+              env | grep _ >> .ssh/environment
+              
+              sed -i 's/app.run()/app.run(host=os.environ.get("POD_IP"), port={{ .Values.service.port }}, debug=True)/g' /app/main.py
+              
+              echo 'PasswordAuthentication yes' | sudo tee -a /etc/ssh/sshd_config
+              echo 'PermitUserEnvironment yes' | sudo tee -a /etc/ssh/sshd_config
+              echo 'Port {{ .Values.developerMode.sshService.port }}' | sudo tee -a /etc/ssh/sshd_config
+              
+              echo -n 'dev:{{ .Values.developerMode.sshPassword}}' | sudo chpasswd
+              
+              sudo ssh-keygen -A
+              sudo /usr/sbin/sshd
+
+              echo "To run with sudo privileges but keep environment variables, run command with sudo -E python3 main.py. Note this is necessary when running in unprivileged mode (for example using ports lower than 1024)." > HOW_TO_RUN_SUDO.txt
+              
+              while true; do sleep 30; done;
+              EOF
+          {{ else }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . | default .Chart.AppVersion }}"
+          {{ end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: MONITORED_NAMESPACES
               value: "{{ tpl .Values.monitoredNamespaces . }}"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - name: {{ .Values.service.name }}
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          {{ if not .Values.developerMode.enabled }}
           livenessProbe:
             httpGet:
               path: /services
@@ -42,6 +78,7 @@ spec:
             httpGet:
               path: /services
               port: {{ .Values.service.port }}
+          {{ end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
