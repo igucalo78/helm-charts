@@ -37,13 +37,13 @@ data:
     # Setup the global connection parameters to NATS
     nats: {
       Servers: ["{{ tpl .Values.natsUrl . }}"],
-      ConnectTimeout: {{ .Values.natsConnectionParameters.connectTimeout }},
-      MaxReconnects: {{ .Values.natsConnectionParameters.maxReconnects }},
-      ReconnectWait: {{ .Values.natsConnectionParameters.reconnectWait }},
-      ProtoBufDescriptorsFile: "{{ .Values.protoBuf.descriptorsFilename }}",
-      ProtoBufByteOffset: {{ .Values.protoBuf.byteOffset }},
-      JSONOutputPrefixBytes: {{ .Values.json.outputPrefixBytes }},
-      JSONOutputPrefixBytesLabel: "{{ .Values.json.outputPrefixBytesLabel }}",
+      ConnectTimeout: {{ .Values.config.natsConnectionParameters.connectTimeout }},
+      MaxReconnects: {{ .Values.config.natsConnectionParameters.maxReconnects }},
+      ReconnectWait: {{ .Values.config.natsConnectionParameters.reconnectWait }},
+      ProtoBufDescriptorsFile: "{{ .Values.config.protobuf.descriptorsFilename }}",
+      ProtoBufByteOffset: {{ .Values.config.protobuf.byteOffset }},
+      JSONOutputPrefixBytes: {{ .Values.config.json.outputPrefixBytes }},
+      JSONOutputPrefixBytesLabel: "{{ .Values.config.json.outputPrefixBytesLabel }}",
     }
 
     include ../config/connections.conf

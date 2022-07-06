@@ -49,9 +49,11 @@ spec:
             - name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
               mountPath: /5G.conf
               subPath: "5G.conf"
+            {{ if .Values.config.natsKafkaTopics.override }}
             - name: {{ include "golang-nkafka-5g.fullname" . }}-5gkafkatopics
               mountPath: /5GKafkaTopics.toml
               subPath: "5GKafkaTopics.toml"
+            {{ end }}
           command: ["/bin/sh"]
           args:
             - "-c"
@@ -112,9 +114,11 @@ spec:
         - name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
           configMap:
             name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
+        {{ if .Values.config.natsKafkaTopics.override }}
         - name: {{ include "golang-nkafka-5g.fullname" . }}-5gkafkatopics
           configMap:
             name: {{ include "golang-nkafka-5g.fullname" . }}-5gkafkatopics
+        {{ end }}
         {{ if eq (tpl .Values.accelleranLicense.enabled .) "true" }}
         - name: accelleran-license
           secret:

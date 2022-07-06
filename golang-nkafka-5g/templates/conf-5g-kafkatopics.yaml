@@ -1,3 +1,4 @@
+{{- if .Values.config.natsKafkaTopics.override }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -5,40 +6,11 @@ metadata:
 data:
   5GKafkaTopics.toml: |-
     [options]
-    default_kafka_topic="accelleran.drax.5g.ric.raw.messages"
+    default_kafka_topic="{{ .Values.config.natsKafkaTopics.defaultKafkaTopic }}"
 
+    {{- range $translations := .Values.config.natsKafkaTopics.translations }}
     [[translate]]
-    nats_subject="5G_CUUP_BEACON_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.cu_state"
-
-    [[translate]]
-    nats_subject="5G_CUUP_BEACON_INFO_UPDATED"
-    kafka_topic="accelleran.drax.5g.ric.raw.cu_state"
-
-    [[translate]]
-    nats_subject="5G_AMF_BEACON_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.cu_state"
-
-    [[translate]]
-    nats_subject="5G_DU_BEACON_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.cu_state"
-
-    [[translate]]
-    nats_subject="5G_MEAS_INFO.ENB=*.DU=*.CELL=*.UE=*"
-    kafka_topic="accelleran.drax.5g.ric.raw.ue_measurements"
-
-    [[translate]]
-    nats_subject="PM-REPORT-COUNTERS"
-    kafka_topic="accelleran.drax.5g.ric.raw.pm_counters"
-
-    [[translate]]
-    nats_subject="5G_COUNTERS_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.pm_counters"
-
-    [[translate]]
-    nats_subject="CUUP_COUNTERS_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.pm_counters"
-
-    [[translate]]
-    nats_subject="CUCP_COUNTERS_INFO"
-    kafka_topic="accelleran.drax.5g.ric.raw.pm_counters"
+    nats_subject="{{ .natsSubject }}"
+    kafka_topic="{{ .kafkaTopic }}"
+    {{- end }}
+{{- end }}

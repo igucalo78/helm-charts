@@ -13,7 +13,7 @@ replicaCount: 1
 image:
   repository: accelleran/golang-nkafka-5g
   pullPolicy: IfNotPresent
-  tag: "0.0.68"
+  tag: "0.0.79_R3.1.4_floreffe"
 
 initImage:
   repository: accelleran/acc-generic-img
@@ -30,22 +30,6 @@ imagePullSecrets:
   - name: accelleran-secret
 nameOverride: ""
 fullnameOverride: ""
-
-kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
-natsUrl: "ric-nats-5g.{{ .Release.Namespace }}:4222"
-
-natsConnectionParameters:
-  connectTimeout: 5000
-  maxReconnects: 120
-  reconnectWait: 5000
-
-protoBuf:
-  descriptorsFilename: "/home/conf/messages_5g.pb"
-  byteOffset: 0
-
-json:
-  outputPrefixBytes: false
-  outputPrefixBytesLabel: ""
 
 # If you want to run the NKafka tool with custom argument, you can override them here. Note all the args need to be strings!
 overrideArgs: []
@@ -90,3 +74,41 @@ draxNodeSelector:
 tolerations: []
 
 affinity: {}
+
+natsUrl: "ric-nats-5g.{{ .Release.Namespace }}:4222"
+kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
+
+config:
+  natsConnectionParameters:
+    connectTimeout: 5000
+    maxReconnects: 120
+    reconnectWait: 5000
+
+  protobuf:
+    descriptorsFilename: "/home/conf/messages_5g.pb"
+    byteOffset: 0
+
+  json:
+    outputPrefixBytes: false
+    outputPrefixBytesLabel: ""
+
+  natsKafkaTopics:
+    override: false
+    # defaultKafkaTopic: "accelleran.drax.5g.ric.raw.messages"
+    # translations:
+    #   - natsSubject: "5G_CUUP_BEACON_INFO"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.cu_state"
+    #   - natsSubject: "5G_CUUP_BEACON_INFO_UPDATED"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.cu_state"
+    #   - natsSubject: "5G_AMF_BEACON_INFO"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.cu_state"
+    #   - natsSubject: "5G_DU_BEACON_INFO"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.cu_state"
+    #   - natsSubject: "5G_MEAS_INFO.ENB=*.DU=*.CELL=*.UE=*"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.ue_measurements"
+    #   - natsSubject: "PM-REPORT-COUNTERS"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.pm_counters"
+    #   - natsSubject: "5G_COUNTERS_INFO"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.pm_counters"
+    #   - natsSubject: "CUCP_COUNTERS_INFO"
+    #     kafkaTopic: "accelleran.drax.5g.ric.raw.pm_counters"
