@@ -13,7 +13,7 @@ replicaCount: 1
 image:
   repository: accelleran/golang-nkafka-5g
   pullPolicy: IfNotPresent
-  tag: "0.0.79_R3.1.4_floreffe"
+  tag: "1.0.0-rc.0_R2.4.20_ename"
 
 initImage:
   repository: accelleran/acc-generic-img
