@@ -6,23 +6,11 @@
 
 # Release Notes ###############################
 
-## RIC 5.0.0
-### Added
-  - Adding Accelleran 4G Infrastructure as sub helm chart, enabled with the global.enable4G value (previously known as drax helm chart)
-
+## RIC 5.2.0-rc.1
 ### Changed
-  - Updated 5G Health dashboard to align with 5G CU version 4.0.0
-  - Updated to use 5G CU version 4 as default
-  - Updated Dashboard parsing of new 5G Beacon message format
-  - Updated 5G PM counters parse chain for new format
-
-### Fixed
-  - Fixed 5G Health dashboard to properly filter pods
-  - Fixed explanation of Disk Space in Health Dashboard in Grafana, it refers to the capacity not current usage
-  - Fixed bug when enable4g was set to false, it would disable 5G components on the dashboard as well
-
-# Limitations
-
+  - Replaced Rust-based NATS-Kafka bridge with Golang-based implementation
+  - Updated 4G implementation to 4G 5.2
+  - Updated Dashboard to support 4G 5.2
 
 # Services #####################################
 {{ if index .Values "acc-kafka" "enabled" }}## Kafka
