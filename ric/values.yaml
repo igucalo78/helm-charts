@@ -491,7 +491,7 @@ acc-5g-infrastructure:
     # For tracing purposes
     enabled: true
 
-nkafka-5g:
+golang-nkafka-5g:
   accelleranLicense:
     enabled: "{{ .Values.global.accelleranLicense.enabled }}"
     licenseSecretName: "{{ .Values.global.accelleranLicense.licenseSecretName }}"
@@ -503,37 +503,29 @@ nkafka-5g:
   kafkaUrl: "{{ .Release.Name }}-acc-kafka.{{ .Release.Namespace }}:9092"
   natsUrl: "{{ .Release.Name }}-nats-5g.{{ .Release.Namespace }}:4222"
 
-  initConfig:
-    kafkaTopicsCheck: "accelleran.drax.5g.ric.raw.messages,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state"
+  config:
+    natsConnectionParameters:
+      connectTimeout: 5000
+      maxReconnects: 120
+      reconnectWait: 5000
 
-  configs:
-    logLevel: info
+    protobuf:
+      descriptorsFilename: "/home/conf/messages_5g.pb"
+      byteOffset: 0
 
-  options:
-    - name: "topic"
-      value: "accelleran.drax.5g.ric.raw.messages"
-    - name: "rewrite_timestamp"
-      value: "insert"
-    - name: "max_len"
-      value: "1048756"
-    - name: "timeout"
-      value: "1000"
-    - name: "mask"
-      value: "true"
-    - name: "seq_mapper"
-      value: "none"
-    - name: "threads"
-      value: "1"
-    - name: "invert_service"
-      value: "false"
-    - name: "replicate_messages"
-      value: "false"
-    - name: "compact"
-      value: "true"
-    - name: "offset"
-      value: "0"
-    - name: "subject"
-      value: "topic"
+    json:
+      outputPrefixBytes: false
+      outputPrefixBytesLabel: ""
+
+    natsKafkaTopics:
+      override: false
+      # defaultKafkaTopic: "accelleran.drax.5g.ric.raw.messages"
+      # translations:
+      #   - natsSubject: "5G_CUUP_BEACON_INFO"
+      #     kafkaTopic: "accelleran.drax.5g.ric.raw.cu_state"
+      #   - natsSubject: "PM-REPORT-COUNTERS"
+      #     kafkaTopic: "accelleran.drax.5g.ric.raw.pm_counters"
+      #   ...
 
 acc-4g-infrastructure:
   nats:

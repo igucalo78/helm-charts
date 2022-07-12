@@ -21,10 +21,6 @@ acc-5g-infrastructure:
   jaeger:
     enabled: true
 
-nkafka-5g:
-  configs:
-    logLevel: debug
-
 acc-4g-infrastructure:
   provisioner-dhcp:
     enabled: true
