@@ -47,19 +47,19 @@ spec:
             - name: {{ include "golang-nkafka-5g.fullname" . }}-config-volume
               mountPath: /config
             - name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
-              mountPath: /5G.conf
-              subPath: "5G.conf"
+              mountPath: /nkafka.conf
+              subPath: "nkafka.conf"
             {{ if .Values.config.natsKafkaTopics.override }}
             - name: {{ include "golang-nkafka-5g.fullname" . }}-5gkafkatopics
-              mountPath: /5GKafkaTopics.toml
-              subPath: "5GKafkaTopics.toml"
+              mountPath: /KafkaTopics.toml
+              subPath: "KafkaTopics.toml"
             {{ end }}
           command: ["/bin/sh"]
           args:
             - "-c"
             - >-
-                cp /5G.conf /config &&
-                python3 /home/conf/generate_nats_to_kafka_connections.py /home/conf/5GKafkaTopics.toml /home/conf/5GTopics.toml {{ tpl .Values.kafkaUrl . }} /config/connections.conf
+                cp /nkafka.conf /config &&
+                python3 /home/conf/generate_nats_to_kafka_connections.py /home/conf/KafkaTopics.toml /home/conf/Topics.toml {{ tpl .Values.kafkaUrl . }} /config/Connections.conf
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -79,10 +79,16 @@ spec:
               name: accelleran-license
               readOnly: true
             {{ end }}
-          command: ["/home/nats-kafka"]
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >-
+              cp /config/nkafka.conf /home/conf &&
+              cp /config/Connections.conf /home/conf &&
+              /home/nats-kafka
           env:
             - name: "NATS_KAFKA_BRIDGE_CONFIG"
-              value: "/config/5G.conf"
+              value: "/home/conf/nkafka.conf"
           {{ if .Values.overrideArgs }}
           args:
             {{  range .Values.overrideArgs }}

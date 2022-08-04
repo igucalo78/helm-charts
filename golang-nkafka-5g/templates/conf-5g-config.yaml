@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "golang-nkafka-5g.fullname" . }}-5gconfig
 data:
-  5G.conf: |-
+  nkafka.conf: |-
     #
     # Example configuration file for the nats-kafka bridge.
     #
@@ -46,4 +46,6 @@ data:
       JSONOutputPrefixBytesLabel: "{{ .Values.config.json.outputPrefixBytesLabel }}",
     }
 
-    include ../config/connections.conf
+    include conf/Protobuf.conf
+
+    include conf/Connections.conf

@@ -85,7 +85,6 @@ config:
     reconnectWait: 5000
 
   protobuf:
-    descriptorsFilename: "/home/conf/messages_5g.pb"
     byteOffset: 0
 
   json:
