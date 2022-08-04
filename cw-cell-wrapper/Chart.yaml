@@ -28,7 +28,7 @@ appVersion: "master-0c891fc2cbe6ba987d5a1a37a166764b4ae82b31"
 dependencies:
   - name: netconf
     condition: netconf.enabled
-    version: 2.3.0-rc.2
+    version: 2.3.0-rc.3
     repository: https://accelleran.github.io/5g-helm-charts/
   - name: redis
     condition: redis.enabled
