@@ -14,7 +14,7 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 5.2.0-rc.1
+version: 5.2.0-alpha
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
@@ -29,10 +29,6 @@ dependencies:
   - name: acc-kminion
     condition: acc-kminion.enabled
     version: 1.5.0
-    repository: https://accelleran.github.io/helm-charts/
-  - name: nkafka-4g
-    condition: global.enable4G
-    version: 3.8.0
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
@@ -77,9 +73,15 @@ dependencies:
     condition: global.enable5G
     version: 3.0.0
     repository: https://accelleran.github.io/5g-helm-charts
-  - name: golang-nkafka-5g
+  - name: golang-nkafka
+    condition: global.enable4G
+    version: 1.1.0-rc.11
+    repository: https://accelleran.github.io/helm-charts/
+    alias: golang-nkafka-4g
+  - name: golang-nkafka
     condition: global.enable5G
-    version: 1.0.0-rc.0
+    version: 1.1.0-rc.11
+    alias: golang-nkafka-5g
     repository: https://accelleran.github.io/helm-charts
   - name: acc-4g-infrastructure
     condition: global.enable4G

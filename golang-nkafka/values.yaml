@@ -10,10 +10,12 @@ accelleranLicense:
 
 replicaCount: 1
 
+mode: "5g"
+
 image:
-  repository: accelleran/golang-nkafka-4g
+  repository: accelleran/golang-nkafka-5g
   pullPolicy: IfNotPresent
-  tag: "1.1.0-rc.11"
+  tag: "1.1.0-rc.12_R3.1.4_floreffe"
 
 initImage:
   repository: accelleran/acc-generic-img
@@ -24,7 +26,7 @@ initImage:
 initConfig:
   natsCheckEnabled: true
   kafkaCheckEnabled: true
-  kafkaTopicsCheck: "accelleran.drax.4g.ric.raw.messages,accelleran.drax.4g.ric.raw.service_discovery,accelleran.drax.4g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.messages"
+  kafkaTopicsCheck: "accelleran.drax.5g.ric.raw.messages,accelleran.drax.5g.ric.raw.pm_counters,accelleran.drax.5g.ric.raw.ue_measurements,accelleran.drax.5g.ric.raw.cu_state"
 
 imagePullSecrets:
   - name: accelleran-secret
@@ -75,23 +77,14 @@ tolerations: []
 
 affinity: {}
 
-#natsUrl: "ric-nats-5g.{{ .Release.Namespace }}:4222"
-#kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
+natsUrl: "ric-nats-5g.{{ .Release.Namespace }}:4222"
 kafkaUrl: "ric-acc-kafka.{{ .Release.Namespace }}:9092"
-natsUrl: "nats-service.{{ .Release.Namespace }}:4222"
 
 config:
   natsConnectionParameters:
     connectTimeout: 5000
     maxReconnects: 120
     reconnectWait: 5000
-
-  protobuf:
-    byteOffset: 0
-
-  json:
-    outputPrefixBytes: false
-    outputPrefixBytesLabel: ""
 
   natsKafkaTopics:
     override: false

@@ -40,10 +40,6 @@ data:
       ConnectTimeout: {{ .Values.config.natsConnectionParameters.connectTimeout }},
       MaxReconnects: {{ .Values.config.natsConnectionParameters.maxReconnects }},
       ReconnectWait: {{ .Values.config.natsConnectionParameters.reconnectWait }},
-      ProtoBufDescriptorsFile: "{{ .Values.config.protobuf.descriptorsFilename }}",
-      ProtoBufByteOffset: {{ .Values.config.protobuf.byteOffset }},
-      JSONOutputPrefixBytes: {{ .Values.config.json.outputPrefixBytes }},
-      JSONOutputPrefixBytesLabel: "{{ .Values.config.json.outputPrefixBytesLabel }}",
     }
 
     include conf/Protobuf.conf

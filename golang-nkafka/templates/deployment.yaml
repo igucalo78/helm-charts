@@ -54,12 +54,21 @@ spec:
               mountPath: /KafkaTopics.toml
               subPath: "KafkaTopics.toml"
             {{ end }}
+          {{ if eq (tpl .Values.mode .) "4g" }}
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - >-
+                cp /nkafka.conf /config &&
+                python3 /home/conf/generate_nats_to_kafka_connections.py /home/conf/KafkaTopics.toml /home/conf/Topics.toml {{ tpl .Values.kafkaUrl . }} /config/Connections.conf
+          {{ else }}   
           command: ["/bin/sh"]
           args:
             - "-c"
             - >-
                 cp /nkafka.conf /config &&
                 python3 /home/conf/generate_nats_to_kafka_connections.py /home/conf/KafkaTopics.toml /home/conf/Topics.toml {{ tpl .Values.kafkaUrl . }} /config/Connections.conf --asterisk_prefix
+          {{ end }}         
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
