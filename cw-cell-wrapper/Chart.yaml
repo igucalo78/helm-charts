@@ -15,13 +15,13 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0-rc.11
+version: 1.0.0-rc.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "master-a219a93cc14b43dbfb05f0a4b3ea681ee84dbdc4"
+appVersion: "master-2e65d89fc93e33508bad7ba5ef564e992cb04d87"
 # DONT FORGET TO UPDATE TAG IN VALUES.YAML BECAUSE THIS ONE IN CHART.YAML IS JUST FOR DOCUMENTATION
 
 # Dependencies
