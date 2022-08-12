@@ -129,79 +129,85 @@ netconf:
     deleteExistingConfig: false
     host: 'localhost'
     config: |
-      <configuration xmlns="http://accelleran.com/ns/yang/accelleran-granny" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
+      <cell-wrapper xmlns="http://accelleran.com/ns/yang/accelleran-granny" xmlns:xc="urn:ietf:params:xml:ns:netconf:base:1.0" xc:operation="create">
         <admin-state>locked</admin-state>
-        
-        <monitor-control-configuration xc:operation="create">
-            <monitor-rate xc:operation="create">
-                <seconds>10</seconds>
-                <milli-seconds>0</milli-seconds>
-            </monitor-rate>
-        </monitor-control-configuration>
 
-        <auto-repairer-configuration xc:operation="create">
-            <number-of-containers-counter-threshold>2</number-of-containers-counter-threshold>
-            <l1-rru-traffic-counter-threshold>3</l1-rru-traffic-counter-threshold>
-            <save-log-request-status>true</save-log-request-status>
-        </auto-repairer-configuration>
-        
-        <physical-cell-configuration xc:operation="create">
-            <ssh-key-pair xc:operation="create">
-                <public-key>/tmp/granny_key.pub</public-key>
-                <private-key>/tmp/granny_key</private-key>
-            </ssh-key-pair>
+        <ssh-key-pair xc:operation="create">
+          <public-key>/home/accelleran/5G/ssh/public</public-key>
+          <private-key>/home/accelleran/5G/ssh/private</private-key>
+        </ssh-key-pair>
 
-            <distributed-unit xc:operation="create">
-                <name>du-1</name>
-                <type>phluido</type>
-                
-                <enable-log-saving>true</enable-log-saving>
-                <log-source-path>/run/logs-du/du</log-source-path>
-                <log-destination-path>/tmp/logs-du-backup</log-destination-path>
-                <duplicated-log-file>/tmp/logs-du/du.0 </duplicated-log-file>
+        <auto-repair xc:operation="create">
+          <enable>true</enable>
 
-                <connection-details xc:operation="create">
-                    <host>localhost</host>
-                    <port>22</port>
-                    <username>root</username>
-                </connection-details>
+          <health-check xc:operation="create">
+            <rate xc:operation="create">
+              <seconds>5</seconds>
+              <milli-seconds>0</milli-seconds>
+            </rate>
+            <unacknowledged-counter-threshold>3</unacknowledged-counter-threshold>
+          </health-check>
 
-                <docker-compose-details xc:operation="create">
-                    <file-path>/home/ad/granny/config/du/benetel650/docker-compose.yml</file-path>
-                    <service-name>du</service-name>
-                    <container-name>gnb_du_main_phluido</container-name>
-                </docker-compose-details>
+          <container-not-running-counter-threshold>2</container-not-running-counter-threshold>
+          <l1-rru-traffic-counter-threshold>3</l1-rru-traffic-counter-threshold>
+        </auto-repair>
 
-                <layer-1 xc:operation="create">
-                    <name>l1-1</name>
-                    <type>phluido</type>
+        <distributed-unit xc:operation="create">
+          <name>du-1</name>
+          <type>effnet</type>
 
-                    <log-source-path>/run/logs-du/l1</log-source-path>
-                    <log-destination-path>/tmp/logs-l1-backup</log-destination-path>
+          <connection-details xc:operation="create">
+            <host>127.0.0.1</host>
+            <port>22</port>
+            <username>root</username>
+          </connection-details>
 
-                    <docker-compose-details xc:operation="create">
-                        <file-path>/home/ad/granny/config/du/benetel650/docker-compose.yml</file-path>
-                        <service-name>phluido_l1</service-name>
-                        <container-name>phluido_l1</container-name>
-                    </docker-compose-details>
+          <config xc:operation="create">
+            <cgi-plmn-id>001f01</cgi-plmn-id>
+            <cgi-cell-id>1</cgi-cell-id>
+            <pci>101</pci>
+            <tac>1</tac>
+            <arfcn>648840</arfcn>
+            <frequency-band>78</frequency-band>
+            <plmns-id>001f01</plmns-id>
+            <plmns-sst>1</plmns-sst>
+            <l1-bbu-addr>10.10.0.1</l1-bbu-addr>
+            <l1-license-key>XXXX</l1-license-key> 
+          </config>
 
-                    <radio-unit xc:operation="create">
-                        <name>ru-1</name>
-                        <type>benetel650</type>
-                        <enable-ssh>false</enable-ssh>
+          <enable-auto-repair>true</enable-auto-repair>
 
+          <working-directory>/run</working-directory>
+          <storage-directory>/var/log</storage-directory>
 
-                        <connection-details xc:operation="create">
-                            <host>localhost</host>
-                            <port>22</port>
-                            <username>root</username>
-                        </connection-details>
+          <enable-log-saving>false</enable-log-saving>
+          <log-rotation-pattern>*.0</log-rotation-pattern>
+          <max-storage-disk-usage>85%</max-storage-disk-usage>
 
-                    </radio-unit>
-                </layer-1>
-            </distributed-unit>
-        </physical-cell-configuration>
-      </configuration>
+          <pcscd-socket>/run/pcscd/pcscd.comm</pcscd-socket>
+
+          <centralized-unit-host>127.0.0.1</centralized-unit-host>
+          <centralized-unit-listening-port>44000</centralized-unit-listening-port>
+
+          <du-image-tag>2022-04-28-q1-release</du-image-tag>
+          <l1-image-tag>v0.8.4.2</l1-image-tag>
+
+          <du-extra-args></du-extra-args>
+          <l1-extra-args></l1-extra-args>
+
+          <radio-unit xc:operation="create">
+            <name>ru-1</name>
+            <type>benetel650</type>
+            <enable-ssh>false</enable-ssh>
+
+            <connection-details xc:operation="create">
+              <host>127.0.0.1</host>
+              <port>22</port>
+              <username>root</username>
+            </connection-details>
+          </radio-unit>
+        </distributed-unit>
+      </cell-wrapper>
 ```
 
 The fields are:
