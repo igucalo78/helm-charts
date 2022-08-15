@@ -30,10 +30,6 @@ dependencies:
     condition: acc-kminion.enabled
     version: 1.5.0
     repository: https://accelleran.github.io/helm-charts/
-  - name: nkafka-4g
-    condition: global.enable4G
-    version: 3.8.0
-    repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
     version: 3.4.10
@@ -77,10 +73,16 @@ dependencies:
     condition: global.enable5G
     version: 3.0.0
     repository: https://accelleran.github.io/5g-helm-charts
-  - name: nkafka-5g
+  - name: golang-nkafka
+    alias: golang-nkafka-4g
+    condition: global.enable4G
+    version: 1.0.0-alpha
+    repository: https://accelleran.github.io/helm-charts/
+  - name: golang-nkafka
+    alias: golang-nkafka-5g
     condition: global.enable5G
-    version: 4.0.1
-    repository: https://accelleran.github.io/5g-helm-charts
+    version: 1.0.0-alpha
+    repository: https://accelleran.github.io/helm-charts
   - name: acc-4g-infrastructure
     condition: global.enable4G
     version: 5.1.0
