@@ -332,3 +332,11 @@ nats:
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
+
+jobs: []
+  # - name: <job_name>
+  #   schedule: "<cron_schedule>"
+  #   netconfHost: <netconf_host>
+  #   netconfPort: <netconf_port>
+  #   rpc: |
+  #     <edit_config_rpc>
