@@ -336,7 +336,7 @@ nats:
 jobs: []
   # - name: <job_name>
   #   schedule: "<cron_schedule>"
-  #   netconfHost: <netconf_host>
-  #   netconfPort: <netconf_port>
+  #   netconfHost: <netconf_host> # optional
+  #   netconfPort: <netconf_port> # optional
   #   rpc: |
   #     <edit_config_rpc>
