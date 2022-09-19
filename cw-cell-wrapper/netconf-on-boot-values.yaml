@@ -35,6 +35,8 @@ netconf:
             <l1-license-key>XXXX</l1-license-key>
           </config>
 
+          <centralized-unit-host>127.0.0.1</centralized-unit-host>
+
           <du-image-tag>2022-04-28-q1-release</du-image-tag>
           <l1-image-tag>v0.8.4.2</l1-image-tag>
 
