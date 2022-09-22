@@ -123,6 +123,9 @@ spec:
               mountPath: "/home/accelleran/5G/ssh/public"
               subPath: "public"
               readOnly: true
+            - name: {{ include "cw-phy-cell.fullname" . }}-du-effnet-conf
+              mountPath: {{ .Values.baseConfig.duEffnetFile }}
+              subPath: "duEffnetConfig.json"
             {{ if and (.Values.developerMode.enabled) (.Values.developerMode.hostPath) }}
             - name: dev-work-dir
               mountPath: /home/accelleran/5G/dev/
@@ -174,3 +177,7 @@ spec:
           secret:
             secretName: {{ tpl .Values.cwSsh.privateKeySecretName . }}
             defaultMode: 256
+        
+        - name: {{ include "cw-phy-cell.fullname" . }}-du-effnet-conf
+          configMap:
+            name: {{ include "cw-phy-cell.fullname" . }}-du-effnet-conf
