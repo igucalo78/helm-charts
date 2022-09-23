@@ -1,6 +1,3 @@
-global:
-  storageClass: longhorn
-
 rbac:
   create: true
 
@@ -181,6 +178,10 @@ alertmanager:
   ##
   nodeSelector: {}
 
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
+
   ## Pod affinity
   ##
   affinity: {}
@@ -234,7 +235,7 @@ alertmanager:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: "{{ .Values.global.storageClass }}"
+    # storageClass: "-"
 
     ## alertmanager data Persistent Volume Binding Mode
     ## If defined, volumeBindingMode: <volumeBindingMode>
@@ -478,6 +479,10 @@ kubeStateMetrics:
   ##
   enabled: true
 
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
+
 ## kube-state-metrics sub-chart configurable values
 ## Please see https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
 ##
@@ -571,6 +576,9 @@ nodeExporter:
   ##
   nodeSelector: {}
 
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
   ## Annotations to be added to node-exporter pods
   ##
   podAnnotations: {}
@@ -887,6 +895,10 @@ server:
   ##
   nodeSelector: {}
 
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
+
   ## Pod affinity
   ##
   affinity: {}
@@ -944,7 +956,7 @@ server:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: "{{ .Values.global.storageClass }}"
+    # storageClass: "-"
 
     ## Prometheus server data Persistent Volume Binding Mode
     ## If defined, volumeBindingMode: <volumeBindingMode>
@@ -1259,6 +1271,10 @@ pushgateway:
   ##
   nodeSelector: {}
 
+  draxNodeSelectorEnabled: "false"
+  draxNodeSelector:
+    draxName: "main"
+
   ## Annotations to be added to pushgateway pods
   ##
   podAnnotations: {}
@@ -1391,7 +1407,7 @@ pushgateway:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: "{{ .Values.global.storageClass }}"
+    # storageClass: "-"
 
     ## pushgateway data Persistent Volume Binding Mode
     ## If defined, volumeBindingMode: <volumeBindingMode>

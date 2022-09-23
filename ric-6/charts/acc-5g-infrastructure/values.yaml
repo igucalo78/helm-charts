@@ -54,7 +54,7 @@ redis:
       - ReadWriteMany
     enabled: true
     size: 10Gi
-    storageClassName: longhorn
+    storageClassName: ""
     type: pvc
     ### TESTING
     #hostPath: /opt/pods/acc-redis

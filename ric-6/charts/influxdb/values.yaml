@@ -1,9 +1,5 @@
 ## influxdb image version
 ## ref: https://hub.docker.com/r/library/influxdb/tags/
-
-global:
-  storageClass: longhorn
-
 image:
   repository: "influxdb"
   tag: "1.8.3"
@@ -69,7 +65,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: "{{ .Values.global.storageClass }}"
+  # storageClass: "-"
   annotations:
   accessMode: ReadWriteOnce
   size: 8Gi
@@ -286,7 +282,7 @@ backup:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: "{{ .Values.global.storageClass }}"
+    # storageClass: "-"
     annotations:
     accessMode: ReadWriteOnce
     size: 8Gi

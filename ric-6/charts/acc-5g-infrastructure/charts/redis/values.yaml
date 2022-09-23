@@ -1,10 +1,6 @@
 # Default values for redis.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
-global:
-  storageClass: longhorn
-
 replicaCount: 1
 
 version: "{{ .Chart.AppVersion }}"
@@ -75,7 +71,7 @@ persistence:
     - ReadWriteMany
   enabled: true
   size: 10Gi
-  storageClassName: "{{ .Values.global.storageClass }}"
+  storageClassName: acc-redis
   type: pvc
   ### TESTING
   #hostPath: /opt/pods/acc-redis

@@ -120,7 +120,6 @@ containerSecurityContext: {}
 nodeSelector: {}
 
 draxNodeSelectorEnabled: "false"
-
 draxNodeSelector:
   draxName: "main"
   
