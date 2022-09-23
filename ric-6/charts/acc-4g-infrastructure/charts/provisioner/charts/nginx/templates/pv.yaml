@@ -1,3 +1,4 @@
+{{ if ne (tpl .Values.persistence.storageClassName .) "longhorn" }}
 kind: PersistentVolume
 apiVersion: v1
 metadata:
@@ -6,7 +7,7 @@ metadata:
     {{- include "nginx.labels" . | nindent 4 }}
     type: local
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
+  storageClassName: {{ tpl .Values.persistence.storageClassName . }}
   capacity:
     storage: {{ .Values.persistence.size | quote }}
   accessModes:
@@ -17,3 +18,4 @@ spec:
      #path: "{{ .Values.persistence.hostPath }}/{{ include "nginx.fullname" . }}"
      path: "{{ .Values.persistence.hostPath }}/provisioner"
      type: DirectoryOrCreate
+{{ end }}
