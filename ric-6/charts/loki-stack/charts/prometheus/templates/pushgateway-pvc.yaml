@@ -13,11 +13,11 @@ metadata:
 spec:
   accessModes:
 {{ toYaml .Values.pushgateway.persistentVolume.accessModes | indent 4 }}
-{{- if .Values.pushgateway.persistentVolume.storageClass }}
-{{- if (eq "-" .Values.pushgateway.persistentVolume.storageClass) }}
+{{- if (tpl .Values.pushgateway.persistentVolume.storageClass .) }}
+{{- if (eq "-" (tpl .Values.pushgateway.persistentVolume.storageClass .)) }}
   storageClassName: ""
 {{- else }}
-  storageClassName: "{{ .Values.pushgateway.persistentVolume.storageClass }}"
+  storageClassName: "{{ tpl .Values.pushgateway.persistentVolume.storageClass . }}"
 {{- end }}
 {{- end }}
   resources:

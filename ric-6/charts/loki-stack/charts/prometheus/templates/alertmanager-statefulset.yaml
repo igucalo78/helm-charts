@@ -136,11 +136,11 @@ spec:
         resources:
           requests:
             storage: "{{ .Values.alertmanager.persistentVolume.size }}"
-      {{- if .Values.server.persistentVolume.storageClass }}
-      {{- if (eq "-" .Values.server.persistentVolume.storageClass) }}
+      {{- if (tpl .Values.server.persistentVolume.storageClass .) }}
+      {{- if (eq "-" (tpl .Values.server.persistentVolume.storageClass .)) }}
         storageClassName: ""
       {{- else }}
-        storageClassName: "{{ .Values.alertmanager.persistentVolume.storageClass }}"
+        storageClassName: "{{ tpl .Values.alertmanager.persistentVolume.storageClass . }}"
       {{- end }}
       {{- end }}
 {{- else }}
