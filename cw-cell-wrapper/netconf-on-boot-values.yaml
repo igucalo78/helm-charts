@@ -23,13 +23,13 @@ netconf:
           </connection-details>
 
           <config xc:operation="create">
-            <cgi-plmn-id>001001</cgi-plmn-id>
+            <cgi-plmn-id>001f01</cgi-plmn-id>
             <cgi-cell-id>000000000000000000000000000000000001</cgi-cell-id>
-            <pci>1</pci>
+            <pci>101</pci>
             <tac>000001</tac>
             <arfcn>648840</arfcn>
             <frequency-band>78</frequency-band>
-            <plmns-id>001001</plmns-id>
+            <plmns-id>001f01</plmns-id>
             <plmns-sst>1</plmns-sst>
             <l1-bbu-addr>10.10.0.1</l1-bbu-addr>
             <l1-license-key>XXXX</l1-license-key>
