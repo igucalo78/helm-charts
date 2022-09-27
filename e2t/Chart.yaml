@@ -27,8 +27,8 @@ dependencies:
   - name: e2t-sctp
     condition: e2t-sctp.enabled
     version: 1.0.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../e2t-sctp
   - name: e2t-ap
     condition: e2t-ap.enabled
     version: 1.0.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../e2t-ap

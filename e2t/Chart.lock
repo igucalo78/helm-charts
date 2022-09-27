@@ -1,0 +1,9 @@
+dependencies:
+- name: e2t-sctp
+  repository: file://../e2t-sctp
+  version: 1.0.0
+- name: e2t-ap
+  repository: file://../e2t-ap
+  version: 1.0.0
+digest: sha256:16d0e7d4677499f5400f65da6921da81f36c4c41246cbb623c3fa0e16d73081c
+generated: "2022-09-27T15:45:19.884956434+02:00"

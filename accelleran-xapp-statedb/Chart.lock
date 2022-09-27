@@ -1,9 +1,9 @@
 dependencies:
 - name: xapp-redis
-  repository: https://accelleran.github.io/helm-charts/
-  version: 0.1.4
+  repository: file://../xapp-redis
+  version: 0.2.0
 - name: xapp-api
-  repository: https://accelleran.github.io/helm-charts/
-  version: 0.3.7
-digest: sha256:1a0b39db582bdf9a0a694108ee0ba8c6abed78155415e4232d0fafe6860d6784
-generated: "2020-08-27T13:02:06.948020642Z"
+  repository: file://../xapp-api
+  version: 0.5.0
+digest: sha256:7bee77444772b5132c9de02f440ebf0bca0ff7c69a894d2b4c8659f4116b77d5
+generated: "2022-09-27T15:41:24.791030814+02:00"

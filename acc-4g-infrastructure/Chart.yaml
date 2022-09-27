@@ -25,32 +25,32 @@ dependencies:
   - name: nats
     condition: nats.enabled
     version: 0.8.4
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../nats
   - name: redis
     condition: redis.enabled
     version: 0.7.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../redis
   - name: provisioner-dhcp
     condition: provisioner-dhcp.enabled
     version: 0.2.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../provisioner-dhcp
   - name: provisioner
     condition: provisioner.enabled
     version: 0.11.2
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../provisioner
   - name: ntp-server
     condition: ntp-server.enabled
     version: 0.2.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../ntp-server
   - name: configurator
     condition: configurator.enabled
     version: 0.3.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../configurator
   - name: 4g-radio-controller
     condition: 4g-radio-controller.enabled
     version: 3.1.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../4g-radio-controller
   - name: acc-l2-update
     condition: acc-l2-update.enabled
     version: 3.1.0
-    repository: https://accelleran.github.io/helm-charts/
+    repository: file://../acc-l2-update
