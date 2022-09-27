@@ -174,9 +174,9 @@ baseConfig:
             "served_cell_information": {
               "nr_cgi": {
                 "plmn_identity": "001f01",
-                "nr_cell_identity": "000000000000000000000000000000000011"
+                "nr_cell_identity": "000000000000000000000000000000000001"
               },
-              "nr_pci": 53,
+              "nr_pci": 101,
               "5gs_tac": "000001",
               "ran_area_code": 1,
               "served_plmns": [
@@ -219,7 +219,7 @@ baseConfig:
               "dmrs_type_a_position": "pos2",
               "intra_freq_reselection": "allowed",
               "ssb_pattern": "1000000000000000000000000000000000000000000000000000000000000000",
-              "ssb_periodicity_serving_cell_ms": 20,
+              "ssb_periodicity_serving_cell_ms": 10,
               "prach_configuration_index": 202,
               "ssb_pbch_scs": 30,
               "offset_point_a": 6,
@@ -288,7 +288,7 @@ baseConfig:
               "harq_processes_for_pdsch": 16,
               "minimum_k1_delay": 1,
               "minimum_k2_delay": 3,
-              "force_rlc_buffer_size": 2500000
+              "force_rlc_buffer_size": 8388608
             }
           }
         ]
