@@ -8,9 +8,9 @@ global:
   #                 '^[a-z0-9-]+$'). The Instance ID also cannot be longer than 54 alphanumeric characters!
   #
   #   Example:
-  # instanceId: "granny"
+  # instanceId: "cw"
   #
-  instanceId: "granny"
+  instanceId: "cw"
 
 
   # NATS URL and PORT

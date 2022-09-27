@@ -3,7 +3,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ $job.name | quote }}
+  name: "{{ $.Release.Name }}-{{ $job.name }}"
 spec:
   schedule: {{ $job.schedule | quote }}
   jobTemplate:
@@ -58,9 +58,9 @@ spec:
                   EOF
               env:
                 - name: NC_HOST
-                  value: {{ $job.netconfHost | default "netconf-granny" | quote }}
+                  value: {{ $job.netconfHost | default (print "netconf-" $.Values.global.instanceId) | quote }}
                 - name: NC_PORT
-                  value: {{ $job.netconfPort | default 830 | quote }}
+                  value: {{ $job.netconfPort | default $.Values.netconf.netconfService.port | quote }}
                 - name: NC_RPC
                   value: >-
                     {{- $job.rpc | nindent 20 }}
