@@ -36,15 +36,15 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: cw-phy-cell
     condition: cw-phy-cell.enabled
-    version: 0.1.0-rc.0
+    version: 1.0.0-rc.1
     repository: https://accelleran.github.io/helm-charts/
   - name: cw-auto-repairer
     condition: cw-auto-repairer.enabled
-    version: 0.1.0-rc.0
+    version: 1.0.0-rc.1
     repository: https://accelleran.github.io/helm-charts/
   - name: cw-ctrl
     condition: cw-ctrl.enabled
-    version: 0.1.0-rc.0
+    version: 1.0.0-rc.1
     repository: https://accelleran.github.io/helm-charts/
   - name: nats
     condition: nats.enabled
