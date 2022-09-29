@@ -14,11 +14,11 @@ metadata:
 spec:
   accessModes:
 {{ toYaml .Values.alertmanager.persistentVolume.accessModes | indent 4 }}
-{{- if .Values.alertmanager.persistentVolume.storageClass }}
-{{- if (eq "-" .Values.alertmanager.persistentVolume.storageClass) }}
+{{- if (tpl .Values.alertmanager.persistentVolume.storageClass .) }}
+{{- if (eq "-" (tpl .Values.alertmanager.persistentVolume.storageClass .)) }}
   storageClassName: ""
 {{- else }}
-  storageClassName: "{{ .Values.alertmanager.persistentVolume.storageClass }}"
+  storageClassName: "{{ tpl .Values.alertmanager.persistentVolume.storageClass . }}"
 {{- end }}
 {{- end }}
 {{- if .Values.alertmanager.persistentVolume.volumeBindingMode }}

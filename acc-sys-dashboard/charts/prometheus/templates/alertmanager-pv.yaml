@@ -9,7 +9,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: {{ .Values.alertmanager.persistentVolume.storageClass }}
+  storageClassName: {{ (tpl .Values.alertmanager.persistentVolume.storageClass .) }}
   capacity:
     storage: {{ .Values.alertmanager.persistentVolume.size }}
   accessModes:
@@ -22,4 +22,3 @@ spec:
 {{- end -}}
 {{- end -}}
 {{- end -}}
-

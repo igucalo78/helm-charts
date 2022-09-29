@@ -10,7 +10,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: {{ .Values.server.persistentVolume.storageClass }}
+  storageClassName: {{ (tpl .Values.server.persistentVolume.storageClass .) }}
   capacity:
     storage: {{ .Values.server.persistentVolume.size }}
   accessModes:

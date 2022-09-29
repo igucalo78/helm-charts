@@ -8,7 +8,7 @@ metadata:
     {{- include "redis.labels" . | nindent 4 }}
     type: local
 spec:
-  storageClassName: {{ .Values.persistence.storageClassName }}
+  storageClassName: {{ tpl .Values.persistence.storageClassName . }}
   capacity:
     storage: {{ .Values.persistence.size | quote }}
   accessModes:

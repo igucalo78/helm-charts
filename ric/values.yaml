@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "10.20.20.20"
+  kubeIp: "18.185.215.36"
 
 
   # dRAX Specific Node Selector
@@ -34,8 +34,8 @@ global:
   #
   #   Value type:   bool
   #
-  enable4G: true
-  enable5G: false
+  enable4G: false
+  enable5G: true
 
 
   # Accelleran License
@@ -52,6 +52,9 @@ global:
   accelleranLicense:
     enabled: "true"
     licenseSecretName: "accelleran-license"
+
+  dynamicProvisioningEnabled: "true"
+  storageClass: longhorn
 
 acc-kafka:
   enabled: true
@@ -91,7 +94,15 @@ acc-kminion:
 
 acc-sys-dashboard:
   enabled: true
+
   grafana:
+    persistence:
+      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: "{{ .Values.global.storageClass }}"
+      hostPath: null
+
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
@@ -108,10 +119,18 @@ acc-sys-dashboard:
 
   prometheus:
     alertmanager:
+      persistentVolume:
+        storageClass: "{{ .Values.global.storageClass }}"
+      persistence:
+        dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+        accessModes:
+          - ReadWriteOnce
+        hostPath: null
       draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
     kubeStateMetrics:
+
       draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
@@ -120,6 +139,13 @@ acc-sys-dashboard:
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
     server:
+      persistentVolume:
+        storageClass: "{{ .Values.global.storageClass }}"
+      persistence:
+        dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+        accessModes:
+          - ReadWriteOnce
+        hostPath: null
       draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
       draxNodeSelector:
         draxName: "{{ .Values.global.draxName }}"
@@ -161,7 +187,6 @@ acc-sys-dashboard:
       draxName: "{{ .Values.global.draxName }}"
 
 
-
 loki-stack:
   fluent-bit:
     loki:
@@ -171,6 +196,11 @@ loki-stack:
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
+    persistence:
+    dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: "{{ .Values.global.storageClass }}"
 
     config:
       table_manager:
@@ -322,6 +352,10 @@ influxdb:
   # Enable/disable installation of InfluxDB
   enabled: true
 
+  persistence:
+    dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+    storageClass: "{{ .Values.global.storageClass }}"
+
   draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
   draxNodeSelector:
     draxName: "{{ .Values.global.draxName }}"
@@ -415,6 +449,10 @@ acc-5g-infrastructure:
 
   redis:
     enabled: true
+
+    persistence:
+      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+      storageClassName: "{{ .Values.global.storageClass }}"
 
     nameOverride: "redis-5g"
 
@@ -550,6 +588,10 @@ acc-4g-infrastructure:
 
   redis:
     enabled: true
+
+    persistence:
+      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+      storageClassName: "{{ .Values.global.storageClass }}"
 
     # The External IP of where NATS is installed
     natsIp: "{{ .Values.global.kubeIp }}"

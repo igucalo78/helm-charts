@@ -4,7 +4,7 @@ dependencies:
   version: 0.8.4
 - name: redis
   repository: file://../redis
-  version: 0.7.0
+  version: 0.7.1
 - name: provisioner-dhcp
   repository: file://../provisioner-dhcp
   version: 0.2.0
@@ -23,5 +23,5 @@ dependencies:
 - name: acc-l2-update
   repository: file://../acc-l2-update
   version: 3.1.0
-digest: sha256:b8211eaae47065b1efb1d1f0f13b108c3a21c30b86fc32f1a75cf761b3a18373
-generated: "2022-09-27T15:20:38.255026221+02:00"
+digest: sha256:0333ef1b73897fca297dadb2b08a19c8ba5f3c571a16a91d62732626ea79db05
+generated: "2022-09-29T14:02:38.348079981+02:00"

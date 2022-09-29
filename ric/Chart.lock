@@ -10,13 +10,13 @@ dependencies:
   version: 1.5.1
 - name: acc-sys-dashboard
   repository: file://../acc-sys-dashboard
-  version: 3.4.11
+  version: 3.4.12
 - name: dash-front-back-end
   repository: file://../dash-front-back-end
   version: 4.2.0-rc.1
 - name: loki-stack
   repository: file://../loki-stack
-  version: 0.43.1
+  version: 0.43.2
 - name: acc-service-monitor
   repository: file://../acc-service-monitor
   version: 0.6.1
@@ -28,7 +28,7 @@ dependencies:
   version: 0.14.5
 - name: influxdb
   repository: file://../influxdb
-  version: 5.0.3
+  version: 5.0.4
 - name: vector
   repository: file://../vector
   version: 0.7.1
@@ -39,8 +39,8 @@ dependencies:
   repository: file://../acc-fiveg-pmcounters
   version: 0.5.1
 - name: acc-5g-infrastructure
-  repository: https://accelleran.github.io/5g-helm-charts
-  version: 3.0.0
+  repository: file://../../5g-helm-charts/acc-5g-infrastructure/
+  version: 3.0.1
 - name: golang-nkafka
   repository: file://../golang-nkafka
   version: 1.0.0-alpha
@@ -49,9 +49,9 @@ dependencies:
   version: 1.0.0-alpha
 - name: acc-4g-infrastructure
   repository: file://../acc-4g-infrastructure
-  version: 5.1.0
+  version: 5.1.1
 - name: keycloak-ingress
   repository: file://../keycloak-ingress
   version: 0.1.1
-digest: sha256:86f3ce54643476b648714baa38f627a3f8b512f21286a323d19b5d9248525298
-generated: "2022-09-27T15:40:29.493379644+02:00"
+digest: sha256:b9d21770f040d57ef22d6d175621584f0f9136523f61cf0289408f7c985a2ece
+generated: "2022-09-29T16:35:38.163933186+02:00"

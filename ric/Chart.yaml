@@ -36,14 +36,14 @@ dependencies:
     repository: file://../acc-kminion
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
-    version: 3.4.11
+    version: 3.4.12
     repository: file://../acc-sys-dashboard
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled
     version: 4.2.0-rc.1
     repository: file://../dash-front-back-end
   - name: loki-stack
-    version: 0.43.1
+    version: 0.43.2
     repository: file://../loki-stack
   - name: acc-service-monitor
     condition: acc-service-monitor.enabled
@@ -59,7 +59,7 @@ dependencies:
     repository: file://../accelleran-xapp-statedb
   - name: influxdb
     condition: influxdb.enabled
-    version: 5.0.3
+    version: 5.0.4
     repository: file://../influxdb
   - name: vector
     condition: vector.enabled
@@ -75,8 +75,8 @@ dependencies:
     repository: file://../acc-fiveg-pmcounters
   - name: acc-5g-infrastructure
     condition: global.enable5G
-    version: 3.0.0
-    repository: https://accelleran.github.io/5g-helm-charts
+    version: 3.0.1
+    repository: file://../../5g-helm-charts/acc-5g-infrastructure/
   - name: golang-nkafka
     alias: golang-nkafka-4g
     condition: global.enable4G
@@ -89,7 +89,7 @@ dependencies:
     repository: file://../golang-nkafka
   - name: acc-4g-infrastructure
     condition: global.enable4G
-    version: 5.1.0
+    version: 5.1.1
     repository: file://../acc-4g-infrastructure
   - name: keycloak-ingress
     condition: ingress.enabled
