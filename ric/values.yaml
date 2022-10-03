@@ -197,10 +197,10 @@ loki-stack:
     draxNodeSelector:
       draxName: "{{ .Values.global.draxName }}"
     persistence:
-    dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
-    accessModes:
-      - ReadWriteOnce
-    storageClassName: "{{ .Values.global.storageClass }}"
+      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: "{{ .Values.global.storageClass }}"
 
     config:
       table_manager:
@@ -450,10 +450,6 @@ acc-5g-infrastructure:
   redis:
     enabled: true
 
-    persistence:
-      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
-      storageClassName: "{{ .Values.global.storageClass }}"
-
     nameOverride: "redis-5g"
 
     draxNodeSelectorEnabled: "{{ .Values.global.draxNodeSelectorEnabled }}"
@@ -475,11 +471,12 @@ acc-5g-infrastructure:
       serviceName: '{{ include "redis.fullname" . }}'
 
     persistence:
+      dynamicProvisioningEnabled: "{{ .Values.global.dynamicProvisioningEnabled }}"
       accessModes:
         - ReadWriteMany
       enabled: true
       size: 10Gi
-      storageClassName: acc-redis-5g
+      storageClassName: "{{ .Values.global.storageClass }}"
       type: pvc
       hostPath: /opt/pods/redis-storage-5g
 
