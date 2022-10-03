@@ -24,7 +24,7 @@ appVersion: 6.0.0-alpha
 dependencies:
   - name: metrics-server
     condition: metrics-server.enabled
-    version: 2.11.3
+    version: 3.8.2
     repository: file://../metrics-server
   - name: acc-kafka
     condition: acc-kafka.enabled

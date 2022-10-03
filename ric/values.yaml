@@ -5,7 +5,7 @@ global:
   #
   #   Value type:   string
   #
-  kubeIp: "18.185.215.36"
+  kubeIp: "3.68.227.29"
 
 
   # dRAX Specific Node Selector

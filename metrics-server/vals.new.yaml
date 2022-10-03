@@ -1,0 +1,91 @@
+image:
+  repository: accelleran/acc-metrics-server
+  tag: v0.3.6
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: accelleran-secret
+nameOverride: ''
+fullnameOverride: ''
+serviceAccount:
+  create: true
+  annotations: {}
+  name: null
+rbac:
+  create: true
+  pspEnabled: true
+apiService:
+  create: true
+podLabels: {}
+podAnnotations: {}
+podSecurityContext: {}
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
+  capabilities:
+    drop:
+      - all
+  runAsGroup: 10001
+priorityClassName: system-cluster-critical
+containerPort: 4443
+hostNetwork:
+  enabled: false
+replicas: 1
+updateStrategy: {}
+podDisruptionBudget:
+  enabled: false
+  minAvailable: null
+  maxUnavailable: null
+defaultArgs:
+  - '--cert-dir=/tmp'
+  - '--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname'
+  - '--kubelet-use-node-status-port'
+  - '--metric-resolution=15s'
+args:
+  - '--kubelet-insecure-tls=true'
+  - '--kubelet-preferred-address-types=InternalIP'
+  - '--v=2'
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: https
+    scheme: HTTPS
+  initialDelaySeconds: 20
+  periodSeconds: 10
+  failureThreshold: 3
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: https
+    scheme: HTTPS
+  initialDelaySeconds: 20
+  periodSeconds: 10
+  failureThreshold: 3
+service:
+  type: ClusterIP
+  port: 443
+  annotations: {}
+  labels: {}
+metrics:
+  enabled: false
+serviceMonitor:
+  enabled: false
+  additionalLabels: {}
+  interval: 1m
+  scrapeTimeout: 10s
+resources: {}
+extraVolumeMounts: []
+extraVolumes: []
+nodeSelector: {}
+tolerations: []
+affinity: {}
+strategyType: Recreate
+draxNodeSelectorEnabled: 'false'
+draxNodeSelector:
+  draxName: main
+extraContainers: []
+testImage:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent

@@ -1,7 +1,7 @@
 dependencies:
 - name: metrics-server
   repository: file://../metrics-server
-  version: 2.11.3
+  version: 3.8.2
 - name: acc-kafka
   repository: file://../acc-kafka
   version: 0.3.2
@@ -53,5 +53,5 @@ dependencies:
 - name: keycloak-ingress
   repository: file://../keycloak-ingress
   version: 0.1.1
-digest: sha256:b9d21770f040d57ef22d6d175621584f0f9136523f61cf0289408f7c985a2ece
-generated: "2022-09-29T16:35:38.163933186+02:00"
+digest: sha256:3d6199b576214d85e8cd0a14d2cee3a41ba31f2fe8443b91f5196ddfe9c26c84
+generated: "2022-10-03T16:00:01.993520303+02:00"
