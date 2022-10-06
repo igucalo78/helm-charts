@@ -1,0 +1,444 @@
+Executing helm version
+Executing helm get manifest ric --namespace default
+Executing helm template ric . --namespace default --set acc-5g-infrastructure.metallb.speaker.secretValue=cx1AOxvpAWMMiMmtZOriDTOloTZJ1PZOxecIGi2BIfLxgEdqNmhRnokEjkWPEg9pSjoNY9VVAj1HNZUznqubEoy3wdYtHdy3TthQQMbZDQtxOobHV5zgTeqgyz8blUy5pV3tKnwS65f75eEjPcq27s9nYOit5N80JoezQ2Sel3k8H4cAtIx12oswF4TRX3twHGFbJhiSFyg1VbcMdI16jLBouf9ff77zJ7sEdTF259ymA9C8BdYG6878jz1K5b7O --values values.yaml --validate --is-upgrade
+Executing helm get hooks ric --namespace default
+default, privileged-ric-metrics-server, PodSecurityPolicy (policy) has changed:
+  # Source: ric/charts/metrics-server/templates/psp.yaml
+  apiVersion: policy/v1beta1
+  kind: PodSecurityPolicy
+  metadata:
+    name: privileged-ric-metrics-server
++   labels:
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  spec:
+    allowedCapabilities:
+-   - '*'
++     - '*'
+    fsGroup:
+      rule: RunAsAny
+    privileged: true
+    runAsUser:
+      rule: RunAsAny
+    seLinux:
+      rule: RunAsAny
+    supplementalGroups:
+      rule: RunAsAny
+    volumes:
+-   - '*'
++     - '*'
+    hostPID: true
+    hostIPC: true
+    hostNetwork: true
+    hostPorts:
+-   - min: 1
+-     max: 65536
++     - min: 1
++       max: 65536
+default, ric-keycloak-secret, Secret (v1) has changed:
+  # Source: ric/charts/keycloak-ingress/templates/keycloak-secret.yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: ric-keycloak-secret
+  data:
+-   KEYCLOAK_PASSWORD: '-------- # (16 bytes)'
++   KEYCLOAK_PASSWORD: '++++++++ # (16 bytes)'
+  type: Opaque
+
+default, ric-metrics-server, Deployment (apps) has changed:
+- # Source: ric/charts/metrics-server/templates/metrics-server-deployment.yaml
++ # Source: ric/charts/metrics-server/templates/deployment.yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: ric-metrics-server
+-   namespace: default
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  spec:
++   replicas: 1
+    selector:
+      matchLabels:
+-       app: metrics-server
+-       release: ric
+-   replicas: 1
+-   strategy:
+-     type: Recreate
++       
++       app.kubernetes.io/name: metrics-server
++       app.kubernetes.io/instance: ric
+    template:
+      metadata:
+        labels:
+-         drax/role: ric
+-         drax/name: MetricsServer
+-         drax/component-name: metrics-server
+-         drax/component-version: 2.11.3
+-         app: metrics-server
+-         release: ric
++         
++         app.kubernetes.io/name: metrics-server
++         app.kubernetes.io/instance: ric
+      spec:
+-       imagePullSecrets:
+-         - name: accelleran-secret
+        serviceAccountName: ric-metrics-server
++       priorityClassName: "system-cluster-critical"
+        containers:
+          - name: metrics-server
+-           image: "accelleran/acc-metrics-server:v0.3.6"
++           securityContext:
++             allowPrivilegeEscalation: false
++             capabilities:
++               drop:
++               - all
++             readOnlyRootFilesystem: true
++             runAsGroup: 10001
++             runAsNonRoot: true
++             runAsUser: 10001
++           image: k8s.gcr.io/metrics-server/metrics-server:v0.6.1
+            imagePullPolicy: IfNotPresent
+-           command:
+-             - /metrics-server
+-             - --cert-dir=/tmp
+-             - --logtostderr
++           args:
+              - --secure-port=4443
++             - --cert-dir=/tmp
++             - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
++             - --kubelet-use-node-status-port
++             - --metric-resolution=15s
+              - --kubelet-insecure-tls=true
+              - --kubelet-preferred-address-types=InternalIP
+              - --v=2
+            ports:
+-           - containerPort: 4443
+-             name: https
++           - name: https
++             protocol: TCP
++             containerPort: 4443
+            livenessProbe:
++             failureThreshold: 3
+              httpGet:
+-               path: /healthz
++               path: /livez
+                port: https
+                scheme: HTTPS
+              initialDelaySeconds: 20
++             periodSeconds: 10
+            readinessProbe:
++             failureThreshold: 3
+              httpGet:
+-               path: /healthz
++               path: /readyz
+                port: https
+                scheme: HTTPS
+              initialDelaySeconds: 20
+-           resources:
+-             {}
+-           securityContext:
+-             allowPrivilegeEscalation: false
+-             capabilities:
+-               drop:
+-               - all
+-             readOnlyRootFilesystem: true
+-             runAsGroup: 10001
+-             runAsNonRoot: true
+-             runAsUser: 10001
++             periodSeconds: 10
+            volumeMounts:
+-           - name: tmp
+-             mountPath: /tmp
+-       affinity:
+-         {}
+-       tolerations:
+-         []
++             - name: tmp
++               mountPath: /tmp
+        volumes:
+-       - name: tmp
+-         emptyDir: {}
++         - name: tmp
++           emptyDir: {}
+default, ric-metrics-server, Service (v1) has changed:
+- # Source: ric/charts/metrics-server/templates/metric-server-service.yaml
++ # Source: ric/charts/metrics-server/templates/service.yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: ric-metrics-server
+-   namespace: default
+    labels:
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
++     
+      drax/role: ric
+      drax/name: MetricsServer
+      drax/component-name: metrics-server
+-     drax/component-version: 2.11.3
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
+-   annotations:
+-     {}
++     drax/component-version: 3.8.2
+  spec:
++   type: ClusterIP
+    ports:
+-     - port: 443
++     - name: https
++       port: 443
+        protocol: TCP
+        targetPort: https
+    selector:
+-     app: metrics-server
+-     release: ric
+-   type: ClusterIP
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
+default, ric-metrics-server, ServiceAccount (v1) has changed:
+- # Source: ric/charts/metrics-server/templates/metrics-server-serviceaccount.yaml
++ # Source: ric/charts/metrics-server/templates/serviceaccount.yaml
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: ric-metrics-server
+-   namespace: default
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+default, ric-metrics-server:system:auth-delegator, ClusterRoleBinding (rbac.authorization.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/auth-delegator-crb.yaml
++ # Source: ric/charts/metrics-server/templates/clusterrolebinding-auth-delegator.yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    name: ric-metrics-server:system:auth-delegator
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+    - kind: ServiceAccount
+      name: ric-metrics-server
+      namespace: default
+default, system:metrics-server-aggregated-reader, ClusterRole (rbac.authorization.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/aggregated-metrics-reader-cluster-role.yaml
+- kind: ClusterRole
++ # Source: ric/charts/metrics-server/templates/clusterrole-aggregated-reader.yaml
+  apiVersion: rbac.authorization.k8s.io/v1
++ kind: ClusterRole
+  metadata:
+    name: system:metrics-server-aggregated-reader
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
+-     rbac.authorization.k8s.io/aggregate-to-view: "true"
+-     rbac.authorization.k8s.io/aggregate-to-edit: "true"
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+      rbac.authorization.k8s.io/aggregate-to-admin: "true"
++     rbac.authorization.k8s.io/aggregate-to-edit: "true"
++     rbac.authorization.k8s.io/aggregate-to-view: "true"
+  rules:
+-   - apiGroups: ["metrics.k8s.io"]
+-     resources: ["pods","nodes"]
+-     verbs: ["get", "list", "watch"]
++   - apiGroups:
++       - metrics.k8s.io
++     resources:
++       - pods
++       - nodes
++     verbs:
++       - get
++       - list
++       - watch
+default, system:ric-metrics-server, ClusterRole (rbac.authorization.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/cluster-role.yaml
++ # Source: ric/charts/metrics-server/templates/clusterrole.yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRole
+  metadata:
+    name: system:ric-metrics-server
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  rules:
++   - apiGroups:
++     - ""
++     resources:
++     - nodes/metrics
++     verbs:
++     - get
+    - apiGroups:
+      - ""
+      resources:
+        - pods
+        - nodes
+-       - nodes/stats
+        - namespaces
++       - configmaps
+      verbs:
+        - get
+        - list
+        - watch
+    - apiGroups:
+-     - extensions
+-     - policy
++       - extensions
++       - policy
+      resources:
+-     - podsecuritypolicies
++       - podsecuritypolicies
+      resourceNames:
+-     - privileged-ric-metrics-server
++       - privileged-ric-metrics-server
+      verbs:
+-     - use
++       - use
+default, system:ric-metrics-server, ClusterRoleBinding (rbac.authorization.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/metrics-server-crb.yaml
++ # Source: ric/charts/metrics-server/templates/clusterrolebinding.yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    name: system:ric-metrics-server
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:ric-metrics-server
+  subjects:
+    - kind: ServiceAccount
+      name: ric-metrics-server
+      namespace: default
+default, v1beta1.metrics.k8s.io, APIService (apiregistration.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/metrics-api-service.yaml
++ # Source: ric/charts/metrics-server/templates/apiservice.yaml
+  apiVersion: apiregistration.k8s.io/v1
+  kind: APIService
+  metadata:
+    name: v1beta1.metrics.k8s.io
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  spec:
++   group: metrics.k8s.io
++   groupPriorityMinimum: 100
++   insecureSkipTLSVerify: true
+    service:
+      name: ric-metrics-server
+      namespace: default
+-   group: metrics.k8s.io
+    version: v1beta1
+-   insecureSkipTLSVerify: true
+-   groupPriorityMinimum: 100
+    versionPriority: 100
+kube-system, ric-metrics-server-auth-reader, RoleBinding (rbac.authorization.k8s.io) has changed:
+- # Source: ric/charts/metrics-server/templates/role-binding.yaml
++ # Source: ric/charts/metrics-server/templates/rolebinding.yaml
+  apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    name: ric-metrics-server-auth-reader
+    namespace: kube-system
+    labels:
+-     app: metrics-server
+-     chart: metrics-server-2.11.3
+-     release: ric
+-     heritage: Helm
++     
++     helm.sh/chart: metrics-server-3.8.2
++     
++     app.kubernetes.io/name: metrics-server
++     app.kubernetes.io/instance: ric
++     app.kubernetes.io/version: "0.6.1"
++     app.kubernetes.io/managed-by: Helm
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: extension-apiserver-authentication-reader
+  subjects:
+    - kind: ServiceAccount
+      name: ric-metrics-server
+      namespace: default
