@@ -27,7 +27,7 @@ global:
   #                in DockerHub.
   #   Value type: string
   #
-  tag: "master-e3580cab22b9f7294c20616093862a253cac86b6"
+  tag: "master-d1a5f2f6cdbd479f9d073708dc4e20418785b55c"
   # DONT FORGET TO UPDATE TAG IN CHART.YAML FOR DOCUMENTATION
 
 
