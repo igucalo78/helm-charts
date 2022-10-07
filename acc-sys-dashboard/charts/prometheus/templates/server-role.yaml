@@ -16,7 +16,7 @@ rules:
     resourceNames:
     - {{ template "prometheus.server.fullname" . }}
 {{- end }}
-{{- if not .Values.rbac.namespaced }}
+{{- if eq .Values.rbac.namespaced "false" }}
   - apiGroups:
       - ""
     resources:

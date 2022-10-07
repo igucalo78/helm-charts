@@ -16,7 +16,7 @@ rules:
     resourceNames:
     - {{ template "prometheus.kubeStateMetrics.fullname" . }}
 {{- end }}
-{{- if not .Values.rbac.namespaced }} 
+{{- if eq .Values.rbac.namespaced "false" }} 
   - apiGroups:
       - ""
     resources:
@@ -113,6 +113,14 @@ rules:
       - networking.k8s.io
     resources:
       - networkpolicies
+      - ingresses
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
     verbs:
       - list
       - watch
