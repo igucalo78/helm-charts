@@ -53,17 +53,18 @@ data:
             if event.log.PmReportingCuupCounterData.CounterList.items ~= nil then
               for k, v in pairs(event.log.PmReportingCuupCounterData.CounterList.items) do
                 temp = m
-                temp.log.measurement.dlGtpThroughput = 0.0
-                temp.log.measurement.ulGtpThroughput = 0.0
-                if v.CounterId == "DL_GTP_THP" then
-                  temp.log.measurement.dlGtpThroughput = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
-                end
-                if v.CounterId == "UL_GTP_THP" then
-                  temp.log.measurement.ulGtpThroughput = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
-                end
                 temp.log.ueId = event.log.PmReportingCuupCounterData.CounterList.items[k].InstanceId
                 temp.log.cuupId = event.log.topic:match("[^.]*")
-                emit(temp)
+                if v.CounterId == "DL_GTP_THP" then
+                  temp.log.measurement.dlGtpThroughput = 0.0
+                  temp.log.measurement.dlGtpThroughput = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
+                  emit(temp)
+                end
+                if v.CounterId == "UL_GTP_THP" then
+                  temp.log.measurement.ulGtpThroughput = 0.0
+                  temp.log.measurement.ulGtpThroughput = event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._val / event.log.PmReportingCuupCounterData.CounterList.items[k].ValueList.items["0"]._key
+                  emit(temp)
+                end
               end
             end
         end
