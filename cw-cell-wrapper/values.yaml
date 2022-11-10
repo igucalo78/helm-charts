@@ -27,7 +27,7 @@ global:
   #                in DockerHub.
   #   Value type: string
   #
-  tag: "CW1.0.1"
+  tag: "CW1.1.0-rc1"
   # DONT FORGET TO UPDATE TAG IN CHART.YAML FOR DOCUMENTATION
 
 
