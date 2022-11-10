@@ -19,7 +19,7 @@ acc-5g-infrastructure:
           addresses:
             - 10.55.1.20-10.55.1.60
   jaeger:
-    enabled: true
+    enabled: false
 
 acc-4g-infrastructure:
   provisioner-dhcp:
