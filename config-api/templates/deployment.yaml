@@ -25,8 +25,16 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          volumeMounts:
+            - name: {{ include "config-api.fullname" . }}-config
+              mountPath: ./app/config_api.env
+              subPath: "config_api.env"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: {{ include "config-api.fullname" . }}-config
+          configMap:
+            name: {{ include "config-api.fullname" . }}-config
       {{- if or (.Values.nodeSelector) (eq (tpl .Values.draxNodeSelectorEnabled .) "true") }}
       nodeSelector:
         {{ if .Values.nodeSelector }}
