@@ -150,9 +150,9 @@ baseConfig:
     {
       "configuration": {
         "du_address": "du",
-        "f1c_bind_address": "du",
         "cu_address": "cu",
         "gtp_listen_address": "du",
+        "f1c_bind_address": "du",
         "vphy_listen_address": "127.0.0.1",
         "vphy_port": 13337,
         "vphy_tick_multiplier": 1,
@@ -161,7 +161,7 @@ baseConfig:
         "phy_control": {
           "crnti_range": {
             "min": 42000,
-            "max": 42049
+            "max": 42127
           }
         },
         "rrc_version": {
@@ -228,9 +228,8 @@ baseConfig:
               "search_space_zero_index": 2,
               "ra_response_window_slots": 20,
               "sr_slot_periodicity": 40,
-              "sr_slot_offset": 7,
               "search_space_other_si": 1,
-              "paging_search_space": 1,
+              "paging_search_space": 0,
               "ra_search_space": 1,
               "bwps": [
                 {
@@ -268,7 +267,7 @@ baseConfig:
                   }
                 }
               ],
-              "maximum_ru_power_dbm": 53.0,
+              "maximum_ru_power_dbm": 35.0,
               "num_tx_antennas": 2,
               "trs": {
                 "periodicity_and_offset": {
@@ -288,7 +287,9 @@ baseConfig:
               "harq_processes_for_pdsch": 16,
               "minimum_k1_delay": 1,
               "minimum_k2_delay": 3,
-              "force_rlc_buffer_size": 8388608
+              "force_rlc_buffer_size": 8388608,
+              "default_paging_cycle": 128,
+              "modification_period_coeff": 2
             }
           }
         ]
