@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.1.0-rc3
+version: 1.1.0-rc4
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -28,7 +28,7 @@ appVersion: "CW1.1.0-rc2"
 dependencies:
   - name: netconf
     condition: netconf.enabled
-    version: 2.3.1-rc.3
+    version: 2.3.1-rc.4
     repository: https://accelleran.github.io/5g-helm-charts/
   - name: redis
     condition: redis.enabled
