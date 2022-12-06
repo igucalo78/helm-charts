@@ -91,3 +91,7 @@ dependencies:
     condition: ingress.enabled
     version: 0.1.0
     repository: https://accelleran.github.io/helm-charts/
+  - name: config-api
+    condition: config-api.enabled
+    version: 0.1.0
+    repository: https://accelleran.github.io/helm-charts/

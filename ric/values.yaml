@@ -721,3 +721,12 @@ acc-4g-infrastructure:
 keycloak-ingress:
   enabled: true
   namespace: "default"
+
+config-api:
+  enabled: true
+  config:
+    default_service_namespace: "default"
+    default_oran_namespace: "default"
+    service_monitor_host: "acc-service-monitor"
+    service_monitor_port: "80"
+
