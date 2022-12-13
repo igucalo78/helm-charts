@@ -78,6 +78,8 @@ config:
   svcOrchestratorPort: "80"
   svcMonitorHost: "acc-service-monitor"
   svcMonitorPort: "80"
+  networkStateMonitorHost: "accelleran-network-state-monitor-service"
+  networkStateMonitorPort: "5000"
   pcixAppPodName: "accelleran-drax-pci-010-pci-xapp-api"
   pcixAppPort: "80"
   ksqldbPodName: "10.20.20.20"

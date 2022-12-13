@@ -20,6 +20,8 @@ data:
         "kafkaPort": "{{ tpl .Values.config.kafkaPort . }}",
         "svcOrchestratorHost": "{{ tpl .Values.config.svcOrchestratorHost . }}",
         "svcOrchestratorPort": "{{ tpl .Values.config.svcOrchestratorPort . }}",
+        "networkStateMonitorHost": "{{ tpl .Values.config.networkStateMonitorHost . }}",
+        "networkStateMonitorPort": "{{ tpl .Values.config.networkStateMonitorPort . }}",
         "svcMonitorHost": "{{ tpl .Values.config.svcMonitorHost . }}",
         "svcMonitorPort": "{{ tpl .Values.config.svcMonitorPort . }}",
         "pcixAppPodName": "{{ tpl .Values.config.pcixAppPodName . }}",
