@@ -32,7 +32,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-sys-dashboard
     condition: acc-sys-dashboard.enabled
-    version: 3.4.12
+    version: 3.4.13
     repository: https://accelleran.github.io/helm-charts/
   - name: dash-front-back-end
     condition: dash-front-back-end.enabled
@@ -67,7 +67,7 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-fiveg-pmcounters
     condition: acc-fiveg-pmcounters.enabled
-    version: 1.0.0
+    version: 1.0.2
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-5g-infrastructure
     condition: global.enable5G
