@@ -14,19 +14,11 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-<<<<<<< HEAD
-version: 6.1.0-rc.X
-
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application.
-appVersion: 6.1.0-rc.X
-=======
 version: 6.1.0-rc.4
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
 appVersion: 6.1.0-rc.4
->>>>>>> 9fff887d9afb9680f0dead91630864bcce7b53d6
 
 # Dependencies
 dependencies:
@@ -105,5 +97,5 @@ dependencies:
     repository: https://accelleran.github.io/helm-charts/
   - name: acc-network-state-monitor
     condition: acc-network-state-monitor.enabled
-    version: 1.0.0
+    version: 1.0.1
     repository: https://accelleran.github.io/helm-charts/
