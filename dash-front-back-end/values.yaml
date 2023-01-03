@@ -79,6 +79,8 @@ config:
   svcOrchestratorPort: "80"
   networkStateMonitorHost: "ric-acc-network-state-monitor"
   networkStateMonitorPort: "5000"
+  configApiHost: "config-api"
+  configApiPort: "80"
   svcMonitorHost: "acc-service-monitor"
   svcMonitorPort: "80"
   pcixAppPodName: "accelleran-drax-pci-010-pci-xapp-api"

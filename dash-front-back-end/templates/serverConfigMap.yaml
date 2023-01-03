@@ -22,6 +22,8 @@ data:
         "svcOrchestratorPort": "{{ tpl .Values.config.svcOrchestratorPort . }}",
         "networkStateMonitorHost": "{{ tpl .Values.config.networkStateMonitorHost . }}",
         "networkStateMonitorPort": "{{ tpl .Values.config.networkStateMonitorPort . }}",
+        "configApiHost": "{{ tpl .Values.config.configApiHost . }}",
+        "configApiPort": "{{ tpl .Values.config.configApiPort . }}",
         "svcMonitorHost": "{{ tpl .Values.config.svcMonitorHost . }}",
         "svcMonitorPort": "{{ tpl .Values.config.svcMonitorPort . }}",
         "pcixAppPodName": "{{ tpl .Values.config.pcixAppPodName . }}",
