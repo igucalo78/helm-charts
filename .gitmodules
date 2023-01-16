@@ -1,3 +1,4 @@
 [submodule "acc-submodule-nats"]
 	path = acc-submodule-nats
 	url = https://github.com/igucalo78/k8s-nats.git
+	branch = drax-integration
