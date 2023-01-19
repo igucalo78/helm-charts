@@ -461,7 +461,7 @@ acc-5g-infrastructure:
 
   jaeger:
     # For tracing purposes
-    enabled: true
+    enabled: false
 
 golang-nkafka-5g:
   accelleranLicense:
